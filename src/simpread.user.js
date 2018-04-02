@@ -110,12 +110,12 @@ if (GM_getValue( "simpread" )) {
     GM_setValue( "simpread",  simpread );
 }
 
-console.log( "current pureread is ", pr, simpread );
-
 if (pr.state != "none" ) {
     bindShortcuts();
     controlbar();
 }
+
+console.log( "current pureread is ", pr, simpread );
 
 /****************************
  * Method

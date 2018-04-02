@@ -47,17 +47,6 @@ const pr         = new PureRead(),
     theme_monospace = GM_getResourceText( "theme_monospace" ),
     theme_newsprint = GM_getResourceText( "theme_newsprint" ),
     theme_octopress = GM_getResourceText( "theme_octopress" ),
-    $root        = $( "html" ),
-    bgtmpl       = `<div class="simpread-read-root">
-                        <sr-read>
-                            <sr-rd-title></sr-rd-title>
-                            <sr-rd-desc></sr-rd-desc>
-                            <sr-rd-content></sr-rd-content>
-                            <sr-rd-crlbar class="controlbar">
-                                <fab>╳</fab>
-                            </sr-rd-crlbar>
-                        </sr-read>
-                    </div>`,
     focus        = {
         version   : "2016-12-29",
         bgcolor   : "rgba( 235, 235, 235, 0.9 )",
@@ -235,6 +224,18 @@ function focusMode() {
  * Read mode
  */
 function readMode() {
+    const $root  = $( "html" ),
+          bgtmpl = `<div class="simpread-read-root">
+                        <sr-read>
+                            <sr-rd-title></sr-rd-title>
+                            <sr-rd-desc></sr-rd-desc>
+                            <sr-rd-content></sr-rd-content>
+                            <sr-rd-crlbar class="controlbar">
+                                <fab>╳</fab>
+                            </sr-rd-crlbar>
+                        </sr-read>
+                    </div>`;
+
     GM_addStyle( theme_pixyii );
     pr.ReadMode();
 

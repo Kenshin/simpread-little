@@ -118,7 +118,8 @@ function bindShortcuts() {
     Mousetrap.bind( [ simpread.read.shortcuts.toLowerCase()  ], readMode  );
     Mousetrap.bind( "esc", ( event, combo ) => {
         if ( combo == "esc" && simpread.option.esc ) {
-            if ( $( ".simpread-read-root" ).length > 0 ) $( ".simpread-read-root sr-rd-crlbar fab" )[0].click();
+            if ( $( ".simpread-read-root"  ).length > 0 ) $( ".simpread-read-root sr-rd-crlbar fab" )[0].click();
+            if ( $( ".simpread-focus-root" ).length > 0 ) $( "sr-rd-crlbar fab" )[0].click();
         }
     });
 }

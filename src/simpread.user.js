@@ -135,10 +135,100 @@ function bindShortcuts() {
 }
 
 /**
- * Focus
+ * Focus mode
  */
 function focusMode() {
+    let $focus = pr.Include(),
+        tag, $parent,
+        sel, range, node;
+    const focuscls   = "simpread-focus-highlight",
+          focusstyle = "z-index: 2147483646; overflow: visible; position: relative;",
+          maskcls    = "simpread-focus-mask",
+          maskstyle  = "z-index: auto; opacity: 1; overflow: visible; transform: none; animation: none; position: relative;",
+          bgcls      = "simpread-focus-root",
+          bgtmpl     = "<div class=" + bgcls + "></div>",
+          bgclsjq    = "." + bgcls,
+          includeStyle = ( $target, style, cls, type ) => {
+            $target.each( ( idx, ele ) => {
+                let bakstyle,
+                    selector = $(ele);
+                if ( type === "add" ) {
+                    bakstyle = selector.attr( "style" ) == undefined ? "" : selector.attr( "style" );
+                    selector.attr( "style", bakstyle + style ).addClass( cls );
+                } else if (  type === "delete" ) {
+                    bakstyle = selector.attr( "style" );
+                    bakstyle = bakstyle.replace( style, "" );
+                    selector.attr( "style", bakstyle ).removeClass( cls );
+                }
+            });
+        },
+        excludeStyle = ( $target, type ) => {
+            const tags = pr.Exclude( $target );
+            if ( type == "delete" )   $target.find( tags ).hide();
+            else if ( type == "add" ) $target.find( tags ).show();
+        };
 
+    while ( $focus.length == 0 ) {
+        if ( $( "body" ).find( "article" ).length > 0 ) {
+            $focus = $( "body" ).find( "article" );
+        }
+        else {
+            try {
+                sel    = window.getSelection();
+                range  = sel.getRangeAt( sel.rangeCount - 1 );
+                node   = range.startContainer.nodeName;
+            if ( node.toLowerCase() === "body" ) throw( "selection area is body tag." );
+                $focus = $( range.startContainer.parentNode );
+            } catch ( error ) {
+                console.log( sel, range, node )
+                console.error( error )
+            }
+        }
+    }
+
+    // set include style
+    includeStyle( $focus, focusstyle, focuscls, "add" );
+
+    // set exclude style
+    excludeStyle( $focus, "delete" );
+
+    // add simpread-focus-mask
+    $parent = $focus.parent();
+    tag     = $parent[0].tagName;
+    while ( tag.toLowerCase() != "body" ) {
+        includeStyle( $parent, maskstyle, maskcls, "add" );
+        $parent = $parent.parent();
+        tag     = $parent[0].tagName;
+    }
+
+    // add background
+    $( "body" ).append( bgtmpl );
+
+    // add background color
+    $( bgclsjq )
+        .css({ "background-color" : focus.bgcolor })
+        .animate({ opacity: 1 });
+
+    // click mask remove it
+    $( bgclsjq ).on( "click", ( event, data ) => {
+            $( bgclsjq ).animate({ opacity: 0 }, {
+                complete: ()=> {
+                    includeStyle( $focus, focusstyle, focuscls, "delete" );
+                    excludeStyle( $focus, "add" );
+                    $( bgclsjq   ).remove();
+                    $( bgclsjq   ).off( "click" );
+                }
+            });
+
+        // remove simpread-focus-mask style
+        $parent = $focus.parent();
+        tag     = $parent[0].tagName;
+        while ( tag && tag.toLowerCase() != "body" ) {
+            includeStyle( $parent, maskstyle, maskcls, "delete" );
+            $parent = $parent.parent();
+            tag     = $parent[0].tagName;
+        }
+    });
 }
 
 /**

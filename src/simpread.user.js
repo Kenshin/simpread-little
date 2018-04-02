@@ -124,6 +124,29 @@ function bindShortcuts() {
 }
 
 /**
+ * Control bar
+ */
+function controlbar() {
+    $( "body" ).append( '<sr-rd-crlbar class="controlbar"><fab style="font-size:12px!important;">简 悦</fab></sr-rd-crlbar>' );
+    $( "sr-rd-crlbar" ).css( "opacity", 1 );
+    setTimeout( () => {
+        $( "sr-rd-crlbar" ).removeAttr( "style" );
+    }, 1000 * 2 );
+    $( "sr-rd-crlbar fab" ).click(  event => {
+        if ( pr.state == "none" ) {
+            tempMode();
+        } else {
+            if ( $(event.target).hasClass( "focus-crlbar-close" ) ) {
+                $( ".simpread-focus-root" )[0].click();
+                $( event.target ).removeClass( "focus-crlbar-close" ).text( "简 悦" );
+            } else readMode();
+        }
+        event.preventDefault();
+        return false;
+    });
+};
+
+/**
  * Focus mode
  */
 function focusMode() {
@@ -275,29 +298,6 @@ function readMode() {
                 $( ".simpread-read-root" ).remove();
             }
         }).addClass( "simpread-read-root-hide" );
-    });
-};
-
-/**
- * Control bar
- */
-function controlbar() {
-    $( "body" ).append( '<sr-rd-crlbar class="controlbar"><fab style="font-size:12px!important;">简 悦</fab></sr-rd-crlbar>' );
-    $( "sr-rd-crlbar" ).css( "opacity", 1 );
-    setTimeout( () => {
-        $( "sr-rd-crlbar" ).removeAttr( "style" );
-    }, 1000 * 2 );
-    $( "sr-rd-crlbar fab" ).click(  event => {
-        if ( pr.state == "none" ) {
-            tempMode();
-        } else {
-            if ( $(event.target).hasClass( "focus-crlbar-close" ) ) {
-                $( ".simpread-focus-root" )[0].click();
-                $( event.target ).removeClass( "focus-crlbar-close" ).text( "简 悦" );
-            } else readMode();
-        }
-        event.preventDefault();
-        return false;
     });
 };
 

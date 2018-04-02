@@ -13,7 +13,7 @@
 // @resource     websites     http://ojec5ddd5.bkt.clouddn.com/website_list_v3.json?data=0402
 // @resource     origins      http://ojec5ddd5.bkt.clouddn.com/website_list_origins.json
 // @resource     main_style   http://ojec5ddd5.bkt.clouddn.com/puread/simpread.css
-// @resource     user_style   https://gist.github.com/Kenshin/365a91c61bad550b5900247539113f06/raw/23ad1acaa0751d27d8cd3fcbaa752ab8896e05b0/simpread_user.css
+// @resource     user_style   https://gist.github.com/Kenshin/365a91c61bad550b5900247539113f06/raw/8b1146ab3b876d174ba278052b345c7ae08f0e96/simpread_user.css
 // @resource     theme_common http://ojec5ddd5.bkt.clouddn.com/puread/theme_common.css
 // @resource     theme_dark   http://ojec5ddd5.bkt.clouddn.com/puread/theme_dark.css
 // @resource     theme_github http://ojec5ddd5.bkt.clouddn.com/puread/theme_github.css
@@ -206,6 +206,7 @@ function focusMode() {
                     excludeStyle( $focus, "add" );
                     $( bgclsjq   ).remove();
                     $( bgclsjq   ).off( "click" );
+                    $( "sr-rd-crlbar fab" ).removeClass( "focus-crlbar-close" ).text( "简 悦" );
                 }
             });
 
@@ -218,6 +219,9 @@ function focusMode() {
             tag     = $parent[0].tagName;
         }
     });
+
+    // set focus controlbar
+    $( "sr-rd-crlbar fab" ).addClass( "focus-crlbar-close" ).text( "╳" );
 }
 
 /**
@@ -231,7 +235,7 @@ function readMode() {
                             <sr-rd-desc></sr-rd-desc>
                             <sr-rd-content></sr-rd-content>
                             <sr-rd-crlbar class="controlbar">
-                                <fab>╳</fab>
+                                <fab style="font-size:12px!important;">╳</fab>
                             </sr-rd-crlbar>
                         </sr-read>
                     </div>`;
@@ -284,6 +288,9 @@ function controlbar() {
         $( "sr-rd-crlbar" ).removeAttr( "style" );
     }, 1000 * 2 );
     $( "sr-rd-crlbar fab" ).click(  event => {
-        readMode();
+        if ( $(event.target).hasClass( "focus-crlbar-close" ) ) {
+            $( ".simpread-focus-root" )[0].click();
+            $( event.target ).removeClass( "focus-crlbar-close" ).text( "简 悦" );
+        } else readMode();
     });
 };

@@ -1,5 +1,6 @@
 sr-rd-crlbar.controlbar {
     height: 100px;
+    z-index: 2147483647;
 }
 
 sr-rd-crlbar fab {
@@ -27,11 +28,13 @@ sr-rd-crlbar fab {
     transition: all 450ms 0ms;
 }
 
-.simpread-read-root sr-rd-crlbar fab:hover {
+.simpread-read-root sr-rd-crlbar fab:hover,
+sr-rd-crlbar fab.focus-crlbar-close:hover {
     transform: rotate(45deg);
     transition: all 450ms 0ms;
 }
 
-.simpread-read-root sr-rd-crlbar fab {
+.simpread-read-root sr-rd-crlbar fab,
+sr-rd-crlbar fab.focus-crlbar-close {
     background-color: rgba(244, 67, 54, 1);
 }

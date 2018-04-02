@@ -99,10 +99,9 @@ if (GM_getValue( "simpread" )) {
     GM_setValue( "simpread",  simpread );
 }
 
-if (pr.state != "none" ) {
-    bindShortcuts();
-    controlbar();
-}
+// init shortcuts and controlbar
+bindShortcuts();
+controlbar();
 
 console.log( "current pureread is ", pr, simpread );
 
@@ -289,9 +288,61 @@ function controlbar() {
         $( "sr-rd-crlbar" ).removeAttr( "style" );
     }, 1000 * 2 );
     $( "sr-rd-crlbar fab" ).click(  event => {
-        if ( $(event.target).hasClass( "focus-crlbar-close" ) ) {
-            $( ".simpread-focus-root" )[0].click();
-            $( event.target ).removeClass( "focus-crlbar-close" ).text( "简 悦" );
-        } else readMode();
+        if ( pr.state == "none" ) {
+            tempMode();
+        } else {
+            if ( $(event.target).hasClass( "focus-crlbar-close" ) ) {
+                $( ".simpread-focus-root" )[0].click();
+                $( event.target ).removeClass( "focus-crlbar-close" ).text( "简 悦" );
+            } else readMode();
+        }
+        event.preventDefault();
+        return false;
     });
 };
+
+/**
+ * Temp Read mode
+ */
+function tempMode() {
+    highlight().done( dom => {
+        pr.TempMode( "read", dom.outerHTML );
+        readMode();
+    });
+}
+
+/**
+ * Highlight
+ * 
+ * @return {promise} promise
+ */
+function highlight() {
+    const highlight_class= "simpread-highlight-selector";
+    let $prev;
+    const dtd            = $.Deferred(),
+          mousemoveEvent = event => {
+            if ( !$prev ) {
+                $( event.target ).addClass( highlight_class );
+            } else {
+                $prev.removeClass( highlight_class );
+                $( event.target ).addClass( highlight_class );
+            }
+            $prev = $( event.target );
+    };
+    $( "body" ).one( "click", event => {
+        if ( !$prev ) return;
+        $( event.target ).removeClass( highlight_class );
+        $( "body"       ).off( "mousemove", mousemoveEvent );
+        $prev = undefined;
+        dtd.resolve( event.target );
+    });
+    $( "body" ).one( "keydown", event => {
+        if ( event.keyCode == 27 && $prev ) {
+            $( event.target ).find( `.${highlight_class}` ).removeClass( highlight_class );
+            $( "body"       ).off( "mousemove", mousemoveEvent );
+            $prev = undefined;
+        }
+    });
+    $( "body" ).on( "mousemove", mousemoveEvent );
+    return dtd;
+}

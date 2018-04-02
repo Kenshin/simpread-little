@@ -113,8 +113,8 @@ console.log( "current pureread is ", pr, simpread );
  * Keyboard event handler
  */
 function bindShortcuts() {
-    Mousetrap.bind( [ simpread.focus.shortcuts.toLowerCase() ], focusMode );
-    Mousetrap.bind( [ simpread.read.shortcuts.toLowerCase()  ], readMode  );
+    Mousetrap.bind( [ simpread.focus.shortcuts.toLowerCase() ], () => pr.state == "none" ? tempMode( "focus" ) : focusMode );
+    Mousetrap.bind( [ simpread.read.shortcuts.toLowerCase()  ], () => pr.state == "none" ? tempMode( "read"  ) : readMode  );
     Mousetrap.bind( "esc", ( event, combo ) => {
         if ( combo == "esc" && simpread.option.esc ) {
             if ( $( ".simpread-read-root"  ).length > 0 ) $( ".simpread-read-root sr-rd-crlbar fab" )[0].click();
@@ -148,9 +148,11 @@ function controlbar() {
 
 /**
  * Focus mode
+ * 
+ * @param {dom} html element
  */
-function focusMode() {
-    let $focus = pr.Include(),
+function focusMode( element = undefined ) {
+    let $focus = element ? $(element) : pr.Include(),
         tag, $parent,
         sel, range, node;
     const focuscls   = "simpread-focus-highlight",
@@ -303,11 +305,15 @@ function readMode() {
 
 /**
  * Temp Read mode
+ * 
+ * @param {string} include: focus, read
  */
-function tempMode() {
+function tempMode( mode = "read" ) {
     highlight().done( dom => {
-        pr.TempMode( "read", dom.outerHTML );
-        readMode();
+        if ( mode == "read" ) {
+            pr.TempMode( mode, dom.outerHTML );
+            readMode();
+        } else focusMode( dom );
     });
 }
 

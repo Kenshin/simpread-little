@@ -57,3 +57,9 @@ typings/
 # dotenv environment variables file
 .env
 
+# for common
+node_modules/**
+dist/**
+
+# for mac
+**/.DS_Store

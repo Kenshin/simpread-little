@@ -1,0 +1,38 @@
+{
+  "name": "simpread-little_project_workflow",
+  "version": "1.0.0",
+  "description": "simpread-little develop/deploy",
+  "author": "Kenshin Wang <kenshin@ksria.com>",
+  "license": "MIT",
+  "homepage": "http://ksria.com/simpread-little",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kenshin/simpread-little.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kenshin/simpread-little/issues",
+    "email": "kenshin@ksria.com"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "scripts": {
+    "develop": "cross-env NODE_ENV=development rollup -c",
+    "publish": "cross-env NODE_ENV=production  rollup -c"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-es2015-rollup": "^3.0.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "cross-env": "^5.1.4",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-uglify": "^3.0.0"
+  },
+  "dependencies": {}
+}

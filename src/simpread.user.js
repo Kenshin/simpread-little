@@ -32,7 +32,7 @@
 // @run-at       document-end
 // ==/UserScript==
 
-const pr           = new PureRead(),
+const pr         = new PureRead(),
     websites     = GM_getResourceText( "websites" ),
     main_style   = GM_getResourceText( "main_style" ),
     user_style   = GM_getResourceText( "user_style" ),
@@ -47,9 +47,39 @@ const pr           = new PureRead(),
     theme_newsprint = GM_getResourceText( "theme_newsprint" ),
     theme_octopress = GM_getResourceText( "theme_octopress" ),
     $root        = $( "html" ),
-    bgtmpl       = '<div class="simpread-read-root"><sr-read><sr-rd-title></sr-rd-title><sr-rd-desc></sr-rd-desc><sr-rd-content></sr-rd-content><sr-rd-crlbar class="controlbar"><fab>╳</fab></sr-rd-crlbar></sr-read></div>';
+    bgtmpl       = `<div class="simpread-read-root">
+                        <sr-read>
+                            <sr-rd-title></sr-rd-title>
+                            <sr-rd-desc></sr-rd-desc>
+                            <sr-rd-content></sr-rd-content>
+                            <sr-rd-crlbar class="controlbar">
+                                <fab>╳</fab>
+                            </sr-rd-crlbar>
+                        </sr-read>
+                    </div>`;
 
-const readMode     = () => {
+/**
+ * Entry
+ */
+
+// add simpread style
+GM_addStyle( main_style );
+GM_addStyle( user_style );
+GM_addStyle( theme_common );
+
+// add websites and current can'b read mode
+pr.Addsites( JSON.parse( websites ));
+pr.AddPlugin( puplugin.Plugin() );
+pr.Getsites();
+
+console.log( "current pureread is ", pr );
+
+if (pr.state != "none" ) controlbar();
+
+/**
+ * Read mode
+ */
+function readMode() {
     GM_addStyle( theme_pixyii );
     pr.ReadMode();
 
@@ -88,7 +118,10 @@ const readMode     = () => {
     });
 };
 
-const controlbar = () => {
+/**
+ * Control bar
+ */
+function controlbar() {
     $( "body" ).append( '<sr-rd-crlbar class="controlbar"><fab style="font-size:12px!important;">简 悦</fab></sr-rd-crlbar>' );
     $( "sr-rd-crlbar" ).css( "opacity", 1 );
     setTimeout( () => {
@@ -98,19 +131,3 @@ const controlbar = () => {
         readMode();
     });
 };
-
-// add simpread style
-GM_addStyle( main_style );
-GM_addStyle( user_style );
-GM_addStyle( theme_common );
-
-// add websites and current can'b read mode
-pr.Addsites( JSON.parse( websites ));
-pr.AddPlugin( puplugin.Plugin() );
-pr.Getsites();
-
-console.log( "current pureread is ", pr );
-
-if ( pr.state != "none" ) {
-    controlbar();
-}

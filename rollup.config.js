@@ -38,7 +38,6 @@ export default [
         input      : './src/simpread.user.js',
         output     : {
             format : 'iife',
-            name   : 'puplugin',
             file   :  process.env.NODE_ENV === 'production' ? './dist/simpread.user.min.js' : './dist/simpread.user.js',
         },
         plugins,

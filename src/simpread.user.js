@@ -113,8 +113,8 @@ console.log( "current pureread is ", pr, simpread );
  * Keyboard event handler
  */
 function bindShortcuts() {
-    Mousetrap.bind( [ simpread.focus.shortcuts.toLowerCase() ], () => pr.state == "none" ? tempMode( "focus" ) : focusMode );
-    Mousetrap.bind( [ simpread.read.shortcuts.toLowerCase()  ], () => pr.state == "none" ? tempMode( "read"  ) : readMode  );
+    Mousetrap.bind( [ simpread.focus.shortcuts.toLowerCase() ], () => pr.state == "none" ? tempMode( "focus" ) : focusMode() );
+    Mousetrap.bind( [ simpread.read.shortcuts.toLowerCase()  ], () => pr.state == "none" ? tempMode( "read"  ) : readMode()  );
     Mousetrap.bind( "esc", ( event, combo ) => {
         if ( combo == "esc" && simpread.option.esc ) {
             if ( $( ".simpread-read-root"  ).length > 0 ) $( ".simpread-read-root sr-rd-crlbar fab" )[0].click();

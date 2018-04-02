@@ -38,3 +38,7 @@ sr-rd-crlbar fab.focus-crlbar-close:hover {
 sr-rd-crlbar fab.focus-crlbar-close {
     background-color: rgba(244, 67, 54, 1);
 }
+
+sr-rd-crlbar fab.not-adapter {
+    background-color: rgba(189, 189, 189, 1);
+}

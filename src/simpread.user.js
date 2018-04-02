@@ -28,6 +28,7 @@
 // @grant        GM_addStyle
 // @grant        GM_getValue
 // @grant        GM_setValue
+// @grant        GM_deleteValue
 // @grant        GM_xmlhttpRequest
 // @run-at       document-end
 // ==/UserScript==
@@ -56,11 +57,41 @@ const pr         = new PureRead(),
                                 <fab>╳</fab>
                             </sr-rd-crlbar>
                         </sr-read>
-                    </div>`;
+                    </div>`,
+    focus        = {
+        version   : "2016-12-29",
+        bgcolor   : "rgba( 235, 235, 235, 0.9 )",
+        controlbar: true,
+        mask      : true,
+        highlight : true,
+        opacity   : 90,
+        shortcuts : "A S",
+    },
+    read         = {
+        version   : "2017-03-16",
+        auto      : false,
+        controlbar: true,
+        highlight : true,
+        shortcuts : "A A",
+        theme     : "github",
+        fontfamily: "default",
+        whitelist : [],
+        exclusion : [
+            "v2ex.com","issue.github.com","readme.github.com","question.zhihu.com","douban.com","nationalgeographic.com.cn","tech.163.com","docs.microsoft.com","msdn.microsoft.com","baijia.baidu.com","code.oschina.net","http://www.ifanr.com","http://www.ifanr.com/news","http://www.ifanr.com/app","http://www.ifanr.com/minapp","http://www.ifanr.com/dasheng","http://www.ifanr.com/data","https://www.ifanr.com/app","http://www.ifanr.com/weizhizao","http://www.thepaper.cn","http://www.pingwest.com","http://tech2ipo.com","https://www.waerfa.com/social"
+        ],
+        fontsize  : "",  // default 62.5%
+        layout    : "",  // default 20%
+    },
+    option = {
+        version   : "2017-04-03",
+        esc       : true,
+        origins   : [],
+    };
+    let simpread = { focus, read, option };
 
-/**
+/****************************
  * Entry
- */
+ ****************************/
 
 // add simpread style
 GM_addStyle( main_style );
@@ -72,9 +103,43 @@ pr.Addsites( JSON.parse( websites ));
 pr.AddPlugin( puplugin.Plugin() );
 pr.Getsites();
 
-console.log( "current pureread is ", pr );
+// set/get storage
+if (GM_getValue( "simpread" )) {
+    simpread = GM_getValue( "simpread" )
+} else {
+    GM_setValue( "simpread",  simpread );
+}
 
-if (pr.state != "none" ) controlbar();
+console.log( "current pureread is ", pr, simpread );
+
+if (pr.state != "none" ) {
+    bindShortcuts();
+    controlbar();
+}
+
+/****************************
+ * Method
+ ****************************/
+
+/**
+ * Keyboard event handler
+ */
+function bindShortcuts() {
+    Mousetrap.bind( [ simpread.focus.shortcuts.toLowerCase() ], focusMode );
+    Mousetrap.bind( [ simpread.read.shortcuts.toLowerCase()  ], readMode  );
+    Mousetrap.bind( "esc", ( event, combo ) => {
+        if ( combo == "esc" && simpread.option.esc ) {
+            console.log( "asdfasdfasf" )
+        }
+    });
+}
+
+/**
+ * Focus
+ */
+function focusMode() {
+
+}
 
 /**
  * Read mode

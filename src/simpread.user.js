@@ -9,7 +9,7 @@
 // @require      https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js
 // @require      https://greasyfork.org/scripts/40172-mousetrap/code/Mousetrap.js?version=262594
 // @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=261636
-// @require      https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js?version=261638
+// @require      https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js?version=262834
 // @resource     websites     http://ojec5ddd5.bkt.clouddn.com/website_list_v3.json?data=0402
 // @resource     origins      http://ojec5ddd5.bkt.clouddn.com/website_list_origins.json
 // @resource     main_style   http://ojec5ddd5.bkt.clouddn.com/puread/simpread.css
@@ -34,6 +34,7 @@
 // ==/UserScript==
 
 const pr         = new PureRead(),
+      style      = puplugin.Plugin( "style" ),
     websites     = GM_getResourceText( "websites" ),
     main_style   = GM_getResourceText( "main_style" ),
     user_style   = GM_getResourceText( "user_style" ),
@@ -267,7 +268,6 @@ function readMode() {
                         </sr-read>
                     </div>`;
 
-    GM_addStyle( theme[simpread.read.theme] );
     pr.ReadMode();
 
     $( "body" ).addClass( "simpread-hidden" );
@@ -289,6 +289,15 @@ function readMode() {
     $("sr-rd-content").find( pr.Exclude( $("sr-rd-content") ) ).remove();
     pr.Beautify( $( "sr-rd-content" ) );
     pr.Format( "simpread-read-root" );
+
+    simpread.read.fontsize = "62.5%";
+    simpread.read.layout = "15%";
+    simpread.read.fontfamily = "PingFang SC";
+
+    GM_addStyle( theme[`theme_${simpread.read.theme}`]    );
+    style.FontFamily( simpread.read.fontfamily );
+    style.FontSize(   simpread.read.fontsize   );
+    style.Layout(     simpread.read.layout     );
 
     // exit
     $( ".simpread-read-root sr-rd-crlbar fab" ).one( "click",  event => {

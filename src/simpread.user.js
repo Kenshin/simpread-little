@@ -106,24 +106,6 @@ controlbar();
 
 console.log( "current pureread is ", pr, simpread );
 
-// test code
-simpread.focus.mask       = false;
-//simpread.focus.highlight  = false;
-simpread.focus.shortcuts  = "shift shift";
-simpread.focus.opacity    = "95";
-simpread.focus.bgcolor    = "rgba(61, 66, 70, 0.95)";
-
-simpread.read.auto        = false;
-simpread.read.controlbar  = true;
-simpread.read.highlight   = true;
-simpread.read.fontsize    = "62.5%";
-simpread.read.layout      = "15%";
-simpread.read.fontfamily  = "PingFang SC";
-simpread.read.shortcuts   = "1 1";
-simpread.read.whitelist   = [ "sspai.com" ];
-
-simpread.option.esc       = false;
-
 autoOpen();
 
 /****************************
@@ -134,8 +116,8 @@ autoOpen();
  * Keyboard event handler
  */
 function bindShortcuts() {
-    Mousetrap.bind( [ simpread.focus.shortcuts.toLowerCase() ], () => pr.state == "none" ? simpread.focus.highlight == true && tempMode( "focus" ) : focusMode() );
-    Mousetrap.bind( [ simpread.read.shortcuts.toLowerCase()  ], () => pr.state == "none" ? simpread.read.highlight  == true && tempMode( "read"  ) : readMode()  );
+    Mousetrap.bind( [ simpread.focus.shortcuts.toLowerCase() ], () => [ "none", "temp" ].includes( pr.state ) ? simpread.focus.highlight == true && tempMode( "focus" ) : focusMode() );
+    Mousetrap.bind( [ simpread.read.shortcuts.toLowerCase()  ], () => [ "none", "temp" ].includes( pr.state ) ? simpread.read.highlight  == true && tempMode( "read"  ) : readMode()  );
     Mousetrap.bind( "esc", ( event, combo ) => {
         if ( combo == "esc" && simpread.option.esc ) {
             if ( $( ".simpread-read-root"  ).length > 0 ) $( ".simpread-read-root sr-rd-crlbar fab" )[0].click();
@@ -203,7 +185,7 @@ function controlbar() {
             $( ".simpread-focus-root" ).trigger( "click", "okay" );
             $( event.target ).removeClass( "focus-crlbar-close" ).text( "简 悦" );
         } else {
-            if ( pr.state == "none" ) {
+            if ( [ "none", "temp" ].includes( pr.state ) ) {
                 tempMode();
             } else {
                 readMode();

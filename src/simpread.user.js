@@ -181,13 +181,15 @@ function controlbar() {
         $( "sr-rd-crlbar" ).removeAttr( "style" );
     }, 1000 * 2 );
     $( "sr-rd-crlbar fab" ).click(  event => {
-        if ( pr.state == "none" ) {
-            tempMode();
+        if ( $(event.target).hasClass( "focus-crlbar-close" ) ) {
+            $( ".simpread-focus-root" ).trigger( "click", "okay" );
+            $( event.target ).removeClass( "focus-crlbar-close" ).text( "简 悦" );
         } else {
-            if ( $(event.target).hasClass( "focus-crlbar-close" ) ) {
-                $( ".simpread-focus-root" ).trigger( "click", "okay" );
-                $( event.target ).removeClass( "focus-crlbar-close" ).text( "简 悦" );
-            } else readMode();
+            if ( pr.state == "none" ) {
+                tempMode();
+            } else {
+                // TO-DO
+            }
         }
         event.preventDefault();
         return false;
@@ -229,24 +231,6 @@ function focusMode( element = undefined ) {
             if ( type == "delete" )   $target.find( tags ).hide();
             else if ( type == "add" ) $target.find( tags ).show();
         };
-
-    while ( $focus.length == 0 ) {
-        if ( $( "body" ).find( "article" ).length > 0 ) {
-            $focus = $( "body" ).find( "article" );
-        }
-        else {
-            try {
-                sel    = window.getSelection();
-                range  = sel.getRangeAt( sel.rangeCount - 1 );
-                node   = range.startContainer.nodeName;
-            if ( node.toLowerCase() === "body" ) throw( "selection area is body tag." );
-                $focus = $( range.startContainer.parentNode );
-            } catch ( error ) {
-                console.log( sel, range, node )
-                console.error( error )
-            }
-        }
-    }
 
     // set include style
     includeStyle( $focus, focusstyle, focuscls, "add" );

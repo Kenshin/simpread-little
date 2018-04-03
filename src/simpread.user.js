@@ -223,7 +223,7 @@ function focusMode( element = undefined ) {
 
     // add background color
     $( bgclsjq )
-        .css({ "background-color" : focus.bgcolor })
+        .css({ "background-color" : simpread.focus.bgcolor })
         .animate({ opacity: 1 });
 
     // click mask remove it
@@ -289,10 +289,6 @@ function readMode() {
     $("sr-rd-content").find( pr.Exclude( $("sr-rd-content") ) ).remove();
     pr.Beautify( $( "sr-rd-content" ) );
     pr.Format( "simpread-read-root" );
-
-    simpread.read.fontsize = "62.5%";
-    simpread.read.layout = "15%";
-    simpread.read.fontfamily = "PingFang SC";
 
     GM_addStyle( theme[`theme_${simpread.read.theme}`]    );
     style.FontFamily( simpread.read.fontfamily );

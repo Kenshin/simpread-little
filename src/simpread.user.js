@@ -47,6 +47,7 @@ const pr         = new PureRead(),
     theme_monospace = GM_getResourceText( "theme_monospace" ),
     theme_newsprint = GM_getResourceText( "theme_newsprint" ),
     theme_octopress = GM_getResourceText( "theme_octopress" ),
+    theme        = { theme_dark, theme_github, theme_gothic, theme_night, theme_pixyii, theme_engwrite, theme_monospace, theme_newsprint, theme_octopress },
     focus        = {
         version   : "2016-12-29",
         bgcolor   : "rgba( 235, 235, 235, 0.9 )",
@@ -266,7 +267,7 @@ function readMode() {
                         </sr-read>
                     </div>`;
 
-    GM_addStyle( theme_pixyii );
+    GM_addStyle( theme[simpread.read.theme] );
     pr.ReadMode();
 
     $( "body" ).addClass( "simpread-hidden" );
@@ -295,7 +296,7 @@ function readMode() {
             delay: 100,
             complete: () => {
                 $root.removeClass( "simpread-theme-root" )
-                .removeClass( "simpread-font" );
+                     .removeClass( "simpread-font" );
                 if ( $root.attr("style") ) $root.attr( "style", $root.attr("style").replace( "font-size: 62.5%!important", "" ));
                 $( "body" ).removeClass( "simpread-hidden" );
                 $( ".simpread-read-root" ).remove();

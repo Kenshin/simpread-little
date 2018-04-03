@@ -53,7 +53,7 @@ const pr         = new PureRead(),
         version   : "2016-12-29",
         bgcolor   : "rgba( 235, 235, 235, 0.9 )",
         mask      : true,
-        highlight : true,
+        highlight : true,  // not-write, only read
         opacity   : 90,
         shortcuts : "A S",
     },

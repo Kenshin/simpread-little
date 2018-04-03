@@ -52,7 +52,6 @@ const pr         = new PureRead(),
     focus        = {
         version   : "2016-12-29",
         bgcolor   : "rgba( 235, 235, 235, 0.9 )",
-        controlbar: true,
         mask      : true,
         highlight : true,
         opacity   : 90,
@@ -186,7 +185,7 @@ function controlbar() {
             tempMode();
         } else {
             if ( $(event.target).hasClass( "focus-crlbar-close" ) ) {
-                $( ".simpread-focus-root" )[0].click();
+                $( ".simpread-focus-root" ).trigger( "click", "okay" );
                 $( event.target ).removeClass( "focus-crlbar-close" ).text( "简 悦" );
             } else readMode();
         }
@@ -274,6 +273,7 @@ function focusMode( element = undefined ) {
 
     // click mask remove it
     $( bgclsjq ).on( "click", ( event, data ) => {
+            if ( !simpread.focus.mask && !data ) return;
             $( bgclsjq ).animate({ opacity: 0 }, {
                 complete: ()=> {
                     includeStyle( $focus, focusstyle, focuscls, "delete" );

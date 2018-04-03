@@ -106,6 +106,24 @@ controlbar();
 
 console.log( "current pureread is ", pr, simpread );
 
+// test code
+simpread.focus.mask       = false;
+//simpread.focus.highlight  = false;
+simpread.focus.shortcuts  = "shift shift";
+simpread.focus.opacity    = "95";
+simpread.focus.bgcolor    = "rgba(61, 66, 70, 0.95)";
+
+simpread.read.auto        = false;
+simpread.read.controlbar  = true;
+simpread.read.highlight   = true;
+simpread.read.fontsize    = "62.5%";
+simpread.read.layout      = "15%";
+simpread.read.fontfamily  = "PingFang SC";
+simpread.read.shortcuts   = "1 1";
+simpread.read.whitelist   = [ "sspai.com" ];
+
+simpread.option.esc       = false;
+
 autoOpen();
 
 /****************************
@@ -188,7 +206,7 @@ function controlbar() {
             if ( pr.state == "none" ) {
                 tempMode();
             } else {
-                // TO-DO
+                readMode();
             }
         }
         event.preventDefault();

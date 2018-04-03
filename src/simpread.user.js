@@ -75,6 +75,7 @@ const pr         = new PureRead(),
     option = {
         version   : "2017-04-03",
         esc       : true,
+        trigger   : "read", // include: 'focus' 'read', only by userscript
         origins   : [],
     };
     let simpread = { focus, read, option };
@@ -186,9 +187,11 @@ function controlbar() {
             $( event.target ).removeClass( "focus-crlbar-close" ).text( "简 悦" );
         } else {
             if ( [ "none", "temp" ].includes( pr.state ) ) {
-                tempMode();
+                tempMode( simpread.option.trigger );
             } else {
-                readMode();
+                if ( simpread.option.trigger == "read" ) {
+                    readMode();
+                } else focusMode();
             }
         }
         event.preventDefault();

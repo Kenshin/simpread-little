@@ -107,6 +107,8 @@ controlbar();
 
 console.log( "current pureread is ", pr, simpread );
 
+if ( pr.state == "adapter" && simpread.read.auto ) readMode();
+
 /****************************
  * Method
  ****************************/
@@ -115,8 +117,8 @@ console.log( "current pureread is ", pr, simpread );
  * Keyboard event handler
  */
 function bindShortcuts() {
-    Mousetrap.bind( [ simpread.focus.shortcuts.toLowerCase() ], () => pr.state == "none" ? tempMode( "focus" ) : focusMode() );
-    Mousetrap.bind( [ simpread.read.shortcuts.toLowerCase()  ], () => pr.state == "none" ? tempMode( "read"  ) : readMode()  );
+    Mousetrap.bind( [ simpread.focus.shortcuts.toLowerCase() ], () => pr.state == "none" ? simpread.focus.highlight == true && tempMode( "focus" ) : focusMode() );
+    Mousetrap.bind( [ simpread.read.shortcuts.toLowerCase()  ], () => pr.state == "none" ? simpread.read.highlight  == true && tempMode( "read"  ) : readMode()  );
     Mousetrap.bind( "esc", ( event, combo ) => {
         if ( combo == "esc" && simpread.option.esc ) {
             if ( $( ".simpread-read-root"  ).length > 0 ) $( ".simpread-read-root sr-rd-crlbar fab" )[0].click();
@@ -262,7 +264,7 @@ function readMode() {
                             <sr-rd-title></sr-rd-title>
                             <sr-rd-desc></sr-rd-desc>
                             <sr-rd-content></sr-rd-content>
-                            <sr-rd-crlbar class="controlbar">
+                            <sr-rd-crlbar class=${ simpread.read.controlbar == true ? "" : "controlbar" }>
                                 <fab style="font-size:12px!important;">╳</fab>
                             </sr-rd-crlbar>
                         </sr-read>

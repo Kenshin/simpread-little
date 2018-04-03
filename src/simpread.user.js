@@ -107,7 +107,7 @@ controlbar();
 
 console.log( "current pureread is ", pr, simpread );
 
-if ( pr.state == "adapter" && simpread.read.auto ) readMode();
+autoOpen();
 
 /****************************
  * Method
@@ -125,6 +125,50 @@ function bindShortcuts() {
             if ( $( ".simpread-focus-root" ).length > 0 ) $( "sr-rd-crlbar fab" )[0].click();
         }
     });
+}
+
+/**
+ * Auto open read mode
+ */
+function autoOpen() {
+    const exclusion = ( minimatch, data ) => {
+            const url = window.location.origin + window.location.pathname;
+            return data.findIndex( item => {
+                item = item.trim();
+                return item.startsWith( "http" ) ? minimatch( url, item ) : item == pr.current.site.name;
+            }) == -1 ? true : false;
+        },
+        whitelist = ( minimatch, data ) => {
+            const url = window.location.origin + window.location.pathname;
+            return data.findIndex( item => {
+                item = item.trim();
+                return item.startsWith( "http" ) ? minimatch( url, item ) : item == pr.current.site.name;
+            }) != -1 ? true : false;
+        };
+    if   ( window.location.href.includes( "simpread_mode=read"     ) ||
+         ( simpread.read.auto  && exclusion( puplugin.Plugin( "minimatch" ), simpread.read.exclusion )) ||
+         ( !simpread.read.auto && whitelist( puplugin.Plugin( "minimatch" ), simpread.read.whitelist ))
+        ) {
+        switch ( pr.current.site.name ) {
+            case "my.oschina.net":
+            case "36kr.com":
+            case "chiphell.com":
+            case "question.zhihu.com":
+                $( () => readMode() );
+                break;
+            case "post.juejin.im":
+            case "entry.juejin.im":
+                setTimeout( ()=>readMode(), 2500 );
+                break;
+            case "kancloud.cn":
+            case "sspai.com":
+                setTimeout( ()=>readMode(), 1000 );
+                break;
+            default:
+                if ( pr.state == "adapter" ) readMode();
+                break;
+        }
+    }
 }
 
 /**

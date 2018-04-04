@@ -7,6 +7,7 @@
 // @include      http://*/*
 // @include      https://*/*
 // @require      https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js
+// @require      https://gist.github.com/Kenshin/e738f742bf41ef7c8f30c24590e5d6c8/raw/be396c43baaad602c7315c2d3a187f8fe3eaec21/mduikit.min.js
 // @require      https://greasyfork.org/scripts/40236-notify/code/Notify.js?version=263047
 // @require      https://greasyfork.org/scripts/40172-mousetrap/code/Mousetrap.js?version=262594
 // @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=261636
@@ -320,6 +321,7 @@ function readMode() {
                             <sr-rd-title></sr-rd-title>
                             <sr-rd-desc></sr-rd-desc>
                             <sr-rd-content></sr-rd-content>
+                            <sr-page></sr-page>
                             <sr-rd-footer>
                                 <sr-rd-footer-text>全文完</sr-rd-footer-text>
                                 <sr-rd-footer-copywrite>
@@ -353,7 +355,14 @@ function readMode() {
                     </sr-rd-mult>`;
             });
             $( "sr-rd-content" ).html( child );
-        };
+        },
+        paging = page => {
+            const prev     = page[0].prev,
+                  next     = page[1].next,
+                  btn_next = mduikit.button( next, "后一页 →", next == undefined ? true : false ),
+                  btn_prev = mduikit.button( prev, "← 前一页", prev == undefined ? true : false );
+            $( "sr-page" ).html( btn_prev + btn_next );
+        }
 
     pr.ReadMode();
 
@@ -373,6 +382,8 @@ function readMode() {
     else $( "sr-rd-desc"    ).remove();
     if   ( pr.html.avatar   ) multiple( pr.html.include, pr.html.avatar );
     else $( "sr-rd-content" ).html( pr.html.include );
+    if   ( pr.html.paging   ) paging( pr.html.paging );
+    else $( "sr-page"       ).remove();
 
     $("sr-rd-content").find( pr.Exclude( $("sr-rd-content") ) ).remove();
     pr.Beautify( $( "sr-rd-content" ) );

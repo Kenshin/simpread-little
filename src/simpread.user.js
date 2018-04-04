@@ -323,7 +323,7 @@ function readMode() {
                             <sr-rd-content></sr-rd-content>
                             <sr-page></sr-page>
                             <sr-rd-footer>
-                                <sr-rd-footer-text>全文完</sr-rd-footer-text>
+                                <sr-rd-footer-text style="display:none;">全文完</sr-rd-footer-text>
                                 <sr-rd-footer-copywrite>
                                     <span>本文由 简悦 </span><a href="http://ksria.com/simpread" target="_blank">SimpRead</a><span> 优化，用以提升阅读体验。</span>
                                 </sr-rd-footer-copywrite>

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         简悦 - SimpRead
 // @namespace    http://ksria.com/simpread/
-// @version      1.0.0.0402-beta
+// @version      1.0.0.0404-beta
 // @description  简悦 - 让你瞬间进入沉浸式阅读的 User Script 扩展
 // @author       Kenshin <kenshin@ksria.com>
 // @include      http://*/*

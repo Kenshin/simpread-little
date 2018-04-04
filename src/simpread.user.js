@@ -330,7 +330,30 @@ function readMode() {
                                 <fab style="font-size:12px!important;">╳</fab>
                             </sr-rd-crlbar>
                         </sr-read>
-                    </div>`;
+                    </div>`,
+        multiple  = ( include, avatar ) => {
+            const contents = [],
+                names    = avatar[ 0 ].name,
+                urls     = avatar[ 1 ].url;
+            include.each( ( idx, item ) => {
+                const art = {};
+                art.name    = $( names[idx] ).text();
+                art.url     = $( urls[idx]  ).attr( "src" );
+                art.content = $( item       ).html();
+                !art.url && ( art.url = default_src );
+                contents.push( art );
+            });
+            const child = contents.map( item => {
+                return `<sr-rd-mult>
+                            <sr-rd-mult-avatar>
+                                <div class="sr-rd-content-nobeautify"><img src=${ item.url } /></div>
+                                <span>${ item.name }</span>
+                            </sr-rd-mult-avatar>
+                            <sr-rd-mult-content>${ item.content }</sr-rd-mult-content>
+                    </sr-rd-mult>`;
+            });
+            $( "sr-rd-content" ).html( child );
+        };
 
     pr.ReadMode();
 
@@ -347,7 +370,9 @@ function readMode() {
 
     $( "sr-rd-title" ).html(   pr.html.title   );
     $( "sr-rd-desc" ).html(    pr.html.desc    );
-    $( "sr-rd-content" ).html( pr.html.include );
+    if ( pr.html.avatar ) {
+        multiple( pr.html.include, pr.html.avatar );
+    } else $( "sr-rd-content" ).html( pr.html.include );
     if ( pr.html.desc === "" ) $( "sr-rd-desc" ).remove();
 
     $("sr-rd-content").find( pr.Exclude( $("sr-rd-content") ) ).remove();

@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         简悦 - SimpRead
+// @name         简悦( SimpRead ) · 轻阅版
 // @namespace    http://ksria.com/simpread/
 // @version      1.0.0.0404-beta
 // @description  简悦 - 让你瞬间进入沉浸式阅读的 User Script 扩展
@@ -135,7 +135,7 @@ function version() {
             });
         }
         GM_setValue( "simpread",  simpread );
-        GM_notification( `简悦已升级到最新版${simpread.version}，如需生效请刷新页面。`, "简悦升级提示", GM_info.script.icon );
+        GM_notification( `简悦 · 轻阅版 已升级到最新版${GM_info.script.version}，如需生效请刷新页面。`, "简悦 · 轻阅版升级提示", GM_info.script.icon );
     }
 }
 

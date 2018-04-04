@@ -368,9 +368,9 @@ function readMode() {
         .animate( { opacity: 1 }, { delay: 100 })
         .addClass( "simpread-read-root-show" );
 
-    $( "sr-rd-title" ).html(   pr.html.title   );
+    $( "sr-rd-title"        ).html(   pr.html.title   );
     if ( pr.html.desc != "" ) $( "sr-rd-desc" ).html( pr.html.desc );
-    else $( "sr-rd-desc" ).remove();
+    else $( "sr-rd-desc"    ).remove();
     if   ( pr.html.avatar   ) multiple( pr.html.include, pr.html.avatar );
     else $( "sr-rd-content" ).html( pr.html.include );
 

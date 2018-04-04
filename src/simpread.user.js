@@ -363,9 +363,22 @@ function readMode() {
                   btn_prev = mduikit.Button( prev, "← 前一页", prev == undefined ? true : false, "#fff", "#1976D2" );
             if ( !prev && !next ) $( "sr-page" ).remove();
             else $( "sr-page" ).html( btn_prev + btn_next );
-        }
+        },
+        special = ()=> {
+            if ( pr.current.site.name == "qdaily.com" ) {
+                new Notify().Render( "简悦 · 轻阅版 并不支持此站的适配，如需请使用完整版。" );
+                return true;
+            }
+            if ( pr.html.include.includes( "sr-rd-content-error" ) ) {
+                new Notify().Render( `当前页面结构改变导致不匹配阅读模式，请报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
+                simpread.read.highlight  == true && tempMode( "read"  );
+                return true;
+            }
+        };
 
     pr.ReadMode();
+
+    if ( special() ) return;
 
     $( "body" ).addClass( "simpread-hidden" );
     $root

@@ -101,16 +101,13 @@ pr.Addsites( JSON.parse( websites ));
 pr.AddPlugin( puplugin.Plugin() );
 pr.Getsites();
 
-// version
+// initialize
 version();
-
-// init shortcuts and controlbar
 bindShortcuts();
 controlbar();
+autoOpen();
 
 console.log( "current pureread is ", pr, simpread );
-
-autoOpen();
 
 /****************************
  * Method

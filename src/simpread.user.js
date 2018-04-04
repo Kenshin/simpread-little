@@ -31,6 +31,8 @@
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_deleteValue
+// @grant        GM_notification
+// @grant        GM_info
 // @grant        GM_xmlhttpRequest
 // @run-at       document-end
 // ==/UserScript==
@@ -81,7 +83,8 @@ const pr         = new PureRead(),
         trigger   : "read", // include: 'focus' 'read', only by userscript
         origins   : [],
     };
-    let simpread = { focus, read, option };
+    let simpread = { version: "1.1.0", focus, read, option },
+        org_simp = { ...simpread };
 
 /****************************
  * Entry
@@ -98,12 +101,8 @@ pr.Addsites( JSON.parse( websites ));
 pr.AddPlugin( puplugin.Plugin() );
 pr.Getsites();
 
-// set/get storage
-if (GM_getValue( "simpread" )) {
-    simpread = GM_getValue( "simpread" )
-} else {
-    GM_setValue( "simpread",  simpread );
-}
+// version
+version();
 
 // init shortcuts and controlbar
 bindShortcuts();
@@ -116,6 +115,31 @@ autoOpen();
 /****************************
  * Method
  ****************************/
+/**
+ * Version
+ */
+function version() {
+    // get and set simpread
+    if (GM_getValue( "simpread" )) {
+        simpread = GM_getValue( "simpread" )
+    } else {
+        GM_setValue( "simpread",  simpread );
+    }
+    // compare
+    if ( simpread.version != org_simp.version ) {
+        if ( simpread.version == undefined ) {
+            simpread = { ...org_simp };
+        } else {
+            Object.keys( org_simp ).forEach( key => {
+                if ( !simpread[key] ) {
+                    simpread[key] = org_simp[key];
+                }
+            });
+        }
+        GM_setValue( "simpread",  simpread );
+        GM_notification( `简悦已升级到最新版${simpread.version}，如需生效请刷新页面。`, "简悦升级提示", GM_info.script.icon );
+    }
+}
 
 /**
  * Keyboard event handler

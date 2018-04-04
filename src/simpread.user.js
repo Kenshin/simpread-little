@@ -7,11 +7,13 @@
 // @include      http://*/*
 // @include      https://*/*
 // @require      https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js
+// @require      https://greasyfork.org/scripts/40236-notify/code/Notify.js?version=263047
 // @require      https://greasyfork.org/scripts/40172-mousetrap/code/Mousetrap.js?version=262594
 // @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=261636
 // @require      https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js?version=262834
 // @resource     websites     http://ojec5ddd5.bkt.clouddn.com/website_list_v3.json?data=0402
 // @resource     origins      http://ojec5ddd5.bkt.clouddn.com/website_list_origins.json
+// @resource     notify_style http://ojec5ddd5.bkt.clouddn.com/puread/notify.css
 // @resource     main_style   http://ojec5ddd5.bkt.clouddn.com/puread/simpread.css
 // @resource     user_style   https://gist.github.com/Kenshin/365a91c61bad550b5900247539113f06/raw/dd5d028440fab2cc5095c7b89e62e7868d7be7bb/simpread_user.css
 // @resource     theme_common http://ojec5ddd5.bkt.clouddn.com/puread/theme_common.css
@@ -36,6 +38,7 @@
 const pr         = new PureRead(),
       style      = puplugin.Plugin( "style" ),
     websites     = GM_getResourceText( "websites" ),
+    notify_style = GM_getResourceText( "notify_style" ),
     main_style   = GM_getResourceText( "main_style" ),
     user_style   = GM_getResourceText( "user_style" ),
     theme_common = GM_getResourceText( "theme_common" ),
@@ -85,6 +88,7 @@ const pr         = new PureRead(),
  ****************************/
 
 // add simpread style
+GM_addStyle( notify_style );
 GM_addStyle( main_style );
 GM_addStyle( user_style );
 GM_addStyle( theme_common );

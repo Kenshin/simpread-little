@@ -295,6 +295,12 @@ function readMode() {
                             <sr-rd-title></sr-rd-title>
                             <sr-rd-desc></sr-rd-desc>
                             <sr-rd-content></sr-rd-content>
+                            <sr-rd-footer>
+                                <sr-rd-footer-text>全文完</sr-rd-footer-text>
+                                <sr-rd-footer-copywrite>
+                                    <span>本文由 简悦 </span><a href="http://ksria.com/simpread" target="_blank">SimpRead</a><span> 优化，用以提升阅读体验。</span>
+                                </sr-rd-footer-copywrite>
+                                </sr-rd-footer>
                             <sr-rd-crlbar class=${ simpread.read.controlbar == true ? "" : "controlbar" }>
                                 <fab style="font-size:12px!important;">╳</fab>
                             </sr-rd-crlbar>

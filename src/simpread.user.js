@@ -369,7 +369,7 @@ function readMode() {
                 new Notify().Render( "简悦 · 轻阅版 并不支持此站的适配，如需请使用完整版。" );
                 return true;
             }
-            if ( pr.html.include.includes( "sr-rd-content-error" ) ) {
+            if ( pr.html.include.includes && pr.html.include.includes( "sr-rd-content-error" ) ) {
                 new Notify().Render( `当前页面结构改变导致不匹配阅读模式，请报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
                 simpread.read.highlight  == true && tempMode( "read"  );
                 return true;

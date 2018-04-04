@@ -7,7 +7,7 @@
 // @include      http://*/*
 // @include      https://*/*
 // @require      https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js
-// @require      https://gist.github.com/Kenshin/e738f742bf41ef7c8f30c24590e5d6c8/raw/be396c43baaad602c7315c2d3a187f8fe3eaec21/mduikit.min.js
+// @require      https://gist.github.com/Kenshin/e738f742bf41ef7c8f30c24590e5d6c8/raw/64bff3323b428f3d4a2e6faa4af38ca9eddf5d31/mduikit.light.js
 // @require      https://greasyfork.org/scripts/40236-notify/code/Notify.js?version=263047
 // @require      https://greasyfork.org/scripts/40172-mousetrap/code/Mousetrap.js?version=262594
 // @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=261636
@@ -359,9 +359,10 @@ function readMode() {
         paging = page => {
             const prev     = page[0].prev,
                   next     = page[1].next,
-                  btn_next = mduikit.button( next, "后一页 →", next == undefined ? true : false ),
-                  btn_prev = mduikit.button( prev, "← 前一页", prev == undefined ? true : false );
-            $( "sr-page" ).html( btn_prev + btn_next );
+                  btn_next = mduikit.Button( next, "后一页 →", next == undefined ? true : false, "#fff", "#1976D2" ),
+                  btn_prev = mduikit.Button( prev, "← 前一页", prev == undefined ? true : false, "#fff", "#1976D2" );
+            if ( !prev && !next ) $( "sr-page" ).remove();
+            else $( "sr-page" ).html( btn_prev + btn_next );
         }
 
     pr.ReadMode();

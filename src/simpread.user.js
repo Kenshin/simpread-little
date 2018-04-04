@@ -369,11 +369,10 @@ function readMode() {
         .addClass( "simpread-read-root-show" );
 
     $( "sr-rd-title" ).html(   pr.html.title   );
-    $( "sr-rd-desc" ).html(    pr.html.desc    );
-    if ( pr.html.avatar ) {
-        multiple( pr.html.include, pr.html.avatar );
-    } else $( "sr-rd-content" ).html( pr.html.include );
-    if ( pr.html.desc === "" ) $( "sr-rd-desc" ).remove();
+    if ( pr.html.desc != "" ) $( "sr-rd-desc" ).html( pr.html.desc );
+    else $( "sr-rd-desc" ).remove();
+    if   ( pr.html.avatar   ) multiple( pr.html.include, pr.html.avatar );
+    else $( "sr-rd-content" ).html( pr.html.include );
 
     $("sr-rd-content").find( pr.Exclude( $("sr-rd-content") ) ).remove();
     pr.Beautify( $( "sr-rd-content" ) );

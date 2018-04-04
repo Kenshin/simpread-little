@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name         简悦( SimpRead ) · 轻阅版
 // @namespace    http://ksria.com/simpread/
-// @version      1.0.0.0404-beta
+// @version      1.0.1.0404-beta
 // @description  简悦 - 让你瞬间进入沉浸式阅读的 User Script 扩展
 // @author       Kenshin <kenshin@ksria.com>
 // @include      http://*/*
 // @include      https://*/*
 // @require      https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js
-// @require      https://gist.github.com/Kenshin/e738f742bf41ef7c8f30c24590e5d6c8/raw/64bff3323b428f3d4a2e6faa4af38ca9eddf5d31/mduikit.light.js
+// @require      https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js?version=263075
 // @require      https://greasyfork.org/scripts/40236-notify/code/Notify.js?version=263047
 // @require      https://greasyfork.org/scripts/40172-mousetrap/code/Mousetrap.js?version=262594
 // @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=261636

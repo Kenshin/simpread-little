@@ -1,5 +1,7 @@
 sr-rd-crlbar.controlbar {
-    height: 100px;
+    width: 200px;
+    height: 200px;
+
     z-index: 2147483647;
 }
 
@@ -41,4 +43,24 @@ sr-rd-crlbar fab.focus-crlbar-close {
 
 sr-rd-crlbar fab.not-adapter {
     background-color: rgba(189, 189, 189, 1);
+}
+
+sr-rd-crlbar fab.setting {
+    bottom: 100px;
+    right: 30px;
+    margin-bottom: 10px;
+
+    width: 45px;
+    height: 45px;
+
+    line-height: 45px;
+    font-size: 10px;
+
+    background-color: rgba(76, 175, 80, 7);
+    opacity: 0;
+    transition: opacity .5s ease;
+}
+
+sr-rd-crlbar fab.show {
+    opacity: 1;
 }

@@ -16,7 +16,7 @@
 // @resource     origins      http://ojec5ddd5.bkt.clouddn.com/website_list_origins.json
 // @resource     notify_style http://ojec5ddd5.bkt.clouddn.com/puread/notify.css
 // @resource     main_style   http://ojec5ddd5.bkt.clouddn.com/puread/simpread.css
-// @resource     user_style   https://gist.github.com/Kenshin/365a91c61bad550b5900247539113f06/raw/496c4078ac90f49f50142615b05f32cf74d22ade/simpread_user.css
+// @resource     user_style   https://gist.github.com/Kenshin/365a91c61bad550b5900247539113f06/raw/4204bfba1f7cc75d8818f82b4b65b58ddc173e3d/simpread_user.css
 // @resource     theme_common http://ojec5ddd5.bkt.clouddn.com/puread/theme_common.css
 // @resource     theme_dark   http://ojec5ddd5.bkt.clouddn.com/puread/theme_dark.css
 // @resource     theme_github http://ojec5ddd5.bkt.clouddn.com/puread/theme_github.css
@@ -201,7 +201,7 @@ function autoOpen() {
  * Control bar
  */
 function controlbar() {
-    $( "body" ).append( '<sr-rd-crlbar class="controlbar"><fab class="setting">设 定</fab><fab style="font-size:12px!important;">简 悦</fab></sr-rd-crlbar>' );
+    $( "body" ).append( '<sr-rd-crlbar class="controlbar"><fab class="setting"></fab><fab style="font-size:12px!important;">简 悦</fab></sr-rd-crlbar>' );
     $( "sr-rd-crlbar" ).css( "opacity", 1 );
     if ( pr.state == "none" ) $( "sr-rd-crlbar fab:not(.setting)" ).addClass( "not-adapter" );
     setTimeout( () => {

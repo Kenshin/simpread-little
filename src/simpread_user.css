@@ -47,16 +47,21 @@ sr-rd-crlbar fab.not-adapter {
 
 sr-rd-crlbar fab.setting {
     bottom: 100px;
-    right: 30px;
+    right: 33px;
+
     margin-bottom: 10px;
 
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
 
-    line-height: 45px;
+    line-height: 40px;
     font-size: 10px;
 
-    background-color: rgba(76, 175, 80, 7);
+    background-color: rgb(3, 169, 244);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABvUlEQVRIS72WjVFCQQyENxVoB2oF2oFYiZYAFYgVaAlQidgBdoAdaAVxvptkjMffQxluhoF3L5fNZff2MB1huPuCNGY2cveppEdJd2a2sCPkVwCcSRpLeojP0QFuu2J3A7j7paT7smhuZquaxN1HkkhM1XRjJinn+L3a2qJY/FoStoo6gOw3028dBy30F4C7UwlVTySdS1oDiH4vzWwcu2SnL5IuJC0l8cyHHMsG4O4kuy4EQRaDhTmYIwG74JvnD9oWoDcFALAfDja0Y6i4nsxsulemsVXakwQB8BGkJRjvqay+W8BLtJZzMItiyTNjdz0Ha6Rl9qgypdgIHbJNi4UewZUgqqPXbbg7PU7iP6Pf+XpSYyswAJm8zq9JsgAdFH8SgHp4aBFEIkH63LcIvyH+q2vReGuL9p3Mf5McBKbvoIxUB76Dn1SZEsfId+xyk0xRW/OuPMkkrbYwRIHEDD5oyA8ZVi8iwXNBat4ShbwHT6tiFVhN9aJ1u44TCQgkDzU7RIFnXXVe1LzrtHbdKQpC2U2O5i1dTIqCOA5gXjjMz3deOENZDhVyNg67Mv8AAGd56XNpHf3S3/i35Rt5qiGSUhS/qAAAAABJRU5ErkJggg==);
+
     opacity: 0;
     transition: opacity .5s ease;
 }

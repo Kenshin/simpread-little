@@ -148,3 +148,16 @@ dialog-footer {
 
     box-sizing: border-box;
 }
+
+sr-opt-gp sr-opt-label {
+    font-weight:500;
+    color: rgb(33, 150, 243);
+}
+
+sr-opt-gp sr-opt-item {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+
+    width: 100%;
+}

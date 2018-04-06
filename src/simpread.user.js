@@ -16,7 +16,8 @@
 // @resource     origins      http://ojec5ddd5.bkt.clouddn.com/website_list_origins.json
 // @resource     notify_style http://ojec5ddd5.bkt.clouddn.com/puread/notify.css
 // @resource     main_style   http://ojec5ddd5.bkt.clouddn.com/puread/simpread.css
-// @resource     user_style   https://gist.github.com/Kenshin/365a91c61bad550b5900247539113f06/raw/068ab93fce6c11b0402865e73d3e48bdec7a9d78/simpread_user.css
+// @resource     option_style http://ojec5ddd5.bkt.clouddn.com/puread/option.css
+// @resource     user_style   https://gist.github.com/Kenshin/365a91c61bad550b5900247539113f06/raw/19e4d53be3ac0eac22527d65830bbf12b6c9def5/simpread_user.css
 // @resource     theme_common http://ojec5ddd5.bkt.clouddn.com/puread/theme_common.css
 // @resource     theme_dark   http://ojec5ddd5.bkt.clouddn.com/puread/theme_dark.css
 // @resource     theme_github http://ojec5ddd5.bkt.clouddn.com/puread/theme_github.css
@@ -44,6 +45,7 @@ const pr         = new PureRead(),
     websites     = GM_getResourceText( "websites" ),
     notify_style = GM_getResourceText( "notify_style" ),
     main_style   = GM_getResourceText( "main_style" ),
+    option_style = GM_getResourceText( "option_style" ),
     user_style   = GM_getResourceText( "user_style" ),
     theme_common = GM_getResourceText( "theme_common" ),
     theme_dark   = GM_getResourceText( "theme_dark" ),
@@ -94,8 +96,9 @@ const pr         = new PureRead(),
 
 // add simpread style
 GM_addStyle( notify_style );
-GM_addStyle( main_style );
-GM_addStyle( user_style );
+GM_addStyle( main_style   );
+GM_addStyle( option_style );
+GM_addStyle( user_style   );
 GM_addStyle( theme_common );
 
 // add websites and current can'b read mode
@@ -499,14 +502,24 @@ function optionMode() {
             }});
           },
           save       = event => {
-            // TO-DO
+          },
+          imports    = event => {
+          },
+          exports    = event => {
           },
           btn_cancel = mduikit.Button( "opt-cancel", "取 消", { color: "rgb(33, 150, 243)", type: "flat", onclick: close, mode: "secondary" }),
           btn_save   = mduikit.Button( "opt-save",   "保 存", { color: "rgb(33, 150, 243)", type: "flat", onclick: save }),
+          btn_import = mduikit.Button( "opt-import", "从本地导入配置文件", { color: "#fff", bgColor: "#FF5252", type: "flat", onclick: imports }),
+          btn_export = mduikit.Button( "opt-export", "导出配置文件到本地", { color: "#fff", bgColor: "#2196F3", type: "flat", onclick: exports }),
           optmpl = `<div class="simpread-option-root">
                         <dialog-gp>
                             <dialog-head>选项页</dialog-head>
-                            <dialog-content></dialog-content>
+                            <dialog-content>
+                                <sr-opt-gp>
+                                    <sr-opt-label>导入和导出</sr-opt-label>
+                                    <sr-opt-item>${ btn_import + btn_export }</sr-opt-item>
+                                </sr-opt-gp>
+                            </dialog-content>
                             <dialog-footer>
                                 ${btn_cancel + btn_save}
                             </dialog-footer>

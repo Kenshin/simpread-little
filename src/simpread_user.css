@@ -111,6 +111,21 @@ dialog-gp {
     box-shadow: rgba(0, 0, 0, 0.247059) 0px 14px 45px, rgba(0, 0, 0, 0.219608) 0px 10px 18px;
 }
 
+dialog-head {
+    display: block;
+
+    padding: 24px 24px 20px 24px;
+
+    height: 25px;
+    line-height: 25px;
+
+    font-size: 21px;
+    font-weight: 500;
+    
+    color: #fff;
+    background-color: rgb(100, 181, 246);
+}
+
 dialog-content {
     display: block;
 
@@ -129,6 +144,7 @@ dialog-footer {
     justify-content: flex-end;
 
     width: 100%;
+    min-height: 52px;
 
     box-sizing: border-box;
 }

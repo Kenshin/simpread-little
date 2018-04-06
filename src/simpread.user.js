@@ -7,7 +7,7 @@
 // @include      http://*/*
 // @include      https://*/*
 // @require      https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js
-// @require      https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js?version=263485
+// @require      https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js?version=263504
 // @require      https://greasyfork.org/scripts/40236-notify/code/Notify.js?version=263047
 // @require      https://greasyfork.org/scripts/40172-mousetrap/code/Mousetrap.js?version=262594
 // @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=261636
@@ -16,7 +16,7 @@
 // @resource     origins      http://ojec5ddd5.bkt.clouddn.com/website_list_origins.json
 // @resource     notify_style http://ojec5ddd5.bkt.clouddn.com/puread/notify.css
 // @resource     main_style   http://ojec5ddd5.bkt.clouddn.com/puread/simpread.css
-// @resource     user_style   https://gist.github.com/Kenshin/365a91c61bad550b5900247539113f06/raw/fa24c39b701c7845791208b46c8e6efcee5f359e/simpread_user.css
+// @resource     user_style   https://gist.github.com/Kenshin/365a91c61bad550b5900247539113f06/raw/068ab93fce6c11b0402865e73d3e48bdec7a9d78/simpread_user.css
 // @resource     theme_common http://ojec5ddd5.bkt.clouddn.com/puread/theme_common.css
 // @resource     theme_dark   http://ojec5ddd5.bkt.clouddn.com/puread/theme_dark.css
 // @resource     theme_github http://ojec5ddd5.bkt.clouddn.com/puread/theme_github.css
@@ -501,10 +501,11 @@ function optionMode() {
           save       = event => {
             // TO-DO
           },
-          btn_cancel = mduikit.Button( "opt-cancel", "取 消", { color: "#fff", type: "flat", onclick: close }),
-          btn_save   = mduikit.Button( "opt-save",   "保 存", { color: "#fff", type: "flat", onclick: save }),
+          btn_cancel = mduikit.Button( "opt-cancel", "取 消", { color: "rgb(33, 150, 243)", type: "flat", onclick: close, mode: "secondary" }),
+          btn_save   = mduikit.Button( "opt-save",   "保 存", { color: "rgb(33, 150, 243)", type: "flat", onclick: save }),
           optmpl = `<div class="simpread-option-root">
                         <dialog-gp>
+                            <dialog-head>选项页</dialog-head>
                             <dialog-content></dialog-content>
                             <dialog-footer>
                                 ${btn_cancel + btn_save}

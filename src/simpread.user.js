@@ -16,7 +16,7 @@
 // @resource     origins      http://ojec5ddd5.bkt.clouddn.com/website_list_origins.json
 // @resource     notify_style http://ojec5ddd5.bkt.clouddn.com/puread/notify.css
 // @resource     main_style   http://ojec5ddd5.bkt.clouddn.com/puread/simpread.css
-// @resource     user_style   https://gist.github.com/Kenshin/365a91c61bad550b5900247539113f06/raw/521ca31f67d92ac1eb069f531dd1ad50f06f72e7/simpread_user.css
+// @resource     user_style   https://gist.github.com/Kenshin/365a91c61bad550b5900247539113f06/raw/fa24c39b701c7845791208b46c8e6efcee5f359e/simpread_user.css
 // @resource     theme_common http://ojec5ddd5.bkt.clouddn.com/puread/theme_common.css
 // @resource     theme_dark   http://ojec5ddd5.bkt.clouddn.com/puread/theme_dark.css
 // @resource     theme_github http://ojec5ddd5.bkt.clouddn.com/puread/theme_github.css
@@ -492,7 +492,10 @@ function highlight() {
 function optionMode() {
     const close      = event => {
             mduikit.Clean( ["opt-cancel", "opt-save" ], "click" );
-            $( ".simpread-option-root" ).remove();
+            $( ".simpread-option-root" )
+            .animate({ opacity: 0 }, { complete: ()=>{
+                $( ".simpread-option-root" ).remove();
+            }});
           },
           save       = event => {
             // TO-DO
@@ -508,4 +511,5 @@ function optionMode() {
                         </dialog-gp>
                     </div>`;
     $( "html" ).append( optmpl );
+    $( ".simpread-option-root" ).animate({ opacity: 1 });
 }

@@ -7,7 +7,7 @@
 // @include      http://*/*
 // @include      https://*/*
 // @require      https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js
-// @require      https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js?version=263504
+// @require      https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js?version=263513
 // @require      https://greasyfork.org/scripts/40236-notify/code/Notify.js?version=263047
 // @require      https://greasyfork.org/scripts/40172-mousetrap/code/Mousetrap.js?version=262594
 // @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=261636
@@ -509,8 +509,8 @@ function optionMode() {
           },
           btn_cancel = mduikit.Button( "opt-cancel", "取 消", { color: "rgb(33, 150, 243)", type: "flat", onclick: close, mode: "secondary" }),
           btn_save   = mduikit.Button( "opt-save",   "保 存", { color: "rgb(33, 150, 243)", type: "flat", onclick: save }),
-          btn_import = Button( "opt-import", "从本地导入配置文件", { color: "#fff", bgColor: "#FF5252", type: "flat", width: "100%", onclick: imports }),
-          btn_export = Button( "opt-export", "导出配置文件到本地", { color: "#fff", bgColor: "#2196F3", type: "flat", width: "100%", onclick: exports }),
+          btn_import = mduikit.Button( "opt-import", "从本地导入配置文件", { color: "#fff", bgColor: "#FF5252", type: "flat", width: "100%", onclick: imports }),
+          btn_export = mduikit.Button( "opt-export", "导出配置文件到本地", { color: "#fff", bgColor: "#2196F3", type: "flat", width: "100%", onclick: exports }),
           optmpl = `<div class="simpread-option-root">
                         <dialog-gp>
                             <dialog-head>选项页</dialog-head>

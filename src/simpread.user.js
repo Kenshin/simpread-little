@@ -36,6 +36,7 @@
 // @grant        GM_info
 // @grant        GM_xmlhttpRequest
 // @run-at       document-end
+// @noframes
 // ==/UserScript==
 
 const pr         = new PureRead(),

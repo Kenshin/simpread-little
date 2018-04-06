@@ -7,7 +7,7 @@
 // @include      http://*/*
 // @include      https://*/*
 // @require      https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js
-// @require      https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js?version=263075
+// @require      https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js?version=263485
 // @require      https://greasyfork.org/scripts/40236-notify/code/Notify.js?version=263047
 // @require      https://greasyfork.org/scripts/40172-mousetrap/code/Mousetrap.js?version=262594
 // @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=261636
@@ -371,8 +371,8 @@ function readMode() {
         paging = page => {
             const prev     = page[0].prev,
                   next     = page[1].next,
-                  btn_next = mduikit.Button( next, "后一页 →", next == undefined ? true : false, "#fff", "#1976D2" ),
-                  btn_prev = mduikit.Button( prev, "← 前一页", prev == undefined ? true : false, "#fff", "#1976D2" );
+                  btn_next = mduikit.Button( "btn-next", "后一页 →", { href: next == undefined ? "javascript:;" : next, disable: next == undefined ? true : false, color: "#fff", bgColor: "#1976D2" }),
+                  btn_prev = mduikit.Button( "btn-prev", "← 前一页", { href: prev == undefined ? "javascript:;" : prev, disable: prev == undefined ? true : false, color: "#fff", bgColor: "#1976D2" });
             if ( !prev && !next ) $( "sr-page" ).remove();
             else $( "sr-page" ).html( btn_prev + btn_next );
         },
@@ -490,8 +490,15 @@ function highlight() {
  * Option Mode
  */
 function optionMode() {
-    const btn_cancel = mduikit.Button( "#", "取 消", "#fff" ),
-          btn_save   = mduikit.Button( "#", "保 存", "#fff" ),
+    const close      = event => {
+            mduikit.Clean( ["opt-cancel", "opt-save" ], "click" );
+            $( ".simpread-option-root" ).remove();
+          },
+          save       = event => {
+            // TO-DO
+          },
+          btn_cancel = mduikit.Button( "opt-cancel", "取 消", { color: "#fff", type: "flat", onclick: close }),
+          btn_save   = mduikit.Button( "opt-save",   "保 存", { color: "#fff", type: "flat", onclick: save }),
           optmpl = `<div class="simpread-option-root">
                         <dialog-gp>
                             <dialog-content></dialog-content>

@@ -529,6 +529,10 @@ function optionMode() {
               $input.trigger( "click" );
           },
           exports    = event => {
+            const data = "data:text/json;charset=utf-8," + encodeURIComponent( JSON.stringify( simpread ));
+            const $a   = $( `<a style="display:none" href=${data} download="simpread-little-config.json"></a>` ).appendTo( "body" );
+            $a[0].click();
+            $a.remove();
           },
           btn_cancel = mduikit.Button( "opt-cancel", "取 消", { color: "rgb(33, 150, 243)", type: "flat", onclick: close, mode: "secondary" }),
           btn_save   = mduikit.Button( "opt-save",   "保 存", { color: "rgb(33, 150, 243)", type: "flat", onclick: save }),

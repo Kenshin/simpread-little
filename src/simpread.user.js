@@ -504,6 +504,29 @@ function optionMode() {
           save       = event => {
           },
           imports    = event => {
+            const input  = document.createElement( "input" ),
+                  $input = $(input),
+                  onload = event => {
+                    if ( event && event.target && event.target.result ) {
+                        try {
+                            const json = JSON.parse( event.target.result );
+                            if ( json.version && json.version.replace( /\./g, "" ) >= simpread.version.replace( /\./g, "" ) ) {
+                                Object.keys( simpread.focus  ).forEach( key => { json.focus[key]  && (simpread.focus[key]  = json.focus[key]  )});
+                                Object.keys( simpread.read   ).forEach( key => { json.read[key]   && (simpread.read[key]   = json.read[key]   )});
+                                Object.keys( simpread.option ).forEach( key => { json.option[key] && (simpread.option[key] = json.option[key] )});
+                                GM_setValue( "simpread",  simpread );
+                                new Notify().Render( "导入成功，请刷新当前页面，以便新配置文件生效。" );
+                            } else new Notify().Render( 2, "上传的版本太低，请重新上传！" );
+                        } catch ( error ) { new Notify().Render( 2, "上传失败，配置文件解析失败，请重新确认。" ); }
+                    }
+                  };
+            $input.attr({ type : "file", multiple : "false" })
+                  .one( "change", event => {
+                          const reader  = new FileReader();
+                          reader.onload = onload;
+                          reader.readAsText( event.target.files[0] );
+              });
+              $input.trigger( "click" );
           },
           exports    = event => {
           },

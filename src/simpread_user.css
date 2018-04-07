@@ -116,7 +116,7 @@ dialog-head {
 
     padding: 24px 24px 20px 24px;
 
-    height: 25px;
+    min-height: 25px;
     line-height: 25px;
 
     font-size: 21px;

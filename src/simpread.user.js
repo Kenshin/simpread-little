@@ -212,7 +212,7 @@ function controlbar() {
     setTimeout( () => {
         $( "sr-rd-crlbar" ).removeAttr( "style" );
     }, 1000 * 2 );
-    $( "sr-rd-crlbar fab:not(.setting)" ).click(  event => {
+    $( "sr-rd-crlbar fab:not(.setting)" ).click( event => {
         if ( $(event.target).hasClass( "focus-crlbar-close" ) ) {
             $( ".simpread-focus-root" ).trigger( "click", "okay" );
             $( event.target ).removeClass( "focus-crlbar-close" ).text( "简 悦" );
@@ -526,7 +526,7 @@ function optionMode() {
                           reader.onload = onload;
                           reader.readAsText( event.target.files[0] );
               });
-              $input.trigger( "click" );
+            $input.trigger( "click" );
           },
           exports    = event => {
             const data = "data:text/json;charset=utf-8," + encodeURIComponent( JSON.stringify( simpread ));

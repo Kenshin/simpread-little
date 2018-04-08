@@ -324,7 +324,7 @@ function focusMode( element = undefined ) {
     });
 
     // set focus controlbar
-    $( "sr-rd-crlbar fab:not(.setting)" ).addClass( "focus-crlbar-close" ).text( "╳" );
+    $( "sr-rd-crlbar fab:not(.setting)" ).addClass( "focus-crlbar-close" ).text( "" );
 }
 
 /**
@@ -345,7 +345,7 @@ function readMode() {
                                 </sr-rd-footer-copywrite>
                                 </sr-rd-footer>
                             <sr-rd-crlbar class=${ simpread.read.controlbar == true ? "" : "controlbar" }>
-                                <fab style="font-size:12px!important;">╳</fab>
+                                <fab class="focus-crlbar-close"></fab>
                             </sr-rd-crlbar>
                         </sr-read>
                     </div>`,

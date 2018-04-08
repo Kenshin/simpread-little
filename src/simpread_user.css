@@ -41,6 +41,12 @@ sr-rd-crlbar fab.focus-crlbar-close {
     background-color: rgba(244, 67, 54, 1);
 }
 
+sr-rd-crlbar fab.focus-crlbar-close {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAdklEQVQ4y+WTuQ3AIBAEaQKK8NN/BEUArmccgGyj43MMIZo5TqtFqbUPJxYtbg2OvS44IJQKhguwdUETSiXjXr77KhGICRjihWKm8Dw3KXP4Z5VZ/Lfw7B5kyD1cy5C7uAx5iJcht6vhRTUi4OrC0Szftvi/vAFNdbZ2Dp661QAAAABJRU5ErkJggg==);
+}
+
 sr-rd-crlbar fab.not-adapter {
     background-color: rgba(189, 189, 189, 1);
 }

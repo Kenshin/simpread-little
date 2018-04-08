@@ -17,7 +17,7 @@
 // @resource     notify_style http://ojec5ddd5.bkt.clouddn.com/puread/notify.css
 // @resource     main_style   http://ojec5ddd5.bkt.clouddn.com/puread/simpread.css
 // @resource     option_style http://ojec5ddd5.bkt.clouddn.com/puread/option.css
-// @resource     user_style   https://gist.github.com/Kenshin/365a91c61bad550b5900247539113f06/raw/93dbe34da07bdd01f9f42b1e76d217b2f627a2fe/simpread_user.css
+// @resource     user_style   https://gist.github.com/Kenshin/365a91c61bad550b5900247539113f06/raw/c7ed4d749c56bfc2a843ed9a434ba17b0e7a5a32/simpread_user.css
 // @resource     theme_common http://ojec5ddd5.bkt.clouddn.com/puread/theme_common.css
 // @resource     theme_dark   http://ojec5ddd5.bkt.clouddn.com/puread/theme_dark.css
 // @resource     theme_github http://ojec5ddd5.bkt.clouddn.com/puread/theme_github.css
@@ -213,9 +213,9 @@ function controlbar() {
         $( "sr-rd-crlbar" ).removeAttr( "style" );
     }, 1000 * 2 );
     $( "sr-rd-crlbar fab:not(.setting)" ).click( event => {
-        if ( $(event.target).hasClass( "focus-crlbar-close" ) ) {
+        if ( $(event.target).hasClass( "crlbar-close" ) ) {
             $( ".simpread-focus-root" ).trigger( "click", "okay" );
-            $( event.target ).removeClass( "focus-crlbar-close" ).text( "简 悦" );
+            $( event.target ).removeClass( "crlbar-close" ).text( "简 悦" );
         } else {
             if ( [ "none", "temp" ].includes( pr.state ) ) {
                 tempMode( simpread.option.trigger );
@@ -309,7 +309,7 @@ function focusMode( element = undefined ) {
                     excludeStyle( $focus, "add" );
                     $( bgclsjq   ).remove();
                     $( bgclsjq   ).off( "click" );
-                    $( "sr-rd-crlbar fab:not(.setting)" ).removeClass( "focus-crlbar-close" ).text( "简 悦" );
+                    $( "sr-rd-crlbar fab:not(.setting)" ).removeClass( "crlbar-close" ).text( "简 悦" );
                 }
             });
 
@@ -324,7 +324,7 @@ function focusMode( element = undefined ) {
     });
 
     // set focus controlbar
-    $( "sr-rd-crlbar fab:not(.setting)" ).addClass( "focus-crlbar-close" ).text( "" );
+    $( "sr-rd-crlbar fab:not(.setting)" ).addClass( "crlbar-close" ).text( "" );
 }
 
 /**
@@ -345,7 +345,7 @@ function readMode() {
                                 </sr-rd-footer-copywrite>
                                 </sr-rd-footer>
                             <sr-rd-crlbar class=${ simpread.read.controlbar == true ? "" : "controlbar" }>
-                                <fab class="focus-crlbar-close"></fab>
+                                <fab class="crlbar-close"></fab>
                             </sr-rd-crlbar>
                         </sr-read>
                     </div>`,

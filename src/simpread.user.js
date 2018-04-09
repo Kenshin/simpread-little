@@ -80,12 +80,20 @@ const pr         = new PureRead(),
         fontsize  : "",  // default 62.5%
         layout    : "",  // default 20%
     },
-    option = {
+    option       = {
         version   : "2017-04-03",
         esc       : true,
         trigger   : "read", // include: 'focus' 'read', only by userscript
         origins   : [],
-    };
+    },
+    opt_value    = `
+                # 是否启用 ESC 退出方式
+                set_esc: true
+
+                # 右下角触发器点击后进入的模式
+                # 值包括：focus | read ，默认为 read
+                set_trigger: read
+    `;
     let simpread = { version: "1.1.0", focus, read, option },
         org_simp = { ...simpread };
 
@@ -501,6 +509,9 @@ function optionMode() {
             }});
           },
           save       = event => {
+            setter( $("#txt-global").val(), "option" );
+            GM_setValue( "simpread",  simpread );
+            new Notify().Render( "保存成功，请刷新当前页面，以便新配置文件生效。" );
           },
           imports    = event => {
             const input  = document.createElement( "input" ),
@@ -546,13 +557,41 @@ function optionMode() {
                 new Notify().Render( "清除成功，请刷新本页!" );
             });
           },
+          getter     = ( value, type ) => {
+            const arr = value.split( "\n" ).map( str => {
+                str = str.trim();
+                if ( str.startsWith( "set_" ) ) {
+                    str = str.replace( "set_", "" );
+                    const key   = str.split( ":" )[0];
+                    let   value = str.split( ":" )[1];
+                    if ( simpread[type][key] ) {
+                        value = simpread[type][key];
+                        return `set_${key}: ${value}`;
+                    }
+                } else return str;
+            });
+            return arr.join( "\n" );
+          },
+          setter     = ( value, type ) => {
+            const arr = value.split( "\n" ).forEach( str => {
+                str = str.trim();
+                if ( str.startsWith( "set_" ) ) {
+                    str = str.replace( "set_", "" );
+                    const key   = str.split( ":" )[0];
+                    let   value = str.split( ":" )[1];
+                    if ( simpread[type][key] ) {
+                        simpread[type][key] = value.trim();
+                    }
+                }
+            });
+          },
           btn_cancel = mduikit.Button( "opt-cancel", "取 消", { color: "rgb(33, 150, 243)", type: "flat", onclick: close, mode: "secondary" }),
           btn_save   = mduikit.Button( "opt-save",   "保 存", { color: "rgb(33, 150, 243)", type: "flat", onclick: save }),
           btn_import = mduikit.Button( "opt-import", "从本地导入配置文件", { color: "#fff", bgColor: "#FF5252", type: "flat", width: "100%", onclick: imports }),
           btn_export = mduikit.Button( "opt-export", "导出配置文件到本地", { color: "#fff", bgColor: "#2196F3", type: "flat", width: "100%", onclick: exports }),
           btn_remote = mduikit.Button( "opt-remote", "手动同步适配列表", { color: "#fff", bgColor: "#2196F3", type: "flat", width: "100%", onclick: remote }),
           btn_clean  = mduikit.Button( "opt-clean",  "清除数据", { color: "#fff", bgColor: "#757575", type: "flat", width: "100%", onclick: clean }),
-          txt_global = mduikit.Textarea( "txt-global", "", { color: "rgba(51, 51, 51, 0.6)", state_color: "rgb(33, 150, 243)", size: "11px" }),
+          txt_global = mduikit.Textarea( "txt-global", getter(opt_value, "option"), { color: "rgba(51, 51, 51, 0.6)", state_color: "rgb(33, 150, 243)", size: "11px" }),
           optmpl = `<div class="simpread-option-root">
                         <dialog-gp>
                             <dialog-head>选项页</dialog-head>

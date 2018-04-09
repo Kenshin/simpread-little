@@ -494,7 +494,7 @@ function highlight() {
  */
 function optionMode() {
     const close      = event => {
-            mduikit.Clean( ["opt-cancel", "opt-save", "opt-import", "opt-export", "opt-remote" ], "click" );
+            mduikit.Clean( ["opt-cancel", "opt-save", "opt-import", "opt-export", "opt-remote", "opt-clean" ], "click" );
             $( ".simpread-option-root" )
             .animate({ opacity: 0 }, { complete: ()=>{
                 $( ".simpread-option-root" ).remove();
@@ -539,11 +539,19 @@ function optionMode() {
                 count == 0 ? new Notify().Render( "适配列表已同步至最新版本。" ) : new Notify().Render( 0, `适配列表已同步成功，本次新增 ${ count } 个站点。` );
             });
           },
+          clean      = event => {
+            new Notify().Render( "是否清除掉本地配置文件？", "同意 ", () => {
+                simpread = { ...org_simp };
+                GM_setValue( "simpread",  simpread );
+                new Notify().Render( "清除成功，请刷新本页!" );
+            });
+          },
           btn_cancel = mduikit.Button( "opt-cancel", "取 消", { color: "rgb(33, 150, 243)", type: "flat", onclick: close, mode: "secondary" }),
           btn_save   = mduikit.Button( "opt-save",   "保 存", { color: "rgb(33, 150, 243)", type: "flat", onclick: save }),
           btn_import = mduikit.Button( "opt-import", "从本地导入配置文件", { color: "#fff", bgColor: "#FF5252", type: "flat", width: "100%", onclick: imports }),
           btn_export = mduikit.Button( "opt-export", "导出配置文件到本地", { color: "#fff", bgColor: "#2196F3", type: "flat", width: "100%", onclick: exports }),
           btn_remote = mduikit.Button( "opt-remote", "手动同步适配列表", { color: "#fff", bgColor: "#2196F3", type: "flat", width: "100%", onclick: remote }),
+          btn_clean  = mduikit.Button( "opt-clean",  "清除数据", { color: "#fff", bgColor: "#757575", type: "flat", width: "100%", onclick: clean }),
           optmpl = `<div class="simpread-option-root">
                         <dialog-gp>
                             <dialog-head>选项页</dialog-head>
@@ -554,7 +562,7 @@ function optionMode() {
                                 </sr-opt-gp>
                                 <sr-opt-gp>
                                     <sr-opt-label>同步与清除</sr-opt-label>
-                                    <sr-opt-item>${ btn_remote }</sr-opt-item>
+                                    <sr-opt-item>${ btn_remote + btn_clean }</sr-opt-item>
                                 </sr-opt-gp>
                             </dialog-content>
                             <dialog-footer>

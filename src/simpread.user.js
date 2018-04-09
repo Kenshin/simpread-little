@@ -35,7 +35,6 @@
 // @grant        GM_deleteValue
 // @grant        GM_notification
 // @grant        GM_info
-// @grant        GM_xmlhttpRequest
 // @run-at       document-end
 // @noframes
 // ==/UserScript==
@@ -495,7 +494,7 @@ function highlight() {
  */
 function optionMode() {
     const close      = event => {
-            mduikit.Clean( ["opt-cancel", "opt-save" ], "click" );
+            mduikit.Clean( ["opt-cancel", "opt-save", "opt-import", "opt-export", "opt-remote" ], "click" );
             $( ".simpread-option-root" )
             .animate({ opacity: 0 }, { complete: ()=>{
                 $( ".simpread-option-root" ).remove();
@@ -534,10 +533,17 @@ function optionMode() {
             $a[0].click();
             $a.remove();
           },
+          remote     = event => {
+            $.getJSON( "http://ojec5ddd5.bkt.clouddn.com/website_list_v3.json" + "?_=" + Math.round(+new Date()), result => {
+                const count = pr.Addsites( result );
+                count == 0 ? new Notify().Render( "适配列表已同步至最新版本。" ) : new Notify().Render( 0, `适配列表已同步成功，本次新增 ${ count } 个站点。` );
+            });
+          },
           btn_cancel = mduikit.Button( "opt-cancel", "取 消", { color: "rgb(33, 150, 243)", type: "flat", onclick: close, mode: "secondary" }),
           btn_save   = mduikit.Button( "opt-save",   "保 存", { color: "rgb(33, 150, 243)", type: "flat", onclick: save }),
           btn_import = mduikit.Button( "opt-import", "从本地导入配置文件", { color: "#fff", bgColor: "#FF5252", type: "flat", width: "100%", onclick: imports }),
           btn_export = mduikit.Button( "opt-export", "导出配置文件到本地", { color: "#fff", bgColor: "#2196F3", type: "flat", width: "100%", onclick: exports }),
+          btn_remote = mduikit.Button( "opt-remote", "手动同步适配列表", { color: "#fff", bgColor: "#2196F3", type: "flat", width: "100%", onclick: remote }),
           optmpl = `<div class="simpread-option-root">
                         <dialog-gp>
                             <dialog-head>选项页</dialog-head>
@@ -545,6 +551,10 @@ function optionMode() {
                                 <sr-opt-gp>
                                     <sr-opt-label>导入和导出</sr-opt-label>
                                     <sr-opt-item>${ btn_import + btn_export }</sr-opt-item>
+                                </sr-opt-gp>
+                                <sr-opt-gp>
+                                    <sr-opt-label>同步与清除</sr-opt-label>
+                                    <sr-opt-item>${ btn_remote }</sr-opt-item>
                                 </sr-opt-gp>
                             </dialog-content>
                             <dialog-footer>

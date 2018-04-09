@@ -630,7 +630,7 @@ function optionMode() {
                                     <sr-opt-item>${ btn_remote + btn_clean }</sr-opt-item>
                                 </sr-opt-gp>
                                 <sr-opt-gp>
-                                    <sr-opt-label>全局选项</sr-opt-label>
+                                    <sr-opt-label>全局</sr-opt-label>
                                     <sr-opt-item>${ txt_option }</sr-opt-item>
                                 </sr-opt-gp>
                                 <sr-opt-gp>

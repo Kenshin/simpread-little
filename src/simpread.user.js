@@ -532,7 +532,7 @@ function optionMode() {
             }});
           },
           save       = event => {
-            setter( $("#txt-global").val(), "option" );
+            setter( $("#txt-option").val(), "option" );
             setter( $("#txt-focus ").val(), "focus"  );
             GM_setValue( "simpread",  simpread );
             new Notify().Render( "保存成功，请刷新当前页面，以便新配置文件生效。" );
@@ -615,8 +615,8 @@ function optionMode() {
           btn_export = mduikit.Button( "opt-export", "导出配置文件到本地", { color: "#fff", bgColor: "#2196F3", type: "flat", width: "100%", onclick: exports }),
           btn_remote = mduikit.Button( "opt-remote", "手动同步适配列表", { color: "#fff", bgColor: "#2196F3", type: "flat", width: "100%", onclick: remote }),
           btn_clean  = mduikit.Button( "opt-clean",  "清除数据", { color: "#fff", bgColor: "#757575", type: "flat", width: "100%", onclick: clean }),
-          txt_global = mduikit.Textarea( "txt-global", getter(opt_value, "option"), { color: "rgba(51, 51, 51, 0.6)", state_color: "rgb(33, 150, 243)", size: "11px" }),
-          txt_focus  = mduikit.Textarea( "txt-focus", getter(focus_value, "focus"), { color: "rgba(51, 51, 51, 0.6)", state_color: "rgb(33, 150, 243)", size: "11px" }),
+          txt_option = mduikit.Textarea( "txt-option", getter(opt_value, "option"), { color: "rgba(51, 51, 51, 0.6)", state_color: "rgb(33, 150, 243)", size: "11px", height: "130px" }),
+          txt_focus  = mduikit.Textarea( "txt-focus",  getter(focus_value, "focus"), { color: "rgba(51, 51, 51, 0.6)", state_color: "rgb(33, 150, 243)", size: "11px" }),
           optmpl = `<div class="simpread-option-root">
                         <dialog-gp>
                             <dialog-head>选项页</dialog-head>
@@ -631,7 +631,7 @@ function optionMode() {
                                 </sr-opt-gp>
                                 <sr-opt-gp>
                                     <sr-opt-label>全局选项</sr-opt-label>
-                                    <sr-opt-item>${ txt_global }</sr-opt-item>
+                                    <sr-opt-item>${ txt_option }</sr-opt-item>
                                 </sr-opt-gp>
                                 <sr-opt-gp>
                                     <sr-opt-label>聚焦模式</sr-opt-label>

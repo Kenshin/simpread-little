@@ -7,7 +7,7 @@
 // @include      http://*/*
 // @include      https://*/*
 // @require      https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js
-// @require      https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js?version=263513
+// @require      https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js?version=264103
 // @require      https://greasyfork.org/scripts/40236-notify/code/Notify.js?version=263047
 // @require      https://greasyfork.org/scripts/40172-mousetrap/code/Mousetrap.js?version=262594
 // @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=261636
@@ -494,7 +494,7 @@ function highlight() {
  */
 function optionMode() {
     const close      = event => {
-            mduikit.Clean( ["opt-cancel", "opt-save", "opt-import", "opt-export", "opt-remote", "opt-clean" ], "click" );
+            mduikit.Destory();
             $( ".simpread-option-root" )
             .animate({ opacity: 0 }, { complete: ()=>{
                 $( ".simpread-option-root" ).remove();
@@ -552,6 +552,7 @@ function optionMode() {
           btn_export = mduikit.Button( "opt-export", "导出配置文件到本地", { color: "#fff", bgColor: "#2196F3", type: "flat", width: "100%", onclick: exports }),
           btn_remote = mduikit.Button( "opt-remote", "手动同步适配列表", { color: "#fff", bgColor: "#2196F3", type: "flat", width: "100%", onclick: remote }),
           btn_clean  = mduikit.Button( "opt-clean",  "清除数据", { color: "#fff", bgColor: "#757575", type: "flat", width: "100%", onclick: clean }),
+          txt_global = mduikit.Textarea( "txt-global", "", { color: "rgba(51, 51, 51, 0.6)", state_color: "rgb(33, 150, 243)", size: "11px" }),
           optmpl = `<div class="simpread-option-root">
                         <dialog-gp>
                             <dialog-head>选项页</dialog-head>
@@ -563,6 +564,10 @@ function optionMode() {
                                 <sr-opt-gp>
                                     <sr-opt-label>同步与清除</sr-opt-label>
                                     <sr-opt-item>${ btn_remote + btn_clean }</sr-opt-item>
+                                </sr-opt-gp>
+                                <sr-opt-gp>
+                                    <sr-opt-label>全局选项</sr-opt-label>
+                                    <sr-opt-item>${ txt_global }</sr-opt-item>
                                 </sr-opt-gp>
                             </dialog-content>
                             <dialog-footer>

@@ -93,6 +93,29 @@ const pr         = new PureRead(),
                 # 右下角触发器点击后进入的模式
                 # 值包括：focus | read ，默认为 read
                 set_trigger: read
+    `,
+    focus_value  = `
+                # 是否启用点击空白（遮罩）退出功能？
+                # 默认为为 true，取值为 true | false
+                set_mask: true
+
+                # 遮罩的背景色，支持 css color 值
+                # 默认 rgba( 235, 235, 235, 0.9 )
+                set_bgcolor: rgba( 235, 235, 235, 0.9 )
+
+                # 遮罩的透明度，默认为 90
+                # 取值范围 0 ~ 100
+                set_opacity: 90
+
+                # 启动聚焦模式的快捷键
+                # 默认为 A S
+                # 必须有两个值，仅支持字母和数字，，中间必须有空格
+                set_shortcuts: A S
+
+                # 当未适配聚焦模式时，是否启用手动聚焦模式？
+                # 默认为启用
+                # 取值为 true | false
+                set_highlight: true
     `;
     let simpread = { version: "1.1.0", focus, read, option },
         org_simp = { ...simpread };
@@ -510,6 +533,7 @@ function optionMode() {
           },
           save       = event => {
             setter( $("#txt-global").val(), "option" );
+            setter( $("#txt-focus ").val(), "focus"  );
             GM_setValue( "simpread",  simpread );
             new Notify().Render( "保存成功，请刷新当前页面，以便新配置文件生效。" );
           },
@@ -592,6 +616,7 @@ function optionMode() {
           btn_remote = mduikit.Button( "opt-remote", "手动同步适配列表", { color: "#fff", bgColor: "#2196F3", type: "flat", width: "100%", onclick: remote }),
           btn_clean  = mduikit.Button( "opt-clean",  "清除数据", { color: "#fff", bgColor: "#757575", type: "flat", width: "100%", onclick: clean }),
           txt_global = mduikit.Textarea( "txt-global", getter(opt_value, "option"), { color: "rgba(51, 51, 51, 0.6)", state_color: "rgb(33, 150, 243)", size: "11px" }),
+          txt_focus  = mduikit.Textarea( "txt-focus", getter(focus_value, "focus"), { color: "rgba(51, 51, 51, 0.6)", state_color: "rgb(33, 150, 243)", size: "11px" }),
           optmpl = `<div class="simpread-option-root">
                         <dialog-gp>
                             <dialog-head>选项页</dialog-head>
@@ -607,6 +632,10 @@ function optionMode() {
                                 <sr-opt-gp>
                                     <sr-opt-label>全局选项</sr-opt-label>
                                     <sr-opt-item>${ txt_global }</sr-opt-item>
+                                </sr-opt-gp>
+                                <sr-opt-gp>
+                                    <sr-opt-label>聚焦模式</sr-opt-label>
+                                    <sr-opt-item>${ txt_focus }</sr-opt-item>
                                 </sr-opt-gp>
                             </dialog-content>
                             <dialog-footer>

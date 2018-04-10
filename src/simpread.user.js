@@ -376,7 +376,7 @@ function focusMode( element = undefined ) {
 
     // add background color
     $( bgclsjq )
-        .css({ "background-color" : simpread.focus.bgcolor })
+        .css({ "background-color" : style.BgColor( simpread.focus.bgcolor, simpread.focus.opacity ) })
         .animate({ opacity: 1 });
 
     // click mask remove it

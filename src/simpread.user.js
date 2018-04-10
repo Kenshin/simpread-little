@@ -17,7 +17,7 @@
 // @resource     notify_style http://ojec5ddd5.bkt.clouddn.com/puread/notify.css
 // @resource     main_style   http://ojec5ddd5.bkt.clouddn.com/puread/simpread.css
 // @resource     option_style http://ojec5ddd5.bkt.clouddn.com/puread/option.css
-// @resource     user_style   https://gist.github.com/Kenshin/365a91c61bad550b5900247539113f06/raw/c7ed4d749c56bfc2a843ed9a434ba17b0e7a5a32/simpread_user.css
+// @resource     user_style   https://gist.github.com/Kenshin/365a91c61bad550b5900247539113f06/raw/bcb148d10fe43a7967b6fc73c940c3600b6795aa/simpread_user.css
 // @resource     theme_common http://ojec5ddd5.bkt.clouddn.com/puread/theme_common.css
 // @resource     theme_dark   http://ojec5ddd5.bkt.clouddn.com/puread/theme_dark.css
 // @resource     theme_github http://ojec5ddd5.bkt.clouddn.com/puread/theme_github.css
@@ -116,6 +116,55 @@ const pr         = new PureRead(),
                 # 默认为启用
                 # 取值为 true | false
                 set_highlight: true
+    `,
+    read_value   = `
+                # 主题样式
+                # 取值范围 白练 → github, 白磁 → newsprint, 卯之花色 → gothic, 丁子色 → engwrite
+                # 取值范围 娟鼠 → octopress, 月白 → pixyii, 百合 → monospace, 紺鼠 → night, 黒鸢 → dark
+                # 请使用关键字，而非名称，如：pixyii
+                theme: github
+
+                # 字体样式，支持 css font-family 值
+                # 默认为 default，即系统选择
+                fontfamily: default
+
+                # 字体大小，，支持 css font-size 值
+                # 默认为 62.5%
+                fontsize: 62.5%
+
+                # 布局宽度，支持 css margin 值，例如： 20px, 80% 等
+                # 默认为 20% 宽度
+                layout: 20%
+
+                # 是否一直显示右下角的控制栏？
+                # 默认为不显示，取值范围 true | false
+                controlbar: false
+
+                # 当未适配阅读模式时，是否启用临时阅读模式？
+                # 默认为启用
+                # 取值为 true | false
+                set_highlight: true
+
+                # 启动阅读模式的快捷键
+                # 默认为 A A
+                # 必须有两个值，仅支持字母和数字，中间必须有空格
+                set_shortcuts: A A
+
+                # 如果当前页面适配阅读模式，是否自动进入阅读模式？
+                # 默认为不进入 false，取值范围 true | false
+                auto: false
+
+                # 黑名单，加入其中后，不会自动进入阅读模式
+                # 此功能在 auto = true 时才会生效
+                # 支持 minimatch，域名 和 name，例如： "v2ex.com", "http://www.ifanr.com/**/*"
+                # 每个名单由小写 , 分隔
+                exclusion: "v2ex.com", "http://www.ifanr.com/**/*"
+
+                # 白名单，加入其中后，自动进入阅读模式
+                # 此功能在 auto = true 时才会生效，并与黑名单互斥
+                # 支持 minimatch，域名 和 name，例如： "v2ex.com", "http://www.ifanr.com/**/*"
+                # 默认为空，每个名单由小写 , 分隔
+                whitelist: 
     `;
     let simpread = { version: "1.1.0", focus, read, option },
         org_simp = { ...simpread };
@@ -617,6 +666,7 @@ function optionMode() {
           btn_clean  = mduikit.Button( "opt-clean",  "清除数据", { color: "#fff", bgColor: "#757575", type: "flat", width: "100%", onclick: clean }),
           txt_option = mduikit.Textarea( "txt-option", getter(opt_value, "option"), { color: "rgba(51, 51, 51, 0.6)", state_color: "rgb(33, 150, 243)", size: "11px", height: "130px" }),
           txt_focus  = mduikit.Textarea( "txt-focus",  getter(focus_value, "focus"), { color: "rgba(51, 51, 51, 0.6)", state_color: "rgb(33, 150, 243)", size: "11px" }),
+          txt_read   = mduikit.Textarea( "txt-read",   getter(read_value, "read"), { color: "rgba(51, 51, 51, 0.6)", state_color: "rgb(33, 150, 243)", size: "11px" }),
           optmpl = `<div class="simpread-option-root">
                         <dialog-gp>
                             <dialog-head>选项页</dialog-head>
@@ -636,6 +686,10 @@ function optionMode() {
                                 <sr-opt-gp>
                                     <sr-opt-label>聚焦模式</sr-opt-label>
                                     <sr-opt-item>${ txt_focus }</sr-opt-item>
+                                </sr-opt-gp>
+                                <sr-opt-gp>
+                                    <sr-opt-label>阅读模式</sr-opt-label>
+                                    <sr-opt-item>${ txt_read }</sr-opt-item>
                                 </sr-opt-gp>
                             </dialog-content>
                             <dialog-footer>

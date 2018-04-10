@@ -122,23 +122,23 @@ const pr         = new PureRead(),
                 # 取值范围 白练 → github, 白磁 → newsprint, 卯之花色 → gothic, 丁子色 → engwrite
                 # 取值范围 娟鼠 → octopress, 月白 → pixyii, 百合 → monospace, 紺鼠 → night, 黒鸢 → dark
                 # 请使用关键字，而非名称，如：pixyii
-                theme: github
+                set_theme: github
 
                 # 字体样式，支持 css font-family 值
                 # 默认为 default，即系统选择
-                fontfamily: default
+                set_fontfamily: default
 
                 # 字体大小，，支持 css font-size 值
                 # 默认为 62.5%
-                fontsize: 62.5%
+                set_fontsize: 62.5%
 
                 # 布局宽度，支持 css margin 值，例如： 20px, 80% 等
                 # 默认为 20% 宽度
-                layout: 20%
+                set_layout: 20%
 
                 # 是否一直显示右下角的控制栏？
                 # 默认为不显示，取值范围 true | false
-                controlbar: false
+                set_controlbar: false
 
                 # 当未适配阅读模式时，是否启用临时阅读模式？
                 # 默认为启用
@@ -152,19 +152,19 @@ const pr         = new PureRead(),
 
                 # 如果当前页面适配阅读模式，是否自动进入阅读模式？
                 # 默认为不进入 false，取值范围 true | false
-                auto: false
+                set_auto: false
 
                 # 黑名单，加入其中后，不会自动进入阅读模式
                 # 此功能在 auto = true 时才会生效
                 # 支持 minimatch，域名 和 name，例如： "v2ex.com", "http://www.ifanr.com/**/*"
                 # 每个名单由小写 , 分隔
-                exclusion: "v2ex.com", "http://www.ifanr.com/**/*"
+                set_exclusion: "v2ex.com", "http://www.ifanr.com/**/*"
 
                 # 白名单，加入其中后，自动进入阅读模式
                 # 此功能在 auto = true 时才会生效，并与黑名单互斥
                 # 支持 minimatch，域名 和 name，例如： "v2ex.com", "http://www.ifanr.com/**/*"
                 # 默认为空，每个名单由小写 , 分隔
-                whitelist: 
+                set_whitelist: 
     `;
     let simpread = { version: "1.1.0", focus, read, option },
         org_simp = { ...simpread };
@@ -583,7 +583,9 @@ function optionMode() {
           save       = event => {
             setter( $("#txt-option").val(), "option" );
             setter( $("#txt-focus ").val(), "focus"  );
+            setter( $("#txt-read ").val(), "read"  );
             GM_setValue( "simpread",  simpread );
+            console.log( "current simpread is ", simpread )
             new Notify().Render( "保存成功，请刷新当前页面，以便新配置文件生效。" );
           },
           imports    = event => {
@@ -637,7 +639,7 @@ function optionMode() {
                     str = str.replace( "set_", "" );
                     const key   = str.split( ":" )[0];
                     let   value = str.split( ":" )[1];
-                    if ( simpread[type][key] ) {
+                    if ( simpread[type][key] != undefined ) {
                         value = simpread[type][key];
                         return `set_${key}: ${value}`;
                     }
@@ -651,8 +653,12 @@ function optionMode() {
                 if ( str.startsWith( "set_" ) ) {
                     str = str.replace( "set_", "" );
                     const key   = str.split( ":" )[0];
-                    let   value = str.split( ":" )[1];
-                    if ( simpread[type][key] ) {
+                    if ( [ "exclusion", "whitelist" ].includes( key )) {
+                        const value = str.replace( `${key}:`, "" ).trim();
+                        simpread[type][key] = value.split(",");
+                    }
+                    else if ( simpread[type][key] != undefined ) {
+                        let   value = str.split( ":" )[1];
                         simpread[type][key] = value.trim();
                     }
                 }

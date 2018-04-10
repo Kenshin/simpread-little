@@ -165,7 +165,8 @@ const pr         = new PureRead(),
                 # 默认为空，每个名单由小写 , 分隔
                 set_whitelist: 
     `;
-    let simpread = { version: "1.1.0", focus, read, option },
+    let current_state = "", // include: focus, read
+        simpread = { version: "1.1.0", focus, read, option },
         org_simp = { ...simpread };
 
 /****************************
@@ -355,6 +356,14 @@ function focusMode( element = undefined ) {
             else if ( type == "add" ) $target.find( tags ).show();
         };
 
+    if ( current_state == "focus" ) {
+        new Notify().Render( "请误重复进入。" );
+        return;
+    } else if ( current_state == "read" ) {
+        new Notify().Render( "请先退出当前模式。" );
+        return;
+    } else current_state = "focus";
+
     // set include style
     includeStyle( $focus, focusstyle, focuscls, "add" );
 
@@ -383,6 +392,7 @@ function focusMode( element = undefined ) {
             if ( !simpread.focus.mask && !data ) return;
             $( bgclsjq ).animate({ opacity: 0 }, {
                 complete: ()=> {
+                    current_state = "";
                     includeStyle( $focus, focusstyle, focuscls, "delete" );
                     excludeStyle( $focus, "add" );
                     $( bgclsjq   ).remove();
@@ -474,6 +484,14 @@ function readMode() {
 
     if ( special() ) return;
 
+    if ( current_state == "read" ) {
+        new Notify().Render( "请误重复进入。" );
+        return;
+    } else if ( current_state == "focus" ) {
+        new Notify().Render( "请先退出当前模式。" );
+        return;
+    } else current_state = "read";
+
     $( "body" ).addClass( "simpread-hidden" );
     $root
         .addClass( "simpread-font" )
@@ -507,6 +525,7 @@ function readMode() {
         $( ".simpread-read-root" ).animate( { opacity: 0 }, {
             delay: 100,
             complete: () => {
+                current_state = "";
                 $root.removeClass( "simpread-theme-root" )
                      .removeClass( "simpread-font" );
                 if ( $root.attr("style") ) $root.attr( "style", $root.attr("style").replace( "font-size: 62.5%!important", "" ));

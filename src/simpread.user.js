@@ -87,34 +87,34 @@ const pr         = new PureRead(),
         origins   : [],
     },
     opt_value    = `
-                # 是否启用 ESC 退出方式
+                # 是否启用 ESC 退出方式？
+                # 默认为 true，取值范围 true | false
                 set_esc: true
 
                 # 右下角触发器点击后进入的模式
-                # 值包括：focus | read ，默认为 read
+                # 默认为 read，取值范围 focus | read ，
                 set_trigger: read
     `,
     focus_value  = `
                 # 是否启用点击空白（遮罩）退出功能？
-                # 默认为为 true，取值为 true | false
+                # 默认为 true，取值范围 true | false
                 set_mask: true
 
-                # 遮罩的背景色，支持 css color 值
-                # 默认 rgba( 235, 235, 235, 0.9 )
+                # 遮罩的背景色，仅支持 rgba 格式
+                # 默认为 rgba( 235, 235, 235, 1 )
                 set_bgcolor: rgba( 235, 235, 235, 0.9 )
 
-                # 遮罩的透明度，默认为 90
-                # 取值范围 0 ~ 100
+                # 遮罩的透明度
+                # 默认为 90，取值范围 0 ~ 100
                 set_opacity: 90
 
                 # 启动聚焦模式的快捷键
                 # 默认为 A S
-                # 必须有两个值，仅支持字母和数字，，中间必须有空格
+                # 必须有两个值，仅支持 shift, 字母和数字，中间必须有空格
                 set_shortcuts: A S
 
                 # 当未适配聚焦模式时，是否启用手动聚焦模式？
-                # 默认为启用
-                # 取值为 true | false
+                # 默认为启用，取值范围 true | false
                 set_highlight: true
     `,
     read_value   = `
@@ -125,7 +125,7 @@ const pr         = new PureRead(),
                 set_theme: github
 
                 # 字体样式，支持 css font-family 值
-                # 默认为 default，即系统选择
+                # 默认为 default，即浏览器默认值
                 set_fontfamily: default
 
                 # 字体大小，，支持 css font-size 值
@@ -141,24 +141,23 @@ const pr         = new PureRead(),
                 set_controlbar: false
 
                 # 当未适配阅读模式时，是否启用临时阅读模式？
-                # 默认为启用
-                # 取值为 true | false
+                # 默认为启用，取值范围 true | false
                 set_highlight: true
 
                 # 启动阅读模式的快捷键
                 # 默认为 A A
-                # 必须有两个值，仅支持字母和数字，中间必须有空格
+                # 必须有两个值，仅支持 shift, 字母和数字，中间必须有空格
                 set_shortcuts: A A
 
                 # 如果当前页面适配阅读模式，是否自动进入阅读模式？
-                # 默认为不进入 false，取值范围 true | false
+                # 默认为 false，取值范围 true | false
                 set_auto: false
 
                 # 黑名单，加入其中后，不会自动进入阅读模式
                 # 此功能在 auto = true 时才会生效
                 # 支持 minimatch，域名 和 name，例如： "v2ex.com", "http://www.ifanr.com/**/*"
                 # 每个名单由小写 , 分隔
-                set_exclusion: "v2ex.com", "http://www.ifanr.com/**/*"
+                set_exclusion: 
 
                 # 白名单，加入其中后，自动进入阅读模式
                 # 此功能在 auto = true 时才会生效，并与黑名单互斥

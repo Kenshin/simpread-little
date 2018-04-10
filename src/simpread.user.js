@@ -77,8 +77,8 @@ const pr         = new PureRead(),
         exclusion : [
             "v2ex.com","issue.github.com","readme.github.com","question.zhihu.com","douban.com","nationalgeographic.com.cn","tech.163.com","docs.microsoft.com","msdn.microsoft.com","baijia.baidu.com","code.oschina.net","http://www.ifanr.com","http://www.ifanr.com/news","http://www.ifanr.com/app","http://www.ifanr.com/minapp","http://www.ifanr.com/dasheng","http://www.ifanr.com/data","https://www.ifanr.com/app","http://www.ifanr.com/weizhizao","http://www.thepaper.cn","http://www.pingwest.com","http://tech2ipo.com","https://www.waerfa.com/social"
         ],
-        fontsize  : "",  // default 62.5%
-        layout    : "",  // default 20%
+        fontsize  : "62.5%",
+        layout    : "20%",
     },
     option       = {
         version   : "2017-04-03",
@@ -641,6 +641,7 @@ function optionMode() {
                     let   value = str.split( ":" )[1];
                     if ( simpread[type][key] != undefined ) {
                         value = simpread[type][key];
+                        value == "" && ( value = org_simp[type][key] );
                         return `set_${key}: ${value}`;
                     }
                 } else return str;
@@ -658,8 +659,10 @@ function optionMode() {
                         simpread[type][key] = value.split(",");
                     }
                     else if ( simpread[type][key] != undefined ) {
-                        let   value = str.split( ":" )[1];
-                        simpread[type][key] = value.trim();
+                        let   value = str.split( ":" )[1].trim();
+                        if ( typeof simpread[type][key] == "boolean" ) {
+                            simpread[type][key] = value == "true" ? true : false;
+                        } else simpread[type][key] = value.trim();
                     }
                 }
             });

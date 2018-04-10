@@ -659,7 +659,7 @@ function optionMode() {
                     let   value = str.split( ":" )[1];
                     if ( simpread[type][key] != undefined ) {
                         value = simpread[type][key];
-                        value == "" && ![ "exclusion", "whitelist" ].includes( key ) && ( value = org_simp[type][key] );
+                        value == "" && ![ "whitelist" ].includes( key ) && ( value = org_simp[type][key] );
                         return `set_${key}: ${value}`;
                     }
                 } else return str;

@@ -139,6 +139,7 @@ dialog-content {
 
     width: 100%;
     min-height: 244px;
+    max-height: 580px;
 
     overflow-y: auto;
     box-sizing: border-box;

@@ -651,39 +651,47 @@ function optionMode() {
             });
           },
           getter     = ( value, type ) => {
-            const arr = value.split( "\n" ).map( str => {
-                str = str.trim();
-                if ( str.startsWith( "set_" ) ) {
-                    str = str.replace( "set_", "" );
-                    const key   = str.split( ":" )[0];
-                    let   value = str.split( ":" )[1];
-                    if ( simpread[type][key] != undefined ) {
-                        value = simpread[type][key];
-                        value == "" && ![ "whitelist" ].includes( key ) && ( value = org_simp[type][key] );
-                        return `set_${key}: ${value}`;
-                    }
-                } else return str;
-            });
-            return arr.join( "\n" );
+            try {
+                const arr = value.split( "\n" ).map( str => {
+                    str = str.trim();
+                    if ( str.startsWith( "set_" ) ) {
+                        str = str.replace( "set_", "" );
+                        const key   = str.split( ":" )[0];
+                        let   value = str.split( ":" )[1];
+                        if ( simpread[type][key] != undefined ) {
+                            value = simpread[type][key];
+                            value == "" && ![ "whitelist" ].includes( key ) && ( value = org_simp[type][key] );
+                            return `set_${key}: ${value}`;
+                        }
+                    } else return str;
+                });
+                return arr.join( "\n" );
+            } catch ( error ) {
+                new Notify().Render( 2, "设置出现了问题，请重新打开设置。" );
+            }
           },
           setter     = ( value, type ) => {
-            const arr = value.split( "\n" ).forEach( str => {
-                str = str.trim();
-                if ( str.startsWith( "set_" ) ) {
-                    str = str.replace( "set_", "" );
-                    const key   = str.split( ":" )[0];
-                    if ( [ "exclusion", "whitelist" ].includes( key )) {
-                        const value = str.replace( `${key}:`, "" ).trim();
-                        simpread[type][key] = value.split(",");
+            try {
+                const arr = value.split( "\n" ).forEach( str => {
+                    str = str.trim();
+                    if ( str.startsWith( "set_" ) ) {
+                        str = str.replace( "set_", "" );
+                        const key   = str.split( ":" )[0];
+                        if ( [ "exclusion", "whitelist" ].includes( key )) {
+                            const value = str.replace( `${key}:`, "" ).trim();
+                            simpread[type][key] = value.split(",");
+                        }
+                        else if ( simpread[type][key] != undefined ) {
+                            let   value = str.split( ":" )[1].trim();
+                            if ( typeof simpread[type][key] == "boolean" ) {
+                                simpread[type][key] = value == "true" ? true : false;
+                            } else simpread[type][key] = value.trim();
+                        }
                     }
-                    else if ( simpread[type][key] != undefined ) {
-                        let   value = str.split( ":" )[1].trim();
-                        if ( typeof simpread[type][key] == "boolean" ) {
-                            simpread[type][key] = value == "true" ? true : false;
-                        } else simpread[type][key] = value.trim();
-                    }
-                }
-            });
+                });
+            } catch ( error ) {
+                new Notify().Render( 2, "设置出现了问题，请重新打开设置。" );
+            }
           },
           btn_cancel = mduikit.Button( "opt-cancel", "关 闭", { color: "rgb(33, 150, 243)", type: "flat", onclick: close, mode: "secondary" }),
           btn_save   = mduikit.Button( "opt-save",   "保 存", { color: "rgb(33, 150, 243)", type: "flat", onclick: save }),

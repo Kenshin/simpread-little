@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         简悦( SimpRead ) · 轻阅版
 // @namespace    http://ksria.com/simpread/
-// @version      1.0.1.0404-beta
+// @version      1.0.2.0411-beta
 // @description  简悦 - 让你瞬间进入沉浸式阅读的 User Script 扩展
 // @author       Kenshin <kenshin@ksria.com>
 // @include      http://*/*
@@ -203,22 +203,25 @@ console.log( "current pureread is ", pr, simpread );
 function version() {
     // get and set simpread
     if (GM_getValue( "simpread" )) {
-        simpread = GM_getValue( "simpread" )
+        simpread = GM_getValue( "simpread" );
     } else {
-        GM_setValue( "simpread",  simpread );
+        GM_setValue( "simpread", simpread );
     }
     // compare
-    if ( simpread.version != org_simp.version ) {
-        if ( simpread.version == undefined ) {
-            simpread = { ...org_simp };
-        } else {
-            Object.keys( org_simp ).forEach( key => {
-                if ( !simpread[key] ) {
-                    simpread[key] = org_simp[key];
-                }
-            });
+    if ( GM_getValue( "simpread_subver" ) != GM_info.script.version ) {
+        GM_setValue( "simpread_subver", GM_info.script.version );
+        if ( simpread.version != org_simp.version ) {
+            if ( simpread.version == undefined ) {
+                simpread = { ...org_simp };
+            } else {
+                Object.keys( org_simp ).forEach( key => {
+                    if ( !simpread[key] ) {
+                        simpread[key] = org_simp[key];
+                    }
+                });
+            }
+            GM_setValue( "simpread", simpread );
         }
-        GM_setValue( "simpread",  simpread );
         GM_notification( `简悦 · 轻阅版 已升级到最新版${GM_info.script.version}，如需生效请刷新页面。`, "简悦 · 轻阅版升级提示", GM_info.script.icon );
     }
 }

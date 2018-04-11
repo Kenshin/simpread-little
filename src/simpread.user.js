@@ -206,6 +206,7 @@ function version() {
         simpread = GM_getValue( "simpread" );
     } else {
         GM_setValue( "simpread", simpread );
+        GM_setValue( "simpread_subver", GM_info.script.version );
     }
     // compare
     if ( GM_getValue( "simpread_subver" ) != GM_info.script.version ) {

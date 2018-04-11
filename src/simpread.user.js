@@ -363,7 +363,7 @@ function focusMode( element = undefined ) {
     if ( current_state == "focus" ) {
         new Notify().Render( "请误重复进入。" );
         return;
-    } else if ( current_state == "read" ) {
+    } else if ( current_state != "" ) {
         new Notify().Render( "请先退出当前模式。" );
         return;
     } else current_state = "focus";
@@ -491,7 +491,7 @@ function readMode() {
     if ( current_state == "read" ) {
         new Notify().Render( "请误重复进入。" );
         return;
-    } else if ( current_state == "focus" ) {
+    } else if ( current_state != "" ) {
         new Notify().Render( "请先退出当前模式。" );
         return;
     } else current_state = "read";
@@ -599,6 +599,7 @@ function optionMode() {
             mduikit.Destory();
             $( ".simpread-option-root" )
             .animate({ opacity: 0 }, { complete: ()=>{
+                current_state = "";
                 $( ".simpread-option-root" ).remove();
             }});
           },
@@ -736,6 +737,13 @@ function optionMode() {
                             </dialog-footer>
                         </dialog-gp>
                     </div>`;
+    if ( current_state == "option" ) {
+        new Notify().Render( "请误重复进入。" );
+        return;
+    } else if ( current_state != "" ) {
+        new Notify().Render( "请先退出当前模式。" );
+        return;
+    } else current_state = "option";
     $( "html" ).append( optmpl );
     $( ".simpread-option-root" ).animate({ opacity: 1 });
 }

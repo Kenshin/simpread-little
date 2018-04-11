@@ -128,7 +128,7 @@ const pr         = new PureRead(),
                 # 默认为 default，即浏览器默认值
                 set_fontfamily: default
 
-                # 字体大小，，支持 css font-size 值
+                # 字体大小，支持 css font-size 值
                 # 默认为 62.5%
                 set_fontsize: 62.5%
 

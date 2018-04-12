@@ -14,12 +14,14 @@
 ***
 
 #### 简悦 · 轻阅版：
-轻阅版是在 [简悦](https://github.com/kenshin/simpread) 的基础上专门针对 Apple Safari, Microsoft Edge 以及任意支持 UserScript 的浏览器而生的。
+轻阅版是在 [简悦](https://github.com/kenshin/simpread) 的基础上专门针对 Apple Safari, Microsoft Edge 以及任意支持 UserScript 的浏览器而生的。  
+现在就加入 [Telegram 群](https://t.me/simpread)，获取简悦的第一手资料。
 
 #### 马上使用：
-* 下载地址 <https://greasyfork.org/zh-CN/scripts/39998>
-* 现在就加入 [Telegram 群](https://t.me/simpread)，获取简悦的第一手资料。
-* 不同简悦如何使用？想知道简悦的高级功能，请看简悦的 [帮助中心](https://github.com/kenshin/simpread/wiki) 。
+* 安装 [Tampermonkey](http://tampermonkey.net/) 并选择对应浏览器的版本；
+* 进入 <https://greasyfork.org/zh-CN/scripts/39998>，并选择 `安装`；
+* 安装完毕后，打开 <https://sspai.com/post/39491> 键盘快捷键 → A A（双击 A） 就可以进入阅读模式；
+* 不清楚简悦如何使用？想知道简悦的高级功能，请看简悦的 [帮助中心](https://github.com/kenshin/simpread/wiki) 。
 
 #### 特点：
 * （阅读模式）的加载速度快；（由于直接使用 JavaScript 作为模板引擎）
@@ -52,6 +54,9 @@
 * 无 `自定义样式`；
 
 #### 截图：
+
+
+#### 如何使用：
 
 
 #### 投票：

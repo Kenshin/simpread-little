@@ -54,9 +54,9 @@
 * 无 `自定义样式`；
 
 #### 截图：
-![](https://i.imgur.com/FYdkezF.png)  
-![](https://i.imgur.com/okA0jN4.png)  
-![](https://i.imgur.com/9Yew7Ig.png)  
+![](https://i.imgur.com/k84hQKll.png | width=600)  
+![](https://i.imgur.com/4oa3LKCl.png | width=600)  
+![](https://i.imgur.com/XgjccbXl.png | width=600)  
 
 #### 新手入门：
 
@@ -68,7 +68,7 @@
 * `聚焦模式` 默认快捷键 为 <kbd>A</kbd> <kbd>S</kbd>
 * `阅读模式` 默认快捷键 为 <kbd>A</kbd> <kbd>A</kbd>
 * 更详细的设定请看  
-  ![Imgur](https://i.imgur.com/77Vo2uF.png)
+  ![Imgur](https://i.imgur.com/77Vo2uFl.png)
 
 #### 投票：
 简悦是一个免费并开源的项目。如果觉得不错，请给我 [投票](https://greasyfork.org/zh-CN/forum/post/discussion?script=39998&locale=zh-CN) 。这样让更多人了解并受用与 `简悦` 带来的便利，你的认可是对我最大的鼓励。

@@ -14,6 +14,7 @@
 ***
 
 <h1 align="center">简悦 · 轻阅版</h1>
+
 轻阅版是在 [简悦](https://github.com/kenshin/simpread) 的基础上专门针对 Apple Safari, Microsoft Edge 以及任意支持 UserScript 的浏览器而生的。  
 现在就加入 [Telegram 群](https://t.me/simpread)，获取简悦的第一手资料。
 

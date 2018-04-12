@@ -75,10 +75,7 @@
 简悦是一个免费并开源的项目。如果觉得不错，请给我 [投票](https://greasyfork.org/zh-CN/forum/post/discussion?script=39998&locale=zh-CN) 。这样让更多人了解并受用与 `简悦` 带来的便利，你的认可是对我最大的鼓励。
 
 #### 相关链接：
-* [更新日志](http://ksria.com/simpread/changelog.html)
-* [帮助中心](https://github.com/kenshin/simpread/wiki)
-* [新手入门](https://github.com/kenshin/simpread/wiki/入门指南（-操作指引-）)
-* [常见问题](https://github.com/kenshin/simpread/wiki/faq)
+* [简悦](https://github.com/kenshin/simpread)
 * [反馈](https://github.com/kenshin/simpread/issues)
 * [联系](http://kenshin.wang) · [邮件](kenshin@ksria.com) · [微博](http://weibo.com/23784148) · [Telegram 群](https://t.me/simpread)
 * 想了解简悦背后的故事？ [猛击这里](https://sspai.com/post/39491)
@@ -104,7 +101,7 @@
 #### 请杯咖啡：
 如果简悦可以解决你在阅读上痛点，提升 Web 端的阅读体验，可以请我喝杯咖啡，想必也是非常愉悦的事情。 :smile:  
 _如发现下图显示不全，请直接访问 http://ojec5ddd5.bkt.clouddn.com/zhifu_m2.png_
-<img src="http://ojec5ddd5.bkt.clouddn.com/zhifu_m2.png"/>
+<img src="https://i.imgur.com/cyQuQBb.png"/>
 
 #### 许可：
 [![license-badge]][license-link]

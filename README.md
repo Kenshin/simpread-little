@@ -104,7 +104,11 @@
 #### 请杯咖啡：
 如果简悦可以解决你在阅读上痛点，提升 Web 端的阅读体验，可以请我喝杯咖啡，想必也是非常愉悦的事情。 :smile:  
 _如发现下图显示不全，请直接访问 http://ojec5ddd5.bkt.clouddn.com/zhifu_m2.png_
-![支付](http://ojec5ddd5.bkt.clouddn.com/zhifu_m2.png)
+![支付](http://ojec5ddd5.bkt.clouddn.com/zhifu_m2.png?2018-04-12)
 
 #### 许可：
 [![license-badge]][license-link]
+
+<!-- Link -->
+[license-badge]:    https://img.shields.io/github/license/mashape/apistatus.svg
+[license-link]:     https://opensource.org/licenses/MIT

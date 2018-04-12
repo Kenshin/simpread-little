@@ -7,7 +7,7 @@
    <a target="_blank" href="http://ksria.com/simpread"><img src="https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg"></a>
    <a target="_blank" href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll"><img src="https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg"></a>
    <a target="_blank" href="https://addons.mozilla.org/zh-CN/firefox/addon/simpread"><img src="https://img.shields.io/badge/download-_firefox_addon-DD512A.svg"></a>
-   <a href="http://ksria.com/simpread/crx/1.1.0/simpread.crx"><img src="https://img.shields.io/badge/download-_crx-brightgreen.svg"></a>
+   <a href="https://greasyfork.org/zh-CN/scripts/39998"><img src="https://img.shields.io/badge/download-_userscirpt-00485b.svg"></a>
 
 </p>
 
@@ -20,11 +20,11 @@
 #### 马上使用：
 * 安装 [Tampermonkey](http://tampermonkey.net/) 并选择对应浏览器的版本；
 * 进入 <https://greasyfork.org/zh-CN/scripts/39998>，并选择 `安装`；
-* 安装完毕后，打开 <https://sspai.com/post/39491> 键盘快捷键 → A A（双击 A） 就可以进入阅读模式；
+* 安装完毕后，打开 <https://sspai.com/post/39491> 键盘快捷键 → <kbd>A</kbd> <kbd>A</kbd>（双击 A） 就可以进入阅读模式；
 * 不清楚简悦如何使用？想知道简悦的高级功能，请看简悦的 [帮助中心](https://github.com/kenshin/simpread/wiki) 。
 
 #### 特点：
-* （阅读模式）的加载速度快；（由于直接使用 JavaScript 作为模板引擎）
+* 阅读模式的加载速度快；（由于直接使用 JavaScript 作为模板引擎）
 * 基于 UserScript 编写，所以只要是支持此的浏览器均可以感受简悦带来的 `沉浸式阅读体验`；
 * 可导入 `简悦` 的配置信息；
 * 只关注阅读模式，除此以外并无其它任何功能。
@@ -59,7 +59,8 @@
 #### 新手入门：
 
 * 正确安装 简悦 · 轻阅版 后，每次新开一个页面，都会在右下角显示如下两种图标状态：
-  - ![Imgur](https://i.imgur.com/UgwxLGc.png)
+  ![Imgur](https://i.imgur.com/UgwxLGc.png)
+
 * 点击绿色 → 进入 `阅读模式`；
 * 点击灰色 → 进入 `临时阅读模式`；
 * `聚焦模式` 默认快捷键 为 <kbd>A</kbd> <kbd>S</kbd>

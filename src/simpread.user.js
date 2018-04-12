@@ -12,7 +12,7 @@
 // @require      https://greasyfork.org/scripts/40172-mousetrap/code/Mousetrap.js?version=262594
 // @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=261636
 // @require      https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js?version=262834
-// @resource     websites     http://ojec5ddd5.bkt.clouddn.com/website_list_v3.json?data=0402
+// @resource     global_sites http://ojec5ddd5.bkt.clouddn.com/website_list_v3.json?data=0402
 // @resource     origins      http://ojec5ddd5.bkt.clouddn.com/website_list_origins.json
 // @resource     notify_style http://ojec5ddd5.bkt.clouddn.com/puread/notify.css
 // @resource     main_style   http://ojec5ddd5.bkt.clouddn.com/puread/simpread.css
@@ -41,7 +41,7 @@
 
 const pr         = new PureRead(),
       style      = puplugin.Plugin( "style" ),
-    websites     = GM_getResourceText( "websites" ),
+    global_sites = GM_getResourceText( "global_sites" ),
     notify_style = GM_getResourceText( "notify_style" ),
     main_style   = GM_getResourceText( "main_style" ),
     option_style = GM_getResourceText( "option_style" ),
@@ -165,7 +165,8 @@ const pr         = new PureRead(),
                 # 默认为空，每个名单由小写 , 分隔
                 set_whitelist: 
     `;
-    let current_state = "", // include: focus, read
+    let current_state = "", // include: focus, read, option
+        websites = { global:[], custom:[], local:[] },
         simpread = { version: "1.1.0", focus, read, option },
         org_simp = { ...simpread };
 
@@ -181,7 +182,14 @@ GM_addStyle( user_style   );
 GM_addStyle( theme_common );
 
 // add websites and current can'b read mode
-pr.Addsites( JSON.parse( websites ));
+if (GM_getValue( "simpread_db" )) {
+    websites = GM_getValue( "simpread_db" );
+    pr.sites = websites;
+} else {
+    pr.Addsites( JSON.parse( global_sites ));
+    websites.global = pr.sites.global;
+    GM_setValue( "simpread_db", websites );
+}
 pr.AddPlugin( puplugin.Plugin() );
 pr.Getsites();
 
@@ -623,6 +631,13 @@ function optionMode() {
                                 Object.keys( simpread.read   ).forEach( key => { json.read[key]   != undefined && (simpread.read[key]   = json.read[key]   )});
                                 Object.keys( simpread.option ).forEach( key => { json.option[key] != undefined && (simpread.option[key] = json.option[key] )});
                                 GM_setValue( "simpread",  simpread );
+                                if ( json.websites ) {
+                                    websites.custom = [ ...json.websites.custom ];
+                                    websites.local  = [ ...json.websites.local  ];
+                                    pr.sites        = websites;
+                                    GM_setValue( "simpread_db", websites );
+                                    console.log( "new simpread db", websites, pr.sites )
+                                }
                                 new Notify().Render( "导入成功，请刷新当前页面，以便新配置文件生效。" );
                             } else new Notify().Render( 2, "上传的版本太低，请重新上传！" );
                         } catch ( error ) { new Notify().Render( 2, "上传失败，配置文件解析失败，请重新确认。" ); }
@@ -651,7 +666,10 @@ function optionMode() {
           clean      = event => {
             new Notify().Render( "是否清除掉本地配置文件？", "同意 ", () => {
                 simpread = { ...org_simp };
-                GM_setValue( "simpread",  simpread );
+                GM_setValue( "simpread", simpread );
+                websites = { global:[], custom:[], local:[] };
+                pr.sites = websites;
+                GM_deleteValue( "simpread_db" );
                 new Notify().Render( "清除成功，请刷新本页!" );
             });
           },

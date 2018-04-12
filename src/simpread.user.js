@@ -166,7 +166,6 @@ const pr         = new PureRead(),
                 set_whitelist: 
     `;
     let current_state = "", // include: focus, read, option
-        websites = { global:[], custom:[], local:[] },
         simpread = { version: "1.1.0", focus, read, option },
         org_simp = { ...simpread };
 
@@ -183,12 +182,10 @@ GM_addStyle( theme_common );
 
 // add websites and current can'b read mode
 if (GM_getValue( "simpread_db" )) {
-    websites = GM_getValue( "simpread_db" );
-    pr.sites = websites;
+    pr.sites = GM_getValue( "simpread_db" );
 } else {
     pr.Addsites( JSON.parse( global_sites ));
-    websites.global = pr.sites.global;
-    GM_setValue( "simpread_db", websites );
+    GM_setValue( "simpread_db", pr.sites );
 }
 pr.AddPlugin( puplugin.Plugin() );
 pr.Getsites();
@@ -632,11 +629,11 @@ function optionMode() {
                                 Object.keys( simpread.option ).forEach( key => { json.option[key] != undefined && (simpread.option[key] = json.option[key] )});
                                 GM_setValue( "simpread",  simpread );
                                 if ( json.websites ) {
-                                    websites.custom = [ ...json.websites.custom ];
-                                    websites.local  = [ ...json.websites.local  ];
-                                    pr.sites        = websites;
-                                    GM_setValue( "simpread_db", websites );
-                                    console.log( "new simpread db", websites, pr.sites )
+                                    pr.sites.custom = [ ...json.websites.custom ];
+                                    pr.sites.local  = [ ...json.websites.local ];
+                                    GM_setValue( "simpread_db", pr.sites );
+                                    new Notify().Render( `已导入本地适配源：${ pr.sites.local.length} 条；官方次适配源：${pr.sites.custom.length} 条。` );
+                                    console.log( "new simpread db", pr.sites )
                                 }
                                 new Notify().Render( "导入成功，请刷新当前页面，以便新配置文件生效。" );
                             } else new Notify().Render( 2, "上传的版本太低，请重新上传！" );
@@ -667,8 +664,7 @@ function optionMode() {
             new Notify().Render( "是否清除掉本地配置文件？", "同意 ", () => {
                 simpread = { ...org_simp };
                 GM_setValue( "simpread", simpread );
-                websites = { global:[], custom:[], local:[] };
-                pr.sites = websites;
+                pr.sites = { global:[], custom:[], local:[] };
                 GM_deleteValue( "simpread_db" );
                 new Notify().Render( "清除成功，请刷新本页!" );
             });

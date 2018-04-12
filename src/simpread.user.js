@@ -765,6 +765,10 @@ function optionMode() {
     } else current_state = "option";
     $( "html" ).append( optmpl );
     $( ".simpread-option-root" ).animate({ opacity: 1 });
+    const [ h1, h2 ] = [ $("dialog-gp").height(), $(".simpread-option-root").height() ];
+    if ( h2 <= h1 ) {
+        $("dialog-gp").height( h2 - 80 );
+    }
 }
 
 /**
@@ -814,5 +818,10 @@ function aboutMode() {
         return;
     } else current_state = "option";
     $( "html" ).append( optmpl );
-    $( ".simpread-option-root" ).animate({ opacity: 1 });
+    $( ".simpread-option-root" ).animate({ opacity: 1 },{ complete: ()=>{
+        const [ h1, h2 ] = [ $("dialog-gp").height(), $(".simpread-option-root").height() ];
+        if ( h2 <= h1 ) {
+            $("dialog-gp").animate({height: h2 - 80 });
+        }
+    }});
 }

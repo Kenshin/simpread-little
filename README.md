@@ -57,7 +57,6 @@
 * 无 `自定义样式`；
 
 #### 截图：
-<img src="https://i.imgur.com/k84hQKl.png" width="600px"/>  
 <img src="https://i.imgur.com/7q5czJ9.gif" width="600px"/>  
 
 #### 新手入门：
@@ -84,6 +83,11 @@
 * [联系](http://kenshin.wang) · [邮件](kenshin@ksria.com) · [微博](http://weibo.com/23784148) · [Telegram 群](https://t.me/simpread)
 * 想了解简悦背后的故事？ [猛击这里](https://sspai.com/post/39491)
 
+#### 简悦相关的模块：
+* 简悦的 `核心库` → [PuRead](https://github.com/kenshin/puread)
+* 简悦的 `Material Design Component` → [MDUIKit](https://github.com/kenshin/mduikit)
+* 简悦的 `消息提示系统` → [Notify](https://github.com/kenshin/notify)
+
 #### 简悦的诞生离不开它们：
 - [Node.js](https://nodejs.org/) · [NPM](https://www.npmjs.com)
 - [Rollup](https://webpack.github.io/)
@@ -104,15 +108,3 @@ _如发现下图显示不全，请直接访问 http://ojec5ddd5.bkt.clouddn.com/
 
 #### 许可：
 [![license-badge]][license-link]
-
-<!-- Link -->
-[www-badge]:        https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg
-[www-link]:         http://ksria.com/simpread
-[version-badge]:    https://img.shields.io/badge/lastest_version-1.1.0-blue.svg
-[version-link]:     https://github.com/kenshin/simpread/releases
-[chrome-badge]:     https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg
-[chrome-link]:      https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll
-[offline-badge]:    https://img.shields.io/badge/download-_crx-brightgreen.svg
-[offline-link]:     http://ksria.com/simpread/crx/1.1.0/simpread.crx
-[license-badge]:    https://img.shields.io/github/license/mashape/apistatus.svg
-[license-link]:     https://opensource.org/licenses/MIT

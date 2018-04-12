@@ -17,7 +17,7 @@
 // @resource     notify_style http://ojec5ddd5.bkt.clouddn.com/puread/notify.css
 // @resource     main_style   http://ojec5ddd5.bkt.clouddn.com/puread/simpread.css
 // @resource     option_style http://ojec5ddd5.bkt.clouddn.com/puread/option.css
-// @resource     user_style   https://gist.github.com/Kenshin/365a91c61bad550b5900247539113f06/raw/bcb148d10fe43a7967b6fc73c940c3600b6795aa/simpread_user.css
+// @resource     user_style   https://gist.github.com/Kenshin/365a91c61bad550b5900247539113f06/raw/8f222464944765136f511ef3bdf4865e8018738b/simpread_user.css
 // @resource     theme_common http://ojec5ddd5.bkt.clouddn.com/puread/theme_common.css
 // @resource     theme_dark   http://ojec5ddd5.bkt.clouddn.com/puread/theme_dark.css
 // @resource     theme_github http://ojec5ddd5.bkt.clouddn.com/puread/theme_github.css
@@ -294,13 +294,13 @@ function autoOpen() {
  * Control bar
  */
 function controlbar() {
-    $( "body" ).append( '<sr-rd-crlbar class="controlbar"><fab class="setting"></fab><fab style="font-size:12px!important;">简 悦</fab></sr-rd-crlbar>' );
+    $( "body" ).append( '<sr-rd-crlbar class="controlbar"><fab class="about"></fab><fab class="setting"></fab><fab style="font-size:12px!important;">简 悦</fab></sr-rd-crlbar>' );
     $( "sr-rd-crlbar" ).css( "opacity", 1 );
-    if ( pr.state == "none" ) $( "sr-rd-crlbar fab:not(.setting)" ).addClass( "not-adapter" );
+    if ( pr.state == "none" ) $( "sr-rd-crlbar fab:not(.setting,.about)" ).addClass( "not-adapter" );
     setTimeout( () => {
         $( "sr-rd-crlbar" ).removeAttr( "style" );
     }, 1000 * 2 );
-    $( "sr-rd-crlbar fab:not(.setting)" ).click( event => {
+    $( "sr-rd-crlbar fab:not(.setting,.about)" ).click( event => {
         if ( $(event.target).hasClass( "crlbar-close" ) ) {
             $( ".simpread-focus-root" ).trigger( "click", "okay" );
             $( event.target ).removeClass( "crlbar-close" ).text( "简 悦" );
@@ -316,16 +316,21 @@ function controlbar() {
         event.preventDefault();
         return false;
     });    
-    $( "sr-rd-crlbar fab:not(.setting)" ).mouseover( () => {
+    $( "sr-rd-crlbar fab:not(.setting,.about)" ).mouseover( () => {
         if ( $( ".simpread-focus-root" ).length == 0 ) {
             $( "sr-rd-crlbar fab.setting" ).addClass( "show" );
+            $( "sr-rd-crlbar fab.about"   ).addClass( "show" );
         }
         $( "sr-rd-crlbar" ).one( "mouseleave" , () => {
             $( "sr-rd-crlbar fab.setting" ).removeClass( "show" );
+            $( "sr-rd-crlbar fab.about"   ).removeClass( "show" );
         });
     });
     $( "sr-rd-crlbar fab.setting" ).click( () => {
         optionMode();
+    });
+    $( "sr-rd-crlbar fab.about" ).click( () => {
+        console.log("asdfasdfasdf")
     });
 };
 
@@ -406,7 +411,7 @@ function focusMode( element = undefined ) {
                     excludeStyle( $focus, "add" );
                     $( bgclsjq   ).remove();
                     $( bgclsjq   ).off( "click" );
-                    $( "sr-rd-crlbar fab:not(.setting)" ).removeClass( "crlbar-close" ).text( "简 悦" );
+                    $( "sr-rd-crlbar fab:not(.setting,.about)" ).removeClass( "crlbar-close" ).text( "简 悦" );
                 }
             });
 
@@ -421,7 +426,7 @@ function focusMode( element = undefined ) {
     });
 
     // set focus controlbar
-    $( "sr-rd-crlbar fab:not(.setting)" ).addClass( "crlbar-close" ).text( "" );
+    $( "sr-rd-crlbar fab:not(.setting,.about)" ).addClass( "crlbar-close" ).text( "" );
 }
 
 /**

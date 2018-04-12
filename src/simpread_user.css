@@ -1,6 +1,6 @@
 sr-rd-crlbar.controlbar {
     width: 100px;
-    height: 150px;
+    height: 200px;
 
     z-index: 2147483647;
 }
@@ -51,7 +51,8 @@ sr-rd-crlbar fab.not-adapter {
     background-color: rgba(189, 189, 189, 1);
 }
 
-sr-rd-crlbar fab.setting {
+sr-rd-crlbar fab.setting,
+sr-rd-crlbar fab.about {
     bottom: 100px;
     right: 33px;
 
@@ -70,6 +71,11 @@ sr-rd-crlbar fab.setting {
 
     opacity: 0;
     transition: opacity .5s ease;
+}
+
+sr-rd-crlbar fab.about {
+    bottom: 150px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAeklEQVRIie3T0QmAIBDG8RuhEdwkR3CENmiE3KxRXKEN/r0oSJkvXaHgB/ckfD84OZFWAlhgTqNd7rnHDyAHXAFwakDfARZgu8wKTBrltrB7vU/+AzDA8RmQQf0f2gAeiw2wA6EAhPhm3gC1O0ix7QIR8bV5VT4iInICHxrcTgOet60AAAAASUVORK5CYII=);
 }
 
 sr-rd-crlbar fab.show {

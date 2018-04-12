@@ -7,7 +7,7 @@
    <a target="_blank" href="http://ksria.com/simpread"><img src="https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg"></a>
    <a target="_blank" href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll"><img src="https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg"></a>
    <a target="_blank" href="https://addons.mozilla.org/zh-CN/firefox/addon/simpread"><img src="https://img.shields.io/badge/download-_firefox_addon-DD512A.svg"></a>
-   <a href="https://greasyfork.org/zh-CN/scripts/39998"><img src="https://img.shields.io/badge/download-_userscirpt-00485b.svg"></a>
+   <a target="_blank" href="https://greasyfork.org/zh-CN/scripts/39998"><img src="https://img.shields.io/badge/download-_userscirpt-00485b.svg"></a>
 
 </p>
 
@@ -54,17 +54,21 @@
 * 无 `自定义样式`；
 
 #### 截图：
-
+![](https://i.imgur.com/FYdkezF.png)  
+![](https://i.imgur.com/okA0jN4.png)  
+![](https://i.imgur.com/9Yew7Ig.png)  
 
 #### 新手入门：
 
-* 正确安装 简悦 · 轻阅版 后，每次新开一个页面，都会在右下角显示如下两种图标状态：
+* 正确安装 简悦 · 轻阅版 后，每次新开一个页面，都会在右下角显示如下两种图标状态：  
   ![Imgur](https://i.imgur.com/UgwxLGc.png)
 
 * 点击绿色 → 进入 `阅读模式`；
 * 点击灰色 → 进入 `临时阅读模式`；
 * `聚焦模式` 默认快捷键 为 <kbd>A</kbd> <kbd>S</kbd>
 * `阅读模式` 默认快捷键 为 <kbd>A</kbd> <kbd>A</kbd>
+* 更详细的设定请看  
+  ![Imgur](https://i.imgur.com/77Vo2uF.png)
 
 #### 投票：
 简悦是一个免费并开源的项目。如果觉得不错，请给我 [投票](https://greasyfork.org/zh-CN/forum/post/discussion?script=39998&locale=zh-CN) 。这样让更多人了解并受用与 `简悦` 带来的便利，你的认可是对我最大的鼓励。

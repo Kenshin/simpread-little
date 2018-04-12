@@ -54,9 +54,9 @@
 * 无 `自定义样式`；
 
 #### 截图：
-![](https://i.imgur.com/k84hQKll.png)  
-![](https://i.imgur.com/4oa3LKCl.png)  
-![](https://i.imgur.com/XgjccbXl.png)  
+![](https://i.imgur.com/k84hQKl.png)  
+![](https://i.imgur.com/4oa3LKC.png)  
+![](https://i.imgur.com/XgjccbX.png)  
 
 #### 新手入门：
 

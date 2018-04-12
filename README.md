@@ -58,8 +58,7 @@
 
 #### 截图：
 <img src="https://i.imgur.com/k84hQKl.png" width="600px"/>  
-<img src="https://i.imgur.com/4oa3LKC.png" width="600px"/>  
-<img src="https://i.imgur.com/XgjccbX.png" width="600px"/>  
+<img src="https://i.imgur.com/7q5czJ9.gif" width="600px"/>  
 
 #### 新手入门：
 

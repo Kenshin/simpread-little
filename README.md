@@ -56,8 +56,14 @@
 #### 截图：
 
 
-#### 如何使用：
+#### 新手入门：
 
+* 正确安装 简悦 · 轻阅版 后，每次新开一个页面，都会在右下角显示如下两种图标状态：
+  - ![Imgur](https://i.imgur.com/UgwxLGc.png)
+* 点击绿色 → 进入 `阅读模式`；
+* 点击灰色 → 进入 `临时阅读模式`；
+* `聚焦模式` 默认快捷键 为 <kbd>A</kbd> <kbd>S</kbd>
+* `阅读模式` 默认快捷键 为 <kbd>A</kbd> <kbd>A</kbd>
 
 #### 投票：
 简悦是一个免费并开源的项目。如果觉得不错，请给我 [投票](https://greasyfork.org/zh-CN/forum/post/discussion?script=39998&locale=zh-CN) 。这样让更多人了解并受用与 `简悦` 带来的便利，你的认可是对我最大的鼓励。
@@ -73,12 +79,10 @@
 
 #### 简悦的诞生离不开它们：
 - [Node.js](https://nodejs.org/) · [NPM](https://www.npmjs.com)
-- [Webpack](https://webpack.github.io/)
-- [React](https://facebook.github.io/react)
+- [Rollup](https://webpack.github.io/)
+- [Tampermonkey](http://tampermonkey.net/) · [Greasyfork](https://greasyfork.org/zh-CN)
 - [ES6](http://es6-features.org/) · [Babel](https://babeljs.io)
-- [PostCSS](http://postcss.org/) · [cssnext](http://cssnext.io/)
-- [jQuery](https://jquery.com/) · [Mousetrap](https://craig.is/killing/mice) · [pangu.js](https://github.com/vinta/pangu.js) · [ProgressBar.js](https://kimmobrunfeldt.github.io/progressbar.js/) · [timego.js](http://timeago.org/) · [Velocity.js](http://velocityjs.org/) · [minimatch](https://github.com/isaacs/minimatch) · [to-markdown](https://github.com/domchristie/to-markdown) · [FileSaver.js](https://github.com/eligrey/FileSaver.js) · [dom-to-image](https://github.com/tsayen/dom-to-image)
-- [Visual Studio Code](https://code.visualstudio.com/)
+- [jQuery](https://jquery.com/) · [Mousetrap](https://craig.is/killing/mice) · [minimatch](https://github.com/isaacs/minimatch) 
 - [Sketch](https://www.sketchapp.com/) · [Pixelmator](http://www.pixelmator.com/)
 - Icon from <http://iconfont.cn>
 - Mockup Design usage <http://magicmockups.com/>

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         简悦( SimpRead ) · 轻阅版
 // @namespace    http://ksria.com/simpread/
-// @version      1.0.2.0411-beta
+// @version      1.1.0
 // @description  简悦 - 让你瞬间进入沉浸式阅读的 User Script 扩展
 // @author       Kenshin <kenshin@ksria.com>
 // @include      http://*/*
@@ -314,9 +314,9 @@ function controlbar() {
             if ( [ "none", "temp" ].includes( pr.state ) ) {
                 tempMode( simpread.option.trigger );
             } else {
-                if ( simpread.option.trigger == "read" ) {
-                    readMode();
-                } else focusMode();
+                if ( simpread.option.trigger == "focus" ) {
+                    focusMode();
+                } else readMode();
             }
         }
         event.preventDefault();

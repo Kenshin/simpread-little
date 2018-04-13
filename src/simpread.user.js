@@ -242,8 +242,8 @@ function version() {
  * Keyboard event handler
  */
 function bindShortcuts() {
-    Mousetrap.bind( [ simpread.focus.shortcuts.toLowerCase() ], () => [ "none", "temp" ].includes( pr.state ) ? simpread.focus.highlight == true && tempMode( "focus" ) : focusMode() );
-    Mousetrap.bind( [ simpread.read.shortcuts.toLowerCase()  ], () => [ "none", "temp" ].includes( pr.state ) ? simpread.read.highlight  == true && tempMode( "read"  ) : readMode()  );
+    Mousetrap.bind( [ simpread.focus.shortcuts.toLowerCase() ], () => entryMode( "focus" ));
+    Mousetrap.bind( [ simpread.read.shortcuts.toLowerCase()  ], () => entryMode( "read"  ));
     Mousetrap.bind( "esc", ( event, combo ) => {
         if ( combo == "esc" && simpread.option.esc ) {
             if ( $( ".simpread-read-root"  ).length > 0 ) $( ".simpread-read-root sr-rd-crlbar fab" )[0].click();
@@ -310,18 +310,10 @@ function controlbar() {
         if ( $(event.target).hasClass( "crlbar-close" ) ) {
             $( ".simpread-focus-root" ).trigger( "click", "okay" );
             $( event.target ).removeClass( "crlbar-close" ).text( "简 悦" );
-        } else {
-            if ( [ "none", "temp" ].includes( pr.state ) ) {
-                tempMode( simpread.option.trigger );
-            } else {
-                if ( simpread.option.trigger == "focus" ) {
-                    focusMode();
-                } else readMode();
-            }
-        }
+        } else entryMode( simpread.option.trigger );
         event.preventDefault();
         return false;
-    });    
+    });
     $( "sr-rd-crlbar fab:not(.setting,.about)" ).mouseover( () => {
         if ( $( ".simpread-focus-root" ).length == 0 ) {
             $( "sr-rd-crlbar fab.setting" ).addClass( "show" );
@@ -339,6 +331,19 @@ function controlbar() {
         aboutMode();
     });
 };
+
+/**
+ * Enter Mode
+ * 
+ * @param {string} include: focus, read
+ */
+function entryMode( type ) {
+    type = type == "focus" ? "focus" : "read";
+    if ( [ "none", "temp" ].includes( pr.state ) ) {
+        if ( simpread[type].highlight == true ) tempMode( type );
+        else new Notify().Render( `当前未启用 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>，并当前站点也未适配，如需要适配请提交到 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
+    } else type == "focus" ? focusMode() : readMode();
+}
 
 /**
  * Focus mode

@@ -35,6 +35,7 @@
 // @grant        GM_deleteValue
 // @grant        GM_notification
 // @grant        GM_info
+// @grant        GM_openInTab
 // @run-at       document-end
 // @noframes
 // ==/UserScript==
@@ -212,6 +213,9 @@ function version() {
     } else {
         GM_setValue( "simpread", simpread );
         GM_setValue( "simpread_subver", GM_info.script.version );
+        GM_notification({ text: `安装到最新版${GM_info.script.version}，点击查看说明。`, title: "简悦 · 轻阅版安装提示", image: GM_info.script.icon}, () => {
+            GM_openInTab("https://github.com/Kenshin/simpread-little");
+        });
     }
     // compare
     if ( GM_getValue( "simpread_subver" ) != GM_info.script.version ) {
@@ -228,7 +232,9 @@ function version() {
             }
             GM_setValue( "simpread", simpread );
         }
-        GM_notification( `简悦 · 轻阅版 已升级到最新版${GM_info.script.version}，如需生效请刷新页面。`, "简悦 · 轻阅版升级提示", GM_info.script.icon );
+        GM_notification({ text: `升级到正式版${GM_info.script.version}，点击查看说明。`, title: "简悦 · 轻阅版升级提示", image: GM_info.script.icon}, () => {
+            GM_openInTab("https://github.com/Kenshin/simpread-little/blob/master/README.md#特点");
+        });
     }
 }
 

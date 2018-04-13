@@ -665,6 +665,10 @@ function optionMode() {
             $a.remove();
           },
           remote     = event => {
+            if ( location.protocol == "https:" ) {
+                new Notify().Render( `请勿在 https 下面使用此功能，请前往 http 的页面，如： <a href='http://kenshin.wang/blog/' target='_blank' >点击这里</a>` );
+                return;
+            }
             $.getJSON( "http://ojec5ddd5.bkt.clouddn.com/website_list_v3.json" + "?_=" + Math.round(+new Date()), result => {
                 const count = pr.Addsites( result );
                 count == 0 ? new Notify().Render( "适配列表已同步至最新版本。" ) : new Notify().Render( 0, `适配列表已同步成功，本次新增 ${ count } 个站点。` );

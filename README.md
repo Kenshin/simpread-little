@@ -23,6 +23,8 @@
 #### 马上使用：
 * 安装 [Tampermonkey](http://tampermonkey.net/) 并选择对应浏览器的版本；
 * 进入 <https://greasyfork.org/zh-CN/scripts/39998>，并选择 `安装`；
+  _注意：使用 **暴力猴** 的用户请使用 https://github.com/Kenshin/simpread-little/blob/master/src/simpread_user.css 安装_
+
 * 安装完毕后，打开 <https://sspai.com/post/39491> 键盘快捷键 → <kbd>A</kbd> <kbd>A</kbd>（双击 A） 就可以进入阅读模式；  
   _简悦能完美适配的网址多达数千个，加上临时阅读模式的话，可支持任意页面。_
 * 不清楚简悦如何使用？想知道简悦的高级功能，请看简悦的 [帮助中心](https://github.com/kenshin/simpread/wiki) 。
@@ -56,6 +58,9 @@
 * 无 `导出到生产力功能`；
 * 无 `站点编辑器` `站点适配源` `站点管理器`；
 * 无 `自定义样式`；
+
+#### Chrome / Firefox / 轻阅版（UserScript）功能差别：
+![Chrome / Firefox / 轻阅版（UserScript）功能差别](https://i.imgur.com/z4WI7uK.png)
 
 #### 截图：
 <img src="https://i.imgur.com/7q5czJ9.gif" width="600px"/>  

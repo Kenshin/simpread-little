@@ -241,7 +241,7 @@ function bindShortcuts() {
     Mousetrap.bind( "esc", ( event, combo ) => {
         if ( combo == "esc" && simpread.option.esc ) {
             if ( $( ".simpread-read-root"  ).length > 0 ) $( ".simpread-read-root sr-rd-crlbar fab" )[0].click();
-            if ( $( ".simpread-focus-root" ).length > 0 ) $( "sr-rd-crlbar fab" )[0].click();
+            if ( $( ".simpread-focus-root" ).length > 0 ) $( "sr-rd-crlbar fab.crlbar-close" )[0].click();
         }
     });
 }

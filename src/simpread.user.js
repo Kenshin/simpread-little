@@ -320,6 +320,7 @@ function controlbar() {
     if ( pr.state == "none" ) $( "sr-rd-crlbar fab:not(.setting,.about)" ).addClass( "not-adapter" );
     setTimeout( () => {
         $( "sr-rd-crlbar" ).removeAttr( "style" );
+        if ( pr.state == "none" && simpread.option.trigger_hiden == true ) $( "sr-rd-crlbar" ).css({ display: "none" });
     }, 1000 * 2 );
     $( "sr-rd-crlbar fab:not(.setting,.about)" ).click( event => {
         if ( $(event.target).hasClass( "crlbar-close" ) ) {

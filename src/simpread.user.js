@@ -190,30 +190,35 @@ const pr         = new PureRead(),
  * Entry
  ****************************/
 
-// add simpread style
-GM_addStyle( notify_style );
-GM_addStyle( main_style   );
-GM_addStyle( option_style );
-GM_addStyle( user_style   );
-GM_addStyle( theme_common );
-
-// add websites and current can'b read mode
-if (GM_getValue( "simpread_db" )) {
-    pr.sites = GM_getValue( "simpread_db" );
-} else {
-    pr.Addsites( JSON.parse( global_sites ));
-    GM_setValue( "simpread_db", pr.sites );
-}
-pr.AddPlugin( puplugin.Plugin() );
-pr.Getsites();
-
 // initialize
 version();
-bindShortcuts();
-controlbar();
-autoOpen();
 
-console.log( "current pureread is ", pr, simpread );
+// blacklist
+if ( !blacklist() ) {
+    // add simpread style
+    GM_addStyle( notify_style );
+    GM_addStyle( main_style   );
+    GM_addStyle( option_style );
+    GM_addStyle( user_style   );
+    GM_addStyle( theme_common );
+
+    // add websites and current can'b read mode
+    if (GM_getValue( "simpread_db" )) {
+        pr.sites = GM_getValue( "simpread_db" );
+    } else {
+        pr.Addsites( JSON.parse( global_sites ));
+        GM_setValue( "simpread_db", pr.sites );
+    }
+    pr.AddPlugin( puplugin.Plugin() );
+    pr.Getsites();
+
+    // global
+    bindShortcuts();
+    controlbar();
+    autoOpen();
+
+    console.log( "current pureread is ", pr, simpread );
+}
 
 /****************************
  * Method
@@ -251,6 +256,28 @@ function version() {
         }
         new Notify().Render( "简悦 · 轻阅版 版本提示", `升级到正式版 ${GM_info.script.version}，请看 <a href='http://ksria.com/simpread/changelog.html#us_${GM_info.script.version}' target='_blank' >更新说明</a> 。` );
     }
+}
+
+/**
+ * Black list
+ */
+function blacklist() {
+    let is_blacklist = false;
+    for ( const item of simpread.option.blacklist ) {
+        if ( !item.startsWith( "http" ) ) {
+            if ( location.hostname.includes( item ) ) {
+                is_blacklist = true;
+                break;
+            }
+        } else {
+            if ( location.href == item ) {
+                is_blacklist = true;
+                break;
+            }
+        }
+    }
+    console.log( "current site is blacklist", is_blacklist )
+    return is_blacklist;
 }
 
 /**

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         简悦( SimpRead ) · 轻阅版
 // @namespace    http://ksria.com/simpread/
-// @version      1.1.0
+// @version      1.1.1
 // @description  简悦 - 让你瞬间进入沉浸式阅读的 User Script 扩展
 // @author       Kenshin <kenshin@ksria.com>
 // @include      http://*/*
@@ -84,6 +84,10 @@ const pr         = new PureRead(),
         esc       : true,
         trigger   : "read", // include: 'focus' 'read', only by userscript
         origins   : [],
+        trigger_hiden: true,
+        blacklist : [
+            "google.com","https://www.baidu.com/?vit=1"
+        ],
     },
     opt_value    = `
                 # 是否启用 ESC 退出方式？
@@ -91,8 +95,22 @@ const pr         = new PureRead(),
                 set_esc: true
 
                 # 右下角触发器点击后进入的模式
-                # 默认为 read，取值范围 focus | read ，
+                # 默认为 read，取值范围 focus | read
                 set_trigger: read
+
+                # 当在非适配的页面是否隐藏触发器
+                # 默认为 true （隐藏），取值范围 true | false
+                set_trigger_hiden: true
+
+                # 黑名单，加入其中后，不再启动简悦
+                # 有别于白名单和排除列表，前两种当前页面还是加载简悦，但黑名单则彻底加载轻阅的代码
+                # 支持 域名 和 URL，
+                # 例如： 
+                # https://www.baidu.com/?vit=1 则在此页面禁用
+                # google.com 则凡是含有 google.com 的域名都禁用，包括： mail.google.com doc.google.com 等
+                # mail.google.com 仅在 mail.google.com 下无法使用，但 doc.google.com 则没问题
+                # 每个名单由小写 , 分隔
+                set_blacklist: 
     `,
     focus_value  = `
                 # 是否启用点击空白（遮罩）退出功能？
@@ -165,7 +183,7 @@ const pr         = new PureRead(),
                 set_whitelist: 
     `;
     let current_state = "", // include: focus, read, option
-        simpread = { version: "1.1.0", focus, read, option },
+        simpread = { version: "1.1.1", focus, read, option },
         org_simp = { ...simpread };
 
 /****************************
@@ -221,14 +239,17 @@ function version() {
                 simpread = { ...org_simp };
             } else {
                 Object.keys( org_simp ).forEach( key => {
-                    if ( !simpread[key] ) {
-                        simpread[key] = org_simp[key];
-                    }
+                    key != "version" && Object.keys( org_simp[key] ).forEach( value => {
+                        if ( !simpread[key][value] ) {
+                            simpread[key][value] = org_simp[key][value];
+                        }
+                    });
                 });
+                simpread.version = org_simp.version;
             }
             GM_setValue( "simpread", simpread );
         }
-        new Notify().Render( "简悦 · 轻阅版 版本提示", `升级到正式版 ${GM_info.script.version}，请看 <a href='https://github.com/Kenshin/simpread-little/blob/master/README.md#特点' target='_blank' >更新说明</a> 。` );
+        new Notify().Render( "简悦 · 轻阅版 版本提示", `升级到正式版 ${GM_info.script.version}，请看 <a href='http://ksria.com/simpread/changelog.html#us_${GM_info.script.version}' target='_blank' >更新说明</a> 。` );
     }
 }
 
@@ -693,7 +714,7 @@ function optionMode() {
                         let   value = str.split( ":" )[1];
                         if ( simpread[type][key] != undefined ) {
                             value = simpread[type][key];
-                            ![ "whitelist", "exclusion" ].includes( key )  && value === "" && ( value = org_simp[type][key] );
+                            ![ "whitelist", "exclusion", "blacklist" ].includes( key )  && value === "" && ( value = org_simp[type][key] );
                             return `set_${key}: ${value}`;
                         }
                     } else return str;
@@ -710,7 +731,7 @@ function optionMode() {
                     if ( str.startsWith( "set_" ) ) {
                         str = str.replace( "set_", "" );
                         const key   = str.split( ":" )[0];
-                        if ( [ "exclusion", "whitelist" ].includes( key )) {
+                        if ( [ "exclusion", "whitelist", "blacklist" ].includes( key )) {
                             const value = str.replace( `${key}:`, "" ).trim();
                             simpread[type][key] = value.split(",");
                         }

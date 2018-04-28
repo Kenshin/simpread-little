@@ -100,6 +100,7 @@ const pr         = new PureRead(),
 
                 # 当在非适配的页面是否隐藏触发器
                 # 默认为 true （隐藏），取值范围 true | false
+                # 当选择了 true 且在非适配页面时，可以通过快捷键使用临时阅读模式
                 set_trigger_hiden: true
 
                 # 黑名单，加入其中后，不再启动简悦

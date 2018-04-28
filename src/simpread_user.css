@@ -141,7 +141,7 @@ dialog-head {
 dialog-content {
     display: block;
 
-    padding: 39px 24px 0;
+    padding: 12px 24px 0;
 
     width: 100%;
     min-height: 244px;
@@ -176,7 +176,7 @@ sr-opt-gp sr-opt-item {
 }
 
 dialog-content .about {
-    padding: 20px 0;
+    padding: 3px 0 10px 0;
 
     width: 650px;
 

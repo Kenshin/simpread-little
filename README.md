@@ -3,7 +3,7 @@
 <p align="center">让你瞬间进入沉浸式阅读的扩展，还原阅读的本质，提升你的阅读体验。</p>
 <p align="center">为了达到完美的阅读模式这个小目标 ，我适配了 <a target="_blank" href="https://github.com/kenshin/simpread/wiki/适配站点列表">240+</a> 个网站，因此诞生了简悦。</p>
 <p align="center">
-   <a href="https://github.com/kenshin/simpread/releases"><img src="https://i.imgur.com/fiweIRT.png"></a>
+   <a href="https://github.com/kenshin/simpread/releases"><img src="https://i.imgur.com/rAc8bT7.png"></a>
    <a target="_blank" href="http://ksria.com/simpread"><img src="https://i.imgur.com/ryEV5nm.png"></a>
    <a target="_blank" href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll"><img src="https://i.imgur.com/ubNLVJa.png"></a>
    <a target="_blank" href="https://addons.mozilla.org/zh-CN/firefox/addon/simpread"><img src="https://i.imgur.com/tBstQ7d.png"></a>

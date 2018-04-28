@@ -217,7 +217,7 @@ if ( !blacklist() ) {
     controlbar();
     autoOpen();
 
-    console.log( "current pureread is ", pr, simpread );
+    console.log( "[SimpRead Lite] current pureread is ", pr, simpread );
 }
 
 /****************************

@@ -6,7 +6,7 @@ const script       = document.createElement( "script" ),
       notify_src   = "https://greasyfork.org/scripts/40236-notify/code/Notify.js",
       puplugin_src = "https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js",
       mduikit_src  = "https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js",
-      json         = "http://ojec5ddd5.bkt.clouddn.com/website_list_v3.json";
+      json         = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/jsbox/res/website_list_v3.json";
 
 const notif_style  = '<link href="http://ojec5ddd5.bkt.clouddn.com/puread/notify.css"        rel="stylesheet">',
       main_style   = '<link href="http://ojec5ddd5.bkt.clouddn.com/puread/simpread.css"      rel="stylesheet">',
@@ -123,6 +123,10 @@ function readMode( pr, puplugin, $ ) {
     if   ( pr.html.paging   ) paging( pr.html.paging );
     else $( "sr-page"       ).remove();
 
+    $("sr-rd-content").find( pr.Exclude( $("sr-rd-content") ) ).remove();
+    pr.Beautify( $( "sr-rd-content" ) );
+    pr.Format( "simpread-read-root" );
+
     $("head").append( theme_gothic );
     //style.FontFamily( simpread.read.fontfamily );
     //style.FontSize(   simpread.read.fontsize   );
@@ -130,16 +134,12 @@ function readMode( pr, puplugin, $ ) {
 
     // exit
     $( ".simpread-read-root sr-rd-crlbar fab" ).one( "click", event => {
-        $( ".simpread-read-root" ).animate( { opacity: 0 }, {
-            delay: 100,
-            complete: () => {
-                $root.removeClass( "simpread-theme-root" )
-                     .removeClass( "simpread-font" );
-                if ( $root.attr("style") ) $root.attr( "style", $root.attr("style").replace( "font-size: 62.5%!important", "" ));
-                $( "body" ).removeClass( "simpread-hidden" );
-                $( ".simpread-read-root" ).remove();
-            }
-        }).addClass( "simpread-read-root-hide" );
+        $( ".simpread-read-root" ).addClass( "simpread-read-root-hide" );
+        $root.removeClass( "simpread-theme-root" )
+             .removeClass( "simpread-font" );
+        if ( $root.attr("style") ) $root.attr( "style", $root.attr("style").replace( "font-size: 62.5%!important", "" ));
+        $( "body" ).removeClass( "simpread-hidden" );
+        $( ".simpread-read-root" ).remove();
     });
 
 }

@@ -41,5 +41,13 @@ export default [
             file   :  process.env.NODE_ENV === 'production' ? './dist/simpread.user.min.js' : './dist/simpread.user.js',
         },
         plugins,
+    },
+    {
+        input      : './src/jsbox/simpread.js',
+        output     : {
+            format : 'iife',
+            file   :  process.env.NODE_ENV === 'production' ? './dist/simpread.jsbox.min.js' : './dist/simpread.jsbox.js',
+        },
+        plugins,
     }
 ]

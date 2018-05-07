@@ -127,10 +127,10 @@ function readMode( pr, puplugin, $ ) {
     pr.Beautify( $( "sr-rd-content" ) );
     pr.Format( "simpread-read-root" );
 
-    $("head").append( theme_night );
+    $("head").append( theme_gothic );
     //style.FontFamily( simpread.read.fontfamily );
     //style.FontSize(   simpread.read.fontsize   );
-    //style.Layout(     simpread.read.layout     );
+     //style.Layout(     simpread.read.layout     );
 
     // exit
     $( ".simpread-read-root sr-rd-crlbar fab" ).one( "click", event => {

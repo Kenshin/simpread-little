@@ -8,24 +8,24 @@ const script       = document.createElement( "script" ),
       mduikit_src  = "https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js",
       json         = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/jsbox/res/website_list_v3.json";
 
-const notif_style  = '<link href="http://ojec5ddd5.bkt.clouddn.com/puread/notify.css"        rel="stylesheet">',
-      main_style   = '<link href="http://ojec5ddd5.bkt.clouddn.com/puread/simpread.css"      rel="stylesheet">',
-      user_style   = '<link href="http://ojec5ddd5.bkt.clouddn.com/puread/simpread_user.css" rel="stylesheet">',
-      option_style = '<link href="http://ojec5ddd5.bkt.clouddn.com/puread/option.css"        rel="stylesheet">',
-      theme_common = '<link href="http://ojec5ddd5.bkt.clouddn.com/puread/theme_common.css"  rel="stylesheet">',
-      theme_pixyii = '<link href="http://ojec5ddd5.bkt.clouddn.com/puread/theme_pixyii.css"  rel="stylesheet">',
-      theme_gothic = '<link href="http://ojec5ddd5.bkt.clouddn.com/puread/theme_gothic.css"  rel="stylesheet">',
-      theme_night  = '<link href="http://ojec5ddd5.bkt.clouddn.com/puread/theme_night.css"   rel="stylesheet">';
+const notif_style  = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/jsbox/res/notify.css",
+      main_style   = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/jsbox/res/simpread.css",
+      user_style   = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/jsbox/res/simpread_user.css",
+      option_style = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/jsbox/res/option.css",
+      theme_common = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/jsbox/res/theme_common.css",
+      theme_pixyii = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/jsbox/res/theme_pixyii.css",
+      theme_gothic = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/jsbox/res/theme_gothic.css",
+      theme_night  = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/jsbox/res/theme_night.css";
 
 script.type        = "text/javascript";
 script.src         = script_src;
 script.onload      = () => {
     $script( jq_src, () => {
-        $("head").append( notif_style )
-                 .append( main_style )
-                 .append( option_style )
-                 .append( user_style )
-                 .append( theme_common );
+        $.get( notif_style,  result => { $("head").append( `<style type="text/css">${result}</style>` ) });
+        $.get( main_style,   result => { $("head").append( `<style type="text/css">${result}</style>` ) });
+        $.get( option_style, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
+        $.get( user_style,   result => { $("head").append( `<style type="text/css">${result}</style>` ) });
+        $.get( user_style,   result => { $("head").append( `<style type="text/css">${result}</style>` ) });
         $script( [ puread_src, notify_src, puplugin_src, mduikit_src ], "bundle" );
         $script.ready( "bundle", () => {
             $.getJSON( json, result => {
@@ -127,10 +127,11 @@ function readMode( pr, puplugin, $ ) {
     pr.Beautify( $( "sr-rd-content" ) );
     pr.Format( "simpread-read-root" );
 
-    $("head").append( theme_gothic );
+    $.get( theme_gothic, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
     //style.FontFamily( simpread.read.fontfamily );
     //style.FontSize(   simpread.read.fontsize   );
-     //style.Layout(     simpread.read.layout     );
+    //style.Layout(     simpread.read.layout     );
+    puplugin.Plugin( "style" ).FontSize( "62.5%" );
 
     // exit
     $( ".simpread-read-root sr-rd-crlbar fab" ).one( "click", event => {

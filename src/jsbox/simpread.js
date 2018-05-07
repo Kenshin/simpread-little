@@ -33,7 +33,10 @@ script.onload      = () => {
                 pr.Addsites(result);
                 pr.AddPlugin(puplugin.Plugin());
                 pr.Getsites();
-                if ( pr.state == "none" ) new Notify().Render( "当前页面不支持简悦的阅读模式" );
+                if ( pr.state == "none" ) {
+                    alert( location.href )
+                    new Notify().Render( "当前页面不支持简悦的阅读模式" );
+                }
                 else readMode( pr, puplugin, $ );
             });
         });

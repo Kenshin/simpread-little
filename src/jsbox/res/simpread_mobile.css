@@ -1,0 +1,8 @@
+
+sr-read {
+    padding: 0 50px;
+}
+
+sr-rd-content *, sr-rd-content p, sr-rd-content div {
+    font-size: initial;
+}

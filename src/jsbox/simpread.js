@@ -127,7 +127,7 @@ function readMode( pr, puplugin, $ ) {
     pr.Beautify( $( "sr-rd-content" ) );
     pr.Format( "simpread-read-root" );
 
-    $("head").append( theme_gothic );
+    $("head").append( theme_night );
     //style.FontFamily( simpread.read.fontfamily );
     //style.FontSize(   simpread.read.fontsize   );
     //style.Layout(     simpread.read.layout     );

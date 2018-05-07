@@ -25,7 +25,7 @@ script.onload      = () => {
         $.get( main_style,   result => { $("head").append( `<style type="text/css">${result}</style>` ) });
         $.get( option_style, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
         $.get( user_style,   result => { $("head").append( `<style type="text/css">${result}</style>` ) });
-        $.get( user_style,   result => { $("head").append( `<style type="text/css">${result}</style>` ) });
+        $.get( theme_common, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
         $script( [ puread_src, notify_src, puplugin_src, mduikit_src ], "bundle" );
         $script.ready( "bundle", () => {
             $.getJSON( json, result => {
@@ -46,7 +46,7 @@ document.body.appendChild( script );
 function readMode( pr, puplugin, $ ) {
     const $root  = $( "html" ),
           bgtmpl = `<div class="simpread-read-root">
-                        <sr-read>
+                        <sr-read style="padding: 0 50px;">
                             <sr-rd-title></sr-rd-title>
                             <sr-rd-desc></sr-rd-desc>
                             <sr-rd-content></sr-rd-content>

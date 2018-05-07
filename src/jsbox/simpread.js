@@ -46,7 +46,7 @@ document.body.appendChild( script );
 function readMode( pr, puplugin, $ ) {
     const $root  = $( "html" ),
           bgtmpl = `<div class="simpread-read-root">
-                        <sr-read>
+                        <sr-read style="padding: 0 50px;">
                             <sr-rd-title></sr-rd-title>
                             <sr-rd-desc></sr-rd-desc>
                             <sr-rd-content></sr-rd-content>

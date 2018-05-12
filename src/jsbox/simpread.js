@@ -45,12 +45,43 @@ script.onload      = () => {
 document.body.appendChild( script );
 
 /**
+ * User Agent
+ * 
+ * @return {string} ipad and iphone
+ */
+function userAgent() {
+    const ua = navigator.userAgent.toLowerCase();
+    if ( ua.match( /ipad/i ) == "ipad" ) {
+       return "ipad";
+    } else {
+       return "iphone";
+    }
+}
+
+/**
+ * Set style
+ * 
+ * @param {object} puplugin.Plugin( "style" )
+ */
+function setStyle( style ) {
+    if ( userAgent() == "iphone" ) {
+        style.FontSize( "62.5%" );
+        $("sr-read").css({ "padding": "0 50px" });
+        $.get( theme_gothic, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
+    } else {
+        style.FontSize( "72%" );
+        style.Layout( "10%" );
+        $.get( theme_pixyii, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
+    }
+}
+
+/**
  * Read mode
  */
 function readMode( pr, puplugin, $ ) {
     const $root  = $( "html" ),
           bgtmpl = `<div class="simpread-read-root">
-                        <sr-read style="padding: 0 50px;">
+                        <sr-read>
                             <sr-rd-title></sr-rd-title>
                             <sr-rd-desc></sr-rd-desc>
                             <sr-rd-content></sr-rd-content>
@@ -131,11 +162,7 @@ function readMode( pr, puplugin, $ ) {
     pr.Beautify( $( "sr-rd-content" ) );
     pr.Format( "simpread-read-root" );
 
-    $.get( theme_gothic, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
-    //style.FontFamily( simpread.read.fontfamily );
-    //style.FontSize(   simpread.read.fontsize   );
-    //style.Layout(     simpread.read.layout     );
-    puplugin.Plugin( "style" ).FontSize( "62.5%" );
+    setStyle( puplugin.Plugin( "style" ) );
 
     // exit
     $( ".simpread-read-root sr-rd-crlbar fab" ).one( "click", event => {

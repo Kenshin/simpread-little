@@ -76,6 +76,22 @@ function setStyle( style ) {
 }
 
 /**
+ * Control bar
+ */
+function controlbar() {
+    let cur = 0;
+    $( window ).scroll( event => {
+        const next = $(window).scrollTop();
+        if ( next > cur ) {
+            $( "fab" ).css({ opacity: 0 });
+        } else {
+            $( "fab" ).css({ opacity: 1 });
+        }
+        cur = next;
+    });
+}
+
+/**
  * Read mode
  */
 function readMode( pr, puplugin, $ ) {
@@ -163,6 +179,7 @@ function readMode( pr, puplugin, $ ) {
     pr.Format( "simpread-read-root" );
 
     setStyle( puplugin.Plugin( "style" ) );
+    controlbar();
 
     // exit
     $( ".simpread-read-root sr-rd-crlbar fab" ).one( "click", event => {

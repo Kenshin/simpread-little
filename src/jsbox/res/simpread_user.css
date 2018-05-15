@@ -52,7 +52,8 @@ sr-rd-crlbar fab.not-adapter {
 }
 
 sr-rd-crlbar fab.setting,
-sr-rd-crlbar fab.about {
+sr-rd-crlbar fab.about,
+sr-rd-crlbar fab.pocket {
     bottom: 100px;
     right: 33px;
 
@@ -71,6 +72,12 @@ sr-rd-crlbar fab.about {
 
     opacity: 0;
     transition: opacity .5s ease;
+}
+
+sr-rd-crlbar fab.pocket {
+    opacity: 1;
+    bottom: 100px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABKElEQVQ4T72UYVEDMRCF36eAOgAUgAOKhCqAOsAB4IAqoHVQB4ACDgfFQVGwzLtJmNxNelw7hfy5mcvm2923L0FHXhyZpxYYERNJN5L83XdtgFU+lIHLBNwXluPngBk/Fb5KujqUJukRePhX4Iekix0Vf0naSjot9gcrXAB3EXEr6bkHNWwKNBHRFEkHgWtglqZfQkuY3fAu6Swl/FXDJTAvoE9FZYa9SLocarlmmxI6AbbJr32YuTNgXU65ppf3O9BKZbnIc2BTAt2Gf5xUJuvqF2lAZZs59A2Ydm5K0srGvD/A3NeAL0a7Oo9Dzwpj2K3FysA+0K072y5Tl2dXgLXvrOrzFRFu35lrmn56L091FDAHRYTF9iDy0BrfkiEt/uaBHaP+2JhvPYuFFTslm1gAAAAASUVORK5CYII=);
 }
 
 sr-rd-crlbar fab.about {

@@ -238,7 +238,7 @@ function service( pr ) {
                 data    : {
                     token  : "S=s1:U=120a6:E=16739f21c19:C=15fe240ee38:P=81:A=wonle-9146:V=2:H=e95d8333616d0ec4946bbfca9e5b9c6d",
                     title  : pr.html.title,
-                    content: pr.html.content,
+                    content: pr.html.include,
                 }
             }).done( success ).fail( failed );
         }

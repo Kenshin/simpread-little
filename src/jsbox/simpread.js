@@ -51,7 +51,7 @@ document.body.appendChild( script );
  */
 function userAgent() {
     const ua = navigator.userAgent.toLowerCase();
-    if ( ua.match( /ipad/i ) == "iphone" ) {
+    if ( ua.match( /iphone/i ) == "iphone" ) {
         return "iphone";
     } else {
         return "ipad";

@@ -51,10 +51,10 @@ document.body.appendChild( script );
  */
 function userAgent() {
     const ua = navigator.userAgent.toLowerCase();
-    if ( ua.match( /ipad/i ) == "ipad" ) {
-       return "ipad";
+    if ( ua.match( /ipad/i ) == "iphone" ) {
+        return "iphone";
     } else {
-       return "iphone";
+        return "ipad";
     }
 }
 
@@ -182,7 +182,7 @@ function readMode( pr, puplugin, $ ) {
     controlbar();
 
     // exit
-    $( ".simpread-read-root sr-rd-crlbar fab" ).one( "click", event => {
+    $( ".simpread-read-root sr-rd-crlbar fab.crlbar-close" ).one( "click", event => {
         $( ".simpread-read-root" ).addClass( "simpread-read-root-hide" );
         $root.removeClass( "simpread-theme-root" )
              .removeClass( "simpread-font" );

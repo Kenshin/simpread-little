@@ -92,6 +92,38 @@ function controlbar() {
 }
 
 /**
+ * Service
+ * 
+ * @param {object} pr object
+ */
+function service( pr ) {
+    $( "sr-rd-crlbar fab.pocket" ).click( () => {
+        var notify = new Notify().Render({ state: "loading", content: "保存中，请稍后！" });
+        $.ajax({
+            url     : `http://localhost:3000/service/add`,
+            type    : "POST",
+            data    : {
+                name  : "pocket",
+                token : "68d4c6c6-7460-b8e3-96c5-7a176f",
+                tags  : "temp",
+                title : pr.html.title,
+                url   : location.href
+            }
+        }).done( ( result, textStatus, jqXHR ) => {
+            console.log( result, textStatus, jqXHR )
+            notify.complete();
+            if ( result.code == 200 ) {
+                new Notify().Render( "保存成功！" );
+            } else new Notify().Render( "保存失败，请稍候再试！" );
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error );
+            notify.complete();
+            new Notify().Render( "保存失败，请稍候再试！" );
+        });
+    });
+}
+
+/**
  * Read mode
  */
 function readMode( pr, puplugin, $ ) {
@@ -109,6 +141,7 @@ function readMode( pr, puplugin, $ ) {
                                 </sr-rd-footer-copywrite>
                                 </sr-rd-footer>
                             <sr-rd-crlbar>
+                                <fab class="pocket"></fab>
                                 <fab class="crlbar-close"></fab>
                             </sr-rd-crlbar>
                         </sr-read>
@@ -180,6 +213,7 @@ function readMode( pr, puplugin, $ ) {
 
     setStyle( puplugin.Plugin( "style" ) );
     controlbar();
+    service( pr );
 
     // exit
     $( ".simpread-read-root sr-rd-crlbar fab.crlbar-close" ).one( "click", event => {

@@ -63,3 +63,6 @@ dist/**
 
 # for mac
 **/.DS_Store
+
+# test file
+css.js

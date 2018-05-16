@@ -203,7 +203,8 @@ function readMode( pr, puplugin, $ ) {
  */
 function service( pr ) {
     const clickEvent  = event => {
-        const type    = event.target.className,
+        const server  = "http://localhost:3000",
+              type    = event.target.className,
               notify  = new Notify().Render({ state: "loading", content: "保存中，请稍后！" }),
               success = ( result, textStatus, jqXHR ) => {
                 console.log( result, textStatus, jqXHR )
@@ -219,7 +220,7 @@ function service( pr ) {
               };
         if ( type == "pocket" ) {
             $.ajax({
-                url     : `http://localhost:3000/service/add`,
+                url     : `${server}/service/add`,
                 type    : "POST",
                 data    : {
                     name  : "pocket",
@@ -231,7 +232,7 @@ function service( pr ) {
             }).done( success ).fail( failed );
         } else if ( type == "evernote" ) {
             $.ajax({
-                url     : `http://localhost:3000/evernote/add`,
+                url     : `${server}/evernote/add`,
                 type    : "POST",
                 headers : { sandbox: false, china: false, type: "evernote" },
                 data    : {

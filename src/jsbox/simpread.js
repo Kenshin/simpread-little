@@ -97,53 +97,56 @@ function controlbar() {
  * @param {object} pr object
  */
 function service( pr ) {
-    $( "sr-rd-crlbar fab.pocket" ).click( () => {
+    const clickEvent = event => {
+        const type = event.target.className;
         var notify = new Notify().Render({ state: "loading", content: "保存中，请稍后！" });
-        $.ajax({
-            url     : `http://localhost:3000/service/add`,
-            type    : "POST",
-            data    : {
-                name  : "pocket",
-                token : "68d4c6c6-7460-b8e3-96c5-7a176f",
-                tags  : "temp",
-                title : pr.html.title,
-                url   : location.href
-            }
-        }).done( ( result, textStatus, jqXHR ) => {
-            console.log( result, textStatus, jqXHR )
-            notify.complete();
-            if ( result.code == 200 ) {
-                new Notify().Render( "保存成功！" );
-            } else new Notify().Render( "保存失败，请稍候再试！" );
-        }).fail( ( jqXHR, textStatus, error ) => {
-            console.error( jqXHR, textStatus, error );
-            notify.complete();
-            new Notify().Render( "保存失败，请稍候再试！" );
-        });
-    });
-    $( "sr-rd-crlbar fab.evernote" ).click( () => {
-        var notify = new Notify().Render({ state: "loading", content: "保存中，请稍后！" });
-        $.ajax({
-            url     : `http://localhost:3000/evernote/add`,
-            type    : "POST",
-            headers : { sandbox: false, china: false, type: "evernote" },
-            data    : {
-                token  : "S=s1:U=120a6:E=16739f21c19:C=15fe240ee38:P=81:A=wonle-9146:V=2:H=e95d8333616d0ec4946bbfca9e5b9c6d",
-                title  : pr.html.title,
-                content: pr.html.content,
-            }
-        }).done( ( result, textStatus, jqXHR ) => {
-            console.log( result, textStatus, jqXHR )
-            notify.complete();
-            if ( result.code == 200 ) {
-                new Notify().Render( "保存成功！" );
-            } else new Notify().Render( "保存失败，请稍候再试！" );
-        }).fail( ( jqXHR, textStatus, error ) => {
-            console.error( jqXHR, textStatus, error );
-            notify.complete();
-            new Notify().Render( "保存失败，请稍候再试！" );
-        });
-    });
+        if ( type == "pocket" ) {
+            $.ajax({
+                url     : `http://localhost:3000/service/add`,
+                type    : "POST",
+                data    : {
+                    name  : "pocket",
+                    token : "68d4c6c6-7460-b8e3-96c5-7a176f",
+                    tags  : "temp",
+                    title : pr.html.title,
+                    url   : location.href
+                }
+            }).done( ( result, textStatus, jqXHR ) => {
+                console.log( result, textStatus, jqXHR )
+                notify.complete();
+                if ( result.code == 200 ) {
+                    new Notify().Render( "保存成功！" );
+                } else new Notify().Render( "保存失败，请稍候再试！" );
+            }).fail( ( jqXHR, textStatus, error ) => {
+                console.error( jqXHR, textStatus, error );
+                notify.complete();
+                new Notify().Render( "保存失败，请稍候再试！" );
+            });
+        } else if ( type == "evernote" ) {
+            $.ajax({
+                url     : `http://localhost:3000/evernote/add`,
+                type    : "POST",
+                headers : { sandbox: false, china: false, type: "evernote" },
+                data    : {
+                    token  : "S=s1:U=120a6:E=16739f21c19:C=15fe240ee38:P=81:A=wonle-9146:V=2:H=e95d8333616d0ec4946bbfca9e5b9c6d",
+                    title  : pr.html.title,
+                    content: pr.html.content,
+                }
+            }).done( ( result, textStatus, jqXHR ) => {
+                console.log( result, textStatus, jqXHR )
+                notify.complete();
+                if ( result.code == 200 ) {
+                    new Notify().Render( "保存成功！" );
+                } else new Notify().Render( "保存失败，请稍候再试！" );
+            }).fail( ( jqXHR, textStatus, error ) => {
+                console.error( jqXHR, textStatus, error );
+                notify.complete();
+                new Notify().Render( "保存失败，请稍候再试！" );
+            });
+        }
+    };
+    $( "sr-rd-crlbar fab.pocket"   ).click( clickEvent );
+    $( "sr-rd-crlbar fab.evernote" ).click( clickEvent );
 }
 
 /**

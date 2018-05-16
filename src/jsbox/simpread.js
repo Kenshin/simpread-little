@@ -202,9 +202,21 @@ function readMode( pr, puplugin, $ ) {
  * @param {object} pr object
  */
 function service( pr ) {
-    const clickEvent = event => {
-        const type   = event.target.className,
-              notify = new Notify().Render({ state: "loading", content: "保存中，请稍后！" });
+    const clickEvent  = event => {
+        const type    = event.target.className,
+              notify  = new Notify().Render({ state: "loading", content: "保存中，请稍后！" }),
+              success = ( result, textStatus, jqXHR ) => {
+                console.log( result, textStatus, jqXHR )
+                notify.complete();
+                if ( result.code == 200 ) {
+                    new Notify().Render( "保存成功！" );
+                } else new Notify().Render( "保存失败，请稍候再试！" );
+              },
+              failed  = ( jqXHR, textStatus, error ) => {
+                console.error( jqXHR, textStatus, error );
+                notify.complete();
+                new Notify().Render( "保存失败，请稍候再试！" );
+              };
         if ( type == "pocket" ) {
             $.ajax({
                 url     : `http://localhost:3000/service/add`,
@@ -216,17 +228,7 @@ function service( pr ) {
                     title : pr.html.title,
                     url   : location.href
                 }
-            }).done( ( result, textStatus, jqXHR ) => {
-                console.log( result, textStatus, jqXHR )
-                notify.complete();
-                if ( result.code == 200 ) {
-                    new Notify().Render( "保存成功！" );
-                } else new Notify().Render( "保存失败，请稍候再试！" );
-            }).fail( ( jqXHR, textStatus, error ) => {
-                console.error( jqXHR, textStatus, error );
-                notify.complete();
-                new Notify().Render( "保存失败，请稍候再试！" );
-            });
+            }).done( success ).fail( failed );
         } else if ( type == "evernote" ) {
             $.ajax({
                 url     : `http://localhost:3000/evernote/add`,
@@ -237,17 +239,7 @@ function service( pr ) {
                     title  : pr.html.title,
                     content: pr.html.content,
                 }
-            }).done( ( result, textStatus, jqXHR ) => {
-                console.log( result, textStatus, jqXHR )
-                notify.complete();
-                if ( result.code == 200 ) {
-                    new Notify().Render( "保存成功！" );
-                } else new Notify().Render( "保存失败，请稍候再试！" );
-            }).fail( ( jqXHR, textStatus, error ) => {
-                console.error( jqXHR, textStatus, error );
-                notify.complete();
-                new Notify().Render( "保存失败，请稍候再试！" );
-            });
+            }).done( success ).fail( failed );
         }
     };
     $( "sr-rd-crlbar fab.pocket"   ).click( clickEvent );

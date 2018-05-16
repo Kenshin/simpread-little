@@ -121,6 +121,29 @@ function service( pr ) {
             new Notify().Render( "保存失败，请稍候再试！" );
         });
     });
+    $( "sr-rd-crlbar fab.evernote" ).click( () => {
+        var notify = new Notify().Render({ state: "loading", content: "保存中，请稍后！" });
+        $.ajax({
+            url     : `http://localhost:3000/evernote/add`,
+            type    : "POST",
+            headers : { sandbox: false, china: false, type: "evernote" },
+            data    : {
+                token  : "S=s1:U=120a6:E=16739f21c19:C=15fe240ee38:P=81:A=wonle-9146:V=2:H=e95d8333616d0ec4946bbfca9e5b9c6d",
+                title  : pr.html.title,
+                content: pr.html.content,
+            }
+        }).done( ( result, textStatus, jqXHR ) => {
+            console.log( result, textStatus, jqXHR )
+            notify.complete();
+            if ( result.code == 200 ) {
+                new Notify().Render( "保存成功！" );
+            } else new Notify().Render( "保存失败，请稍候再试！" );
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error );
+            notify.complete();
+            new Notify().Render( "保存失败，请稍候再试！" );
+        });
+    });
 }
 
 /**
@@ -141,6 +164,7 @@ function readMode( pr, puplugin, $ ) {
                                 </sr-rd-footer-copywrite>
                                 </sr-rd-footer>
                             <sr-rd-crlbar>
+                                <fab class="evernote"></fab>
                                 <fab class="pocket"></fab>
                                 <fab class="crlbar-close"></fab>
                             </sr-rd-crlbar>

@@ -203,8 +203,8 @@ function readMode( pr, puplugin, $ ) {
  */
 function service( pr ) {
     const clickEvent = event => {
-        const type = event.target.className;
-        var notify = new Notify().Render({ state: "loading", content: "保存中，请稍后！" });
+        const type   = event.target.className,
+              notify = new Notify().Render({ state: "loading", content: "保存中，请稍后！" });
         if ( type == "pocket" ) {
             $.ajax({
                 url     : `http://localhost:3000/service/add`,

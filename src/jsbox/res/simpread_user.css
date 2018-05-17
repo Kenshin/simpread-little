@@ -96,8 +96,6 @@ sr-crlbar-group {
     width: 200px;
     height: 200px;
 
-    background-color: red;
-
     opacity: 0;
     transition: opacity .5s ease;
 }

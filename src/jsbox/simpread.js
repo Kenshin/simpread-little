@@ -86,10 +86,14 @@ function controlbar() {
         const next = $(window).scrollTop();
         if ( next > cur ) {
             $( "sr-rd-crlbar" ).css({ opacity: 0 });
+            $("sr-crlbar-group").css({ opacity: 0 });
         } else {
             $( "sr-rd-crlbar" ).css({ opacity: 1 });
         }
         cur = next;
+    });
+    $( ".simpread-read-root sr-rd-crlbar fab.anchor" ).on( "mouseenter", event => {
+        $("sr-crlbar-group").css({ opacity: 1, display: "block" });
     });
 }
 
@@ -111,9 +115,12 @@ function readMode( pr, puplugin, $ ) {
                                 </sr-rd-footer-copywrite>
                                 </sr-rd-footer>
                             <sr-rd-crlbar>
-                                <fab class="yinxiang"></fab>
-                                <fab class="evernote"></fab>
-                                <fab class="pocket"></fab>
+                                <sr-crlbar-group>
+                                    <fab class="yinxiang"></fab>
+                                    <fab class="evernote"></fab>
+                                    <fab class="pocket"></fab>
+                                </sr-crlbar-group>
+                                <fab class="anchor" style="opacity:1;"></fab>
                                 <fab class="crlbar-close"></fab>
                             </sr-rd-crlbar>
                         </sr-read>

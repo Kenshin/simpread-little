@@ -181,12 +181,14 @@ function readMode( pr, puplugin, $ ) {
     pr.Beautify( $( "sr-rd-content" ) );
     pr.Format( "simpread-read-root" );
 
-    setStyle( puplugin.Plugin( "style" ) );
-    controlbar();
-    service( pr );
+    setTimeout( ()=>{
+        setStyle( puplugin.Plugin( "style" ) );
+        controlbar();
+        service( pr );
+    }, 500 )
 
     // exit
-    $( ".simpread-read-root sr-rd-crlbar fab.crlbar-close" ).one( "click", event => {
+    $( ".simpread-read-root sr-rd-crlbar fab.crlbar-close" ).on( "click", event => {
         $( ".simpread-read-root" ).addClass( "simpread-read-root-hide" );
         $root.removeClass( "simpread-theme-root" )
              .removeClass( "simpread-font" );

@@ -85,6 +85,11 @@ sr-rd-crlbar fab.evernote {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABZUlEQVQ4T61UgVECQQzcrUA7QDuQCtQK1AqEDuhArcAS1ArUCoQKwA6wArCCdfYmB/z//cOrmQGeT7K3yW1CFEzSMYARgDsAfl4DmAIYk/Rzq7HukWSgJYCPQtYbgEW89wHfJPP/9LoCGGBPAC5bAEvMzNjMfdgWUNI1gElk+HfeVVrNtyA5rAO61EEEXgDw52AjmapNX5KcXOrZrwHNzr37i52SXP4bQ18kyWkGtNZWPeh9ArgH8AzgKPK2gNFHX3927sPOejwDYHXYGoAOutqH1OFvAFp7jx0JXzuyKoU1AE9irEplG8yjdnsww+ijQS0h6/J8J/mF5ChG0zH2u3+bwyvCbjtVkpOsAI/WWpLBBiRnMaqvkesl4bjqcui6EEmWSCo5s5GkyJmRTKPaWF8dbJ1s/U0s4GhRBnwgaV32BjTQTRxqiZm1bZj3Yh+GbcLflNuXoXtkrfqi8pp7jxZ4wyf7AYBGjBWE70biAAAAAElFTkSuQmCC);
 }
 
+sr-rd-crlbar fab.yinxiang {
+    bottom: 200px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUBAMAAAB/pwA+AAAAMFBMVEUAAAD///////////////////////////////////////////////////////////87TQQwAAAAEHRSTlMAgMBAMCDQEGCgkFCwcODwVvi/VAAAANJJREFUCNclir9LAlEAgL97711dHsE9DoqcrltaGszLmoSjH1vQq38hhKTlUXNgbW7i5uYt7g46q4g4O7iLo/g/eOLy8fHxgZsC/h5OXIy7vGYhCISM/E2yNgf9/RhWA4Quy4hxvdg4VLWYfluE95+/f71POKq/340K8+tyimOEwuu83K6BAig7xsIzT7gGgMv7beW01Y5bOMvqWYXAEuH5byf20ZCrryeZbQY3Oq96dZHKIKSBInJL8jwEHrKV7spZyAC4Oq45NZ18AX1dUvYnMTu0Nyqkt1vV7AAAAABJRU5ErkJggg==);
+}
+
 sr-rd-crlbar fab.about {
     bottom: 150px;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAeklEQVRIie3T0QmAIBDG8RuhEdwkR3CENmiE3KxRXKEN/r0oSJkvXaHgB/ckfD84OZFWAlhgTqNd7rnHDyAHXAFwakDfARZgu8wKTBrltrB7vU/+AzDA8RmQQf0f2gAeiw2wA6EAhPhm3gC1O0ix7QIR8bV5VT4iInICHxrcTgOet60AAAAASUVORK5CYII=);

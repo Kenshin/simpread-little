@@ -109,6 +109,7 @@ function readMode( pr, puplugin, $ ) {
                                 </sr-rd-footer-copywrite>
                                 </sr-rd-footer>
                             <sr-rd-crlbar>
+                                <fab class="yinxiang"></fab>
                                 <fab class="evernote"></fab>
                                 <fab class="pocket"></fab>
                                 <fab class="crlbar-close"></fab>
@@ -230,13 +231,14 @@ function service( pr ) {
                     url   : location.href
                 }
             }).done( success ).fail( failed );
-        } else if ( type == "evernote" ) {
+        } else if ( type == "evernote" || type == "yinxiang" ) {
+            const token = type == "evernote" ? "S=s1:U=120a6:E=16739f21c19:C=15fe240ee38:P=81:A=wonle-9146:V=2:H=e95d8333616d0ec4946bbfca9e5b9c6d" : "S=s9:U=3ac:E=167821898d9:C=1602a676b88:P=81:A=kenshin:V=2:H=8a35d28635df6c1a06ec0554b06b9347";
             $.ajax({
                 url     : `${server}/evernote/add`,
                 type    : "POST",
-                headers : { sandbox: false, china: false, type: "evernote" },
+                headers : { sandbox: false, china: type == "evernote" ? false : true, type },
                 data    : {
-                    token  : "S=s1:U=120a6:E=16739f21c19:C=15fe240ee38:P=81:A=wonle-9146:V=2:H=e95d8333616d0ec4946bbfca9e5b9c6d",
+                    token,
                     title  : pr.html.title,
                     content: pr.html.include,
                 }
@@ -245,4 +247,5 @@ function service( pr ) {
     };
     $( "sr-rd-crlbar fab.pocket"   ).click( clickEvent );
     $( "sr-rd-crlbar fab.evernote" ).click( clickEvent );
+    $( "sr-rd-crlbar fab.yinxiang" ).click( clickEvent );
 }

@@ -54,6 +54,7 @@ sr-rd-crlbar fab.not-adapter {
 }
 
 sr-rd-crlbar fab.setting,
+sr-rd-crlbar fab.anchor,
 sr-rd-crlbar fab.about,
 sr-rd-crlbar fab.pocket,
 sr-rd-crlbar fab.evernote,
@@ -76,6 +77,11 @@ sr-rd-crlbar fab.yinxiang {
 
     opacity: 0;
     transition: opacity .5s ease;
+}
+
+sr-rd-crlbar fab.anchor {
+    bottom: 100px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAANElEQVQ4T+3GMQ0AIAwAMAwSEvwLACai3HtmAHq1te8xpnCM6okAu3rigFU9MWxLr/695AI0E1VgH26hCQAAAABJRU5ErkJggg==);
 }
 
 sr-rd-crlbar fab.pocket {

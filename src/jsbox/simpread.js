@@ -185,18 +185,24 @@ function readMode( pr, puplugin, $ ) {
         setStyle( puplugin.Plugin( "style" ) );
         controlbar();
         service( pr );
-    }, 500 )
+        close( $root );
+    }, 500 );
+}
 
-    // exit
+/**
+ * Close
+ * 
+ * @param {jquery} root jquery object
+ */
+function close( $root ) {
     $( ".simpread-read-root sr-rd-crlbar fab.crlbar-close" ).on( "click", event => {
         $( ".simpread-read-root" ).addClass( "simpread-read-root-hide" );
         $root.removeClass( "simpread-theme-root" )
-             .removeClass( "simpread-font" );
+            .removeClass( "simpread-font" );
         if ( $root.attr("style") ) $root.attr( "style", $root.attr("style").replace( "font-size: 62.5%!important", "" ));
         $( "body" ).removeClass( "simpread-hidden" );
         $( ".simpread-read-root" ).remove();
     });
-
 }
 
 /**

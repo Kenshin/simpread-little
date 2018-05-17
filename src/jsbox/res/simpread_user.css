@@ -52,7 +52,8 @@ sr-rd-crlbar fab.not-adapter {
 sr-rd-crlbar fab.setting,
 sr-rd-crlbar fab.about,
 sr-rd-crlbar fab.pocket,
-sr-rd-crlbar fab.evernote {
+sr-rd-crlbar fab.evernote,
+sr-rd-crlbar fab.yinxiang {
     bottom: 100px;
     right: 33px;
 
@@ -86,6 +87,7 @@ sr-rd-crlbar fab.evernote {
 }
 
 sr-rd-crlbar fab.yinxiang {
+    opacity: 1;
     bottom: 200px;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUBAMAAAB/pwA+AAAAMFBMVEUAAAD///////////////////////////////////////////////////////////87TQQwAAAAEHRSTlMAgMBAMCDQEGCgkFCwcODwVvi/VAAAANJJREFUCNclir9LAlEAgL97711dHsE9DoqcrltaGszLmoSjH1vQq38hhKTlUXNgbW7i5uYt7g46q4g4O7iLo/g/eOLy8fHxgZsC/h5OXIy7vGYhCISM/E2yNgf9/RhWA4Quy4hxvdg4VLWYfluE95+/f71POKq/340K8+tyimOEwuu83K6BAig7xsIzT7gGgMv7beW01Y5bOMvqWYXAEuH5byf20ZCrryeZbQY3Oq96dZHKIKSBInJL8jwEHrKV7spZyAC4Oq45NZ18AX1dUvYnMTu0Nyqkt1vV7AAAAABJRU5ErkJggg==);
 }

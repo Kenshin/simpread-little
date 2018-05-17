@@ -1,3 +1,7 @@
+sr-rd-crlbar {
+    transition: all 450ms 0ms;
+}
+
 sr-rd-crlbar.controlbar {
     width: 100px;
     height: 200px;
@@ -75,19 +79,19 @@ sr-rd-crlbar fab.yinxiang {
 }
 
 sr-rd-crlbar fab.pocket {
-    opacity: 1;
+    opacity: 0;
     bottom: 100px;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABKElEQVQ4T72UYVEDMRCF36eAOgAUgAOKhCqAOsAB4IAqoHVQB4ACDgfFQVGwzLtJmNxNelw7hfy5mcvm2923L0FHXhyZpxYYERNJN5L83XdtgFU+lIHLBNwXluPngBk/Fb5KujqUJukRePhX4Iekix0Vf0naSjot9gcrXAB3EXEr6bkHNWwKNBHRFEkHgWtglqZfQkuY3fAu6Swl/FXDJTAvoE9FZYa9SLocarlmmxI6AbbJr32YuTNgXU65ppf3O9BKZbnIc2BTAt2Gf5xUJuvqF2lAZZs59A2Ydm5K0srGvD/A3NeAL0a7Oo9Dzwpj2K3FysA+0K072y5Tl2dXgLXvrOrzFRFu35lrmn56L091FDAHRYTF9iDy0BrfkiEt/uaBHaP+2JhvPYuFFTslm1gAAAAASUVORK5CYII=);
 }
 
 sr-rd-crlbar fab.evernote {
-    opacity: 1;
+    opacity: 0;
     bottom: 150px;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABZUlEQVQ4T61UgVECQQzcrUA7QDuQCtQK1AqEDuhArcAS1ArUCoQKwA6wArCCdfYmB/z//cOrmQGeT7K3yW1CFEzSMYARgDsAfl4DmAIYk/Rzq7HukWSgJYCPQtYbgEW89wHfJPP/9LoCGGBPAC5bAEvMzNjMfdgWUNI1gElk+HfeVVrNtyA5rAO61EEEXgDw52AjmapNX5KcXOrZrwHNzr37i52SXP4bQ18kyWkGtNZWPeh9ArgH8AzgKPK2gNFHX3927sPOejwDYHXYGoAOutqH1OFvAFp7jx0JXzuyKoU1AE9irEplG8yjdnsww+ijQS0h6/J8J/mF5ChG0zH2u3+bwyvCbjtVkpOsAI/WWpLBBiRnMaqvkesl4bjqcui6EEmWSCo5s5GkyJmRTKPaWF8dbJ1s/U0s4GhRBnwgaV32BjTQTRxqiZm1bZj3Yh+GbcLflNuXoXtkrfqi8pp7jxZ4wyf7AYBGjBWE70biAAAAAElFTkSuQmCC);
 }
 
 sr-rd-crlbar fab.yinxiang {
-    opacity: 1;
+    opacity: 0;
     bottom: 200px;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUBAMAAAB/pwA+AAAAMFBMVEUAAAD///////////////////////////////////////////////////////////87TQQwAAAAEHRSTlMAgMBAMCDQEGCgkFCwcODwVvi/VAAAANJJREFUCNclir9LAlEAgL97711dHsE9DoqcrltaGszLmoSjH1vQq38hhKTlUXNgbW7i5uYt7g46q4g4O7iLo/g/eOLy8fHxgZsC/h5OXIy7vGYhCISM/E2yNgf9/RhWA4Quy4hxvdg4VLWYfluE95+/f71POKq/340K8+tyimOEwuu83K6BAig7xsIzT7gGgMv7beW01Y5bOMvqWYXAEuH5byf20ZCrryeZbQY3Oq96dZHKIKSBInJL8jwEHrKV7spZyAC4Oq45NZ18AX1dUvYnMTu0Nyqkt1vV7AAAAABJRU5ErkJggg==);
 }

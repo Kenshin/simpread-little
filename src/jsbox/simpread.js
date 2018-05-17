@@ -17,6 +17,8 @@ const notif_style  = "https://raw.githubusercontent.com/kenshin/simpread-little/
       theme_gothic = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/jsbox/res/theme_gothic.css",
       theme_night  = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/jsbox/res/theme_night.css";
 
+const simpread_config = {};
+
 script.type        = "text/javascript";
 script.src         = script_src;
 script.onload      = () => {
@@ -83,9 +85,9 @@ function controlbar() {
     $( window ).scroll( event => {
         const next = $(window).scrollTop();
         if ( next > cur ) {
-            $( "fab" ).css({ opacity: 0 });
+            $( "sr-rd-crlbar" ).css({ opacity: 0 });
         } else {
-            $( "fab" ).css({ opacity: 1 });
+            $( "sr-rd-crlbar" ).css({ opacity: 1 });
         }
         cur = next;
     });
@@ -214,6 +216,7 @@ function service( pr ) {
     const clickEvent  = event => {
         const server  = "https://simpread.herokuapp.com", // http://192.168.199.130:3000
               type    = event.target.className,
+              token   = simpread_config.secret ? simpread_config.secret[type].access_token : "",
               notify  = new Notify().Render({ state: "loading", content: "保存中，请稍后！" }),
               success = ( result, textStatus, jqXHR ) => {
                 console.log( result, textStatus, jqXHR )
@@ -233,14 +236,13 @@ function service( pr ) {
                 type    : "POST",
                 data    : {
                     name  : "pocket",
-                    token : "68d4c6c6-7460-b8e3-96c5-7a176f",
+                    token,
                     tags  : "temp",
                     title : pr.html.title,
                     url   : location.href
                 }
             }).done( success ).fail( failed );
         } else if ( type == "evernote" || type == "yinxiang" ) {
-            const token = type == "evernote" ? "S=s1:U=120a6:E=16739f21c19:C=15fe240ee38:P=81:A=wonle-9146:V=2:H=e95d8333616d0ec4946bbfca9e5b9c6d" : "S=s9:U=3ac:E=167821898d9:C=1602a676b88:P=81:A=kenshin:V=2:H=8a35d28635df6c1a06ec0554b06b9347";
             $.ajax({
                 url     : `${server}/evernote/add`,
                 type    : "POST",
@@ -253,7 +255,7 @@ function service( pr ) {
             }).done( success ).fail( failed );
         }
     };
-    $( "sr-rd-crlbar fab.pocket"   ).click( clickEvent );
-    $( "sr-rd-crlbar fab.evernote" ).click( clickEvent );
-    $( "sr-rd-crlbar fab.yinxiang" ).click( clickEvent );
+    simpread_config.secret && simpread_config.secret.pocket   && $("sr-rd-crlbar fab.pocket").click(clickEvent)   && $("sr-rd-crlbar fab.pocket").css({ opacity: 1 });
+    simpread_config.secret && simpread_config.secret.evernote && $("sr-rd-crlbar fab.evernote").click(clickEvent) && $("sr-rd-crlbar fab.evernote").css({ opacity: 1 });
+    simpread_config.secret && simpread_config.secret.yinxiang && $("sr-rd-crlbar fab.yinxiang").click(clickEvent) && $("sr-rd-crlbar fab.yinxiang").css({ opacity: 1 });
 }

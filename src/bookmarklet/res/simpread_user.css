@@ -59,7 +59,8 @@ sr-rd-crlbar fab.about,
 sr-rd-crlbar fab.pocket,
 sr-rd-crlbar fab.evernote,
 sr-rd-crlbar fab.yinxiang,
-sr-rd-crlbar fab.dropbox {
+sr-rd-crlbar fab.dropbox,
+sr-rd-crlbar fab.bear {
     bottom: 100px;
     right: 33px;
 

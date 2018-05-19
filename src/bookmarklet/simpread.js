@@ -130,6 +130,7 @@ function readMode( pr, puplugin, $ ) {
                                 </sr-rd-footer>
                             <sr-rd-crlbar>
                                 <sr-crlbar-group>
+                                    <fab class="drafts"></fab>
                                     <fab class="bear"></fab>
                                     <fab class="dropbox"></fab>
                                     <fab class="yinxiang"></fab>
@@ -301,13 +302,18 @@ function service( pr ) {
                 processData : false,
                 contentType : false
             }).done( ( data, textStatus, jqXHR ) => success( {code:200, data}, textStatus, jqXHR )).fail( failed );
-        } else if ( type == "bear" ) {
+        } else if ( type == "bear" || type == "drafts" ) {
             const mdService = new TurndownService(),
-                  data      = mdService.turndown( clearMD( $("sr-rd-content").html() ));
+                  data      = mdService.turndown( clearMD( $("sr-rd-content").html() )),
+                  title     = encodeURIComponent( pr.html.title ),
+                  text      = encodeURIComponent( data ),
+                  bear      = `bear://x-callback-url/create?title=${title}&text=${text}&tags=simpread`,
+                  drafts    = `drafts4://x-callback-url/create?text=${encodeURIComponent( `# ${pr.html.title}\r\n\r\n` )}${text}`,
+                  name      = type == "bear" ? "Bear" : "Drafts";
             notify.complete();
-            new Notify().Render( "保存成功，2 秒后，将会提示打开 Bear" );
+            new Notify().Render( "保存成功，2 秒后，将会提示打开 " + name );
             setTimeout( ()=> {
-                window.location.href = `bear://x-callback-url/create?title=${encodeURIComponent(pr.html.title)}&text=${encodeURIComponent(data)}&tags=simpread`;
+                window.location.href = type == "bear" ? bear : drafts;
             }, 2000 );
         }
     };
@@ -315,7 +321,8 @@ function service( pr ) {
     simpread_config.secret && simpread_config.secret.evernote && $("sr-rd-crlbar fab.evernote").click(clickEvent) && $("sr-rd-crlbar fab.evernote").css({ opacity: 1 });
     simpread_config.secret && simpread_config.secret.yinxiang && $("sr-rd-crlbar fab.yinxiang").click(clickEvent) && $("sr-rd-crlbar fab.yinxiang").css({ opacity: 1 });
     simpread_config.secret && simpread_config.secret.yinxiang && $("sr-rd-crlbar fab.dropbox").click(clickEvent)  && $("sr-rd-crlbar fab.dropbox").css({ opacity: 1 });
-    platform() != "pc"     && $("sr-rd-crlbar fab.bear").click(clickEvent)     && $("sr-rd-crlbar fab.bear").css({ opacity: 1 });
+    platform() != "pc"     && $("sr-rd-crlbar fab.bear").click(clickEvent)   && $("sr-rd-crlbar fab.bear").css({ opacity: 1 });
+    platform() != "pc"     && $("sr-rd-crlbar fab.drafts").click(clickEvent) && $("sr-rd-crlbar fab.drafts").css({ opacity: 1 });
 }
 
 /**

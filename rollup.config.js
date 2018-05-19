@@ -43,10 +43,10 @@ export default [
         plugins,
     },
     {
-        input      : './src/jsbox/simpread.js',
+        input      : './src/bookmarklet/simpread.js',
         output     : {
             format : 'iife',
-            file   :  process.env.NODE_ENV === 'production' ? './dist/simpread.jsbox.min.js' : './dist/simpread.jsbox.js',
+            file   :  process.env.NODE_ENV === 'production' ? './dist/simpread.bookmarklet.min.js' : './dist/simpread.bookmarklet.js',
         },
         plugins,
     }

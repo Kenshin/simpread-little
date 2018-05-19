@@ -6,16 +6,16 @@ const script       = document.createElement( "script" ),
       notify_src   = "https://greasyfork.org/scripts/40236-notify/code/Notify.js",
       puplugin_src = "https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js",
       mduikit_src  = "https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js",
-      json         = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/jsbox/res/website_list_v3.json";
+      json         = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/website_list_v3.json";
 
-const notif_style  = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/jsbox/res/notify.css",
-      main_style   = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/jsbox/res/simpread.css",
-      user_style   = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/jsbox/res/simpread_user.css",
-      option_style = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/jsbox/res/option.css",
-      theme_common = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/jsbox/res/theme_common.css",
-      theme_pixyii = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/jsbox/res/theme_pixyii.css",
-      theme_gothic = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/jsbox/res/theme_gothic.css",
-      theme_night  = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/jsbox/res/theme_night.css";
+const notif_style  = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/notify.css",
+      main_style   = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/simpread.css",
+      user_style   = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/simpread_user.css",
+      option_style = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/option.css",
+      theme_common = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/theme_common.css",
+      theme_pixyii = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/theme_pixyii.css",
+      theme_gothic = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/theme_gothic.css",
+      theme_night  = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/theme_night.css";
 
 const simpread_config = {};
 

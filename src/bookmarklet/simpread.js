@@ -130,6 +130,7 @@ function readMode( pr, puplugin, $ ) {
                                 </sr-rd-footer>
                             <sr-rd-crlbar>
                                 <sr-crlbar-group>
+                                    <fab class="bear"></fab>
                                     <fab class="dropbox"></fab>
                                     <fab class="yinxiang"></fab>
                                     <fab class="evernote"></fab>
@@ -238,7 +239,7 @@ function service( pr ) {
     const clickEvent  = event => {
         const server  = "https://simpread.herokuapp.com", // http://192.168.199.130:3000
               type    = event.target.className,
-              token   = simpread_config.secret ? simpread_config.secret[type].access_token : "",
+              token   = simpread_config.secret && simpread_config.secret[type] ? simpread_config.secret[type].access_token : "",
               notify  = new Notify().Render({ state: "loading", content: "保存中，请稍后！" }),
               success = ( result, textStatus, jqXHR ) => {
                 console.log( result, textStatus, jqXHR )
@@ -300,12 +301,21 @@ function service( pr ) {
                 processData : false,
                 contentType : false
             }).done( ( data, textStatus, jqXHR ) => success( {code:200, data}, textStatus, jqXHR )).fail( failed );
+        } else if ( type == "bear" ) {
+            const mdService = new TurndownService(),
+                  data      = mdService.turndown( clearMD( $("sr-rd-content").html() ));
+            notify.complete();
+            new Notify().Render( "保存成功，2 秒后，将会提示打开 Bear" );
+            setTimeout( ()=> {
+                window.location.href = `bear://x-callback-url/create?title=${encodeURIComponent(pr.html.title)}&text=${encodeURIComponent(data)}&tags=simpread`;
+            }, 2000 );
         }
     };
     simpread_config.secret && simpread_config.secret.pocket   && $("sr-rd-crlbar fab.pocket").click(clickEvent)   && $("sr-rd-crlbar fab.pocket").css({ opacity: 1 });
     simpread_config.secret && simpread_config.secret.evernote && $("sr-rd-crlbar fab.evernote").click(clickEvent) && $("sr-rd-crlbar fab.evernote").css({ opacity: 1 });
     simpread_config.secret && simpread_config.secret.yinxiang && $("sr-rd-crlbar fab.yinxiang").click(clickEvent) && $("sr-rd-crlbar fab.yinxiang").css({ opacity: 1 });
     simpread_config.secret && simpread_config.secret.yinxiang && $("sr-rd-crlbar fab.dropbox").click(clickEvent)  && $("sr-rd-crlbar fab.dropbox").css({ opacity: 1 });
+    platform() != "pc"     && $("sr-rd-crlbar fab.bear").click(clickEvent)     && $("sr-rd-crlbar fab.bear").css({ opacity: 1 });
 }
 
 /**

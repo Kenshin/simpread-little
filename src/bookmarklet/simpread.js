@@ -17,7 +17,7 @@ const notif_style  = "https://raw.githubusercontent.com/kenshin/simpread-little/
       theme_gothic = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/theme_gothic.css",
       theme_night  = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/theme_night.css";
 
-const simpread_config = {};
+const simpread_config = {"secret":{"dropbox":{"access_token":"C3ItaGv086wAAAAAAAAC8WE6q0XMGnFoxscYu-W8uw2IMTXfZChtPznJBlgQ2tcY"},"evernote":{"access_token":"S=s1:U=120a6:E=16739f21c19:C=15fe240ee38:P=81:A=wonle-9146:V=2:H=e95d8333616d0ec4946bbfca9e5b9c6d"},"gdrive":{"access_token":"ya29.Gl19BXzA3rN5OL6XOXnuVbgHlFgh9Jqrf6SOKgxqdQnuKNfInSe3dEv6Vg7iOU6xdx1c0xc4TRd1r6ThjAT-EemV9f2vBowqjHu4hpKPZBcBsncIcmdmI2OQYO3k8F0","folder_id":"0B-i93Mu5AdsCWlNQOEI4TmlyOWc"},"instapaper":{"access_token":"0e3157396d364fc69ce07411610044ae","token_secret":"39ff98c241e74ab4ac93edb23e46dde0"},"linnk":{"access_token":"ZmY4MDgwODE1ZDU4MjliZjAxNWVjNjc2OTYyZjQzMTg=","group_name":"简悦-稍后读"},"onenote":{"access_token":"EwAQA61DBAAUcSSzoTJJsy+XrnQXgAKO5cj4yc8AAZ63IEORIxUlBHHsOGjDljvIfGV+v2P7eGlii3WmQ8ScT8YenmQ8HfY7WivMYGX/emlN5RI+1YQ8ShFmu7ocRaFPEt/CJBtkgpTACvXKwxXMhGjN7p2Ds+MzXaEAlQ6ZpwuvScthfX3EispMQTpmwjqt70bxfQAO2rStzyjy/xebVOzM++c/TEJmnXUnaeGPqWXAz7/txhbDu6YGFKjdlqxPxlvdKNLlmCQUNeYcPtYUn59A4CCTmB83bww3QecRXkrMXwAQlOvPhfa2F2TlfMGMrlAaukW4BmbhfuyNa5i0Llksud0LiXa8+gYLOLn0lavXfiXHhyQMR4RUsAquviIDZgAACDfVv6SSopQN4AFkmfHgjbge+9nPqFQRC/K91I15JHnHBdtDcdU2BuGsyO7siN9ZpCP5B/qBYMW1iLvY2W/hOB7BIT4XUTj2EKVsrGEl08K3Zf/ZNowmGe7KhQXeZ+hCz8Jhfa1bt7JK6Ip3JHaz48Gfd63mVTn0HHAUXTy7SSQUrAiBuo0xiyYEHNTKNiOaUIX5vgREOh6gXyBFJQ/6KwoVp/TjWjWXnnD1EX+cL1uf1VayDCpLpV0j0uuksz4qGCCn8maLuM556VkQ02AAK0OXn4NZa8daAvi2RwUjgvPGiuKWTQsqU+7py/7eVvuQcyAl1YxdXcxYROOS3VQfIzD6XDpRKmiuits/YMmb14V79LvzTc8sklelIRWEh3OrbW6ANPlc3AwxVDWZuOLCAL/q1RCOGXHDnO0gg+x7IrwkdU6aJVixSU+Yd/COjbosFd1w0gSjQRs+wqvfpp0V4n6Ij7/THikbLsjExwpbs9VOvbYCWEZRxUmf2MaHClEZFxjuKTuCipNfvOgZ16KJdxjq4uVbMizivoxzjdsHZiglTacaE6QmQrw7ri84MjKv512lHt+qbzO+DEAT7SflfMeZ307CHmufdp4Oc6w1yG+9yYEr/uxMS2FfX15Xs2Q35rrurkpi1OvU9FAOAg=="},"pocket":{"access_token":"68d4c6c6-7460-b8e3-96c5-7a176f","tags":"temp"},"version":"2017-11-22","yinxiang":{"access_token":"S=s9:U=3ac:E=167821898d9:C=1602a676b88:P=81:A=kenshin:V=2:H=8a35d28635df6c1a06ec0554b06b9347"}}};
 
 script.type        = "text/javascript";
 script.src         = script_src;
@@ -257,7 +257,7 @@ function service( pr ) {
                 data    : {
                     token,
                     title  : pr.html.title,
-                    content: pr.html.include,
+                    content: html2enml( $("sr-rd-content").html(), pr.org_url ),
                 }
             }).done( success ).fail( failed );
         }
@@ -265,4 +265,53 @@ function service( pr ) {
     simpread_config.secret && simpread_config.secret.pocket   && $("sr-rd-crlbar fab.pocket").click(clickEvent)   && $("sr-rd-crlbar fab.pocket").css({ opacity: 1 });
     simpread_config.secret && simpread_config.secret.evernote && $("sr-rd-crlbar fab.evernote").click(clickEvent) && $("sr-rd-crlbar fab.evernote").css({ opacity: 1 });
     simpread_config.secret && simpread_config.secret.yinxiang && $("sr-rd-crlbar fab.yinxiang").click(clickEvent) && $("sr-rd-crlbar fab.yinxiang").css({ opacity: 1 });
+}
+
+/**
+ * Html convert to enml( from simpread util.HTML2ENML )
+ * 
+ * @param  {string} convert string
+ * @param  {string} url
+ * 
+ * @return {string} convert string
+ */
+function html2enml( html, url ) {
+    let $target, str;
+    const tags = [ "figure", "sup", "hr", "section", "applet", "base", "basefont", "bgsound", "blink", "body", "button", "dir", "embed", "fieldset", "form", "frame", "frameset", "head", "html", "iframe", "ilayer", "input", "isindex", "label", "layer", "legend", "link", "marquee", "menu", "meta", "noframes", "noscript", "object", "optgroup", "option", "param", "plaintext", "script", "select", "style", "textarea", "xml" ];
+    
+    $( "html" ).append( `<div id="simpread-en" style="display: none;">${html}</div>` );
+    $target = $( "#simpread-en" );
+    $target.find( "img:not(.sr-rd-content-nobeautify)" ).map( ( index, item ) => {
+        $( "<div>" ).attr( "style", `width: ${item.naturalWidth}px; height:${item.naturalHeight}px; background: url(${item.src})` )
+        .replaceAll( $(item) );
+    });
+    $target.find( tags.join( "," ) ).map( ( index, item ) => {
+        $( "<div>" ).html( $(item).html() ).replaceAll( $(item) );
+    });
+    $target.find( tags.join( "," ) ).remove();
+    str = $target.html();
+    $target.remove();
+
+    try {
+        str = `<blockquote>本文由 <a href="http://ksria.com/simpread" target="_blank">简悦 SimpRead</a> 转码，原文地址 <a href="${url}" target="_blank">${url}</a></blockquote><hr></hr><br></br>` + str;
+        str = str.replace( /(id|class|onclick|ondblclick|accesskey|data|dynsrc|tabindex)="[\w- ]+"/g, "" )
+                //.replace( / style=[ \w="-:\/\/:#;]+/ig, "" )             // style="xxxx"
+                .replace( /label=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )  // label="xxxx"
+                .replace( / finallycleanhtml=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )  // finallycleanhtml="xxxx"
+                .replace( /<img[ \w="-:\/\/?!]+>/ig, "" )                  // <img>
+                .replace( /data[-\w]*=[ \w=\-.:\/\/?!;+"]+"[ ]?/ig, "" )   // data="xxx" || data-xxx="xxx"
+                .replace( /href="javascript:[\w()"]+/ig, "" )              // href="javascript:xxx"
+                .replace( /sr-blockquote/ig, "blockquote" )                // sr-blockquote to blockquote
+                .replace( /<p[ -\w*= \w=\-.:\/\/?!;+"]*>/ig, "" )          // <p> || <p > || <p xxx="xxx">
+                .replace( /<figcaption[ -\w*= \w=\-.:\/\/?!;+"]*>/ig, "" ) // <figcaption >
+                .replace( /<\/figcaption>/ig, "" )                         // </figcaption>
+                .replace( /<\/br>/ig, "" )                                 // </br>
+                .replace( /<br>/ig, "<br></br>" )
+                .replace( /<\/p>/ig, "<br></br>" );
+
+        return str;
+
+    } catch( error ) {
+        return `<div>转换失败，原文地址 <a href="${url}" target="_blank">${url}</a></div>`
+    }
 }

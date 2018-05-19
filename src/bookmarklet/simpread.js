@@ -2,6 +2,7 @@
 const script       = document.createElement( "script" ),
       script_src   = "https://cdn.bootcss.com/script.js/2.5.8/script.min.js",
       jq_src       = "https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js",
+      turndown_src = "https://unpkg.com/turndown@4.0.2/dist/turndown.js",
       puread_src   = "https://greasyfork.org/scripts/39995-pureread/code/PureRead.js",
       notify_src   = "https://greasyfork.org/scripts/40236-notify/code/Notify.js",
       puplugin_src = "https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js",
@@ -28,7 +29,7 @@ script.onload      = () => {
         $.get( option_style, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
         $.get( user_style,   result => { $("head").append( `<style type="text/css">${result}</style>` ) });
         $.get( theme_common, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
-        $script( [ puread_src, notify_src, puplugin_src, mduikit_src ], "bundle" );
+        $script( [ puread_src, notify_src, puplugin_src, mduikit_src, turndown_src ], "bundle" );
         $script.ready( "bundle", () => {
             $.getJSON( json, result => {
                 const pr = new PureRead();
@@ -116,6 +117,7 @@ function readMode( pr, puplugin, $ ) {
                                 </sr-rd-footer>
                             <sr-rd-crlbar>
                                 <sr-crlbar-group>
+                                    <fab class="dropbox"></fab>
                                     <fab class="yinxiang"></fab>
                                     <fab class="evernote"></fab>
                                     <fab class="pocket"></fab>
@@ -260,11 +262,37 @@ function service( pr ) {
                     content: html2enml( $("sr-rd-content").html(), pr.org_url ),
                 }
             }).done( success ).fail( failed );
+        } else if ( type == "dropbox" ) {
+            const mdService = new TurndownService(),
+                  data      = mdService.turndown( clearMD( $("sr-rd-content").html() )),
+                  path      = "md/",
+                  name      = pr.html.title + ".md",
+                  safename  = data => data.replace( /\//ig, "" ),
+                  args      = { path: `/${path}${safename(name)}`, mode: "overwrite" },
+                  safejson  = args => {
+                    const charsToEncode = /[\u007f-\uffff]/g;
+                    return JSON.stringify(args).replace( charsToEncode, c => {
+                        return '\\u' + ( '000' + c.charCodeAt(0).toString(16)).slice(-4);
+                    });
+                  };
+            $.ajax({
+                url     : "https://content.dropboxapi.com/2/files/upload",
+                type    : "POST",
+                data    : data,
+                headers : {
+                    "Authorization"   : `Bearer ${token}`,
+                    "Dropbox-API-Arg" : safejson( args ),
+                    "Content-Type"    : "application/octet-stream"
+                },
+                processData : false,
+                contentType : false
+            }).done( ( data, textStatus, jqXHR ) => success( {code:200, data}, textStatus, jqXHR )).fail( failed );
         }
     };
     simpread_config.secret && simpread_config.secret.pocket   && $("sr-rd-crlbar fab.pocket").click(clickEvent)   && $("sr-rd-crlbar fab.pocket").css({ opacity: 1 });
     simpread_config.secret && simpread_config.secret.evernote && $("sr-rd-crlbar fab.evernote").click(clickEvent) && $("sr-rd-crlbar fab.evernote").css({ opacity: 1 });
     simpread_config.secret && simpread_config.secret.yinxiang && $("sr-rd-crlbar fab.yinxiang").click(clickEvent) && $("sr-rd-crlbar fab.yinxiang").css({ opacity: 1 });
+    simpread_config.secret && simpread_config.secret.yinxiang && $("sr-rd-crlbar fab.dropbox").click(clickEvent)  && $("sr-rd-crlbar fab.dropbox").css({ opacity: 1 });
 }
 
 /**
@@ -314,4 +342,18 @@ function html2enml( html, url ) {
     } catch( error ) {
         return `<div>转换失败，原文地址 <a href="${url}" target="_blank">${url}</a></div>`
     }
+}
+
+/**
+ * Clear Html to MD, erorr <tag>( from simpread util.HTML2ENML )
+ * 
+ * @param {string} convert string
+ */
+function clearMD( str ) {
+    str = `<blockquote><p>本文由 <a href="http://ksria.com/simpread/" target="_blank">简悦 SimpRead</a> 转码， 原文地址 <a href="${window.location.href}" target="_blank">${window.location.href}</a></p></blockquote>\r\n\r\n ${str}`;
+    str = str.replace( /<\/?(ins|font|span|div|canvas|noscript|fig\w+)[ -\w*= \w=\-.:&\/\/?!;,%+()#'"{}\u4e00-\u9fa5]*>/ig, "" )
+             .replace( /sr-blockquote/ig, "blockquote" )
+             .replace( /<\/?style[ -\w*= \w=\-.:&\/\/?!;,+()#"\S]*>/ig, "" )
+             .replace( /(name|lable)=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )
+    return str;
 }

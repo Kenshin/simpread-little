@@ -53,11 +53,24 @@ document.body.appendChild( script );
  * @return {string} ipad and iphone
  */
 function userAgent() {
-    const ua = navigator.userAgent.toLowerCase();
-    if ( ua.match( /iphone/i ) == "iphone" ) {
+    if ( /iphone|android/i.test( navigator.userAgent ) ) {
         return "iphone";
     } else {
         return "ipad";
+    }
+}
+
+/**
+ * Platform
+ * 
+ * @return {string} pc and mobile
+ */
+function platform() {
+    if ( /win|mac/i.test( navigator.platform ) ) {
+        return "pc";
+    }
+    else {
+        return "mobile";
     }
 }
 

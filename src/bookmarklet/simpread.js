@@ -313,6 +313,7 @@ function service( pr ) {
             notify.complete();
             new Notify().Render( "保存成功，2 秒后，将会提示打开 " + name );
             setTimeout( ()=> {
+                $notify && $notify( "open", {"url": type == "bear" ? bear : drafts });
                 window.location.href = type == "bear" ? bear : drafts;
             }, 2000 );
         }

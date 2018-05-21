@@ -422,7 +422,7 @@
         "url"     : "http*://www.appinn.com/*/",
         "title"   : "[[{$('.entry-title').text()||$('.post-title').text()}]]",
         "desc"    : "",
-        "include" : "[[{$('.entry-content').html()||$('.content-area').html()}]]",
+        "include" : "[[{$('.entry-content').html()||$('#content-area').html()}]]",
         "exclude" : [
             "<div class='open_social_box'>",
             "<div class='os-share-box'>",

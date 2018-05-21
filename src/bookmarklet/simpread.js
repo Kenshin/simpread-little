@@ -89,6 +89,12 @@ function setStyle( style ) {
         style.Layout( "10%" );
         $.get( theme_pixyii, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
     }
+
+    const maxWidth = $(document).width(),
+          width    = $("sr-read").width();
+    if ( width >= maxWidth ) {
+        $("sr-read").css({ "min-width": maxWidth - 20 + "px" });
+    }
 }
 
 /**

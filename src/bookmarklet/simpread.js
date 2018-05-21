@@ -7,7 +7,7 @@ const script       = document.createElement( "script" ),
       notify_src   = "https://greasyfork.org/scripts/40236-notify/code/Notify.js",
       puplugin_src = "https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js",
       mduikit_src  = "https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js",
-      json         = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/website_list_v3.json";
+      json         = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/website_list_v4.json";
 
 const notif_style  = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/notify.css",
       main_style   = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/simpread.css",

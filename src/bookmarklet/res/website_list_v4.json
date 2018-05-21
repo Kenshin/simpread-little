@@ -72,7 +72,13 @@
         "desc"    : "",
         "include" : "<article>",
         "exclude" : [
-            ""
+            "<div class='entry-header'>",
+            "<div class='entry-meta'>",
+            "<a class='entry-comment-number'>",
+            "<div class='article-header'>",
+            "<div class='article-jiong-banner'>",
+            "<div class='popup'>",
+            "<div class='article-sns-tool'>"
         ]
     },{
         "name"    : "minapp.ifanr.com",
@@ -83,6 +89,13 @@
         "exclude" : [
             "[['<span>本文由知晓程序授权转载</span>']]",
             "[[/src=\\S+(new_zx-1)\\S+'/]]",
+            "<div class='entry-header'>",
+            "<div class='entry-meta'>",
+            "<a class='entry-comment-number'>",
+            "<div class='article-header'>",
+            "<div class='article-jiong-banner'>",
+            "<div class='popup'>",
+            "<div class='article-sns-tool'>",
             "[[/src=\\S+(zxcx-qun-1)\\S+'/]]"
         ]
     },{
@@ -96,6 +109,13 @@
             "[['<strong>本文由让手机更好用</strong>']]",
             "[[/src=\\S+(AppSo-qrcode-signature)\\S+'/]]",
             "[['<strong>▽</strong>']]",
+            "<div class='entry-header'>",
+            "<div class='entry-meta'>",
+            "<a class='entry-comment-number'>",
+            "<div class='article-header'>",
+            "<div class='article-jiong-banner'>",
+            "<div class='popup'>",
+            "<div class='article-sns-tool'>",
             "[[/src=\\S+(banner2)\\S+'/]]"
         ]
     },{
@@ -400,9 +420,9 @@
     },{
         "name"    : "appinn.com",
         "url"     : "http*://www.appinn.com/*/",
-        "title"   : "<h2 class='entry-title'>",
+        "title"   : "[[{$('.entry-title').text()||$('.post-title').text()}]]",
         "desc"    : "",
-        "include" : "<div class='entry-content'>",
+        "include" : "[[{$('.entry-content').html()||$('.content-area').html()}]]",
         "exclude" : [
             "<div class='open_social_box'>",
             "<div class='os-share-box'>",
@@ -953,7 +973,7 @@
         "url"     : "http*://blog.csdn.net/*/article/details/*",
         "title"   : "<title>",
         "desc"    : "",
-        "include" : "<div id='article_content'>",
+        "include" : "<div class='article_content'>",
         "exclude" : [
             ""
         ]

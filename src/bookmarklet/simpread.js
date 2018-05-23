@@ -82,7 +82,7 @@ function platform() {
 function setStyle( style ) {
     if ( userAgent() == "iphone" ) {
         style.FontSize( "62.5%" );
-        $("sr-read").css({ "padding": "0 50px" });
+        //$("sr-read").css({ "padding": "0 50px" });
         $.get( theme_gothic, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
     } else {
         style.FontSize( "72%" );

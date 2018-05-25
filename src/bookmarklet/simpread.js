@@ -18,7 +18,7 @@ const notif_style  = "https://raw.githubusercontent.com/kenshin/simpread-little/
       theme_gothic = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/theme_gothic.css",
       theme_night  = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/theme_night.css";
 
-const simpread_config = {"secret":{"dropbox":{"access_token":"C3ItaGv086wAAAAAAAAC8WE6q0XMGnFoxscYu-W8uw2IMTXfZChtPznJBlgQ2tcY"},"evernote":{"access_token":"S=s1:U=120a6:E=16739f21c19:C=15fe240ee38:P=81:A=wonle-9146:V=2:H=e95d8333616d0ec4946bbfca9e5b9c6d"},"gdrive":{"access_token":"ya29.Gl19BXzA3rN5OL6XOXnuVbgHlFgh9Jqrf6SOKgxqdQnuKNfInSe3dEv6Vg7iOU6xdx1c0xc4TRd1r6ThjAT-EemV9f2vBowqjHu4hpKPZBcBsncIcmdmI2OQYO3k8F0","folder_id":"0B-i93Mu5AdsCWlNQOEI4TmlyOWc"},"instapaper":{"access_token":"0e3157396d364fc69ce07411610044ae","token_secret":"39ff98c241e74ab4ac93edb23e46dde0"},"linnk":{"access_token":"ZmY4MDgwODE1ZDU4MjliZjAxNWVjNjc2OTYyZjQzMTg=","group_name":"简悦-稍后读"},"onenote":{"access_token":"EwAQA61DBAAUcSSzoTJJsy+XrnQXgAKO5cj4yc8AAZ63IEORIxUlBHHsOGjDljvIfGV+v2P7eGlii3WmQ8ScT8YenmQ8HfY7WivMYGX/emlN5RI+1YQ8ShFmu7ocRaFPEt/CJBtkgpTACvXKwxXMhGjN7p2Ds+MzXaEAlQ6ZpwuvScthfX3EispMQTpmwjqt70bxfQAO2rStzyjy/xebVOzM++c/TEJmnXUnaeGPqWXAz7/txhbDu6YGFKjdlqxPxlvdKNLlmCQUNeYcPtYUn59A4CCTmB83bww3QecRXkrMXwAQlOvPhfa2F2TlfMGMrlAaukW4BmbhfuyNa5i0Llksud0LiXa8+gYLOLn0lavXfiXHhyQMR4RUsAquviIDZgAACDfVv6SSopQN4AFkmfHgjbge+9nPqFQRC/K91I15JHnHBdtDcdU2BuGsyO7siN9ZpCP5B/qBYMW1iLvY2W/hOB7BIT4XUTj2EKVsrGEl08K3Zf/ZNowmGe7KhQXeZ+hCz8Jhfa1bt7JK6Ip3JHaz48Gfd63mVTn0HHAUXTy7SSQUrAiBuo0xiyYEHNTKNiOaUIX5vgREOh6gXyBFJQ/6KwoVp/TjWjWXnnD1EX+cL1uf1VayDCpLpV0j0uuksz4qGCCn8maLuM556VkQ02AAK0OXn4NZa8daAvi2RwUjgvPGiuKWTQsqU+7py/7eVvuQcyAl1YxdXcxYROOS3VQfIzD6XDpRKmiuits/YMmb14V79LvzTc8sklelIRWEh3OrbW6ANPlc3AwxVDWZuOLCAL/q1RCOGXHDnO0gg+x7IrwkdU6aJVixSU+Yd/COjbosFd1w0gSjQRs+wqvfpp0V4n6Ij7/THikbLsjExwpbs9VOvbYCWEZRxUmf2MaHClEZFxjuKTuCipNfvOgZ16KJdxjq4uVbMizivoxzjdsHZiglTacaE6QmQrw7ri84MjKv512lHt+qbzO+DEAT7SflfMeZ307CHmufdp4Oc6w1yG+9yYEr/uxMS2FfX15Xs2Q35rrurkpi1OvU9FAOAg=="},"pocket":{"access_token":"68d4c6c6-7460-b8e3-96c5-7a176f","tags":"temp"},"version":"2017-11-22","yinxiang":{"access_token":"S=s9:U=3ac:E=167821898d9:C=1602a676b88:P=81:A=kenshin:V=2:H=8a35d28635df6c1a06ec0554b06b9347"}}};
+const simpread_config = {};
 
 script.type        = "text/javascript";
 script.src         = script_src;
@@ -324,10 +324,10 @@ function service( pr ) {
             }, 2000 );
         }
     };
-    simpread_config.secret && simpread_config.secret.pocket   && $("sr-rd-crlbar fab.pocket").click(clickEvent)   && $("sr-rd-crlbar fab.pocket").css({ opacity: 1 });
-    simpread_config.secret && simpread_config.secret.evernote && $("sr-rd-crlbar fab.evernote").click(clickEvent) && $("sr-rd-crlbar fab.evernote").css({ opacity: 1 });
-    simpread_config.secret && simpread_config.secret.yinxiang && $("sr-rd-crlbar fab.yinxiang").click(clickEvent) && $("sr-rd-crlbar fab.yinxiang").css({ opacity: 1 });
-    simpread_config.secret && simpread_config.secret.yinxiang && $("sr-rd-crlbar fab.dropbox").click(clickEvent)  && $("sr-rd-crlbar fab.dropbox").css({ opacity: 1 });
+    simpread_config.secret && simpread_config.secret.pocket   && $("sr-rd-crlbar fab.pocket").click(clickEvent)   && $("sr-rd-crlbar fab.pocket").css({ opacity: 1, "background-color": "rgb(3, 169, 244)" });
+    simpread_config.secret && simpread_config.secret.evernote && $("sr-rd-crlbar fab.evernote").click(clickEvent) && $("sr-rd-crlbar fab.evernote").css({ opacity: 1, "background-color": "rgb(3, 169, 244)" });
+    simpread_config.secret && simpread_config.secret.yinxiang && $("sr-rd-crlbar fab.yinxiang").click(clickEvent) && $("sr-rd-crlbar fab.yinxiang").css({ opacity: 1, "background-color": "rgb(3, 169, 244)" });
+    simpread_config.secret && simpread_config.secret.yinxiang && $("sr-rd-crlbar fab.dropbox").click(clickEvent)  && $("sr-rd-crlbar fab.dropbox").css({ opacity: 1, "background-color": "rgb(3, 169, 244)" });
     platform() != "pc"     && $("sr-rd-crlbar fab.bear").click(clickEvent)   && $("sr-rd-crlbar fab.bear").css({ opacity: 1 });
     platform() != "pc"     && $("sr-rd-crlbar fab.drafts").click(clickEvent) && $("sr-rd-crlbar fab.drafts").css({ opacity: 1 });
 }

@@ -288,7 +288,7 @@
     },{
         "name"    : "mp.weixin.qq.com",
         "url"     : "http://mp.weixin.qq.com/*",
-        "title"   : "<h2 id='activity-name'>",
+        "title"   : "[[{$('.rich_media_title_ios').text()||document.getElementById('activity-name').lastChild.data}]]",
         "desc"    : "",
         "include" : "<div id='js_content'>",
         "exclude" : [

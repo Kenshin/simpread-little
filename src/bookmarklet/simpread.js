@@ -260,7 +260,11 @@ function service( pr ) {
                 console.error( jqXHR, textStatus, error );
                 notify.complete();
                 new Notify().Render( "保存失败，请稍候再试！" );
-              };
+              },
+              markdown = () => {
+                const mdService = new TurndownService();
+                return mdService.turndown( clearMD( $("sr-rd-content").html() ));
+              }
         if ( type == "pocket" ) {
             $.ajax({
                 url     : `${server}/service/add`,
@@ -285,8 +289,7 @@ function service( pr ) {
                 }
             }).done( success ).fail( failed );
         } else if ( type == "dropbox" ) {
-            const mdService = new TurndownService(),
-                  data      = mdService.turndown( clearMD( $("sr-rd-content").html() )),
+            const data      = markdown(),
                   path      = "md/",
                   name      = pr.html.title + ".md",
                   safename  = data => data.replace( /\//ig, "" ),
@@ -310,8 +313,7 @@ function service( pr ) {
                 contentType : false
             }).done( ( data, textStatus, jqXHR ) => success( {code:200, data}, textStatus, jqXHR )).fail( failed );
         } else if ( type == "bear" || type == "drafts" ) {
-            const mdService = new TurndownService(),
-                  data      = mdService.turndown( clearMD( $("sr-rd-content").html() )),
+            const data      = markdown(),
                   title     = encodeURIComponent( pr.html.title ),
                   text      = encodeURIComponent( data ),
                   bear      = `bear://x-callback-url/create?title=${title}&text=${text}&tags=simpread`,
@@ -324,9 +326,13 @@ function service( pr ) {
                 window.location.href = type == "bear" ? bear : drafts;
             }, 2000 );
         } else if ( type == "markdown" ) {
-            const mdService = new TurndownService(),
-                  data      = mdService.turndown( clearMD( $("sr-rd-content").html() ));
-            $clipboard && $clipboard.text( data );
+            try {
+                notify.complete();
+                $notify && $notify( "clipboard", { string: markdown() });
+                new Notify().Render("已成功复制到剪切板！");
+            } catch ( error ) {
+                new Notify().Render( "此功能只能在「阅读器」中使用。" );
+            }
         }
     };
     simpread_config.secret && simpread_config.secret.pocket   && $("sr-rd-crlbar fab.pocket").click(clickEvent)   && $("sr-rd-crlbar fab.pocket").css({ opacity: 1, "background-color": "rgb(3, 169, 244)" });

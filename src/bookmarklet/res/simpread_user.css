@@ -73,7 +73,7 @@ sr-crlbar-group {
     flex-direction: column;
 
     right: 33px;
-    bottom: 180px;
+    bottom: 150px;
 
     opacity: 0;
     transition: opacity .5s ease;
@@ -97,6 +97,7 @@ sr-rd-crlbar fab.dropbox {
 
 sr-rd-crlbar fab.markdown {
     opacity: 0;
+    background-color: rgba(245, 82, 70, 1);
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABPUlEQVRYR+1VwVHDQAzcrYB0EqgA0kE6gHRECUklQAdJB9ABVCBmPbob2XfK5OPJ5+7lOcnSerVaE3c+vHN/DACDgcHAYKAyYGYbAFs3ph+S35lJmdkLAFOc5Ncyz8weATyE+wvJ3169CEBFPzxJyTuS507xI4DXck+yGaOZfQJ4Du+qlu6akwFQYgPCzGbNnYHVAMxA9JqvCeAS9CAmRN8+8PdXZrzWCHYA3uKsQ/ODx6YZrwZAounQfiB5jCIrALIRdXT3FMWdibCqNhSemqtgD4DfNyJdAKg16haVB9/tsoaztVEsrlEGwEFodYufxP5N82mEtwDoeEHd86UG3NAUjyBOJKWpm30gNY5rIwgfI1eVk8oN0+ZLBvSSLFTnnFmnA1Ce8rUFXYdzO34nKYdNz/gbDgYGA4OBwcA/0We1IQQPM9YAAAAASUVORK5CYII=);
 }
 

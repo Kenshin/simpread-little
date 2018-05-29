@@ -3,17 +3,7 @@ sr-rd-crlbar {
 }
 
 sr-rd-crlbar fab {
-    /*position: fixed;*/
     display: block;
-
-    /*bottom: 45px;
-    right: 24px;*/
-
-    /*font-size: 15px;
-    text-align: center;*/
-
-    /*color: #fff;
-    background-color: rgb(76, 175, 80);*/
 
     background-position: center;
     background-repeat: no-repeat;
@@ -33,8 +23,6 @@ sr-rd-crlbar fab.crlbar-close {
     line-height: 56px;
 
     background-color: rgba(244, 67, 54, 1);
-    /*background-position: center;
-    background-repeat: no-repeat;*/
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAdklEQVQ4y+WTuQ3AIBAEaQKK8NN/BEUArmccgGyj43MMIZo5TqtFqbUPJxYtbg2OvS44IJQKhguwdUETSiXjXr77KhGICRjihWKm8Dw3KXP4Z5VZ/Lfw7B5kyD1cy5C7uAx5iJcht6vhRTUi4OrC0Szftvi/vAFNdbZ2Dp661QAAAABJRU5ErkJggg==);
 
     transform: rotate(0deg);
@@ -48,7 +36,6 @@ sr-rd-crlbar fab.crlbar-close:hover {
 
 sr-rd-crlbar fab.anchor {
     position: fixed;
-    /*opacity: 1;*/
     right: 33px;
     bottom: 100px;
     background-color: rgba(245, 82, 70, .8);
@@ -63,25 +50,12 @@ sr-rd-crlbar fab.dropbox,
 sr-rd-crlbar fab.markdown,
 sr-rd-crlbar fab.drafts,
 sr-rd-crlbar fab.bear {
-    /*bottom: 100px;
-    right: 33px;*/
-
     margin-bottom: 10px;
 
     width: 40px;
     height: 40px;
     line-height: 40px;
 
-    /*font-size: 10px;*/
-
-    /*
-    background-color: rgb(3, 169, 244);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABvUlEQVRIS72WjVFCQQyENxVoB2oF2oFYiZYAFYgVaAlQidgBdoAdaAVxvptkjMffQxluhoF3L5fNZff2MB1huPuCNGY2cveppEdJd2a2sCPkVwCcSRpLeojP0QFuu2J3A7j7paT7smhuZquaxN1HkkhM1XRjJinn+L3a2qJY/FoStoo6gOw3028dBy30F4C7UwlVTySdS1oDiH4vzWwcu2SnL5IuJC0l8cyHHMsG4O4kuy4EQRaDhTmYIwG74JvnD9oWoDcFALAfDja0Y6i4nsxsulemsVXakwQB8BGkJRjvqay+W8BLtJZzMItiyTNjdz0Ha6Rl9qgypdgIHbJNi4UewZUgqqPXbbg7PU7iP6Pf+XpSYyswAJm8zq9JsgAdFH8SgHp4aBFEIkH63LcIvyH+q2vReGuL9p3Mf5McBKbvoIxUB76Dn1SZEsfId+xyk0xRW/OuPMkkrbYwRIHEDD5oyA8ZVi8iwXNBat4ShbwHT6tiFVhN9aJ1u44TCQgkDzU7RIFnXXVe1LzrtHbdKQpC2U2O5i1dTIqCOA5gXjjMz3deOENZDhVyNg67Mv8AAGd56XNpHf3S3/i35Rt5qiGSUhS/qAAAAABJRU5ErkJggg==);
-    */
-
-    /*opacity: 0;*/
     transition: opacity .5s ease;
 }
 
@@ -100,9 +74,6 @@ sr-crlbar-group {
 
     right: 33px;
     bottom: 180px;
-
-    /*width: 50px;
-    height: 200px;*/
 
     opacity: 0;
     transition: opacity .5s ease;
@@ -138,136 +109,3 @@ sr-rd-crlbar fab.drafts {
     opacity: 0;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAAsSAAALEgHS3X78AAAAF3RFWHRDcmVhdGlvbiBUaW1lADIwMTguNS4xOdo4t2EAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzbovLKMAAAEHElEQVRYhcVXTWhcVRT+7nt3/jKTmD9sDAp1Y8RCMW6kQuhCKrgRFNzpSupGty5ciLQrpbhwXVEUlIKLal0o4kIRBK0taIUuhIimjWNM08nPzGTeu+c7Lu6b6cTOnUnE8g7D/DDnft/5+c65PPPCm18gD7Mikg9xImk+xGmaU8YUzYfYOZcTcV7icsJ9uhqY/eMqRnQwv3HaD3FkjHO8sd0iYUamrQAwOV6uFAuiwXJax9GldiLFOH76+ENzM7Vk1PjZONppJV9fXt5sdYqFWAMlH5qxZo1tbO0+euTe0ycfHxliz4zRsxd+nJuuhVptGSaOjOkkstNKioV4+fqNNz74Zm56PBUBYExXayaLD6oAmu1k6eH7Fxfmy0UrToZkZSWwQIxBKoyj6JGF+d/rjWa78+6Fi07URIiM2Wp22ruJMcYTK2CjaGqisr7ZPHXyxOLCfJKKUkPgAKy4QI8N1jZ2nnty8dSLJ9766Nuz53+YnRxThaqK6gP3zR6aropQAcBEkdlpdv5Y2xTHSskCIOmcBMEBKxj8nyoSurtnqsVCfGimtutSpyRVhFutzivPLz21dISkAqpqo2i7nbx05pMry3U/wYQ6MAQ+rNQASLR3HYDdTqqEiJKqMNVy6e1z373z6SXf59TJPTPj77/+bKVUTBLxMvb+w0rtHHvyQLabsp8upR9EobqUzpGk92lstzcaLe+XOhHHTupc6uioVACi9Ef6AftZLBkUHinwTaQKhRQyy8AAcew/lYo4NgBIRc+HSsoQcMvwAiGFqgAUHoU94n4TISnGQEGIZD3W7EiQWFQDpYaoahY9RFVUOWgPiaoCE2MVYwx6sXaP9AHuLbVIrw299+yLc+yiqBOKDM4YisZW+73PLq7+vRUXCr7HVHWOcuvq03+9WyH7g0FfVI6kEgBJEQrZS3nPEYOb2+2Xz5yfHK/ElYJf/lQ6UkjclqxHsNTgdaNqlMZ/YfYa6AcYU6tWTBSLAJod8adC4MPE5WUKQKFeWoNL3a0BSREplSyAciHyqvuPxLzVFDXQPhEMMkUUYaW+kaTu+tomNLMQcRhL1M9xq9nGX41VEkOcVWHt1Hj5w88vf//LytXf1iYnq+TAOfDEoX8AqMZxBOCJxx6MXn2mWCkh7Fwo2GtrjXNf/rTeaK6uL9eq5VIhlnCglsru+O4xA4Cy0+4AOHb08LGjh4Px9dmlq9f+rN+cmqop1DnCYOCSMIBVr54BzKY0Ufv4q59Tx7tqJRe+4LwVi3al3rjya71SrUhPGhnwbUvCwIwffy0ApXEUtTpJ0mjtJ1eoIo7GpmoFGw/TTdeGXxIs2rg4Wxsig34zBgrd56OJ5YgJOciT1UF8bWjO7rRZvxRzIJYDFeh/JM6v1OEL5E4T55NxlAsrgH8AwnEIgVJ/yEsAAAAASUVORK5CYII=);
 }
-
-/*
-sr-rd-crlbar.controlbar {
-    width: 100px;
-    height: 200px;
-
-    z-index: 2147483647;
-}
-
-sr-rd-crlbar fab.about {
-    bottom: 150px;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAeklEQVRIie3T0QmAIBDG8RuhEdwkR3CENmiE3KxRXKEN/r0oSJkvXaHgB/ckfD84OZFWAlhgTqNd7rnHDyAHXAFwakDfARZgu8wKTBrltrB7vU/+AzDA8RmQQf0f2gAeiw2wA6EAhPhm3gC1O0ix7QIR8bV5VT4iInICHxrcTgOet60AAAAASUVORK5CYII=);
-}
-
-sr-rd-crlbar fab.show {
-    opacity: 1;
-}
-
-.simpread-option-root {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 100%;
-    height: 100%;
-
-    color: rgb(255, 255, 255);
-    background-color: rgba(0,0,0,.5);
-
-    text-shadow: rgba(0, 0, 0, 0.3) 0px 1px;
-
-    opacity: 0;
-    transition: all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-
-    z-index: 2147483646;
-}
-
-dialog-gp {
-    display: -webkit-flex;
-    flex-direction: column;
-
-    margin: 0;
-    padding: 0;
-
-    min-width: 480px;
-    min-height: 300px;
-
-    color: rgba(0, 0, 0, 0.870588);
-    background-color: rgb(255, 255, 255);
-
-    border-radius: 3px;
-    box-sizing: border-box;
-    box-shadow: rgba(0, 0, 0, 0.247059) 0px 14px 45px, rgba(0, 0, 0, 0.219608) 0px 10px 18px;
-}
-
-dialog-head {
-    display: block;
-
-    padding: 24px 24px 20px 24px;
-
-    min-height: 25px;
-    line-height: 25px;
-
-    font-size: 21px;
-    font-weight: 500;
-    
-    color: #fff;
-    background-color: rgb(100, 181, 246);
-}
-
-dialog-content {
-    display: block;
-
-    padding: 12px 24px 0;
-
-    width: 100%;
-    min-height: 244px;
-    max-height: 580px;
-
-    overflow-y: auto;
-    box-sizing: border-box;
-}
-
-dialog-footer {
-    display: -webkit-flex;
-    flex-flow: row nowrap;
-    justify-content: flex-end;
-
-    width: 100%;
-    min-height: 52px;
-
-    box-sizing: border-box;
-}
-
-sr-opt-gp sr-opt-label {
-    font-weight:500;
-    color: rgb(33, 150, 243);
-}
-
-sr-opt-gp sr-opt-item {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-
-    width: 100%;
-}
-
-dialog-content .about {
-    padding: 3px 0 10px 0;
-
-    width: 650px;
-
-    color: rgba(51, 51, 51, 0.7);
-
-    font-weight: 400;
-    font-size: 14px;
-
-    text-align: center;
-    text-shadow: none;
-    line-height: 1.8;
-}
-
-dialog-content .about a {
-    text-decoration: none;
-
-    color: rgba(51, 51, 51, 0.87);
-    border-bottom: 1px dotted rgba(51, 51, 51, 0.7);
-}
-*/

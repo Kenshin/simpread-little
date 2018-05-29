@@ -445,6 +445,7 @@
         "exclude" : [
             "<div class='open_social_box'>",
             "<div class='os-share-box'>",
+            "<div class='sharing-options'>",
             "[[/src=\\S+(ds-logo-1-2-64)\\S+'/]]",
             "[[/src=\\S+(down)\\S+'/]]"
         ]

@@ -113,7 +113,7 @@ function controlbar() {
         cur = next;
     });
     $( ".simpread-read-root sr-rd-crlbar fab.anchor" ).on( "mouseenter", event => {
-        $("sr-crlbar-group").css({ opacity: 1, display: "block" });
+        $("sr-crlbar-group").css({ opacity: 1, display: "flex" });
     });
 }
 
@@ -138,6 +138,7 @@ function readMode( pr, puplugin, $ ) {
                                 <sr-crlbar-group>
                                     <fab class="drafts"></fab>
                                     <fab class="bear"></fab>
+                                    <fab class="markdown"></fab>
                                     <fab class="dropbox"></fab>
                                     <fab class="yinxiang"></fab>
                                     <fab class="evernote"></fab>
@@ -322,12 +323,17 @@ function service( pr ) {
                 $notify && $notify( "open", {"url": type == "bear" ? bear : drafts });
                 window.location.href = type == "bear" ? bear : drafts;
             }, 2000 );
+        } else if ( type == "markdown" ) {
+            const mdService = new TurndownService(),
+                  data      = mdService.turndown( clearMD( $("sr-rd-content").html() ));
+            $clipboard && $clipboard.text( data );
         }
     };
     simpread_config.secret && simpread_config.secret.pocket   && $("sr-rd-crlbar fab.pocket").click(clickEvent)   && $("sr-rd-crlbar fab.pocket").css({ opacity: 1, "background-color": "rgb(3, 169, 244)" });
     simpread_config.secret && simpread_config.secret.evernote && $("sr-rd-crlbar fab.evernote").click(clickEvent) && $("sr-rd-crlbar fab.evernote").css({ opacity: 1, "background-color": "rgb(3, 169, 244)" });
     simpread_config.secret && simpread_config.secret.yinxiang && $("sr-rd-crlbar fab.yinxiang").click(clickEvent) && $("sr-rd-crlbar fab.yinxiang").css({ opacity: 1, "background-color": "rgb(3, 169, 244)" });
     simpread_config.secret && simpread_config.secret.yinxiang && $("sr-rd-crlbar fab.dropbox").click(clickEvent)  && $("sr-rd-crlbar fab.dropbox").css({ opacity: 1, "background-color": "rgb(3, 169, 244)" });
+    platform() != "pc"     && $("sr-rd-crlbar fab.markdown").click(clickEvent) && $("sr-rd-crlbar fab.markdown").css({ opacity: 1 });
     platform() != "pc"     && $("sr-rd-crlbar fab.bear").click(clickEvent)   && $("sr-rd-crlbar fab.bear").css({ opacity: 1 });
     platform() != "pc"     && $("sr-rd-crlbar fab.drafts").click(clickEvent) && $("sr-rd-crlbar fab.drafts").css({ opacity: 1 });
 }

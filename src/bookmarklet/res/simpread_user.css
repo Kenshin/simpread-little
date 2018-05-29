@@ -104,7 +104,7 @@ sr-crlbar-group {
     /*width: 50px;
     height: 200px;*/
 
-    /*opacity: 0;*/
+    opacity: 0;
     transition: opacity .5s ease;
 }
 

@@ -7,6 +7,11 @@
 
 }
 
+sr-rd-content img {
+    margin: 0!important;
+    padding: 0!important;
+}
+
 sr-rd-crlbar {
     zoom: .8;
 }

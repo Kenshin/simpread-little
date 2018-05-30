@@ -81,14 +81,13 @@ function platform() {
  * @param {object} puplugin.Plugin( "style" )
  */
 function setStyle( style ) {
+    $.get( theme_pixyii, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
     if ( userAgent() == "iphone" ) {
-        style.FontSize( "62.5%" );
-        $.get( theme_gothic, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
+        style.FontSize("72%");
         $.get( theme_mobile, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
     } else {
-        style.FontSize( "72%" );
-        style.Layout( "10%" );
-        $.get( theme_pixyii, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
+        style.FontSize("75%");
+        style.Layout("10%");
     }
 
     const maxWidth = $(document).width(),

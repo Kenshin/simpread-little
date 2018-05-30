@@ -209,7 +209,7 @@
         ]
     },{
         "name"    : "m.dgtle.com",
-        "url"     : "http*://www.dgtle.com/portal.php?mod=view&aid=*&mobile=yes",
+        "url"     : "http*://www.dgtle.com/portal.php*",
         "title"   : "<h1 class='cr_h1title'>",
         "desc"    : "",
         "include" : "<div id='view_content'>",
@@ -2011,7 +2011,7 @@
         ]
     },{
         "name"    : "app.myzaker.com",
-        "url"     : "http*://app.myzaker.com/news/article.php?pk=*",
+        "url"     : "http*://app.myzaker.com/news/article.php*",
         "title"   : "<title>",
         "desc"    : "",
         "include" : "<div id='content'>",

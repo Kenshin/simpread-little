@@ -9,10 +9,10 @@ const script       = document.createElement( "script" ),
       mduikit_src  = "https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js",
       json         = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/website_list_v4.json";
 
-const notif_style  = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/notify.css",
+const notify_style = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/notify.css",
       main_style   = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/simpread.css",
-      local_style   = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/local.css",
-      mobile       = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/mobile.css",
+      local_style  = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/local.css",
+      mobile_style = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/mobile.css",
       option_style = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/option.css",
       theme_common = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/theme_common.css",
       theme_pixyii = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/theme_pixyii.css",
@@ -25,7 +25,7 @@ script.type        = "text/javascript";
 script.src         = script_src;
 script.onload      = () => {
     $script( jq_src, () => {
-        $.get( notif_style,  result => { $("head").append( `<style type="text/css">${result}</style>` ) });
+        $.get( notify_style, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
         $.get( main_style,   result => { $("head").append( `<style type="text/css">${result}</style>` ) });
         $.get( option_style, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
         $.get( local_style,  result => { $("head").append( `<style type="text/css">${result}</style>` ) });
@@ -84,7 +84,7 @@ function setStyle( style ) {
     $.get( theme_pixyii, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
     if ( userAgent() == "iphone" ) {
         style.FontSize("72%");
-        $.get( mobile, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
+        $.get( mobile_style, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
     } else {
         style.FontSize("75%");
         style.Layout("10%");

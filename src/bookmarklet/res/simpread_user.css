@@ -1,15 +1,6 @@
 
-@media all and ( max-height: 620px ) {
-
-    fab {
-        zoom: 1;
-    }
-
-}
-
 sr-rd-crlbar {
     z-index: 2100000000;
-    zoom: .8;
     transition: all 450ms 0ms;
 }
 

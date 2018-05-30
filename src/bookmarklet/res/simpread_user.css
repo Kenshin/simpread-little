@@ -1,4 +1,14 @@
+
+@media all and ( max-height: 620px ) {
+
+    fab {
+        zoom: 1;
+    }
+
+}
+
 sr-rd-crlbar {
+    zoom: .8;
     transition: all 450ms 0ms;
 }
 
@@ -16,7 +26,7 @@ sr-rd-crlbar fab {
 sr-rd-crlbar fab.crlbar-close {
     position: fixed;
     bottom: 45px;
-    right: 24px;
+    right: 13px;
 
     width: 56px;
     height: 56px;
@@ -36,7 +46,7 @@ sr-rd-crlbar fab.crlbar-close:hover {
 
 sr-rd-crlbar fab.anchor {
     position: fixed;
-    right: 33px;
+    right: 20px;
     bottom: 100px;
     background-color: rgba(245, 82, 70, .8);
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAANElEQVQ4T+3GMQ0AIAwAMAwSEvwLACai3HtmAHq1te8xpnCM6okAu3rigFU9MWxLr/695AI0E1VgH26hCQAAAABJRU5ErkJggg==);
@@ -72,7 +82,7 @@ sr-crlbar-group {
     display: flex;
     flex-direction: column;
 
-    right: 33px;
+    right: 20px;
     bottom: 150px;
 
     opacity: 0;

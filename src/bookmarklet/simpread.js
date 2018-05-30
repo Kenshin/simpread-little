@@ -11,7 +11,7 @@ const script       = document.createElement( "script" ),
 
 const notif_style  = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/notify.css",
       main_style   = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/simpread.css",
-      user_style   = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/simpread_user.css",
+      local_style   = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/local.css",
       mobile       = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/mobile.css",
       option_style = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/option.css",
       theme_common = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/theme_common.css",
@@ -28,7 +28,7 @@ script.onload      = () => {
         $.get( notif_style,  result => { $("head").append( `<style type="text/css">${result}</style>` ) });
         $.get( main_style,   result => { $("head").append( `<style type="text/css">${result}</style>` ) });
         $.get( option_style, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
-        $.get( user_style,   result => { $("head").append( `<style type="text/css">${result}</style>` ) });
+        $.get( local_style,  result => { $("head").append( `<style type="text/css">${result}</style>` ) });
         $.get( theme_common, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
         $script( [ puread_src, notify_src, puplugin_src, mduikit_src, turndown_src ], "bundle" );
         $script.ready( "bundle", () => {

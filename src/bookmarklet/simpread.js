@@ -12,9 +12,9 @@ const script       = document.createElement( "script" ),
 const notif_style  = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/notify.css",
       main_style   = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/simpread.css",
       user_style   = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/simpread_user.css",
+      mobile       = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/mobile.css",
       option_style = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/option.css",
       theme_common = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/theme_common.css",
-      theme_mobile = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/theme_mobile.css",
       theme_pixyii = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/theme_pixyii.css",
       theme_gothic = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/theme_gothic.css",
       theme_night  = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/theme_night.css";
@@ -84,7 +84,7 @@ function setStyle( style ) {
     $.get( theme_pixyii, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
     if ( userAgent() == "iphone" ) {
         style.FontSize("72%");
-        $.get( theme_mobile, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
+        $.get( mobile, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
     } else {
         style.FontSize("75%");
         style.Layout("10%");

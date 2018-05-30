@@ -19,6 +19,7 @@
         "include" : "<div class='detail'>",
         "exclude" : [
             "<div class='author-share'>",
+            "<div class='icon-pics'>",
             "<div class='embed-control'>"
         ]
     },{
@@ -185,6 +186,15 @@
             "[[/src=\\S+(zxcx_0208)\\S+'/]]"
         ]
     },{
+        "name"    : "io.sspai.com",
+        "url"     : "https://ios.sspai.com/**/*/*",
+        "title"   : "<h1 class='title'>",
+        "desc"    : "",
+        "include" : "<div id='article-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "sspai.com",
         "url"     : "https://sspai.com/post/",
         "title"   : "<h1 class='title'>",
@@ -196,6 +206,15 @@
             "[['<span>我们主张分享真实的产品体验</span>']]",
             "[['<span>本文内容仅代表作者本人观点</span>']]",
             "[[/src=\\S+(342459.png)\\S+'/]]"
+        ]
+    },{
+        "name"    : "m.dgtle.com",
+        "url"     : "http*://www.dgtle.com/portal.php?mod=view&aid=*&mobile=yes",
+        "title"   : "<h1 class='cr_h1title'>",
+        "desc"    : "",
+        "include" : "<div id='view_content'>",
+        "exclude" : [
+            ""
         ]
     },{
         "name"    : "dgtle.com",
@@ -392,6 +411,22 @@
             "[['<p>未经授权禁止转载</p>']]"
         ]
     },{
+        "name"    : "m.tmtpost.com",
+        "url"     : "http://m.tmtpost.com/*.html",
+        "title"   : "<h1>",
+        "desc"    : "<p class='post-abstract'>",
+        "include" : "<article>",
+        "exclude" : [
+            "<h1>",
+            "<div class='post-info'>",
+            "<p class='post-abstract'>",
+            "<div class='pro_icon'>",
+            "<div class='pro_intro tc'>",
+            "[['<strong>更多精彩内容</strong>']]",
+            "[['<strong>关注钛媒体微信号</strong>']]",
+            "[[/src=\\S+(wzny_ewm)\\S+'/]]"
+        ]
+    },{
         "name"    : "tmtpost.com",
         "url"     : "http://www.tmtpost.com/*.html",
         "title"   : "<h1>",
@@ -505,6 +540,15 @@
         "title"   : "<h2 class='entry-title'>",
         "desc"    : "",
         "include" : "<div class='entry-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "m.weibo.cn",
+        "url"     : "http*://m.weibo.cn/**/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='weibo-text'>",
         "exclude" : [
             ""
         ]
@@ -1661,9 +1705,11 @@
         "url"     : "http://m.thepaper.cn/newsDetail_*",
         "title"   : "<h1 class='t_newsinfo'>",
         "desc"    : "",
-        "include" : "<div class='news_part_father'>",
+        "include" : "<div class='news_part_limit'>",
         "exclude" : [
-            ""
+            "<div class='news_bl'>",
+            "<div id='clickForMore'>",
+            "<div class='relations_div'>"
         ]
     },{
         "name"    : "thepaper.cn",

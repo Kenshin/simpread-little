@@ -8,5 +8,25 @@
         "exclude" : [
             ""
         ]
+    },{
+        "name"    : "dgtle.com",
+        "url"     : "http*://www.dgtle.com/article-*.html",
+        "title"   : "<title>",
+        "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
+        "include" : "[[{$('.view_content').html()||$('#view_content').html()}]]",
+        "exclude" : [
+            "<div id='comments_top'>",
+            "[[/src=\\S+(xxxxxbbs)\\S+'/]]"
+        ]
+    },{
+        "name"    : "bbs.dgtle.com",
+        "url"     : "http*://*.dgtle.com/thread-*.html",
+        "title"   : "<title>",
+        "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
+        "include" : "<div class='forum-viewthread-article-box'>",
+        "exclude" : [
+            "<div id='comments_top'>",
+            "[[/src=\\S+(xxxxxbbs)\\S+'/]]"
+        ]
     }]
 }

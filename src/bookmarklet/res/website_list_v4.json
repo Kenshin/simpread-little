@@ -192,7 +192,9 @@
         "desc"    : "",
         "include" : "<div id='article-content'>",
         "exclude" : [
-            "<span class='ss-app-card'>"
+            "<span class='ss-app-card'>",
+            "<div class='ss-left'>",
+            "<div class='ss-right'>"
         ]
     },{
         "name"    : "sspai.com",

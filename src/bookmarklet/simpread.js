@@ -37,6 +37,7 @@ script.onload      = () => {
                 pr.Addsites(result);
                 pr.AddPlugin(puplugin.Plugin());
                 pr.Getsites();
+                console.log( "current site pr is ", pr );
                 if ( pr.state == "none" ) {
                     alert( location.href )
                     new Notify().Render( "当前页面不支持简悦的阅读模式" );

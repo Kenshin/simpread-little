@@ -2066,6 +2066,15 @@
             "<table>"
         ]
     },{
+        "name"    : "m.toutiaocdn.com",
+        "url"     : "http://m.toutiaocdn.com/**/*",
+        "title"   : "<h1 class='article__title'>",
+        "desc"    : "",
+        "include" : "<div class='article__content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "toutiao.com",
         "url"     : "http*://www.toutiao.com/a*/",
         "title"   : "<h1 class='article-title'>",

@@ -101,7 +101,7 @@ function controlbar() {
         }
         cur = next;
     });
-    $( ".simpread-read-root sr-rd-crlbar fab.anchor" ).on( "mouseenter", event => {
+    $( ".simpread-read-root sr-rd-crlbar fab.anchor" ).on( platform() == "pc" ? "mouseenter" : "click", event => {
         $("sr-crlbar-group").css({ opacity: 1, display: "flex" });
     });
 }

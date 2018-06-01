@@ -1,49 +1,37 @@
 
+let Notify, PureRead, puplugin, TurndownService;
+
 const script       = document.createElement( "script" ),
-      script_src   = "https://cdn.bootcss.com/script.js/2.5.8/script.min.js",
       jq_src       = "https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js",
-      turndown_src = "https://unpkg.com/turndown@4.0.2/dist/turndown.js",
-      puread_src   = "https://greasyfork.org/scripts/39995-pureread/code/PureRead.js",
-      notify_src   = "https://greasyfork.org/scripts/40236-notify/code/Notify.js",
-      puplugin_src = "https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js",
-      mduikit_src  = "https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js",
+
+      vender_src   = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/vender.js",
+      style_src    = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/style.js",
       json         = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/website_list_v4.json?" + Math.round(+new Date());
 
-const notify_style = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/notify.css",
-      main_style   = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/simpread.css",
-      local_style  = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/local.css",
-      mobile_style = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/mobile.css",
-      option_style = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/option.css",
-      theme_common = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/theme_common.css",
-      theme_pixyii = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/theme_pixyii.css",
-      theme_gothic = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/theme_gothic.css",
-      theme_night  = "https://raw.githubusercontent.com/kenshin/simpread-little/develop/src/bookmarklet/res/theme_night.css";
+const mobile_style = "@media all and (max-height:620px){fab{zoom:1}}sr-rd-content img{margin:0!important;padding:0!important}sr-rd-crlbar{zoom:.8}sr-rd-title{font-size:30px!important}sr-rd-content sr-blockquote,sr-rd-desc{padding:10px!important;font-size:22px!important}sr-rd-content h1,sr-rd-content h1 *,sr-rd-content h2,sr-rd-content h2 *,sr-rd-content h3,sr-rd-content h3 *,sr-rd-content h4,sr-rd-content h4 *,sr-rd-content h5,sr-rd-content h5 *,sr-rd-content h6,sr-rd-content h6 *{color:inherit;font-weight:900;line-height:1.2;margin:1em 0 1em}sr-rd-content h1,sr-rd-content h1 *{font-size:28px!important}sr-rd-content h2,sr-rd-content h2 *{font-size:25px!important}sr-rd-content h3,sr-rd-content h3 *{font-size:22px!important}sr-rd-content h4,sr-rd-content h4 *{font-size:20px!important}sr-rd-content h5,sr-rd-content h5 *,sr-rd-content h6,sr-rd-content h6 *{font-size:17px!important}sr-rd-content *,sr-rd-content p,sr-rd-content div{font-size:1.75rem!important}sr-rd-content a,sr-rd-content a:link{border:none!important}",
+      theme_pixyii = "sr-rd-theme-pixyii{display:none;}\n\n/**\n * Pixyii style\n */\n\n/**\n * Common style, include: h1 ~ h6; ol ul; code pre; table; sr-blockquote\n */\n\nsr-rd-content h1,sr-rd-content h1 *,sr-rd-content h2,sr-rd-content h2 *,sr-rd-content h3,sr-rd-content h3 *,sr-rd-content h4,sr-rd-content h4 *,sr-rd-content h5,sr-rd-content h5 *,sr-rd-content h6,sr-rd-content h6 *{color:inherit;font-weight:900;line-height:1.2;margin:1em 0 1em}sr-rd-content h1,sr-rd-content h1 *{font-size:3.92rem}sr-rd-content h2,sr-rd-content h2 *{font-size:3.64rem}sr-rd-content h3,sr-rd-content h3 *{font-size:2.275rem}sr-rd-content h4,sr-rd-content h4 *{font-size:1.82rem}sr-rd-content h5,sr-rd-content h5 *,sr-rd-content h6,sr-rd-content h6 *{font-size:1.573rem}\nsr-rd-content ol,sr-rd-content ul{font-size:1.75rem;line-height:1.5rem}sr-rd-content li{font-size:1.575rem;line-height:1.8;margin:0;position:relative}\nsr-rd-content table{width:100%;font-size:1.575rem}sr-rd-content table>thead>tr>th,sr-rd-content table>thead>tr>td,sr-rd-content table>tbody>tr>th,sr-rd-content table>tbody>tr>td,sr-rd-content table>tfoot>tr>th,sr-rd-content table>tfoot>tr>td{padding:12px;line-height:1.2;vertical-align:top;border-top:1px solid #333}sr-rd-content table>thead>tr>th{vertical-align:bottom;border-bottom:2px solid #333}sr-rd-content table>caption+thead>tr:first-child>th,sr-rd-content table>caption+thead>tr:first-child>td,sr-rd-content table>colgroup+thead>tr:first-child>th,sr-rd-content table>colgroup+thead>tr:first-child>td,sr-rd-content table>thead:first-child>tr:first-child>th,sr-rd-content table>thead:first-child>tr:first-child>td{border-top:0}sr-rd-content table>tbody+tbody{border-top:2px solid #333}\nsr-rd-content sr-blockquote {\n    margin: 1rem 0px;\n    padding: 1.33em;\n    font-style: italic;\n    border-left: 5px solid rgb(122, 122, 122);\n    color: rgb(85, 85, 85);\n}\n\n/**\n * Custom style, include: background; title; desc; sr-rd-content; p,div; a; pre\n */\n\n.simpread-theme-root {\n    background-color: rgb(255, 255, 255);\n    color: rgb(85, 85, 85);\n}\n\nsr-rd-title {\n    font-family: PingFang SC,Hiragino Sans GB,Microsoft Yahei,WenQuanYi Micro Hei,sans-serif;\n    font-size: 4.2rem;\n    font-weight: 900;\n    line-height: 1.2;\n}\n\nsr-rd-desc {\n    margin: 1rem 0px;\n    padding: 1.33em;\n    font-style: italic;\n    font-size: 2rem;\n    line-height: 2;\n    border-left: 5px solid rgb(122, 122, 122);\n    color: rgb(85, 85, 85);\n}\n\nsr-rd-content {\n    font-size: 2.1rem;\n    line-height: 1.8;\n    font-weight: 400;\n    color: rgb(85, 85, 85);\n}\n\nsr-rd-content *,\nsr-rd-content p,\nsr-rd-content div {\n    color: rgb(85, 85, 85);\n    font-size: 1.75rem;\n    line-height: 1.8;\n    font-weight: 300;\n}\n\nsr-rd-content strong {\n    font-weight: 400;\n}\n\nsr-rd-content a,\nsr-rd-content a:link {\n    color: rgb(70, 63, 92);\n    text-decoration: underline;\n}\n\nsr-rd-content a:hover,\nsr-rd-content a:focus,\nsr-rd-content a:active {\n    color: rgb(70, 63, 92);\n    text-decoration: underline;\n}\n\nsr-rd-content sr-blockquote code {\n    font-size: inherit;\n}\n\nsr-rd-content pre {\n    color: rgb(122, 122, 122);\n    background-color: transparent;\n    border: 1px solid rgb(122, 122, 122);\n}\n\nsr-rd-content li code,\nsr-rd-content p code {\n    color: rgb(122, 122, 122);\n    background-color: transparent;\n}";
 
 const simpread_config = {};
 
 script.type        = "text/javascript";
-script.src         = script_src;
+script.src         = jq_src;
 script.onload      = () => {
-    $script( jq_src, () => {
-        $.get( notify_style, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
-        $.get( main_style,   result => { $("head").append( `<style type="text/css">${result}</style>` ) });
-        $.get( option_style, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
-        $.get( local_style,  result => { $("head").append( `<style type="text/css">${result}</style>` ) });
-        $.get( theme_common, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
-        $script( [ puread_src, notify_src, puplugin_src, mduikit_src, turndown_src ], "bundle" );
-        $script.ready( "bundle", () => {
-            $.getJSON( json, result => {
-                const pr = new PureRead();
-                pr.Addsites(result);
-                pr.AddPlugin(puplugin.Plugin());
-                pr.Getsites();
-                console.log( "current site pr is ", pr );
-                if ( pr.state == "none" ) {
-                    alert( location.href )
-                    new Notify().Render( "当前页面不支持简悦的阅读模式" );
-                }
-                else readMode( pr, puplugin, $ );
-            });
+    $.get( style_src,  result => { new Function( result )(); });
+    $.get( vender_src, result => {
+        const js = new Function( result )();
+        [ Notify, PureRead, puplugin, TurndownService ] = [ js.Notify, js.PureRead, js.puplugin, js.TurndownService ];
+
+        $.getJSON( json, result => {
+            const pr = new PureRead();
+            pr.Addsites(result);
+            pr.AddPlugin(puplugin.Plugin());
+            pr.Getsites();
+            console.log( "current site pr is ", pr );
+            if ( pr.state == "none" ) {
+                alert( location.href )
+                new Notify().Render( "当前页面不支持简悦的阅读模式" );
+            }
+            else readMode( pr, puplugin, $ );
         });
     });
 };
@@ -82,10 +70,10 @@ function platform() {
  * @param {object} puplugin.Plugin( "style" )
  */
 function setStyle( style ) {
-    $.get( theme_pixyii, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
+    $("head").append("<style type=\"text/css\">" + theme_pixyii + "</style>");
     if ( userAgent() == "iphone" ) {
         style.FontSize("72%");
-        $.get( mobile_style, result => { $("head").append( `<style type="text/css">${result}</style>` ) });
+        $("head").append("<style type=\"text/css\">" + mobile_style + "</style>");
     } else {
         style.FontSize("75%");
         style.Layout("10%");

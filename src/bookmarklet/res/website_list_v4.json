@@ -491,7 +491,7 @@
         ]
     },{
         "name"    : "free.apprcn.com",
-        "url"     : "http://free.apprcn.com/*.html",
+        "url"     : "http*://free.apprcn.com/*",
         "title"   : "<h2 class='entry-title'>",
         "desc"    : "",
         "include" : "<div class='entry-content'>",
@@ -517,15 +517,6 @@
         "title"   : "<h3 class='entry-title'>",
         "desc"    : "",
         "include" : "<div class='entry-content'>",
-        "exclude" : [
-            ""
-        ]
-    },{
-        "name"    : "iplaysoft.com",
-        "url"     : "http*://www.iplaysoft.com/p/*",
-        "title"   : "<title>",
-        "desc"    : "",
-        "include" : "[[{$('body').find('[itemprop='articleBody']').html()}]]",
         "exclude" : [
             ""
         ]
@@ -1695,6 +1686,20 @@
             ""
         ]
     },{
+        "name"    : "questions.stackoverflow.com",
+        "url"     : "https://stackoverflow.com/questions/**/*",
+        "avatar"  : [
+            {"name" : "[[{$('.user-details').find('a')}]]"},
+            {"url"  : "[[{$('.gravatar-wrapper-32').find('img')}]]"}
+        ],
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "[[{$('.post-text')}]]",
+        "exclude" : [
+            ""
+        ],
+        "css": "code { background-color: transparent; }"
+    },{
         "name"    : "voidcn.com",
         "url"     : "http://www.voidcn.com/blog/**/*/*.html",
         "title"   : "<h1 class='title'>",
@@ -2006,7 +2011,7 @@
         ]
     },{
         "name"    : "duozhi.com",
-        "url"     : "http*://www.duozhi.com/*/*.shtml",
+        "url"     : "http*://www.duozhi.com/**/*.shtml",
         "title"   : "<h1 class='subject-title'>",
         "desc"    : "",
         "include" : "<div class='subject-content'>",
@@ -2040,6 +2045,16 @@
         "exclude" : [
             "<p id='kankan_bq'>"
         ]
+    },{
+        "name"    : "cbnweek.com",
+        "url"     : "https://www.cbnweek.com/articles/normal/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='article-content'>",
+        "exclude" : [
+            ""
+        ],
+        "css"     : ".image-placeholder{background:transparent;padding-bottom:0!important}"
     },{
         "name"    : "article.myzaker.com",
         "url"     : "http*://www.myzaker.com/article/*/",
@@ -2700,7 +2715,7 @@
         ]
     },{
         "name"    : "37zw.net",
-        "url"     : "http://www.37zw.net/**/*.html",
+        "url"     : "http*://www.37zw.net/**/*.html",
         "paging"  : [
             {"prev" : "[[{$($('.bottem2').find('a')[1]).attr('href')}]]"},
             {"next" : "[[{$($('.bottem2').find('a')[3]).attr('href')}]]"}
@@ -2719,6 +2734,172 @@
         "include" : "[[{$('.content').html()||$('.text').html()}]]",
         "exclude" : [
             ""
+        ]
+    },{
+        "name"    : "pin-cong.com",
+        "url"     : "https://www.pin-cong.com/p/*",
+        "avatar"  : [
+            {"name" : "[[{$('.user-details').find('a')}]]"},
+            {"url"  : "[[{$('.gravatar-wrapper-32').find('img')}]]"}
+        ],
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "[[{$('.post-text')}]]",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "bbs.tianya.cn",
+        "url"     : "http://bbs.tianya.cn/*.shtml",
+        "avatar"  : [
+            {"name" : "[[{$('.user-details').find('a')}]]"},
+            {"url"  : "[[{$('.gravatar-wrapper-32').find('img')}]]"}
+        ],
+        "paging"  : [
+            {"prev" : "[[{$('.js-keyboard-prev').attr('href')}]]"},
+            {"next" : "[[{$('.js-keyboard-next').attr('href')}]]"}
+        ],
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "[[{$('.bbs-content')}]]",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "applysquare.com",
+        "url"     : "https://www.applysquare.com/topic-cn/*",
+        "avatar"  : [
+            {"name" : "[[{$('.user-details').find('a')}]]"},
+            {"url"  : "[[{$('.gravatar-wrapper-32').find('img')}]]"}
+        ],
+        "title"   : "<div class='thread-title'>",
+        "desc"    : "",
+        "include" : "[[{$('.qa-html-content')}]]",
+        "exclude" : [
+            "<span class='show-content'>"
+        ]
+    },{
+        "name"    : "aktuell.faz.net",
+        "url"     : "http://www.faz.net/aktuell/*/**/*.html",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "[[{$($('.FAZArtikelText')[0]).html()}]]",
+        "exclude" : [
+            "<span class='Bildnachweis'>",
+            "<span class='autorBox'>",
+            "<ul class='RelatedLinkBox'>"
+        ]
+    },{
+        "name"    : "cn.nytstyle.com",
+        "url"     : "https://cn.nytstyle.com/*/*/*/",
+        "title"   : "<h3 class='articleHeadline'>",
+        "desc"    : "",
+        "include" : "<div class='content'>",
+        "exclude" : [
+            "<div class='authorIdentification'>",
+            "<div class='articleCR'>",
+            "<div class='articleTool'>",
+            "<div id='disqus_thread'>",
+            "<div id='subscribe_cont'>",
+            "<div class='articleByside'>"
+        ]
+    },{
+        "name"    : "sueddeutsche.de",
+        "url"     : "http://www.sueddeutsche.de/*/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<section id='article-body'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "techcrunch.com",
+        "url"     : "https://techcrunch.com/**/*",
+        "title"   : "<h1 class='article__title'>",
+        "desc"    : "",
+        "include" : "<div class='article-content'>",
+        "exclude" : [
+            "<div class='block--comment'>"
+        ]
+    },{
+        "name"    : "blog.bufferapp.com",
+        "url"     : "https://blog.bufferapp.com/**/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "[[{$('#single-entry-content').find('.col-1-1').html()}]]",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "cn.nytimes.com",
+        "url"     : "https://cn.nytimes.com/*/*/*/",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<section class='article-body'>",
+        "exclude" : [
+            "<div class='authorIdentification'>",
+            "<div class='articleCR'>",
+            "<div class='articleTool'>",
+            "<div id='disqus_thread'>",
+            "<div id='subscribe_cont'>",
+            "<div class='articleByside'>"
+        ]
+    },{
+        "name"    : "theverge.com",
+        "url"     : "https://www.theverge.com/**/*",
+        "title"   : "<h1 class='c-page-title'>",
+        "desc"    : "",
+        "include" : "<div class='c-entry-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "medium.com",
+        "url"     : "https://medium.com/@*/**/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='section-content'>",
+        "exclude" : [
+            "<h1 class='graf--title'>",
+			"<img class='progressiveMedia-thumbnail'>",
+			"<canvas class='progressiveMedia-canvas'>",
+			"<figcaption class='imageCaption'>"
+        ]
+    },{
+        "name"    : "news.bbc.com",
+        "url"     : "http://www.bbc.com/news/**/*",
+        "title"   : "<h1 class='story-body__h1'>",
+        "desc"    : "",
+        "include" : "<div class='story-body__inner'>",
+        "exclude" : [
+            "<figure>"
+        ]
+    },{
+        "name"    : "simp.bbc.com",
+        "url"     : "http://www.bbc.com/zhongwen/**/*",
+        "title"   : "<h1 class='story-body__h1'>",
+        "desc"    : "",
+        "include" : "<div class='story-body__inner'>",
+        "exclude" : [
+            "<figure>"
+        ]
+    },{
+        "name"    : "wsj.com",
+        "url"     : "https://www.wsj.com/articles/**/*",
+        "title"   : "<h1 class='wsj-article-headline'>",
+        "desc"    : "",
+        "include" : "<div class='wsj-snippet-body'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "economist.com",
+        "url"     : "https://www.economist.com/**/*",
+        "title"   : "[[{$('.flytitle-and-title__title:first').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='blog-post__text'>",
+        "exclude" : [
+            "<div class='newsletter-form--inline'>"
         ]
     }]
 }

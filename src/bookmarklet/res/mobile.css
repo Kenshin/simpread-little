@@ -1,0 +1,61 @@
+
+@media all and ( max-height: 620px ) {
+
+    fab {
+        zoom: 1;
+    }
+
+}
+
+sr-rd-content img {
+    margin: 0!important;
+    padding: 0!important;
+}
+
+sr-rd-crlbar {
+    zoom: .8;
+}
+
+sr-rd-title {
+    font-size: 30px!important
+}
+
+sr-rd-content sr-blockquote,sr-rd-desc {
+    padding: 10px!important;
+    font-size: 22px!important
+}
+
+sr-rd-content h1,sr-rd-content h1 *,sr-rd-content h2,sr-rd-content h2 *,sr-rd-content h3,sr-rd-content h3 *,sr-rd-content h4,sr-rd-content h4 *,sr-rd-content h5,sr-rd-content h5 *,sr-rd-content h6,sr-rd-content h6 * {
+    color: inherit;
+    font-weight: 900;
+    line-height: 1.2;
+    margin: 1em 0 1em
+}
+
+sr-rd-content h1,sr-rd-content h1 * {
+    font-size: 28px!important
+}
+
+sr-rd-content h2,sr-rd-content h2 * {
+    font-size: 25px!important
+}
+
+sr-rd-content h3,sr-rd-content h3 * {
+    font-size: 22px!important
+}
+
+sr-rd-content h4,sr-rd-content h4 * {
+    font-size: 20px!important
+}
+
+sr-rd-content h5,sr-rd-content h5 *,sr-rd-content h6,sr-rd-content h6 * {
+    font-size: 17px!important
+}
+
+sr-rd-content *,sr-rd-content p,sr-rd-content div {
+    font-size: 1.75rem!important
+}
+
+sr-rd-content a,sr-rd-content a:link {
+    border: none!important
+}

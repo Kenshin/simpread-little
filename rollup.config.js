@@ -35,10 +35,18 @@ const plugins = [
 
 export default [
     {
-        input      : './src/simpread.user.js',
+        input      : './src/userscript/simpread.js',
         output     : {
             format : 'iife',
             file   :  process.env.NODE_ENV === 'production' ? './dist/simpread.user.min.js' : './dist/simpread.user.js',
+        },
+        plugins,
+    },
+    {
+        input      : './src/bookmarklet/simpread.js',
+        output     : {
+            format : 'iife',
+            file   :  process.env.NODE_ENV === 'production' ? './dist/simpread.bookmarklet.min.js' : './dist/simpread.bookmarklet.js',
         },
         plugins,
     }

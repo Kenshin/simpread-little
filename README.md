@@ -1,14 +1,17 @@
-<p align="center"><img src="http://ojec5ddd5.bkt.clouddn.com/logo%20bigger.png" /></p>
+<p align="center"><img src="http://sr.ksria.cn/logo%20bigger.png" /></p>
 <h1 align="center">简悦 - SimpRead</h1>
 <p align="center">让你瞬间进入沉浸式阅读的扩展，还原阅读的本质，提升你的阅读体验。</p>
-<p align="center">为了达到完美的阅读模式这个小目标 ，我适配了 <a target="_blank" href="https://github.com/kenshin/simpread/wiki/适配站点列表">240+</a> 个网站，因此诞生了简悦。</p>
+<p align="center">为了达到完美的阅读模式这个小目标 ，我适配了 <a target="_blank" href="https://simpread.ksria.cn/sites/">数百种类型</a> 的网站，因此诞生了简悦。</p>
 <p align="center">
-   <a href="https://github.com/kenshin/simpread/releases"><img src="https://i.imgur.com/rAc8bT7.png"></a>
-   <a target="_blank" href="http://ksria.com/simpread"><img src="https://i.imgur.com/ryEV5nm.png"></a>
-   <a target="_blank" href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll"><img src="https://i.imgur.com/ubNLVJa.png"></a>
-   <a target="_blank" href="https://addons.mozilla.org/zh-CN/firefox/addon/simpread"><img src="https://i.imgur.com/tBstQ7d.png"></a>
+   <a href="https://github.com/kenshin/simpread/releases"><img src="https://img.shields.io/badge/lastest_version-1.1.2-blue.svg"></a>
+   <a target="_blank" href="http://ksria.com/simpread"><img src="https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg"></a>
+</p>
+<p align="center">
+   <a target="_blank" href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll"><img src="https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg"></a>
+   <a href="http://ksria.com/simpread/crx/1.1.2/simpread.crx"><img src="https://img.shields.io/badge/download-_crx-brightgreen.svg"></a>
+   <a target="_blank" href="https://addons.mozilla.org/zh-CN/firefox/addon/simpread"><img src="https://img.shields.io/badge/download-_firefox_addon-DD512A.svg"></a>
    <a target="_blank" href="https://greasyfork.org/zh-CN/scripts/39998"><img src="https://i.imgur.com/JFhxHeR.png"></a>
-
+   <a target="_blank" href="https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-1.0.2.box?201810231502&name=%E7%AE%80%E6%82%A6"><img src="https://i.imgur.com/zZeOllB.png"></a>
 </p>
 
 ***
@@ -23,7 +26,7 @@
 #### 马上使用：
 * 安装 [Tampermonkey](http://tampermonkey.net/) 并选择对应浏览器的版本；
 * 进入 <https://greasyfork.org/zh-CN/scripts/39998>，并选择 `安装`；  
-  _使用 **暴力猴** 的用户请使用 https://github.com/Kenshin/simpread-little/raw/develop/src/simpread.user.js 安装_
+  _使用 **暴力猴** 的用户请使用 https://raw.githubusercontent.com/Kenshin/simpread-little/master/src/userscript/simpread.js 安装_
 
 * 安装完毕后，打开 <https://sspai.com/post/39491> 键盘快捷键 → <kbd>A</kbd> <kbd>A</kbd>（双击 A） 就可以进入阅读模式；  
   _简悦能完美适配的网址多达数千个，加上临时阅读模式的话，可支持任意页面。_
@@ -106,7 +109,7 @@
 
 #### 请杯咖啡：
 如果简悦可以解决你在阅读上痛点，提升 Web 端的阅读体验，可以请我喝杯咖啡，想必也是非常愉悦的事情。 :smile:  
-_如发现下图显示不全，请直接访问 http://ojec5ddd5.bkt.clouddn.com/zhifu_m2.png_
+_如发现下图显示不全，请直接访问 http://sr.ksria.cn/zhifu_m2.png_
 <img src="https://i.imgur.com/cyQuQBb.png"/>
 
 #### 许可：

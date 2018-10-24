@@ -26,7 +26,7 @@
 #### 马上使用：
 * 安装 [Tampermonkey](http://tampermonkey.net/) 并选择对应浏览器的版本；
 * 进入 <https://greasyfork.org/zh-CN/scripts/39998>，并选择 `安装`；  
-  _使用 **暴力猴** 的用户请使用 https://github.com/Kenshin/simpread-little/raw/develop/src/simpread.user.js 安装_
+  _使用 **暴力猴** 的用户请使用 https://raw.githubusercontent.com/Kenshin/simpread-little/master/src/userscript/simpread.js 安装_
 
 * 安装完毕后，打开 <https://sspai.com/post/39491> 键盘快捷键 → <kbd>A</kbd> <kbd>A</kbd>（双击 A） 就可以进入阅读模式；  
   _简悦能完美适配的网址多达数千个，加上临时阅读模式的话，可支持任意页面。_

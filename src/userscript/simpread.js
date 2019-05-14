@@ -12,21 +12,21 @@
 // @require      https://greasyfork.org/scripts/40172-mousetrap/code/Mousetrap.js?version=262594
 // @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=697882
 // @require      https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js?version=697883
-// @resource     global_sites http://sr.ksria.cn/website_list_v4.json?data=0514
-// @resource     notify_style http://sr.ksria.cn/puread/notify.css
-// @resource     main_style   http://sr.ksria.cn/puread/simpread.css
-// @resource     option_style http://sr.ksria.cn/puread/option.css
+// @resource     global_sites http://sr.ksria.cn/website_list_v4.json?data=1.1.2.5005
+// @resource     notify_style http://sr.ksria.cn/puread/notify.css?version=1.1.2.5005
+// @resource     main_style   http://sr.ksria.cn/puread/simpread.css?version=1.1.2.5005
+// @resource     option_style http://sr.ksria.cn/puread/option.css?version=1.1.2.5005
 // @resource     user_style   https://gist.github.com/Kenshin/365a91c61bad550b5900247539113f06/raw/3e666bee279f249e5b59140d8a777192ecb121cd/simpread_user.css
-// @resource     theme_common http://sr.ksria.cn/puread/theme_common.css
-// @resource     theme_dark   http://sr.ksria.cn/puread/theme_dark.css
-// @resource     theme_github http://sr.ksria.cn/puread/theme_github.css
-// @resource     theme_gothic http://sr.ksria.cn/puread/theme_gothic.css
-// @resource     theme_night  http://sr.ksria.cn/puread/theme_night.css
-// @resource     theme_pixyii http://sr.ksria.cn/puread/theme_pixyii.css
-// @resource     theme_engwrite  http://sr.ksria.cn/puread/theme_engwrite.css
-// @resource     theme_monospace http://sr.ksria.cn/puread/theme_monospace.css
-// @resource     theme_newsprint http://sr.ksria.cn/puread/theme_newsprint.css
-// @resource     theme_octopress http://sr.ksria.cn/puread/theme_octopress.css
+// @resource     theme_common http://sr.ksria.cn/puread/theme_common.css?version=1.1.2.5005
+// @resource     theme_dark   http://sr.ksria.cn/puread/theme_dark.css?version=1.1.2.5005
+// @resource     theme_github http://sr.ksria.cn/puread/theme_github.css?version=1.1.2.5005
+// @resource     theme_gothic http://sr.ksria.cn/puread/theme_gothic.css?version=1.1.2.5005
+// @resource     theme_night  http://sr.ksria.cn/puread/theme_night.css?version=1.1.2.5005
+// @resource     theme_pixyii http://sr.ksria.cn/puread/theme_pixyii.css?version=1.1.2.5005
+// @resource     theme_engwrite  http://sr.ksria.cn/puread/theme_engwrite.css?version=1.1.2.5005
+// @resource     theme_monospace http://sr.ksria.cn/puread/theme_monospace.css?version=1.1.2.5005
+// @resource     theme_newsprint http://sr.ksria.cn/puread/theme_newsprint.css?version=1.1.2.5005
+// @resource     theme_octopress http://sr.ksria.cn/puread/theme_octopress.css?version=1.1.2.5005
 // @grant        GM_getResourceText
 // @grant        GM_addStyle
 // @grant        GM_getValue

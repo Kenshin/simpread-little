@@ -399,7 +399,7 @@ function entryMode( type ) {
     type = type == "focus" ? "focus" : "read";
     if ( [ "none" ].includes( pr.state ) ) {
         if ( simpread[type].highlight == true ) tempMode( type );
-        else new Notify().Render( `当前未启用 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>，并当前站点也未适配，如需要适配请提交到 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
+        else new Notify().Render( `当前未启用 <a href='http://ksria.com/simpread/docs/#/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>，并当前站点也未适配，如需要适配请提交到 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
     } else type == "focus" ? focusMode() : readMode();
 }
 
@@ -642,7 +642,7 @@ function readMode() {
  * @param {string} include: focus, read
  */
 function tempMode( mode = "read" ) {
-    new Notify().Render( "当前并未适配阅读模式，请移动鼠标手动生成 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。" );
+    new Notify().Render( "当前并未适配阅读模式，请移动鼠标手动生成 <a href='http://ksria.com/simpread/docs/#/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。" );
     highlight().done( dom => {
         if ( mode == "read" ) {
             pr.TempMode( mode, dom.outerHTML );
@@ -896,7 +896,7 @@ function aboutMode() {
                                     它是一个阅读模式类的油猴脚本，也是 <a href="http://ksria.com/simpread">简悦</a> 的轻量级版本。</br>
                                     拥有 <a target="_blank" href="http://ksria.com/simpread/#feature">简悦的一切特性</a>，更具有「加载速度快 · 只关注阅读模式呈现」等 <a target="_blank" href="https://github.com/Kenshin/simpread-little/blob/master/README.md#特点">特点</a>。</br>
                                     简悦的初衷：还原一个干净的阅读空间，提升你的阅读体验。</br>
-                                    截至到目前为止，简悦已经适配了 <spn style="color:#ff3f80;font-weight:600;">${ pr.sites.global.length }个</spn> 网址，详细请看 <a href="https://github.com/Kenshin/simpread/wiki/%E9%80%82%E9%85%8D%E7%AB%99%E7%82%B9%E5%88%97%E8%A1%A8" target="_blank">这里</a>。<br>
+                                    截至到目前为止，简悦已经精准适配了 <spn style="color:#ff3f80;font-weight:600;">${ pr.sites.global.length }个</spn> 网址，详细请看 <a href="http://ksria.com/simpread/docs/#/%E9%80%82%E9%85%8D%E7%AB%99%E7%82%B9%E5%88%97%E8%A1%A8" target="_blank">这里</a>。<br>
                                     简悦是一个免费且开源的项目，占用了我绝大多数的业余时间。</br>
                                     如果觉得它还不错，希望可以给我 <a href="https://greasyfork.org/zh-CN/forum/post/discussion?script=39998&locale=zh-CN" target="_blank">投票</a> 或 <a href="https://github.com/kenshin/simpread#请杯咖啡" target="_blank">请我喝杯咖啡</a>，这是对简悦的最大鼓励。<br>
                                     现在就加入 <a href="https://t.me/simpread">Telegram</a> 群，获取简悦的第一手资料。</br>

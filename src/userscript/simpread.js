@@ -713,20 +713,21 @@ function optionMode() {
                     if ( event && event.target && event.target.result ) {
                         try {
                             const json = JSON.parse( event.target.result );
-                            if ( json.version && json.version.replace( /\./g, "" ) >= simpread.version.replace( /\./g, "" ) ) {
-                                Object.keys( simpread.focus  ).forEach( key => { json.focus[key]  != undefined && (simpread.focus[key]  = json.focus[key]  )});
-                                Object.keys( simpread.read   ).forEach( key => { json.read[key]   != undefined && (simpread.read[key]   = json.read[key]   )});
-                                Object.keys( simpread.option ).forEach( key => { json.option[key] != undefined && (simpread.option[key] = json.option[key] )});
-                                GM_setValue( "simpread",  simpread );
-                                if ( json.websites ) {
-                                    pr.sites.custom = [ ...json.websites.custom ];
-                                    pr.sites.local  = [ ...json.websites.local ];
-                                    GM_setValue( "simpread_db", pr.sites );
-                                    new Notify().Render( `已导入本地适配源：${ pr.sites.local.length} 条；官方次适配源：${pr.sites.custom.length} 条。` );
-                                    console.log( "new simpread db", pr.sites )
-                                }
-                                new Notify().Render( "导入成功，请刷新当前页面，以便新配置文件生效。" );
-                            } else new Notify().Render( 2, "上传的版本太低，请重新上传！" );
+                            if ( json.version && json.version.replace( /\./g, "" ) <= simpread.version.replace( /\./g, "" ) ) {
+                                new Notify().Render( 2, "上传的版本太低，已转换为最新版版本！" );
+                            }
+                            Object.keys( simpread.focus  ).forEach( key => { json.focus[key]  != undefined && (simpread.focus[key]  = json.focus[key]  )});
+                            Object.keys( simpread.read   ).forEach( key => { json.read[key]   != undefined && (simpread.read[key]   = json.read[key]   )});
+                            Object.keys( simpread.option ).forEach( key => { json.option[key] != undefined && (simpread.option[key] = json.option[key] )});
+                            GM_setValue( "simpread",  simpread );
+                            if ( json.websites ) {
+                                pr.sites.custom = [ ...json.websites.custom ];
+                                pr.sites.local  = [ ...json.websites.local ];
+                                GM_setValue( "simpread_db", pr.sites );
+                                new Notify().Render( `已导入本地适配源：${ pr.sites.local.length} 条；官方次适配源：${pr.sites.custom.length} 条。` );
+                                console.log( "new simpread db", pr.sites )
+                            }
+                            new Notify().Render( "导入成功，请刷新当前页面，以便新配置文件生效。" );
                         } catch ( error ) { new Notify().Render( 2, "上传失败，配置文件解析失败，请重新确认。" ); }
                     }
                   };

@@ -191,6 +191,7 @@ const pr         = new PureRead(),
 
                 # 是否启用纯粹模式？
                 # 比【增强解析模式】还要彻底优化版本，包括：字形、颜色、字号、代码段等，专治页面及不规范，如：微信订阅号，CSDN 等。
+                # 此功能在 cleanup = true 时才会生效
                 # 默认为 true，取值范围 true | false
                 set_pure: true
     `;

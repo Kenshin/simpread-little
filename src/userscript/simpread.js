@@ -1,19 +1,18 @@
 // ==UserScript==
 // @name         简悦( SimpRead ) · 轻阅版
 // @namespace    http://ksria.com/simpread/
-// @version      1.1.1.1025
+// @version      1.1.2.5005
 // @description  简悦 - 让你瞬间进入沉浸式阅读的 User Script 扩展
 // @author       Kenshin <kenshin@ksria.com>
 // @include      http://*/*
 // @include      https://*/*
 // @require      https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js
-// @require      https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js?version=264103
-// @require      https://greasyfork.org/scripts/40236-notify/code/Notify.js?version=263047
+// @require      https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js?version=697886
+// @require      https://greasyfork.org/scripts/40236-notify/code/Notify.js?version=697887
 // @require      https://greasyfork.org/scripts/40172-mousetrap/code/Mousetrap.js?version=262594
-// @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=261636
-// @require      https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js?version=262834
-// @resource     global_sites http://sr.ksria.cn/website_list_v3.json?data=0402
-// @resource     origins      http://sr.ksria.cn/website_list_origins.json
+// @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=697882
+// @require      https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js?version=697883
+// @resource     global_sites http://sr.ksria.cn/website_list_v4.json?data=0514
 // @resource     notify_style http://sr.ksria.cn/puread/notify.css
 // @resource     main_style   http://sr.ksria.cn/puread/simpread.css
 // @resource     option_style http://sr.ksria.cn/puread/option.css
@@ -66,6 +65,8 @@ const pr         = new PureRead(),
     },
     read         = {
         version   : "2017-03-16",
+        cleanup   : true,
+        pure      : true,
         auto      : false,
         controlbar: true,
         highlight : true,
@@ -182,9 +183,19 @@ const pr         = new PureRead(),
                 # 支持 minimatch，域名 和 name，例如： "v2ex.com", "http://www.ifanr.com/**/*"
                 # 默认为空，每个名单由小写 , 分隔
                 set_whitelist: 
+
+                # 是否启用增强解析模式？
+                # 增强解析模式会对版面重新设计，包括：去除多余空格、优化版面结构等，此功能为测试版，遇到解析失败时，请关闭此功能。
+                # 默认为 true，取值范围 true | false
+                set_cleanup: true
+
+                # 是否启用纯粹模式？
+                # 比【增强解析模式】还要彻底优化版本，包括：字形、颜色、字号、代码段等，专治页面及不规范，如：微信订阅号，CSDN 等。
+                # 默认为 true，取值范围 true | false
+                set_pure: true
     `;
     let current_state = "", // include: focus, read, option
-        simpread = { version: "1.1.1", focus, read, option },
+        simpread = { version: "1.1.2", focus, read, option },
         org_simp = { ...simpread };
 
 /****************************
@@ -210,6 +221,8 @@ if ( !blacklist() ) {
         pr.Addsites( JSON.parse( global_sites ));
         GM_setValue( "simpread_db", pr.sites );
     }
+    pr.cleanup = simpread.read.cleanup;
+    pr.pure    = simpread.read.pure;
     pr.AddPlugin( puplugin.Plugin() );
     pr.Getsites();
 
@@ -383,7 +396,7 @@ function controlbar() {
  */
 function entryMode( type ) {
     type = type == "focus" ? "focus" : "read";
-    if ( [ "none", "temp" ].includes( pr.state ) ) {
+    if ( [ "none" ].includes( pr.state ) ) {
         if ( simpread[type].highlight == true ) tempMode( type );
         else new Notify().Render( `当前未启用 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>，并当前站点也未适配，如需要适配请提交到 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
     } else type == "focus" ? focusMode() : readMode();
@@ -549,6 +562,23 @@ function readMode() {
             }
         };
 
+    if ( pr.isMathJax() && pr.state == "temp" ) {
+        console.warn( '=== MathJax Mode ===' )
+        const dom = pr.MathJaxMode();
+        console.log( 'current get dom is ', dom )
+        if ( typeof dom == "undefined" ) {
+            new Notify().Render( "智能感知失败，请移动鼠标框选。" );
+            highlight().done( dom => {
+                storage.pr.TempMode( "read", dom );
+                Render( false );
+            });
+        } else if ( typeof dom == "string" ) {
+            const html = pr.GetDom( dom, "html" );
+            pr.Newsite( "read", html );
+        } else {
+            pr.TempMode( "read", dom[0] );
+        }
+    }
     pr.ReadMode();
 
     if ( special() ) return;

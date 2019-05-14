@@ -7,6 +7,7 @@
 // @include      http://*/*
 // @include      https://*/*
 // @require      https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js
 // @require      https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js?version=697886
 // @require      https://greasyfork.org/scripts/40236-notify/code/Notify.js?version=697887
 // @require      https://greasyfork.org/scripts/40172-mousetrap/code/Mousetrap.js?version=262594
@@ -636,6 +637,8 @@ function readMode() {
     style.FontSize(   simpread.read.fontsize   );
     style.Layout(     simpread.read.layout     );
 
+    pr.pure && codehighlight();
+
     // exit
     $( ".simpread-read-root sr-rd-crlbar fab" ).one( "click",  event => {
         $( ".simpread-read-root" ).animate( { opacity: 0 }, {
@@ -701,6 +704,17 @@ function highlight() {
     });
     $( "body" ).on( "mousemove", mousemoveEvent );
     return dtd;
+}
+
+/**
+ * Code highlight
+ */
+function codehighlight() {
+    $("head").append('<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">')
+    $("head").append( '<style>.hljs{background:transparent!important;}</style>' )
+    $("sr-rd-content").find( 'pre' ).map( function(idx,item){
+        hljs.highlightBlock(item);
+    });
 }
 
 /**

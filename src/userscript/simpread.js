@@ -6,7 +6,7 @@
 // @author       Kenshin <kenshin@ksria.com>
 // @include      http://*/*
 // @include      https://*/*
-// @require      https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js
 // @require      https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js?version=697886
 // @require      https://greasyfork.org/scripts/40236-notify/code/Notify.js?version=697887

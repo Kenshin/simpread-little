@@ -534,6 +534,7 @@ function readMode() {
                                 </sr-rd-footer-copywrite>
                             </sr-rd-footer>
                             <sr-rd-crlbar class=${ simpread.read.controlbar == true ? "" : "controlbar" }>
+                                <fab class="setting"></fab>
                                 <fab class="crlbar-close"></fab>
                             </sr-rd-crlbar>
                         </sr-read>
@@ -641,7 +642,7 @@ function readMode() {
     pr.pure && codehighlight();
 
     // exit
-    $( ".simpread-read-root sr-rd-crlbar fab" ).one( "click",  event => {
+    $( ".simpread-read-root sr-rd-crlbar fab:not(.setting)" ).one( "click", event => {
         $( ".simpread-read-root" ).animate( { opacity: 0 }, {
             delay: 100,
             complete: () => {
@@ -653,6 +654,15 @@ function readMode() {
                 $( ".simpread-read-root" ).remove();
             }
         }).addClass( "simpread-read-root-hide" );
+    });
+    $( ".simpread-read-root sr-rd-crlbar fab:not(.setting)" ).mouseover( () => {
+        $( ".simpread-read-root sr-rd-crlbar fab.setting" ).addClass( "show" );
+    });
+    $( ".simpread-read-root sr-rd-crlbar" ).mouseleave( () => {
+        $( "sr-rd-crlbar fab.setting" ).removeClass( "show" );
+    });
+    $( ".simpread-read-root sr-rd-crlbar fab.setting" ).click( () => {
+        wheelmenu();
     });
 };
 

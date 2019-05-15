@@ -598,7 +598,6 @@ function readMode() {
     if ( pr.isMathJax() && pr.state == "temp" ) {
         console.warn( '=== MathJax Mode ===' )
         const dom = pr.MathJaxMode();
-        console.log( 'current get dom is ', dom )
         if ( typeof dom == "undefined" ) {
             new Notify().Render( "智能感知失败，请移动鼠标框选。" );
             highlight().done( dom => {
@@ -788,7 +787,6 @@ function wheelmenu() {
                         const $target = $(item),
                               css     = $target.text();
                         if ( css.startsWith( "sr-rd-theme-" + simpread.read.theme ) ) {
-                            console.log( item )
                             $target.remove();
                         }
                     });

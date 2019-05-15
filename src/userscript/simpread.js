@@ -1,33 +1,35 @@
 // ==UserScript==
 // @name         简悦( SimpRead ) · 轻阅版
 // @namespace    http://ksria.com/simpread/
-// @version      1.1.1.1025
+// @version      1.1.2.5005
 // @description  简悦 - 让你瞬间进入沉浸式阅读的 User Script 扩展
 // @author       Kenshin <kenshin@ksria.com>
 // @include      http://*/*
 // @include      https://*/*
-// @require      https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js
-// @require      https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js?version=264103
-// @require      https://greasyfork.org/scripts/40236-notify/code/Notify.js?version=263047
+// @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js
+// @require      https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js?version=697886
+// @require      https://greasyfork.org/scripts/40236-notify/code/Notify.js?version=697887
 // @require      https://greasyfork.org/scripts/40172-mousetrap/code/Mousetrap.js?version=262594
-// @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=261636
-// @require      https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js?version=262834
-// @resource     global_sites http://sr.ksria.cn/website_list_v3.json?data=0402
-// @resource     origins      http://sr.ksria.cn/website_list_origins.json
-// @resource     notify_style http://sr.ksria.cn/puread/notify.css
-// @resource     main_style   http://sr.ksria.cn/puread/simpread.css
-// @resource     option_style http://sr.ksria.cn/puread/option.css
+// @require      https://greasyfork.org/scripts/383025-bloomingmenu/code/BloomingMenu.js?version=698175
+// @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=697882
+// @require      https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js?version=697883
+// @resource     global_sites http://sr.ksria.cn/website_list_v4.json?data=1.1.2.5005
+// @resource     notify_style http://sr.ksria.cn/puread/notify.css?version=1.1.2.5005
+// @resource     main_style   http://sr.ksria.cn/puread/simpread.css?version=1.1.2.5005
+// @resource     mntips_style http://sr.ksria.cn/puread/mintooltip.css?version=1.1.2.5005
+// @resource     option_style http://sr.ksria.cn/puread/option.css?version=1.1.2.5005
 // @resource     user_style   https://gist.github.com/Kenshin/365a91c61bad550b5900247539113f06/raw/3e666bee279f249e5b59140d8a777192ecb121cd/simpread_user.css
-// @resource     theme_common http://sr.ksria.cn/puread/theme_common.css
-// @resource     theme_dark   http://sr.ksria.cn/puread/theme_dark.css
-// @resource     theme_github http://sr.ksria.cn/puread/theme_github.css
-// @resource     theme_gothic http://sr.ksria.cn/puread/theme_gothic.css
-// @resource     theme_night  http://sr.ksria.cn/puread/theme_night.css
-// @resource     theme_pixyii http://sr.ksria.cn/puread/theme_pixyii.css
-// @resource     theme_engwrite  http://sr.ksria.cn/puread/theme_engwrite.css
-// @resource     theme_monospace http://sr.ksria.cn/puread/theme_monospace.css
-// @resource     theme_newsprint http://sr.ksria.cn/puread/theme_newsprint.css
-// @resource     theme_octopress http://sr.ksria.cn/puread/theme_octopress.css
+// @resource     theme_common http://sr.ksria.cn/puread/theme_common.css?version=1.1.2.5005
+// @resource     theme_dark   http://sr.ksria.cn/puread/theme_dark.css?version=1.1.2.5005
+// @resource     theme_github http://sr.ksria.cn/puread/theme_github.css?version=1.1.2.5005
+// @resource     theme_gothic http://sr.ksria.cn/puread/theme_gothic.css?version=1.1.2.5005
+// @resource     theme_night  http://sr.ksria.cn/puread/theme_night.css?version=1.1.2.5005
+// @resource     theme_pixyii http://sr.ksria.cn/puread/theme_pixyii.css?version=1.1.2.5005
+// @resource     theme_engwrite  http://sr.ksria.cn/puread/theme_engwrite.css?version=1.1.2.5005
+// @resource     theme_monospace http://sr.ksria.cn/puread/theme_monospace.css?version=1.1.2.5005
+// @resource     theme_newsprint http://sr.ksria.cn/puread/theme_newsprint.css?version=1.1.2.5005
+// @resource     theme_octopress http://sr.ksria.cn/puread/theme_octopress.css?version=1.1.2.5005
 // @grant        GM_getResourceText
 // @grant        GM_addStyle
 // @grant        GM_getValue
@@ -43,6 +45,7 @@ const pr         = new PureRead(),
     global_sites = GM_getResourceText( "global_sites" ),
     notify_style = GM_getResourceText( "notify_style" ),
     main_style   = GM_getResourceText( "main_style" ),
+    mntips_style = GM_getResourceText( "mntips_style" ),
     option_style = GM_getResourceText( "option_style" ),
     user_style   = GM_getResourceText( "user_style" ),
     theme_common = GM_getResourceText( "theme_common" ),
@@ -55,7 +58,7 @@ const pr         = new PureRead(),
     theme_monospace = GM_getResourceText( "theme_monospace" ),
     theme_newsprint = GM_getResourceText( "theme_newsprint" ),
     theme_octopress = GM_getResourceText( "theme_octopress" ),
-    theme        = { theme_dark, theme_github, theme_gothic, theme_night, theme_pixyii, theme_engwrite, theme_monospace, theme_newsprint, theme_octopress },
+    theme        = { theme_github, theme_newsprint, theme_gothic, theme_engwrite, theme_octopress, theme_pixyii, theme_monospace, theme_night, theme_dark },
     focus        = {
         version   : "2016-12-29",
         bgcolor   : "rgba( 235, 235, 235, 0.9 )",
@@ -66,6 +69,8 @@ const pr         = new PureRead(),
     },
     read         = {
         version   : "2017-03-16",
+        cleanup   : true,
+        pure      : true,
         auto      : false,
         controlbar: true,
         highlight : true,
@@ -78,6 +83,8 @@ const pr         = new PureRead(),
         ],
         fontsize  : "62.5%",
         layout    : "20%",
+        toc       : true,
+        toc_hide  : true,
     },
     option       = {
         version   : "2017-04-03",
@@ -182,9 +189,31 @@ const pr         = new PureRead(),
                 # 支持 minimatch，域名 和 name，例如： "v2ex.com", "http://www.ifanr.com/**/*"
                 # 默认为空，每个名单由小写 , 分隔
                 set_whitelist: 
+
+                # 是否启用增强解析模式？
+                # 增强解析模式会对版面重新设计，包括：去除多余空格、优化版面结构等，此功能为测试版，遇到解析失败时，请关闭此功能。
+                # 默认为 true，取值范围 true | false
+                set_cleanup: true
+
+                # 是否启用纯粹模式？
+                # 比【增强解析模式】还要彻底优化版本，包括：字形、颜色、字号、代码段等，专治页面及不规范，如：微信订阅号，CSDN 等。
+                # 此功能在 cleanup = true 时才会生效
+                # 默认为 true，取值范围 true | false
+                set_pure: true
+
+                # 是否自动生成大纲（目录）？
+                # 只整理 h1, h2, h3, h4 的内容为大纲
+                # 默认为 true，取值范围 true | false
+                set_toc: true
+
+                # 大纲（目录）是否开启「鼠标移动到左上角」自动显示？
+                # 关闭意味着「一直显示」
+                # 此功能在 toc = true 时才会生效
+                # 默认为 true，取值范围 true | false
+                set_toc_hide: true
     `;
     let current_state = "", // include: focus, read, option
-        simpread = { version: "1.1.1", focus, read, option },
+        simpread = { version: "1.1.2", focus, read, option },
         org_simp = { ...simpread };
 
 /****************************
@@ -199,6 +228,7 @@ if ( !blacklist() ) {
     // add simpread style
     GM_addStyle( notify_style );
     GM_addStyle( main_style   );
+    GM_addStyle( mntips_style );
     GM_addStyle( option_style );
     GM_addStyle( user_style   );
     GM_addStyle( theme_common );
@@ -210,6 +240,8 @@ if ( !blacklist() ) {
         pr.Addsites( JSON.parse( global_sites ));
         GM_setValue( "simpread_db", pr.sites );
     }
+    pr.cleanup = simpread.read.cleanup;
+    pr.pure    = simpread.read.pure;
     pr.AddPlugin( puplugin.Plugin() );
     pr.Getsites();
 
@@ -383,9 +415,9 @@ function controlbar() {
  */
 function entryMode( type ) {
     type = type == "focus" ? "focus" : "read";
-    if ( [ "none", "temp" ].includes( pr.state ) ) {
+    if ( [ "none" ].includes( pr.state ) ) {
         if ( simpread[type].highlight == true ) tempMode( type );
-        else new Notify().Render( `当前未启用 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>，并当前站点也未适配，如需要适配请提交到 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
+        else new Notify().Render( `当前未启用 <a href='http://ksria.com/simpread/docs/#/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>，并当前站点也未适配，如需要适配请提交到 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
     } else type == "focus" ? focusMode() : readMode();
 }
 
@@ -496,12 +528,26 @@ function readMode() {
                             <sr-rd-content></sr-rd-content>
                             <sr-page></sr-page>
                             <sr-rd-footer>
-                                <sr-rd-footer-text style="display:none;">全文完</sr-rd-footer-text>
+                                <sr-rd-footer-group>
+                                    <sr-rd-footer-line></sr-rd-footer-line>
+                                    <sr-rd-footer-text>全文完</sr-rd-footer-text>
+                                    <sr-rd-footer-line></sr-rd-footer-line>
+                                </sr-rd-footer-group>
                                 <sr-rd-footer-copywrite>
-                                    <span>本文由 简悦 </span><a href="http://ksria.com/simpread" target="_blank">SimpRead</a><span> 优化，用以提升阅读体验。</span>
+                                    <div>本文由 <a href="http://ksria.com/simpread" target="_blank">简悦 SimpRead</a> 优化，用以提升阅读体验</div>
+                                    <div class="second">使用了 <abbr>全新的简悦词法分析引擎<sup>beta</sup></abbr>，<a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎">点击查看</a>详细说明</div>
+                                    <div class="third">
+                                        <a class="sr-icon good sr-top" data-sr-mini-tooltip="觉得不错？请帮忙投票 😄" data-position="up" target="_blank" href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll/reviews">
+                                            <svg t="1556354786433" viewBox="0 0 1024 1024" version="1.1" width="33" height="33"><defs><style type="text/css"></style></defs><path d="M859.8 191.2c-80.8-84.2-212-84.2-292.8 0L512 248.2l-55-57.2c-81-84.2-212-84.2-292.8 0-91 94.6-91 248.2 0 342.8L512 896l347.8-362C950.8 439.4 950.8 285.8 859.8 191.2z" p-id="6225" fill="#8C8C8C"></path></svg>
+                                        </a>
+                                        <a class="sr-icon bad sr-top" data-sr-mini-tooltip="有待改进，请帮忙吐槽 😄" data-position="up" target="_blank" href="https://wj.qq.com/s2/3611463/7260/">
+                                            <svg t="1556354650943" viewBox="0 0 1024 1024" version="1.1" p-id="5899" width="33" height="33"><defs><style type="text/css"></style></defs><path d="M458 576c2-36 0-76 16-110 4-10 2-20 2-30-8-42-28-80-30-120 0-2.78 2.008-9.542 2.01-12.314-6.432 4.468-15.214 8.048-22.01 10.314-40 12-35.02 5.146-69.02 27.146l-23.866 14.456c32.686-35.878 77.056-49.562 113.05-77.428 0.388-30.876 1.716-61.354 6.274-91.68C371.22 106.992 243.57 108.536 164.246 191.14c-90.994 94.688-90.994 248.202 0 342.89l305.698 318.192c-0.17-21.312-0.886-42.352-3.944-62.222C454 718 458 648 458 576z" p-id="5900" fill="#8C8C8C"></path><path d="M644 602c-22-52-66-88-126-100-1.7 0-3.758-1.086-5.872-2.638-0.046 0.214-0.082 0.426-0.128 0.638-22 96-46 188-42 284 0 24.454 7.966 50.234 7.666 76.262L512 896l208-216.5C690.306 658.542 660.856 637.242 644 602z" p-id="5901" fill="#8C8C8C"></path><path d="M859.748 191.14c-80.852-84.188-211.978-84.188-292.816 0L528 230.806c0.15 26.35 0.426 52.404-6 77.194-4 20-38 38-32 62 6.006 26.426 16.332 51.41 21.464 77.118C542.028 464.168 569.542 485.792 594 512c45.602 53.532 75.494 114.918 130.566 162.742l135.182-140.71C950.75 439.342 950.75 285.828 859.748 191.14z" p-id="5902" fill="#8C8C8C"></path></svg>
+                                        </a>
+                                    </div>
                                 </sr-rd-footer-copywrite>
-                                </sr-rd-footer>
-                            <sr-rd-crlbar class=${ simpread.read.controlbar == true ? "" : "controlbar" }>
+                            </sr-rd-footer>
+                            <sr-rd-crlbar style="position:fixed;bottom:0;right:0;width:100px;height:200px;" class=${ simpread.read.controlbar == true ? "" : "controlbar" }>
+                                <fab class="setting"></fab>
                                 <fab class="crlbar-close"></fab>
                             </sr-rd-crlbar>
                         </sr-read>
@@ -549,6 +595,22 @@ function readMode() {
             }
         };
 
+    if ( pr.isMathJax() && pr.state == "temp" ) {
+        console.warn( '=== MathJax Mode ===' )
+        const dom = pr.MathJaxMode();
+        if ( typeof dom == "undefined" ) {
+            new Notify().Render( "智能感知失败，请移动鼠标框选。" );
+            highlight().done( dom => {
+                storage.pr.TempMode( "read", dom );
+                Render( false );
+            });
+        } else if ( typeof dom == "string" ) {
+            const html = pr.GetDom( dom, "html" );
+            pr.Newsite( "read", html );
+        } else {
+            pr.TempMode( "read", dom[0] );
+        }
+    }
     pr.ReadMode();
 
     if ( special() ) return;
@@ -589,8 +651,11 @@ function readMode() {
     style.FontSize(   simpread.read.fontsize   );
     style.Layout(     simpread.read.layout     );
 
+    pr.pure && codehighlight();
+    simpread.read.toc && toc();
+
     // exit
-    $( ".simpread-read-root sr-rd-crlbar fab" ).one( "click",  event => {
+    $( ".simpread-read-root sr-rd-crlbar fab:not(.setting)" ).one( "click", event => {
         $( ".simpread-read-root" ).animate( { opacity: 0 }, {
             delay: 100,
             complete: () => {
@@ -603,6 +668,15 @@ function readMode() {
             }
         }).addClass( "simpread-read-root-hide" );
     });
+    $( ".simpread-read-root sr-rd-crlbar fab:not(.setting)" ).mouseover( () => {
+        $( ".simpread-read-root sr-rd-crlbar fab.setting" ).addClass( "show" );
+    });
+    $( ".simpread-read-root sr-rd-crlbar" ).mouseleave( () => {
+        $( "sr-rd-crlbar fab.setting" ).removeClass( "show" );
+    });
+    $( ".simpread-read-root sr-rd-crlbar fab.setting" ).click( () => {
+        wheelmenu();
+    });
 };
 
 /**
@@ -611,7 +685,7 @@ function readMode() {
  * @param {string} include: focus, read
  */
 function tempMode( mode = "read" ) {
-    new Notify().Render( "当前并未适配阅读模式，请移动鼠标手动生成 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。" );
+    new Notify().Render( "当前并未适配阅读模式，请移动鼠标手动生成 <a href='http://ksria.com/simpread/docs/#/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。" );
     highlight().done( dom => {
         if ( mode == "read" ) {
             pr.TempMode( mode, dom.outerHTML );
@@ -657,6 +731,180 @@ function highlight() {
 }
 
 /**
+ * Code highlight
+ */
+function codehighlight() {
+    $("head").append('<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">')
+    $("head").append( '<style>.hljs{background:transparent!important;}</style>' )
+    $("sr-rd-content").find( 'pre' ).map( function(idx,item){
+        hljs.highlightBlock(item);
+    });
+}
+
+/**
+ * Wheel menu buttons
+ */
+function wheelmenu() {
+    const menu = new BloomingMenu({
+        startAngle: -180,
+        endAngle: 0,
+        radius: 120,
+        itemsNum: 7,
+        itemAnimationDelay: 0,
+        isAutoClose: false
+    });
+    menu.render();
+    menu.open()
+    menu.props.elements.items.forEach(function (item, index) {
+        item.addEventListener('click', function () {
+            switch ( index ) {
+                case 0:
+                case 1:
+                    const size = parseFloat( simpread.read.fontsize ) + ( index == 0 ? 3 : -3 );
+                    simpread.read.fontsize = `${size}%`;
+                    style.FontSize( simpread.read.fontsize );
+                    GM_setValue( "simpread",  simpread );
+                    break;
+                case 2:
+                case 3:
+                    const layout = parseFloat( simpread.read.layout ) + ( index == 3 ? 3 : -3 );
+                    simpread.read.layout = `${layout}%`;
+                    style.Layout( simpread.read.layout );
+                    GM_setValue( "simpread",  simpread );
+                    break;
+                case 4:
+                case 5:
+                    const arr = Object.keys( theme ),
+                          len = arr.length;
+                    let   idx = arr.indexOf( `theme_${simpread.read.theme}` ) +  + ( index == 4 ? 1 : -1 );
+                    if ( idx == len ) {
+                        idx = 0;
+                    } else if ( idx == -1 ) {
+                        idx = len -1;
+                    }
+                    // remove old theme
+                    $( "head" ).find( "style" ).map( (index, item) => {
+                        const $target = $(item),
+                              css     = $target.text();
+                        if ( css.startsWith( "sr-rd-theme-" + simpread.read.theme ) ) {
+                            $target.remove();
+                        }
+                    });
+                    // add new theme
+                    simpread.read.theme = arr[idx].replace( "theme_", ""  );
+                    GM_setValue( "simpread",  simpread );
+                    GM_addStyle( theme[`theme_${simpread.read.theme}`]    );
+                    break;
+                case 6:
+                    menu.remove();
+                    $(".sr-rd-trigger").remove();
+                    $("head #blooming-menu__root").remove();
+                    break;
+            }
+        })
+    });
+    const css = `
+        .sr-rd-trigger {
+            position: fixed;
+            right: 50%;
+            bottom: 35px;
+        }
+        .blooming-menu__container {
+            transition: all 1s cubic-bezier(.23,1,.32,1) .1s!important;
+        }
+        .blooming-menu__main {
+            background-color: rgba(244, 67, 54, 1);
+        }
+        .blooming-menu__item-btn-wrapper {
+            background-color: #03a9f4!important;
+        }
+        .blooming-menu__main.is-active {
+            transform: rotate(0);
+            -webkit-transform: rotate(0);
+        }
+        .blooming-menu__item:nth-of-type(3) button,
+        .blooming-menu__item:nth-of-type(4) button {
+            transform: rotate(90deg);
+        }
+        .blooming-menu__item:nth-of-type(6) button {
+            transform: rotate(180deg);
+        }
+    `;
+    $( "head" ).append( `<style id="blooming-menu__root">${ css }</style>` );
+    setTimeout( ()=> {
+        $(".simpread-read-root").append( `<div class="sr-rd-trigger"></div>` );
+        $(".sr-rd-trigger").append( $(".blooming-menu__container") );
+        $(".simpread-read-root .blooming-menu__main-content").html( `<svg t="1557891708974" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5907" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"><defs><style type="text/css"></style></defs><path d="M152.365633 555.145394a154.587346 154.587346 0 0 0 39.497121 66.761107C221.21131 651.245914 260.251289 667.428762 301.759838 667.428762c41.508549 0 80.548528-16.164563 109.897084-45.531404A154.660489 154.660489 0 0 0 450.40433 557.714536H978.330904c25.206844 0 45.714261-20.470846 45.714262-45.714262 0-25.197701-20.470846-45.714261-45.714262-45.714261H450.395187a154.669631 154.669631 0 0 0-38.729122-64.182823A154.413632 154.413632 0 0 0 301.759838 356.571786c-41.508549 0-80.548528 16.164563-109.897084 45.531404a154.587346 154.587346 0 0 0-39.497121 66.761107A45.48569 45.48569 0 0 0 137.234212 466.286013H45.714261a45.723404 45.723404 0 0 0 0 91.428523h91.519951c5.302854 0 10.395423-0.905142 15.131421-2.569142z m719.359614 270.280998a154.596489 154.596489 0 0 0-39.497121-66.761107A154.413632 154.413632 0 0 0 722.331042 713.143024c-41.508549 0-80.548528 16.164563-109.897084 45.531404A154.660489 154.660489 0 0 0 573.68655 822.857251H45.759976c-25.206844 0-45.714261 20.470846-45.714262 45.714261 0 25.197701 20.470846 45.714261 45.714262 45.714261h527.935717a154.660489 154.660489 0 0 0 38.729122 64.182823C641.782513 1007.84458 680.822492 1024 722.331042 1024c41.508549 0 80.548528-16.164563 109.897084-45.531404a154.587346 154.587346 0 0 0 39.497121-66.761107 45.48569 45.48569 0 0 0 15.131421 2.578284h91.519951a45.723404 45.723404 0 0 0 0-91.428522h-91.519951c-5.302854 0-10.395423 0.905142-15.131421 2.569141z m0-713.142475a154.596489 154.596489 0 0 0-39.497121-66.761107A154.413632 154.413632 0 0 0 722.331042 0.000549c-41.508549 0-80.548528 16.164563-109.897084 45.531404A154.660489 154.660489 0 0 0 573.68655 109.714776H45.759976c-25.206844 0-45.714261 20.470846-45.714262 45.714261 0 25.197701 20.470846 45.714261 45.714262 45.714261h527.935717a154.660489 154.660489 0 0 0 38.729122 64.182823C641.782513 294.702105 680.822492 310.857525 722.331042 310.857525c41.508549 0 80.548528-16.164563 109.897084-45.531404a154.587346 154.587346 0 0 0 39.497121-66.761107 45.48569 45.48569 0 0 0 15.131421 2.578284h91.519951a45.723404 45.723404 0 0 0 0-91.428522h-91.519951c-5.302854 0-10.395423 0.905142-15.131421 2.569141zM347.016957 557.257393A63.579395 63.579395 0 0 1 301.759838 576.00024a63.579395 63.579395 0 0 1-45.257118-18.742847A63.579395 63.579395 0 0 1 237.759873 512.000274c0-17.097134 6.655996-33.170268 18.742847-45.257118A63.579395 63.579395 0 0 1 301.759838 448.000309c17.097134 0 33.170268 6.655996 45.257119 18.742847A63.579395 63.579395 0 0 1 365.759804 512.000274c0 17.097134-6.655996 33.170268-18.742847 45.257119z m420.571203 356.571237A63.579395 63.579395 0 0 1 722.331042 932.571478a63.579395 63.579395 0 0 1-45.257119-18.742848A63.579395 63.579395 0 0 1 658.331076 868.571512c0-17.097134 6.655996-33.170268 18.742847-45.257119A63.579395 63.579395 0 0 1 722.331042 804.571546c17.097134 0 33.170268 6.655996 45.257118 18.742847A63.579395 63.579395 0 0 1 786.331007 868.571512c0 17.097134-6.655996 33.170268-18.742847 45.257118z m0-713.142475A63.579395 63.579395 0 0 1 722.331042 219.429002a63.579395 63.579395 0 0 1-45.257119-18.742847A63.579395 63.579395 0 0 1 658.331076 155.429037c0-17.097134 6.655996-33.170268 18.742847-45.257119A63.579395 63.579395 0 0 1 722.331042 91.429071c17.097134 0 33.170268 6.655996 45.257118 18.742847A63.579395 63.579395 0 0 1 786.331007 155.429037c0 17.097134-6.655996 33.170268-18.742847 45.257118z" fill="#ffffff" p-id="5908"></path></svg>` );
+        $($(".simpread-read-root .blooming-menu__item-btn")[0]).html( `<svg t="1557891878314" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7413" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"><defs><style type="text/css"></style></defs><path d="M661.333333 938.666667a21.333333 21.333333 0 0 1-19.886666-13.606667L547.186667 682.666667H178.146667l-94.266667 242.4a21.333333 21.333333 0 1 1-39.76-15.466667l298.666667-768a21.333333 21.333333 0 0 1 39.76 0l298.666666 768A21.333333 21.333333 0 0 1 661.333333 938.666667zM194.74 640h335.853333L362.666667 208.193333zM832 384a21.333333 21.333333 0 0 1-21.333333-21.333333V256h-106.666667a21.333333 21.333333 0 0 1 0-42.666667h106.666667V106.666667a21.333333 21.333333 0 0 1 42.666666 0v106.666666h106.666667a21.333333 21.333333 0 0 1 0 42.666667h-106.666667v106.666667a21.333333 21.333333 0 0 1-21.333333 21.333333z" fill="#ffffff" p-id="7414"></path></svg>` );
+        $($(".simpread-read-root .blooming-menu__item-btn")[1]).html( `<svg t="1557891916958" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7691" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"><defs><style type="text/css"></style></defs><path d="M661.333333 938.666667a21.333333 21.333333 0 0 1-19.886666-13.606667L547.186667 682.666667H178.146667l-94.266667 242.4a21.333333 21.333333 0 1 1-39.76-15.466667l298.666667-768a21.333333 21.333333 0 0 1 39.76 0l298.666666 768A21.333333 21.333333 0 0 1 661.333333 938.666667zM194.74 640h335.853333L362.666667 208.193333zM960 256h-256a21.333333 21.333333 0 0 1 0-42.666667h256a21.333333 21.333333 0 0 1 0 42.666667z" fill="#ffffff" p-id="7692"></path></svg>` );
+        $($(".simpread-read-root .blooming-menu__item-btn")[2]).html( `<svg t="1557892103159" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="825" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"><defs><style type="text/css"></style></defs><path d="M128 128h768v85.333333H128V128z m213.333333 341.333333v426.666667H256V469.333333H128l170.666667-170.666666 170.666666 170.666666H341.333333z m426.666667 0v426.666667h-85.333333V469.333333h-128l170.666666-170.666666 170.666667 170.666666h-128z" p-id="826" fill="#ffffff"></path></svg>` );
+        $($(".simpread-read-root .blooming-menu__item-btn")[3]).html( `<svg t="1557892186358" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10987" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"><defs><style type="text/css"></style></defs><path d="M128 810.666667h768v85.333333H128v-85.333333z m213.333333-256h128l-170.666666 170.666666-170.666667-170.666666h128V128h85.333333v426.666667z m426.666667 0h128l-170.666667 170.666666-170.666666-170.666666h128V128h85.333333v426.666667z" p-id="10988" fill="#ffffff"></path></svg>` );
+        $($(".simpread-read-root .blooming-menu__item-btn")[4]).html( `<svg t="1557893778057" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="12269" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"><defs><style type="text/css"></style></defs><path d="M249.984 841.984l0-269.994667 148.010667 356.010667-61.994667 0q-34.005333 0-59.989333-25.984t-25.984-59.989333zM336 374.016q18.005333 0 29.994667-13.013333t11.989333-31.018667-11.989333-29.994667-29.994667-11.989333-29.994667 11.989333-11.989333 29.994667 11.989333 31.018667 29.994667 13.013333zM939.989333 680.021333q13.994667 32 0 64.981333t-45.994667 47.018667l-313.984 130.005333q-16 6.016-34.005333 6.016-56.021333 0-77.994667-52.010667l-212.010667-512q-6.016-18.005333-6.016-34.005333 0-54.016 52.010667-75.989333l315.989333-130.005333q18.005333-6.016 34.005333-6.016 54.016 0 75.989333 52.010667zM107.989333 838.016q-32-13.994667-45.994667-45.994667t0-64l104.021333-249.984 0 384z" p-id="12270" fill="#ffffff"></path></svg>` );
+        $($(".simpread-read-root .blooming-menu__item-btn")[5]).html( `<svg t="1557893778057" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="12269" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"><defs><style type="text/css"></style></defs><path d="M249.984 841.984l0-269.994667 148.010667 356.010667-61.994667 0q-34.005333 0-59.989333-25.984t-25.984-59.989333zM336 374.016q18.005333 0 29.994667-13.013333t11.989333-31.018667-11.989333-29.994667-29.994667-11.989333-29.994667 11.989333-11.989333 29.994667 11.989333 31.018667 29.994667 13.013333zM939.989333 680.021333q13.994667 32 0 64.981333t-45.994667 47.018667l-313.984 130.005333q-16 6.016-34.005333 6.016-56.021333 0-77.994667-52.010667l-212.010667-512q-6.016-18.005333-6.016-34.005333 0-54.016 52.010667-75.989333l315.989333-130.005333q18.005333-6.016 34.005333-6.016 54.016 0 75.989333 52.010667zM107.989333 838.016q-32-13.994667-45.994667-45.994667t0-64l104.021333-249.984 0 384z" p-id="12270" fill="#ffffff"></path></svg>` );
+        $($(".simpread-read-root .blooming-menu__item-btn")[6]).html( `<svg t="1557893821906" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13152" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"><defs><style type="text/css"></style></defs><path d="M851.428571 755.428571q0 22.857143-16 38.857143l-77.714285 77.714286q-16 16-38.857143 16t-38.857143-16l-168-168-168 168q-16 16-38.857143 16t-38.857143-16l-77.714285-77.714286q-16-16-16-38.857143t16-38.857142l168-168-168-168q-16-16-16-38.857143t16-38.857143l77.714285-77.714286q16-16 38.857143-16t38.857143 16l168 168 168-168q16-16 38.857143-16t38.857143 16l77.714285 77.714286q16 16 16 38.857143t-16 38.857143l-168 168 168 168q16 16 16 38.857142z" p-id="13153" fill="#ffffff"></path></svg>` );
+        $( "body" ).find( ".blooming-menu__container" ).remove();
+    }, 1000);
+
+    let preScroll = 0;
+    $(document).scroll( () => {
+        if ( $(document).scrollTop() > preScroll ) {
+            $(".blooming-menu__container").css({transform: 'translate(-50%, 20%)', opacity: 0.5 });
+            menu.close();
+        } else {
+             $(".blooming-menu__container").css({transform: 'translate(-50%, -50%)', opacity: 1 });
+        }
+        preScroll = $(document).scrollTop();
+    });
+}
+
+/**
+ * toc
+ */
+function toc() {
+    const table = [],
+          cls   = simpread.read.toc_hide ? "toc-bg-hidden" : "";
+    $("sr-read").find( "h1, h2, h3, h4" ).map( ( idx, item) => {
+        const $item = $( item ),
+              tag   = $item[0].tagName.toLowerCase(),
+              value = $item.text();
+        let   id    = $item.attr( "id" );
+        id          = id == undefined ? `sr-toc-${idx}` : `${id}-${idx}`
+        $item.attr( "id", id );
+        value && table.push({
+            level: `toc-level-${tag}`,
+            id,
+            value,
+        });
+    });
+    console.log( "current toc is ", table )
+    let tmpl = "";
+    table.forEach( ( item, idx ) => {
+        tmpl += `<outline className=${ item.level }>
+                    <active></active>
+                    <a class=${ "toc-outline-theme-" + simpread.read.theme } href=${ "#" + item.id } >${ item.value }</a>
+                </outline>`;
+    });
+    $("sr-read").append( `<toc-bg class=${cls}><toc class="simpread-font simpread-theme-root">${tmpl}</toc></tocbg>` );
+    let is_click = false;
+    $("sr-read toc outline a").on( "click", event => {
+        is_click = true;
+        const $target = $( event.target ).parent();
+        $target.parent().find( "active" ).removeClass( "toc-outline-active" );
+        $target.find( "active" ).addClass( "toc-outline-active" );
+
+        const href     = $( event.target ).attr("href"),
+             offsetTop = href === "#" ? 0 : $(href).offset().top - 5;
+        $( "html" ).stop().animate({
+            scrollTop: offsetTop
+        }, 300, () => {
+            setTimeout( ()=>is_click = false, 500 );
+        });
+        event.preventDefault();
+    })
+    simpread.read.toc_hide && $('head').append( `<style>toc-bg{width:50px!important;height:200px!important}.toc-bg-hidden{transition:opacity .2s ease}.toc-bg-hidden:hover toc{width:180px}toc{width:0;transition:width .5s!important}</style>` );
+}
+
+/**
  * Option Mode
  */
 function optionMode() {
@@ -683,20 +931,21 @@ function optionMode() {
                     if ( event && event.target && event.target.result ) {
                         try {
                             const json = JSON.parse( event.target.result );
-                            if ( json.version && json.version.replace( /\./g, "" ) >= simpread.version.replace( /\./g, "" ) ) {
-                                Object.keys( simpread.focus  ).forEach( key => { json.focus[key]  != undefined && (simpread.focus[key]  = json.focus[key]  )});
-                                Object.keys( simpread.read   ).forEach( key => { json.read[key]   != undefined && (simpread.read[key]   = json.read[key]   )});
-                                Object.keys( simpread.option ).forEach( key => { json.option[key] != undefined && (simpread.option[key] = json.option[key] )});
-                                GM_setValue( "simpread",  simpread );
-                                if ( json.websites ) {
-                                    pr.sites.custom = [ ...json.websites.custom ];
-                                    pr.sites.local  = [ ...json.websites.local ];
-                                    GM_setValue( "simpread_db", pr.sites );
-                                    new Notify().Render( `已导入本地适配源：${ pr.sites.local.length} 条；官方次适配源：${pr.sites.custom.length} 条。` );
-                                    console.log( "new simpread db", pr.sites )
-                                }
-                                new Notify().Render( "导入成功，请刷新当前页面，以便新配置文件生效。" );
-                            } else new Notify().Render( 2, "上传的版本太低，请重新上传！" );
+                            if ( json.version && json.version.replace( /\./g, "" ) < simpread.version.replace( /\./g, "" ) ) {
+                                new Notify().Render( 2, "上传的版本太低，已转换为最新版版本！" );
+                            }
+                            Object.keys( simpread.focus  ).forEach( key => { json.focus[key]  != undefined && (simpread.focus[key]  = json.focus[key]  )});
+                            Object.keys( simpread.read   ).forEach( key => { json.read[key]   != undefined && (simpread.read[key]   = json.read[key]   )});
+                            Object.keys( simpread.option ).forEach( key => { json.option[key] != undefined && (simpread.option[key] = json.option[key] )});
+                            GM_setValue( "simpread",  simpread );
+                            if ( json.websites ) {
+                                pr.sites.custom = [ ...json.websites.custom ];
+                                pr.sites.local  = [ ...json.websites.local ];
+                                GM_setValue( "simpread_db", pr.sites );
+                                new Notify().Render( `已导入本地适配源：${ pr.sites.local.length} 条；官方次适配源：${pr.sites.custom.length} 条。` );
+                                console.log( "new simpread db", pr.sites )
+                            }
+                            new Notify().Render( "导入成功，请刷新当前页面，以便新配置文件生效。" );
                         } catch ( error ) { new Notify().Render( 2, "上传失败，配置文件解析失败，请重新确认。" ); }
                     }
                   };
@@ -719,7 +968,7 @@ function optionMode() {
                 new Notify().Render( `请勿在 https 下面使用此功能，请前往 http 的页面，如： <a href='http://kenshin.wang/blog/' target='_blank' >点击这里</a>` );
                 return;
             }
-            $.getJSON( "http://sr.ksria.cn/website_list_v3.json" + "?_=" + Math.round(+new Date()), result => {
+            $.getJSON( "http://sr.ksria.cn/website_list_v4.json" + "?_=" + Math.round(+new Date()), result => {
                 const count = pr.Addsites( result );
                 count == 0 ? new Notify().Render( "适配列表已同步至最新版本。" ) : new Notify().Render( 0, `适配列表已同步成功，本次新增 ${ count } 个站点。` );
             });
@@ -853,14 +1102,18 @@ function aboutMode() {
                             <dialog-head>关于</dialog-head>
                             <dialog-content>
                                 <p align="center"><img src="http://sr.ksria.cn/logo@128.png"></p>
-                                <div style="display:flex;flex-direction:row;justify-content:center;"><a href="https://github.com/Kenshin/simpread/releases" target="_blank" data-reactid=".2.1.5.0.0.2.0"><img style="padding:5px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIIAAAAUCAMAAAB24hWRAAACVVBMVEUAVapVVVUCcrMQgMIAcbISg8RNTU1PT09fX18ThcVfX18CdbUQg8RdXV1PT08AcbJNTU0AcbIBcrMCc7QDdLUEU4AEVYQEVoUEV4YEWIkEYpcEdbYFa6YFdrcGd7gHeLkIeboJersKc7AKe7wLeLYLfL0Mfb4Nfr8Of8APgMEQgcIRgsMSg8QThMUghsAlb5k5OTk8PDw9PT09j789kMA+Pj4+kcE/Pz8/ksFAQEBAk8FBQUFBk8JCQkJCms1EREREjLZFRUVHR0dISEhJSUlKSkpKncxLS0tMTExNTU1OTk5PT09QUFBRUVFSUlJTU1NUVFRUn8pVVVVWVlZXV1dYWFhZWVlaWlpbW1tcXFxdXV1eXl5fX19gYGBhYWFiYmJjY2NkZGRlZWVmZmZnZ2dsbGxubm5vb29ycnJ1dXV3d3d5eXl6enp9fX1+fn5/f3+BgYGCgoKDg4OEhISFhYWGhoaIiIiJiYmKioqLi4uOjo6SxeKVxeGYmJiZmZmampqcnJydnZ2jo6OlpaWpqamqqqqrq6uurq6vr6+wsLCzs7O1tbW2tra5ubm8vLy9vb3AwMDDw8PExMTFxcXGxsbIyMjJycnKysrLy8vMzMzNzc3Ozs7Pz8/Q0NDR0dHU1NTV1dXV5vDW1tbX19fa2trc3Nzd3d3d6O7d6O/d6e/e3t7f39/g4ODh4eHh7vbh7/fi4uLj4+Pk5OTl5eXl8ffm5ubn5+fo6Ojq6urq8/jt7e3u7u7v7+/w8PDx8fHy8vL39/f6+vr7+/v8/f79/f3+/v7///8I/4XxAAAAEXRSTlMGBo2Njo6Ojo7j4+jo6Ons7CIlfBEAAAABYktHRMb6AnrNAAAClElEQVRIx7XM51fTUBgG8IsT996CE3BLq4gaEaui0DbD3JukA0UFFSfiAMWBuMUNCoqDioKVggouXLXRmr/L5N7mkBbPIV/y+5Dz5HneBCQlDy+0yFIThg0GINlvmSWmDASjfJZZbMpI4LXOInOAxzoLzQGSdRaYA0RC9otxrkpiP0W8xO81GdiZd8r6xGSMGUAgZK8QJ+oR+iliYnXJf6Z0bMPy1+sSkzGmA0TIHlTX1tlYhHwPOkOP0A2lJeA73NLeWm4sELp8E6Fdv/yITEi5/vAinpHsRRWhzuZ9anepru00/mcaNnf+m7WJyRjTACRkCXIUVXMNVtRTlAtuijpydnRwFOrx9BY8hIXfRVhziy8iE1Qqc4/iWf2+OOyjql5BqJQ7pB78z3kxwdV9kyECnpBF/nzLy7YGfueX21USz0cFvuJHINDctae3UDGPK/nWUn3iFVa/l8VTDTRf8NvPKzTPRPDxnJjgqr7JEAFHyMKBbid1qImjNx6p/ezhoog7/pyiqCx3b6E5WV/6waVPnMLq97JwopHjoOzVOi4iaLezY4Ir+yZDBCwho7KnNHuvid0tbd38rZgNb2fF8DGWPWgoNPTPuxdYfWIVVp9l5A3vZc8FGK1jI0i7nRUTXKE+tiyLSyRigCFkWHDnyf0rTUxZR8f7ahdT3R2CJYGuT3WGQlDv6Nq/XoZxk4lRGH2WoXt/e9czCXdMBGr/TMXOfvzz9W1q6otthqRHDNBEppum1lC52XSe3W530LTDZnfnZ9lslLHQDnMyneqTTHQmrc/q93l2W7YTd9qbKgWbPmXS5KkpKdNmGpIeMeC2zgxzgMs6E80Bo52WmWDKCDC0wDLjTRkAkoaMzbfIOBPGDAL/AKYMAsA+boF+AAAAAElFTkSuQmCC"></a><a href="http://ksria.com/simpread#lite" target="_blank" data-reactid=".2.1.5.0.0.2.1"><img style="padding:5px;" src="data:image/png;base64,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" data-reactid=".2.1.5.0.0.2.1.0"></a><a href="https://github.com/Kenshin/simpread" target="_blank" data-reactid=".2.1.5.0.0.2.2"><img style="padding:5px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAAAUCAMAAAAQlCuDAAACplBMVEVVVVXVVSvmcjP0gEFNTU1PT09fX1/kbzD2gUJfX1/3g0VdXV3nczT1gkJPT09NTU3kcDE5OTk7Ozs8PDw9PT0+Pj5BQUFCQkJDQ0NERERFRUVISEhJSUlMTExNTU1OTk5PT09QUFBRUVFSUlJTU1NUVFRVVVVWVlZXV1dYWFhZWVlaWlpbW1tcXFxdXV1eXl5fX19gYGBiYmJlZWVnZ2dra2t4eHh8fHx/f3+CgoKGhoaIiIiJiYmKioqLi4uMjIyQkJCTk5OZmZmampqenp6fn5+jUiajo6OkpKSmpqanp6eqqqqrq6usrKyuVyivWCivWCmwsLCxYDSzXCy0XC21Wyq1XCy3XCq4Xi65YTG6Zzq7Xiu9YS/BajvCwsLDYi3Dw8PEZjTEb0DExMTFxcXGxsbHZC7Hx8fIZjLKjGzPz8/QazTSqJDTqJHVbDPVk2/V1dXWazLWcjzW1tbZczzb29vcnXrcrJLc3NzdgE7d3d3e3t7f39/g4ODht6DicjXkcDHkdDfk5OTlcTLlczXlxrXl5eXmcjPmdTfml2znczTodDXoe0DpdTbpdzjpfULp6enqdjfq6urrdzjreTrrejzrhk/rmWzrzr/r1srseDnsez3sgkjs1MfteTrtfUHthU3twant1cjt7e3uejvvezzvfkDv0sLv7+/wfD3wfkDwgEPwhEnwlGHwzLjw8PDxfT7xfkDxoXXxrorx8fHyfj/y8vLzf0Dzpnz0gEH1gUL1so71v6L149n2gkP3g0T3wKL3waP37Ob37+v39/f4vZ34yK74z7n46eD4+Pj50Lr52Mf58/D60r361MD61sL61sP65tv6+vr73s/739D739H75tr759z76N376uD85dj85tr859z87OT9/f3+/fz+/f3///9Ftc+TAAAAEXRSTlMGBo2Njo6Ojo7j4+jo6Ons7CIlfBEAAAABYktHROFfCM+mAAACOUlEQVQYGZXBT0iTYQDH8e/7vs82l6ibYgYWMrE0QaE/VEKXBJMIBKVDHSLoUhSdO3axbqVEERFENwnqVpMIIoIoioIuSRCUFSFWrkzd9u7Z++udUgnhXJ+PQ9Rrp1IjrGx/kDfRzYhKiZXdoc9EROUs5awxraJyopxbRvyHgLKM+A8BZblabswohZTWcmn9UfgrYQv/MGKZoz4XBwIQy4nf8vzRPOnxlyNCrhY1HR5M3ZWumw6vvz9Cy4FjjYqfl9ybEm1Dh9ZqkQ25bdu2ttt1Tnenm9qybZNn7a6mjUlbYkSo5viZTBeC4FlxrFhH/uqGI5eDQAjB/LXG4eE5QgJiz+878f6x02e1e3xWbX1TkP5c10PIiFA8bRMfEaiauiJMJmZ2XhFCCD4lsumqn4R84Mm+7tkJfwe9HoMpZ2raB9uLT8iIUDHiqgqBhASuTAGL8BDEcp4biJAFqkY3bB14VMCPNDSesw09FtZbFhkRmut79X0dAul1/CcgUC5T+6MBQdP75J7HIpQHWqo/PGzNFr/Fsm+/dlc3Z/IQybPIiNDs6ND8y9cCaWTQv40Acan3yzQC72D0wrxLKACyfVHncn39jVPF63avHW8JIGCJ00qJZp2OjgdkEk4u79R8T0Im4fh5x8slycR9xaOUnAQ+vUNN7byZcrdPWGMWdnGvnyVOipLOLi/zMMtqTlCWESUvnsqNe6xGlGVmkoRiMUCspkg5Z002QeUs5SyYwufqWipVZGWjWf0CDsxBCuuBMAQAAAAASUVORK5CYII=" data-reactid=".2.1.5.0.0.2.2.0"></a></div>
+                                <div style="display:flex;flex-direction:row;justify-content:center;">
+                                    <a href="https://github.com/Kenshin/simpread/releases" target="_blank" data-reactid=".2.1.5.0.0.2.0">
+                                        <svg style="margin: 5px;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="90" height="20"><linearGradient id="b" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="a"><rect width="90" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#a)"><path fill="#555" d="M0 0h51v20H0z"/><path fill="#007ec6" d="M51 0h39v20H51z"/><path fill="url(#b)" d="M0 0h90v20H0z"/></g><g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="110"> <text x="265" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="410">version</text><text x="265" y="140" transform="scale(.1)" textLength="410">version</text><text x="695" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">1.1.2</text><text x="695" y="140" transform="scale(.1)" textLength="290">1.1.2</text></g> </svg>
+                                    </a>
+                                    <a href="http://ksria.com/simpread#lite" target="_blank" data-reactid=".2.1.5.0.0.2.1"><img style="padding:5px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKwAAAAUCAYAAAAQqNbAAAAABmJLR0QA/wD/AP+gvaeTAAAJSklEQVRo3u1beVBU6RGfuIAY43qtq9lNsjHZ2tqqZFP51xSa0opR8QZUvK94LZoNqdSKF7JABAUHFOVcUZSKgIDOoKMgl+MAIma4WRQXhAG5L0GiRveX1z2Zx+MJCLtLpTI1XfWr93X3193f16+nv+8VhWLFihU2GzduVAowCIA5IOLOZAvMC4bwnElKjziFjYKKdcOGDTAnCJuzwAwRmjXhuGL9+vUNAmBOCMueaIE5ImdCg2LdunUwNwi/RAvMFIq1a9fC3BCiG2+BmUKxZs0amBuCb79tgZlCsXr1aowEiIZr8+LFC/5oovGlS5e4+L5N7NPacUPCy1fPEKqbMuT5/2t8883LAXVE39X//0M+FM7OzhgJEA3XZseOHeL41atXfLx/m9inbv1oSPCNskNQxrghzx8ugrUTvld/r4SCHUhH9F3XOdL5+D6gWLVqFeSIiIhAcnIyjw8cOMDJ2L9/P/MpKSkIDw/n8aFDh1BWVobKyko8fPgQnp6eog+i+Ph41tXW1sLf35/l9BWfnZ2N6upqVFVVIS8vT7ShDksfTVeuXGF78l1aWso2g8WSIyhzrIgQ7TuoaEpAS3cxmroKUNmcJOqoowRrJ/OYKLvSned19FQiIX8u8g0nBb6UEX33t6Idkb4mEOUN/8DjjhxcK3Huo8urPoaHTVeQ+cCVZfH6Oajr0Anx89H45B4uF9iL8+83xgoyPcf9ulmNcN37ok5TshptT++z3Z0qby5Y6d6kIKLn6VvjUVp/TkAUwm5PHXDv/a1Tmo/B1iVHQv4fUd+Zy3Obu4qQWDCP5eoiB4EvFOQlMLRn4nzuJ33iDzXfUihWrlwJObZt2waDwcDj6OhoFBcX48KFC8xT8ZF+y5YtePToEZycnDB79mwulKamJu6KNI8oLCyMdXS0d3R0sJ2vry+ysrJYTli6dKkYlwqW5s6fP5877Ny5czFnzhxs3rx50FhynMz4oQh1oRNKqtT4c6AtPjthi4Nnpoq6f798hlOZk3hMdDlnF887c3UNXrzsRmTKYuwJGI3L2r0oqY0W7YhitRvxebgtDkS8h84eAyKyPhB1cYLub6G28Lg4hl90U2cJ3CM/4PiHIz8U5tcIhTWR53uc/wnLKa7mziHcrfJj+ZdZ0/H0WQs8znzM+mT9QS5Y6d6kIArRvotHLcm4qffG3i9toS4YeO/ydcrzMdC65IjQ/QxPnzcjIG4mz/3LibEI0Ewzrv95C7yjPmF5XIYL6jvy+sQfar6lUAh/6YIcy5cvR0NDA3bu3In8/Hy4urpCr9czT3LSU+G1t7dzBySUlJRwke/evZt9EEn9UVclm61bt7IP6uBKpZIL1DSPCpbuoDSmgqXjncZviiXHifQxIoKuf4S2J9Uoqg0XOtZaBKW9I+roBQVlTOQxkfelCUbdtY/Q3dOCvyfaMh+RPBtVDdmiHZFvotGPMmUMCh8m4YreSdT5JEwS56ryndDV0wxDmxa17VoYWrVobKvAuexfsz61bA/q2nVCB85CfVshyg0alqsLnFFUcRV+141+jsT+mAtWujcpiBo79YjP3I0DUbZv3Lt8nfJ8DLQuOVQFK1FWlQoflTFmYJoxJ6r8VSitTIGfxjjvixihg798jpBb7w4731IoqGv1B41Gg9DQUD6ClyxZwsc38SQnvbe3NwoLC8VOSZg1axaWLVvGeiI63k3+cnJy+Bin4p03bx7c3d2RlJSE+vp67pQ0hwqWipTGVLDUSYcSS47ANFsRfhpbuAZOQlSKI+5WhKC952vuIqTjF5Q+gcdEAalGm9D0X6L9SZ3oI+rWTDyqzxV5ouCMaSL/VfUNxOgcRJ3yZm/82KwVqDDcxmcnbUS4+Nvg2DVbXLz7O7Q8eYB9oVOFbmaDMJUDHhjS2S4ua5XwQ0gU/QSlTeGCle5NCqK0e0rcr70mFN34N+5dvk5pPgZblxyxWU4or0l9TR6XvVLIS4pENlbw/xyn0qcMO99SKBwdHdEffHx80NjYCJVKxbxarWb+yJEjzFMn7OzshJeXl2izb98+cUwUGRnJYxcXF+6QVJh0LaCuunDhQixYsACtra3Yvn07z6OCpSKlMfnetGnTkGLJEZA6WkTE7ek4mToZnnE22B85Dp3d9QjXfsg6ekEn08bz2JhAo01o+i/Q3lUn8uf+m0ATT5RZ7sbjs9m/Qve/muGvfv81PwR/1XuCvgWJ+YtEWUzeLH5ezF6IBzW34H/DKC+ujsH9mjQeH1f/FG1dNQjOnMq8pmgTF6zJR4LeHuG3f95nTXvP2CAl7wiqW9O4Uw62d/k6pfkYbF3y2LS/rp5GocjtmD8hFGZw5jQohfXTvqNyfsPy1DIXVNbl4njy6GHnWwqFg4MD+gN1RyLqisTTk4iKjnjqbvRVT0c0Hc+PHz+GTqcT7Yno3kudme69bm5ubHP48GG+jxJqamr4A47usWRDBUt3UBqTnOzInmSDxZJDedNGRFyuPZqeFAmX/2K0dJVCpXXH0atGHb2gE6lv89jYcYzykLTpwi++VuRNCTTx3M0KPPkDo7XrPoITHIWj2+Y1PwSS+563Q01LFlq7v0L70wqU1cazzithDO6Vx6BKuHeW18cgo0DJhUG6Yxqhs10WvhnadCh9fAEZxZ5csCa/TZ2luHzPqc+a6OkWaY2k7IPC9UMH1T+dB9y7fJ3SfAy2Lnls2p9f9O9R13ZX+Fgq41gxuX/g9QfFLRGuKYW878qGDHie/fi19Q4l31Io6IjuD3QNmDFjBndB4ulJPMlNcxYtWsRHs52dHYOOapOO5tJH08yZM1ln8mNvb88yE2iO1IaKmsYkJzuaQ7LBYslxPMVaxBeXrPGpv5URflbYd9ZK1P3Jywr+ycbxFs+3RPnRq9bY4ds7zzvRGruVvTyRW6TR5y7Bp0dMbzypnz72Aca5u45ZwfW00RfFdg22Eq4JVvz8PMIKewJ74xyOMdr9VdBRvK1evbpPB4lLeyQ7sh9o7/2t05SPN61LHtsrwRouSmMMiuUZb5R7xFqLOSJ7H3X/631TvqVQUDGYG/yTrUYURCMdw4L+oaDj2Nzgd+OtEcVmj1EjHsOC/kEF20jHvDnh2PVRFpgjkkc1UMEqFy9eDHPCUc0PLDBHXB91nP5wYCO8ZCraFvqwMQf4XlNYYE7QKFqEJ/+LzH8AJAsHnUo27mMAAAAASUVORK5CYII=" data-reactid=".2.1.5.0.0.2.1.0"></a><a href="https://github.com/Kenshin/simpread" target="_blank" data-reactid=".2.1.5.0.0.2.2"><img style="padding:5px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAAAUCAMAAAAQlCuDAAACplBMVEVVVVXVVSvmcjP0gEFNTU1PT09fX1/kbzD2gUJfX1/3g0VdXV3nczT1gkJPT09NTU3kcDE5OTk7Ozs8PDw9PT0+Pj5BQUFCQkJDQ0NERERFRUVISEhJSUlMTExNTU1OTk5PT09QUFBRUVFSUlJTU1NUVFRVVVVWVlZXV1dYWFhZWVlaWlpbW1tcXFxdXV1eXl5fX19gYGBiYmJlZWVnZ2dra2t4eHh8fHx/f3+CgoKGhoaIiIiJiYmKioqLi4uMjIyQkJCTk5OZmZmampqenp6fn5+jUiajo6OkpKSmpqanp6eqqqqrq6usrKyuVyivWCivWCmwsLCxYDSzXCy0XC21Wyq1XCy3XCq4Xi65YTG6Zzq7Xiu9YS/BajvCwsLDYi3Dw8PEZjTEb0DExMTFxcXGxsbHZC7Hx8fIZjLKjGzPz8/QazTSqJDTqJHVbDPVk2/V1dXWazLWcjzW1tbZczzb29vcnXrcrJLc3NzdgE7d3d3e3t7f39/g4ODht6DicjXkcDHkdDfk5OTlcTLlczXlxrXl5eXmcjPmdTfml2znczTodDXoe0DpdTbpdzjpfULp6enqdjfq6urrdzjreTrrejzrhk/rmWzrzr/r1srseDnsez3sgkjs1MfteTrtfUHthU3twant1cjt7e3uejvvezzvfkDv0sLv7+/wfD3wfkDwgEPwhEnwlGHwzLjw8PDxfT7xfkDxoXXxrorx8fHyfj/y8vLzf0Dzpnz0gEH1gUL1so71v6L149n2gkP3g0T3wKL3waP37Ob37+v39/f4vZ34yK74z7n46eD4+Pj50Lr52Mf58/D60r361MD61sL61sP65tv6+vr73s/739D739H75tr759z76N376uD85dj85tr859z87OT9/f3+/fz+/f3///9Ftc+TAAAAEXRSTlMGBo2Njo6Ojo7j4+jo6Ons7CIlfBEAAAABYktHROFfCM+mAAACOUlEQVQYGZXBT0iTYQDH8e/7vs82l6ibYgYWMrE0QaE/VEKXBJMIBKVDHSLoUhSdO3axbqVEERFENwnqVpMIIoIoioIuSRCUFSFWrkzd9u7Z++udUgnhXJ+PQ9Rrp1IjrGx/kDfRzYhKiZXdoc9EROUs5awxraJyopxbRvyHgLKM+A8BZblabswohZTWcmn9UfgrYQv/MGKZoz4XBwIQy4nf8vzRPOnxlyNCrhY1HR5M3ZWumw6vvz9Cy4FjjYqfl9ybEm1Dh9ZqkQ25bdu2ttt1Tnenm9qybZNn7a6mjUlbYkSo5viZTBeC4FlxrFhH/uqGI5eDQAjB/LXG4eE5QgJiz+878f6x02e1e3xWbX1TkP5c10PIiFA8bRMfEaiauiJMJmZ2XhFCCD4lsumqn4R84Mm+7tkJfwe9HoMpZ2raB9uLT8iIUDHiqgqBhASuTAGL8BDEcp4biJAFqkY3bB14VMCPNDSesw09FtZbFhkRmut79X0dAul1/CcgUC5T+6MBQdP75J7HIpQHWqo/PGzNFr/Fsm+/dlc3Z/IQybPIiNDs6ND8y9cCaWTQv40Acan3yzQC72D0wrxLKACyfVHncn39jVPF63avHW8JIGCJ00qJZp2OjgdkEk4u79R8T0Im4fh5x8slycR9xaOUnAQ+vUNN7byZcrdPWGMWdnGvnyVOipLOLi/zMMtqTlCWESUvnsqNe6xGlGVmkoRiMUCspkg5Z002QeUs5SyYwufqWipVZGWjWf0CDsxBCuuBMAQAAAAASUVORK5CYII=" data-reactid=".2.1.5.0.0.2.2.0"></a></div>
                                 <div style="display:flex;flex-direction:row;justify-content:center;" data-reactid=".2.1.5.0.0.3"><a href="http://ksria.com/simpread/changelog.html#us_${GM_info.script.version}" target="_blank" data-reactid=".2.1.5.0.0.3.0"><img style="padding:5px;" src="data:image/png;base64,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" data-reactid=".2.1.5.0.0.3.0.0"></a><a href="https://github.com/kenshin/simpread/issues" target="_blank" data-reactid=".2.1.5.0.0.3.1"><img style="padding:5px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAAUCAYAAABGUvnzAAAABmJLR0QA/wD/AP+gvaeTAAAHnElEQVRo3uVa/VOTVxbOT/4z+2NnpBCI4IJAgABJSAIIdBGk7rq7QxX5Wj4KygKVrNPdwoAlQEFAWolTba0rGr7EACK1ho8qSZAABhQTtq3OOsM+m3Oc950kOBY6tp1p7swz7zn3ufec997znnNvGCQpKSl7srKy9B44PEAgQHsx/TcN3cV0h+Zimv53lSl7JBTczMxMBBI0xrSAQEp/aoMkIyPD6QECCZ6FBwQ0xlSn5ODBgwg0qC/oAgaS9PR0BBpUn2kDBpK0tDQEGpSfagIGktTUVOwUL1684EvKbub8mtja2nplf3Jfig/+Yf4QS5sOLDy1It2YtY3/qdj635YoU3tTdndjT6LT6bBT5OXlYTfjdwsqn2/SHgX4Vf1J59U+sDyaQd7ZIwirDIeiW7mN/6kg/4JM7U3Z3Y09iVarhTfoljk2NoaHDx/CbrdjcnJS5CiD6ZJCMrXu7m4e53Q6UVFRgcuXL2NpaYmRn58vzqN26dIlDA8PY35+HqdPn/bhjEYjzGYzWltbua+srAyzs7Ow2WxYWFhAVVWVOH50dBRWq5X9TkxMIDs7W+QaGhqwsrLC8/r6+niD/ddHSOxVifj828t49t9nePD4Aa5ZB7ivcKAElvUZzuj7Gw9QZqoUx7+Oqx2th2Nzmbnue73sX+Co9Vr6mHN4qkXNSJ3IDS0Oc7/dtQjz8jjS+zNFruR6GeaffMuc3WVnXbBHT+V5Db/3Ndt1lr3XRpBoNBp4o7a2Fjdv3kRERAQjMTFR5CjAdIaRTO3MmTM8prKyEs+fP0dJSQnCw8PR2NgIk8kkzqNWV1eHqKgoJCUl4fHjx8jNzfXhIiMjERcXxwFbXFyEWq1m2xSQ9fV1zm4aL/QT6IPo7+/n/sOHD2Nzc5NLMHEGg4E32H99BEWPUkTEB5GYW57HO43ZCK/9PdIuZMK+YYeiIRnSchmS9WqsfbcO1Xnta7ksYzbczzehbtAy1zLyMfsX/FD7yNTEXIpeB9czFzKMf2Au8YyS+3nejbPos3zG/Rn973hsunH47LvMUYVRdWhFe5pP03B7dQrtox387lR9vNdGkHj+kgVvHDp0iDPy6tWr0Ov1HFCBowDTBpLMZ0ByMssUFLfbDYVCwfqxY8dgsVjEedQoMCSrVCrOQvqQBI76hLHU73K5MDMzwyA7DocDR48eZb65uZmze25ujjN5fHyc++vr69muUqlknQJJG+y/PkJCd7IP5lfm8SfjX1muMp2C63sX7jktuLdmwTfOe1h64kDu50dey50y1WJkdhTyNgXbSWxSsX/BBzVF00uZxozO3UTVjVOs/8vcxFVhZn0WC+tW3LKaub/aVIPx+xOIORv/0s65ZMR1Jor2Hmws4PQXekQ0RG1bkwAJbbw3KGjR0dEoLy/nsvro0SPOHuIowHSGkSwEhuScnBzOMsFGQUEBB0HQqdHlTNApKFR2/e0QTp48ibt374pZSpDJZJz5hYWFWF5e5g+J+qliTE1N8byamhoMDQ2JduidaYP910eIP5fkAwrwH41/Ybniy/cxbfsa0gqZiLdLpIg1JLyWe/9KNQZnh0Sb6h4t+xd0zrgenaiP3b+Fsi8qkH/lOBwuB6Jr5QipCMOJriLctk2J7zJhndz2voK9c6M9uGUzI7kn5ZVjCBLaXG9Q6aSspXIZGxuLjY0NLn/EUYCpZJIsBIZAWU8BFvTjx49zgAWdWnt7O8uUiZTt/HvUzw6BKgSV2urqarGvuLiYn3TOT09P80dI+uDgIAeYZLobrK2t8YdEOh0ftMH+6yPEdSX6YI4C3P9nllWtGrh/2ETZ9UqRP/bViR/lNAYdnG4nNH1prH8w0sD+hXHUWiY/ZjnnYh6efv8UKoMWxV/+DXds05B3JDB3474Jk9bboj8a995XBawrzimh7UsX7e2r24/24Q5Mr34NZa9m27oIEipp3qBNpDOQQJellpYWPoeJowBT6SOZmjCHSjQFWNCFAAs6tc7OTrZJGVhUVMQZ6W+HQP10W6fyTKV5dXVVLL0JCQkYGBjAnTt3MDIywhcpCrAwr7S0lP3S+d/V1cUb7L8+grxT4QMK8JELR1mOaYtH9kc5fLNecjuw8p8VDFmHd8QVdhXDsjaDAesNtJs/Yf+CD2ptYx2wPbXB4Zlb0FHIcw40yfHvb67h9soUBu1D6LnVywEWbOY2vov5tXk8dC/xRevElSLRHj1lniA3DTSzX3WvbtvaJJQN3pDL5QgLCxNBFyOBCw4O5o0UZKGfSqZUKhX1+Ph4LquCTo3skL3Q0FCuDN42/d9BmE9jCVSOBY5kusjRky5m+/btEzmyS/OII3+vss3jPknwQVBpCKKaY0U9sikGb5dJsbc4GHuLghFSJdsRt//DKOak1TLI6vfjrff2itxb+Xu5L6gkhOfu/+eBl5wnc6UeG8EVofwM+3s4gstDff2VShFUHMJzIxujRXvCGLJLfumD8F+bhAL2c4N/s/0CfnaKmI74gIGEyu/PjaCgIPwSfnaK6Pa4gAEFeI1KbCDhQJs8IOAJsJMCrKfLSyAhyhAbEIhukzfQHzr2eBZNQX5Cl5tAQGRrzG8bhugnkYYY/ped/wO7SHqzJuEIewAAAABJRU5ErkJggg==" data-reactid=".2.1.5.0.0.3.1.0"></a><a href="https://github.com/kenshin/simpread/issues" target="_blank" data-reactid=".2.1.5.0.0.3.2"><img style="padding:5px;" src="data:image/png;base64,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" data-reactid=".2.1.5.0.0.3.2.0"></a></div>
                                 <div class="about">
                                     你好，我是 <a target="_blank" href="https://github.com/Kenshin/simpread-little">简悦 · 轻阅版</a> 的开发者 <a target="_blank" href="http://kenshin.wang">Kenshin</a>，很高兴看到你能使用它。<br>
                                     它是一个阅读模式类的油猴脚本，也是 <a href="http://ksria.com/simpread">简悦</a> 的轻量级版本。</br>
                                     拥有 <a target="_blank" href="http://ksria.com/simpread/#feature">简悦的一切特性</a>，更具有「加载速度快 · 只关注阅读模式呈现」等 <a target="_blank" href="https://github.com/Kenshin/simpread-little/blob/master/README.md#特点">特点</a>。</br>
                                     简悦的初衷：还原一个干净的阅读空间，提升你的阅读体验。</br>
-                                    截至到目前为止，简悦已经适配了 <spn style="color:#ff3f80;font-weight:600;">${ pr.sites.global.length }个</spn> 网址，详细请看 <a href="https://github.com/Kenshin/simpread/wiki/%E9%80%82%E9%85%8D%E7%AB%99%E7%82%B9%E5%88%97%E8%A1%A8" target="_blank">这里</a>。<br>
+                                    截至到目前为止，简悦已经精准适配了 <spn style="color:#ff3f80;font-weight:600;">${ pr.sites.global.length }个</spn> 网址，详细请看 <a href="http://ksria.com/simpread/docs/#/%E9%80%82%E9%85%8D%E7%AB%99%E7%82%B9%E5%88%97%E8%A1%A8" target="_blank">这里</a>。<br>
                                     简悦是一个免费且开源的项目，占用了我绝大多数的业余时间。</br>
                                     如果觉得它还不错，希望可以给我 <a href="https://greasyfork.org/zh-CN/forum/post/discussion?script=39998&locale=zh-CN" target="_blank">投票</a> 或 <a href="https://github.com/kenshin/simpread#请杯咖啡" target="_blank">请我喝杯咖啡</a>，这是对简悦的最大鼓励。<br>
                                     现在就加入 <a href="https://t.me/simpread">Telegram</a> 群，获取简悦的第一手资料。</br>

@@ -933,7 +933,7 @@ function optionMode() {
                     if ( event && event.target && event.target.result ) {
                         try {
                             const json = JSON.parse( event.target.result );
-                            if ( json.version && json.version.replace( /\./g, "" ) <= simpread.version.replace( /\./g, "" ) ) {
+                            if ( json.version && json.version.replace( /\./g, "" ) < simpread.version.replace( /\./g, "" ) ) {
                                 new Notify().Render( 2, "上传的版本太低，已转换为最新版版本！" );
                             }
                             Object.keys( simpread.focus  ).forEach( key => { json.focus[key]  != undefined && (simpread.focus[key]  = json.focus[key]  )});

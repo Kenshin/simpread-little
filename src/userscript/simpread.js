@@ -912,7 +912,7 @@ function wheelmenu() {
         endAngle: 0,
         radius: 120,
         itemsNum: 7,
-        itemAnimationDelay: 0.08,
+        itemAnimationDelay: 0,
         isAutoClose: false
     });
     menu.render();
@@ -922,6 +922,8 @@ function wheelmenu() {
             switch ( index ) {
                 case 6:
                     menu.remove();
+                    $(".sr-rd-trigger").remove();
+                    $("head #blooming-menu__root").remove();
                     break;
             }
         })
@@ -954,7 +956,7 @@ function wheelmenu() {
             transform: rotate(180deg);
         }
     `;
-    $( "head" ).append( `<style>${ style }</style>` );
+    $( "head" ).append( `<style id="blooming-menu__root">${ style }</style>` );
     setTimeout( ()=> {
         $(".simpread-read-root").append( `<div class="sr-rd-trigger"></div>` );
         $(".sr-rd-trigger").append( $(".blooming-menu__container") );

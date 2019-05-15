@@ -83,6 +83,8 @@ const pr         = new PureRead(),
         ],
         fontsize  : "62.5%",
         layout    : "20%",
+        toc       : true,
+        toc_hide  : true,
     },
     option       = {
         version   : "2017-04-03",
@@ -198,6 +200,17 @@ const pr         = new PureRead(),
                 # 此功能在 cleanup = true 时才会生效
                 # 默认为 true，取值范围 true | false
                 set_pure: true
+
+                # 是否自动生成大纲（目录）？
+                # 只整理 h1, h2, h3, h4 的内容为大纲
+                # 默认为 true，取值范围 true | false
+                set_toc: true
+
+                # 大纲（目录）是否开启「鼠标移动到左上角」自动显示？
+                # 关闭意味着「一直显示」
+                # 此功能在 toc = true 时才会生效
+                # 默认为 true，取值范围 true | false
+                set_toc_hide: true
     `;
     let current_state = "", // include: focus, read, option
         simpread = { version: "1.1.2", focus, read, option },
@@ -640,7 +653,7 @@ function readMode() {
     style.Layout(     simpread.read.layout     );
 
     pr.pure && codehighlight();
-    toc();
+    simpread.read.toc && toc();
 
     // exit
     $( ".simpread-read-root sr-rd-crlbar fab:not(.setting)" ).one( "click", event => {

@@ -58,7 +58,7 @@ const pr         = new PureRead(),
     theme_monospace = GM_getResourceText( "theme_monospace" ),
     theme_newsprint = GM_getResourceText( "theme_newsprint" ),
     theme_octopress = GM_getResourceText( "theme_octopress" ),
-    theme        = { theme_dark, theme_github, theme_gothic, theme_night, theme_pixyii, theme_engwrite, theme_monospace, theme_newsprint, theme_octopress },
+    theme        = { theme_github, theme_newsprint, theme_gothic, theme_engwrite, theme_octopress, theme_pixyii, theme_monospace, theme_night, theme_dark },
     focus        = {
         version   : "2016-12-29",
         bgcolor   : "rgba( 235, 235, 235, 0.9 )",
@@ -933,6 +933,30 @@ function wheelmenu() {
                     simpread.read.layout = `${layout}%`;
                     style.Layout( simpread.read.layout );
                     GM_setValue( "simpread",  simpread );
+                    break;
+                case 4:
+                case 5:
+                    const arr = Object.keys( theme ),
+                          len = arr.length;
+                    let   idx = arr.indexOf( `theme_${simpread.read.theme}` ) +  + ( index == 4 ? 1 : -1 );
+                    if ( idx == len ) {
+                        idx = 0;
+                    } else if ( idx == -1 ) {
+                        idx = len -1;
+                    }
+                    // remove old theme
+                    $( "head" ).find( "style" ).map( (index, item) => {
+                        const $target = $(item),
+                              css     = $target.text();
+                        if ( css.startsWith( "sr-rd-theme-" + simpread.read.theme ) ) {
+                            console.log( item )
+                            $target.remove();
+                        }
+                    });
+                    // add new theme
+                    simpread.read.theme = arr[idx].replace( "theme_", ""  );
+                    GM_setValue( "simpread",  simpread );
+                    GM_addStyle( theme[`theme_${simpread.read.theme}`]    );
                     break;
                 case 6:
                     menu.remove();

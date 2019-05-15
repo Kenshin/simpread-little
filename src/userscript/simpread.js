@@ -11,7 +11,7 @@
 // @require      https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js?version=697886
 // @require      https://greasyfork.org/scripts/40236-notify/code/Notify.js?version=697887
 // @require      https://greasyfork.org/scripts/40172-mousetrap/code/Mousetrap.js?version=262594
-// @require      https://greasyfork.org/scripts/383025-bloomingmenu/code/BloomingMenu.js?version=697997
+// @require      https://greasyfork.org/scripts/383025-bloomingmenu/code/BloomingMenu.js?version=698175
 // @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=697882
 // @require      https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js?version=697883
 // @resource     global_sites http://sr.ksria.cn/website_list_v4.json?data=1.1.2.5005
@@ -901,13 +901,15 @@ function optionMode() {
  */
 function wheelmenu() {
     const menu = new BloomingMenu({
-        startAngle: -190,
+        startAngle: -180,
         endAngle: 0,
-        radius: 200,
-        itemsNum: 6,
-        itemAnimationDelay: 0.08
+        radius: 120,
+        itemsNum: 7,
+        itemAnimationDelay: 0.08,
+        isAutoClose: false
     });
     menu.render();
+    setTimeout( () => menu.open(), 500 );
     menu.props.elements.items.forEach(function (item, index) {
         item.addEventListener('click', function () {
             //TO-DO
@@ -916,15 +918,15 @@ function wheelmenu() {
     const style = `
         .sr-rd-trigger {
             position: fixed;
-            right: 77px;
-            bottom: 98px;
+            right: 50%;
+            bottom: 35px;
         }
         .blooming-menu__container {
-            transform: rotate(-100deg);
+            /*transform: rotate(-100deg);*/
         }
         .blooming-menu__main {
             background-color: rgba(244, 67, 54, 1);
-            transform: rotate(100deg);
+            /*transform: rotate(100deg);*/
         }
     `;
     $( "head" ).append( `<style>${ style }</style>` );

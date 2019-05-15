@@ -640,6 +640,7 @@ function readMode() {
     style.Layout(     simpread.read.layout     );
 
     pr.pure && codehighlight();
+    toc();
 
     // exit
     $( ".simpread-read-root sr-rd-crlbar fab:not(.setting)" ).one( "click", event => {
@@ -843,6 +844,53 @@ function wheelmenu() {
         }
         preScroll = $(document).scrollTop();
     });
+}
+
+/**
+ * toc
+ */
+function toc() {
+    const table = [],
+          cls   = simpread.read.toc_hide ? "toc-bg-hidden" : "";
+    $("sr-read").find( "h1, h2, h3, h4" ).map( ( idx, item) => {
+        const $item = $( item ),
+              tag   = $item[0].tagName.toLowerCase(),
+              value = $item.text();
+        let   id    = $item.attr( "id" );
+        id          = id == undefined ? `sr-toc-${idx}` : `${id}-${idx}`
+        $item.attr( "id", id );
+        value && table.push({
+            level: `toc-level-${tag}`,
+            id,
+            value,
+        });
+    });
+    console.log( "current toc is ", table )
+    let tmpl = "";
+    table.forEach( ( item, idx ) => {
+        tmpl += `<outline className=${ item.level }>
+                    <active></active>
+                    <a class=${ "toc-outline-theme-" + simpread.read.theme } href=${ "#" + item.id } >${ item.value }</a>
+                </outline>`;
+    });
+    $("sr-read").append( `<toc-bg class=${cls}><toc class="simpread-font simpread-theme-root">${tmpl}</toc></tocbg>` );
+    let is_click = false;
+    $("sr-read toc outline a").on( "click", event => {
+        is_click = true;
+        const $target = $( event.target ).parent();
+        $target.parent().find( "active" ).removeClass( "toc-outline-active" );
+        $target.find( "active" ).addClass( "toc-outline-active" );
+
+        const href     = $( event.target ).attr("href"),
+             offsetTop = href === "#" ? 0 : $(href).offset().top - 5;
+        $( "html" ).stop().animate({
+            scrollTop: offsetTop
+        }, 300, () => {
+            setTimeout( ()=>is_click = false, 500 );
+        });
+        event.preventDefault();
+    })
+    simpread.read.toc_hide && $('head').append( `<style>toc-bg{width:50px!important;height:200px!important}.toc-bg-hidden{transition:opacity .2s ease}.toc-bg-hidden:hover toc{width:180px}toc{width:0;transition:width .5s!important}</style>` );
 }
 
 /**

@@ -533,11 +533,9 @@ function readMode() {
                                     </div>
                                 </sr-rd-footer-copywrite>
                             </sr-rd-footer>
-                            <!== 
                             <sr-rd-crlbar class=${ simpread.read.controlbar == true ? "" : "controlbar" }>
                                 <fab class="crlbar-close"></fab>
                             </sr-rd-crlbar>
-                            ==>
                         </sr-read>
                     </div>`,
         multiple  = ( include, avatar ) => {
@@ -641,7 +639,6 @@ function readMode() {
     style.Layout(     simpread.read.layout     );
 
     pr.pure && codehighlight();
-    wheelmenu();
 
     // exit
     $( ".simpread-read-root sr-rd-crlbar fab" ).one( "click",  event => {

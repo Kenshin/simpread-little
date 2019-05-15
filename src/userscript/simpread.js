@@ -920,6 +920,20 @@ function wheelmenu() {
     menu.props.elements.items.forEach(function (item, index) {
         item.addEventListener('click', function () {
             switch ( index ) {
+                case 0:
+                case 1:
+                    const size = parseFloat( simpread.read.fontsize ) + ( index == 0 ? 3 : -3 );
+                    simpread.read.fontsize = `${size}%`;
+                    style.FontSize( simpread.read.fontsize );
+                    GM_setValue( "simpread",  simpread );
+                    break;
+                case 2:
+                case 3:
+                    const layout = parseFloat( simpread.read.layout ) + ( index == 3 ? 3 : -3 );
+                    simpread.read.layout = `${layout}%`;
+                    style.Layout( simpread.read.layout );
+                    GM_setValue( "simpread",  simpread );
+                    break;
                 case 6:
                     menu.remove();
                     $(".sr-rd-trigger").remove();
@@ -928,7 +942,7 @@ function wheelmenu() {
             }
         })
     });
-    const style = `
+    const css = `
         .sr-rd-trigger {
             position: fixed;
             right: 50%;
@@ -955,7 +969,7 @@ function wheelmenu() {
             transform: rotate(180deg);
         }
     `;
-    $( "head" ).append( `<style id="blooming-menu__root">${ style }</style>` );
+    $( "head" ).append( `<style id="blooming-menu__root">${ css }</style>` );
     setTimeout( ()=> {
         $(".simpread-read-root").append( `<div class="sr-rd-trigger"></div>` );
         $(".sr-rd-trigger").append( $(".blooming-menu__container") );
@@ -1041,4 +1055,27 @@ function aboutMode() {
             $("dialog-gp").animate({height: h2 - 80 });
         }
     }});
+}
+
+/**
+ * Set read mode font size for read mode
+ * 
+ * @param {string} font size, e.g. 70% 62.5%
+ */
+let html_style_bal = "-1";
+function fontSize( value ) {
+    if ( html_style_bal == "-1" ) {
+        html_style_bal = $( "html" ).attr( "style" );
+        html_style_bal == undefined && ( html_style_bal = "" );
+    }
+    value ? $( "html" ).attr( "style", `font-size: ${value}!important;${html_style_bal}` ) : $( "html" ).attr( "style", html_style_bal );
+}
+
+/**
+ * Set read mode layout width for read mode
+ * 
+ * @param {string} layout width
+ */
+function layout( width ) {
+    $( "sr-read" ).css( "margin", width ? `20px ${width}` : "" );
 }

@@ -533,7 +533,7 @@ function readMode() {
                                     </div>
                                 </sr-rd-footer-copywrite>
                             </sr-rd-footer>
-                            <sr-rd-crlbar class=${ simpread.read.controlbar == true ? "" : "controlbar" }>
+                            <sr-rd-crlbar style="position:fixed;bottom:0;right:0;width:100px;height:200px;" class=${ simpread.read.controlbar == true ? "" : "controlbar" }>
                                 <fab class="setting"></fab>
                                 <fab class="crlbar-close"></fab>
                             </sr-rd-crlbar>

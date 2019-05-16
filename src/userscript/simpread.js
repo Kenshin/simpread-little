@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         简悦( SimpRead ) · 轻阅版
 // @namespace    http://ksria.com/simpread/
-// @version      1.1.2.5005
+// @version      1.1.2.5016
 // @description  简悦 - 让你瞬间进入沉浸式阅读的 User Script 扩展
 // @author       Kenshin <kenshin@ksria.com>
 // @include      http://*/*
@@ -14,22 +14,22 @@
 // @require      https://greasyfork.org/scripts/383025-bloomingmenu/code/BloomingMenu.js?version=698175
 // @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=697882
 // @require      https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js?version=697883
-// @resource     global_sites http://sr.ksria.cn/website_list_v4.json?data=1.1.2.5005
-// @resource     notify_style http://sr.ksria.cn/puread/notify.css?version=1.1.2.5005
-// @resource     main_style   http://sr.ksria.cn/puread/simpread.css?version=1.1.2.5005
-// @resource     mntips_style http://sr.ksria.cn/puread/mintooltip.css?version=1.1.2.5005
-// @resource     option_style http://sr.ksria.cn/puread/option.css?version=1.1.2.5005
+// @resource     global_sites http://sr.ksria.cn/website_list_v4.json?data=1.1.2.5016
+// @resource     notify_style http://sr.ksria.cn/puread/notify.css?version=1.1.2.5016
+// @resource     main_style   http://sr.ksria.cn/puread/simpread.css?version=1.1.2.5016
+// @resource     mntips_style http://sr.ksria.cn/puread/mintooltip.css?version=1.1.2.5016
+// @resource     option_style http://sr.ksria.cn/puread/option.css?version=1.1.2.5016
 // @resource     user_style   https://gist.github.com/Kenshin/365a91c61bad550b5900247539113f06/raw/3e666bee279f249e5b59140d8a777192ecb121cd/simpread_user.css
-// @resource     theme_common http://sr.ksria.cn/puread/theme_common.css?version=1.1.2.5005
-// @resource     theme_dark   http://sr.ksria.cn/puread/theme_dark.css?version=1.1.2.5005
-// @resource     theme_github http://sr.ksria.cn/puread/theme_github.css?version=1.1.2.5005
-// @resource     theme_gothic http://sr.ksria.cn/puread/theme_gothic.css?version=1.1.2.5005
-// @resource     theme_night  http://sr.ksria.cn/puread/theme_night.css?version=1.1.2.5005
-// @resource     theme_pixyii http://sr.ksria.cn/puread/theme_pixyii.css?version=1.1.2.5005
-// @resource     theme_engwrite  http://sr.ksria.cn/puread/theme_engwrite.css?version=1.1.2.5005
-// @resource     theme_monospace http://sr.ksria.cn/puread/theme_monospace.css?version=1.1.2.5005
-// @resource     theme_newsprint http://sr.ksria.cn/puread/theme_newsprint.css?version=1.1.2.5005
-// @resource     theme_octopress http://sr.ksria.cn/puread/theme_octopress.css?version=1.1.2.5005
+// @resource     theme_common http://sr.ksria.cn/puread/theme_common.css?version=1.1.2.5016
+// @resource     theme_dark   http://sr.ksria.cn/puread/theme_dark.css?version=1.1.2.5016
+// @resource     theme_github http://sr.ksria.cn/puread/theme_github.css?version=1.1.2.5016
+// @resource     theme_gothic http://sr.ksria.cn/puread/theme_gothic.css?version=1.1.2.5016
+// @resource     theme_night  http://sr.ksria.cn/puread/theme_night.css?version=1.1.2.5016
+// @resource     theme_pixyii http://sr.ksria.cn/puread/theme_pixyii.css?version=1.1.2.5016
+// @resource     theme_engwrite  http://sr.ksria.cn/puread/theme_engwrite.css?version=1.1.2.5016
+// @resource     theme_monospace http://sr.ksria.cn/puread/theme_monospace.css?version=1.1.2.5016
+// @resource     theme_newsprint http://sr.ksria.cn/puread/theme_newsprint.css?version=1.1.2.5016
+// @resource     theme_octopress http://sr.ksria.cn/puread/theme_octopress.css?version=1.1.2.5016
 // @grant        GM_getResourceText
 // @grant        GM_addStyle
 // @grant        GM_getValue
@@ -223,6 +223,9 @@ const pr         = new PureRead(),
 // initialize
 version();
 
+// common mobile
+commonMobile();
+
 // blacklist
 if ( !blacklist() ) {
     // add simpread style
@@ -251,6 +254,147 @@ if ( !blacklist() ) {
     autoOpen();
 
     console.log( "[SimpRead Lite] current pureread is ", pr, simpread );
+}
+
+/****************************
+ * Style
+ ****************************/
+
+ /**
+  * Common Mobile style
+  */
+function commonMobile() {
+    const css = `
+
+    sr-rd-content {
+        text-align: justify;
+    }
+    
+    sr-rd-content p {
+        -webkit-hyphens: auto;
+        -moz-hyphens: auto;
+        -ms-hyphens: auto;
+        hyphens: auto;
+    }
+
+    /**
+     * iPad pro 12 and below
+     */
+     @media only screen and (max-device-width: 1024px) {
+
+        sr-rd-content img {
+            margin: 0!important;
+            width: 100%!important;
+            background-color: transparent!important;
+            border: 0!important;
+            box-shadow: none!important;
+        }
+
+        fab {
+            opacity: 1!important;
+        }
+    }
+
+    /**
+    * iPhone XS Max and below
+    */
+    @media only screen and (max-device-width: 414px) {
+
+        sr-rd-crlbar.controlbar {
+            z-index: 2147483646!important;
+        }
+
+        dialog-gp {
+            transform: scale(.7);
+            z-index: 2147483647!important;
+        }
+
+        dialog-content .about {
+            width: 100%!important;
+        }
+    }
+    
+    /**
+    * iPhone SE and below
+    */
+    @media only screen and (max-device-width: 320px) {
+    }
+    `
+    $("head").append( `<style id="sr-common-mobile">${css}</style>` )
+}
+
+/**
+ * read Mode Mobile style
+ */
+function readModeMobile() {
+    const css = `
+
+    /**
+    * iPhone XS Max and below
+    */
+    @media only screen and (max-device-width: 414px) {
+        sr-read {
+            margin: 10px 10%;
+            width: 100%;
+            min-width: initial!important;
+            min-height: initial!important;
+        }
+
+        sr-rd-desc {
+            padding: 15px !important;
+            line-height: 2;
+            border: none;
+        }
+
+        sr-rd-content a, sr-rd-content a:link {
+            font-size: inherit;
+        }
+
+        sr-rd-content li code, sr-rd-content p code {
+            font-size: inherit;
+        }
+
+        sr-rd-footer {
+            margin-top: 20px;
+        }
+
+        sr-blockquote, sr-blockquote * {
+            margin: 5px !important;
+            padding: 5px !important;
+        }
+
+        sr-rd-title, sr-rd-content h1, sr-rd-content h2, sr-rd-content h3, sr-rd-content h4, sr-rd-content h5, sr-rd-content h6 {
+            font-family: PingFang SC, Verdana, Helvetica Neue, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
+            color: #000;
+            font-weight: 100;
+            line-height: 1.35;
+        }
+
+        sr-rd-content h1, sr-rd-content h2, sr-rd-content h3, sr-rd-content h4, sr-rd-content h5, sr-rd-content h6,
+        sr-rd-content h1 *, sr-rd-content h2 *, sr-rd-content h3 *, sr-rd-content h4 *, sr-rd-content h5 *, sr-rd-content h6 * {
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+            font-weight: 100;
+            line-height: 1.35;
+        }
+
+        sr-rd-content ul, sr-rd-content-ul {
+            margin-left: 1.3em!important;
+            list-style: disc;
+        }
+
+        sr-rd-content ol, sr-rd-content-ol {
+            list-style: decimal;
+            margin-left: 1.9em!important;
+        }
+
+        sr-rd-content li ul, sr-rd-content li ol, sr-rd-content-ul ul, sr-rd-content-ul ol, sr-rd-content-ol ul, sr-rd-content-ol ol {
+            margin-bottom: 0.8em;
+            margin-left: 2em!important;;
+        }
+    }
+    `
+    setTimeout(()=>$("head").append( `<style id="sr-rd-mobile">${css}</style>` ), 1000 );
 }
 
 /****************************
@@ -321,7 +465,7 @@ function bindShortcuts() {
     Mousetrap.bind( [ simpread.read.shortcuts.toLowerCase()  ], () => entryMode( "read"  ));
     Mousetrap.bind( "esc", ( event, combo ) => {
         if ( combo == "esc" && simpread.option.esc ) {
-            if ( $( ".simpread-read-root"  ).length > 0 ) $( ".simpread-read-root sr-rd-crlbar fab" )[0].click();
+            if ( $( ".simpread-read-root"  ).length > 0 ) $( ".simpread-read-root sr-rd-crlbar fab" )[1].click();
             if ( $( ".simpread-focus-root" ).length > 0 ) $( "sr-rd-crlbar fab.crlbar-close" )[0].click();
         }
     });
@@ -414,11 +558,15 @@ function controlbar() {
  * @param {string} include: focus, read
  */
 function entryMode( type ) {
-    type = type == "focus" ? "focus" : "read";
-    if ( [ "none" ].includes( pr.state ) ) {
-        if ( simpread[type].highlight == true ) tempMode( type );
-        else new Notify().Render( `当前未启用 <a href='http://ksria.com/simpread/docs/#/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>，并当前站点也未适配，如需要适配请提交到 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
-    } else type == "focus" ? focusMode() : readMode();
+    try {
+        type = type == "focus" ? "focus" : "read";
+        if ( [ "none" ].includes( pr.state ) ) {
+            if ( simpread[type].highlight == true ) tempMode( type );
+            else new Notify().Render( `当前未启用 <a href='http://ksria.com/simpread/docs/#/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>，并当前站点也未适配，如需要适配请提交到 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
+        } else type == "focus" ? focusMode() : readMode();
+    } catch ( err ) {
+        new Notify().Render( 2, "当前页面无法使用阅读模式。" );
+    }
 }
 
 /**
@@ -589,9 +737,13 @@ function readMode() {
                 return true;
             }
             if ( pr.html.include.includes && pr.html.include.includes( "sr-rd-content-error" ) ) {
-                new Notify().Render( `当前页面结构改变导致不匹配阅读模式，请报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
-                simpread.read.highlight  == true && tempMode( "read"  );
-                return true;
+                //new Notify().Render( `当前页面结构改变导致不匹配阅读模式，请报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
+                //simpread.read.highlight  == true && tempMode( "read"  );
+                //return true;
+                console.warn( '=== Adapter failed call Readability View ===' )
+                pr.Readability();
+                pr.ReadMode();
+                return false;
             }
         };
 
@@ -654,6 +806,9 @@ function readMode() {
     pr.pure && codehighlight();
     simpread.read.toc && toc();
 
+    // add mobile adpater
+    readModeMobile();
+
     // exit
     $( ".simpread-read-root sr-rd-crlbar fab:not(.setting)" ).one( "click", event => {
         $( ".simpread-read-root" ).animate( { opacity: 0 }, {
@@ -665,6 +820,7 @@ function readMode() {
                 if ( $root.attr("style") ) $root.attr( "style", $root.attr("style").replace( "font-size: 62.5%!important", "" ));
                 $( "body" ).removeClass( "simpread-hidden" );
                 $( ".simpread-read-root" ).remove();
+                $( "head #sr-rd-mobile" ).remove();
             }
         }).addClass( "simpread-read-root-hide" );
     });
@@ -745,6 +901,7 @@ function codehighlight() {
  * Wheel menu buttons
  */
 function wheelmenu() {
+    if ( $(".sr-rd-trigger").length > 0 ) return;
     const menu = new BloomingMenu({
         startAngle: -180,
         endAngle: 0,
@@ -817,6 +974,10 @@ function wheelmenu() {
         }
         .blooming-menu__item-btn-wrapper {
             background-color: #03a9f4!important;
+            transition: all 1000ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+        }
+        .blooming-menu__item-btn-wrapper:active {
+            background-color: #0D47A1!important;
         }
         .blooming-menu__main.is-active {
             transform: rotate(0);

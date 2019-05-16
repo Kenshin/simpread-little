@@ -223,6 +223,9 @@ const pr         = new PureRead(),
 // initialize
 version();
 
+// common mobile
+commonMobile();
+
 // blacklist
 if ( !blacklist() ) {
     // add simpread style
@@ -251,6 +254,147 @@ if ( !blacklist() ) {
     autoOpen();
 
     console.log( "[SimpRead Lite] current pureread is ", pr, simpread );
+}
+
+/****************************
+ * Style
+ ****************************/
+
+ /**
+  * Common Mobile style
+  */
+function commonMobile() {
+    const css = `
+
+    sr-rd-content {
+        text-align: justify;
+    }
+    
+    sr-rd-content p {
+        -webkit-hyphens: auto;
+        -moz-hyphens: auto;
+        -ms-hyphens: auto;
+        hyphens: auto;
+    }
+
+    /**
+     * iPad pro 12 and below
+     */
+     @media only screen and (max-device-width: 1024px) {
+
+        fab {
+            opacity: 1!important;
+        }
+    }
+
+    /**
+    * iPhone XS Max and below
+    */
+    @media only screen and (max-device-width: 414px) {
+
+        sr-rd-crlbar.controlbar {
+            z-index: 2147483646!important;
+        }
+
+        dialog-gp {
+            transform: scale(.7);
+            z-index: 2147483647!important;
+        }
+
+        dialog-content .about {
+            width: 100%!important;
+        }
+    }
+    
+    /**
+    * iPhone SE and below
+    */
+    @media only screen and (max-device-width: 320px) {
+    }
+    `
+    $("head").append( `<style id="sr-common-mobile">${css}</style>` )
+}
+
+/**
+ * read Mode Mobile style
+ */
+function readModeMobile() {
+    const css = `
+
+    /**
+    * iPhone XS Max and below
+    */
+    @media only screen and (max-device-width: 414px) {
+        sr-read {
+            margin: 10px 10%;
+            width: 100%;
+            min-width: initial!important;
+            min-height: initial!important;
+        }
+
+        sr-rd-desc {
+            padding: 15px !important;
+            line-height: 2;
+            border: none;
+        }
+
+        sr-rd-content a, sr-rd-content a:link {
+            font-size: inherit;
+        }
+
+        sr-rd-content li code, sr-rd-content p code {
+            font-size: inherit;
+        }
+
+        sr-rd-content img {
+            margin: 0!important;
+            width: 100%!important;
+            background-color: transparent!important;
+            border: 0!important;
+            box-shadow: none!important;
+        }
+
+        sr-rd-footer {
+            margin-top: 20px;
+        }
+
+        sr-blockquote, sr-blockquote * {
+            margin: 5px !important;
+            padding: 5px !important;
+        }
+
+        sr-rd-title, sr-rd-content h1, sr-rd-content h2, sr-rd-content h3, sr-rd-content h4, sr-rd-content h5, sr-rd-content h6 {
+            font-family: PingFang SC, Verdana, Helvetica Neue, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
+            color: #000;
+            font-weight: 100;
+            line-height: 1.35;
+        }
+
+        sr-rd-content h1, sr-rd-content h2, sr-rd-content h3, sr-rd-content h4, sr-rd-content h5, sr-rd-content h6,
+        sr-rd-content h1 *, sr-rd-content h2 *, sr-rd-content h3 *, sr-rd-content h4 *, sr-rd-content h5 *, sr-rd-content h6 * {
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+            font-weight: 100;
+            line-height: 1.35;
+        }
+
+        sr-rd-content ul, sr-rd-content-ul {
+            margin-left: 1.3em!important;
+            list-style: disc;
+        }
+
+        sr-rd-content ol, sr-rd-content-ol {
+            list-style: decimal;
+            margin-left: 1.9em!important;
+        }
+
+        sr-rd-content li ul, sr-rd-content li ol, sr-rd-content-ul ul, sr-rd-content-ul ol, sr-rd-content-ol ul, sr-rd-content-ol ol {
+            margin-bottom: 0.8em;
+            margin-left: 2em!important;;
+        }
+    }
+    `
+    setTimeout(()=>$("head").append( `<style id="sr-rd-mobile">${css}</style>` ), 1000 );
 }
 
 /****************************
@@ -654,6 +798,9 @@ function readMode() {
     pr.pure && codehighlight();
     simpread.read.toc && toc();
 
+    // add mobile adpater
+    readModeMobile();
+
     // exit
     $( ".simpread-read-root sr-rd-crlbar fab:not(.setting)" ).one( "click", event => {
         $( ".simpread-read-root" ).animate( { opacity: 0 }, {
@@ -665,6 +812,7 @@ function readMode() {
                 if ( $root.attr("style") ) $root.attr( "style", $root.attr("style").replace( "font-size: 62.5%!important", "" ));
                 $( "body" ).removeClass( "simpread-hidden" );
                 $( ".simpread-read-root" ).remove();
+                $( "head #sr-rd-mobile" ).remove();
             }
         }).addClass( "simpread-read-root-hide" );
     });

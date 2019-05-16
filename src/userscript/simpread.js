@@ -893,6 +893,7 @@ function codehighlight() {
  * Wheel menu buttons
  */
 function wheelmenu() {
+    if ( $(".sr-rd-trigger").length > 0 ) return;
     const menu = new BloomingMenu({
         startAngle: -180,
         endAngle: 0,

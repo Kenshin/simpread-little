@@ -282,6 +282,14 @@ function commonMobile() {
      */
      @media only screen and (max-device-width: 1024px) {
 
+        sr-rd-content img {
+            margin: 0!important;
+            width: 100%!important;
+            background-color: transparent!important;
+            border: 0!important;
+            box-shadow: none!important;
+        }
+
         fab {
             opacity: 1!important;
         }
@@ -344,14 +352,6 @@ function readModeMobile() {
 
         sr-rd-content li code, sr-rd-content p code {
             font-size: inherit;
-        }
-
-        sr-rd-content img {
-            margin: 0!important;
-            width: 100%!important;
-            background-color: transparent!important;
-            border: 0!important;
-            box-shadow: none!important;
         }
 
         sr-rd-footer {

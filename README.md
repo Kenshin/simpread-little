@@ -38,7 +38,10 @@
 * 可导入 `简悦` 的配置信息；
 * 只关注阅读模式，除此以外并无其它任何功能。
 * ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 配合 [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser&hl=en) 可在 Androd 上享受简悦带来的「沉浸式阅读体验」；
-![](https://i.loli.net/2019/05/16/5cdcf8b44fc3b86548.png) ![](https://i.loli.net/2019/05/16/5cdcf7f84e1b599119.png)
+<details><summary>更多截图</summary>
+  <img src="https://i.loli.net/2019/05/16/5cdcf8b44fc3b86548.png">
+  <img src="https://i.loli.net/2019/05/16/5cdcf7f84e1b599119.png">
+</details>
 
 #### 功能：
 - [聚焦模式](http://ksria.com/simpread/docs/#/聚焦模式)：  

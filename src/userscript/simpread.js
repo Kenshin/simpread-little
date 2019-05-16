@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         简悦( SimpRead ) · 轻阅版
 // @namespace    http://ksria.com/simpread/
-// @version      1.1.2.5005
+// @version      1.1.2.5016
 // @description  简悦 - 让你瞬间进入沉浸式阅读的 User Script 扩展
 // @author       Kenshin <kenshin@ksria.com>
 // @include      http://*/*
@@ -14,22 +14,22 @@
 // @require      https://greasyfork.org/scripts/383025-bloomingmenu/code/BloomingMenu.js?version=698175
 // @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=697882
 // @require      https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js?version=697883
-// @resource     global_sites http://sr.ksria.cn/website_list_v4.json?data=1.1.2.5005
-// @resource     notify_style http://sr.ksria.cn/puread/notify.css?version=1.1.2.5005
-// @resource     main_style   http://sr.ksria.cn/puread/simpread.css?version=1.1.2.5005
-// @resource     mntips_style http://sr.ksria.cn/puread/mintooltip.css?version=1.1.2.5005
-// @resource     option_style http://sr.ksria.cn/puread/option.css?version=1.1.2.5005
+// @resource     global_sites http://sr.ksria.cn/website_list_v4.json?data=1.1.2.5016
+// @resource     notify_style http://sr.ksria.cn/puread/notify.css?version=1.1.2.5016
+// @resource     main_style   http://sr.ksria.cn/puread/simpread.css?version=1.1.2.5016
+// @resource     mntips_style http://sr.ksria.cn/puread/mintooltip.css?version=1.1.2.5016
+// @resource     option_style http://sr.ksria.cn/puread/option.css?version=1.1.2.5016
 // @resource     user_style   https://gist.github.com/Kenshin/365a91c61bad550b5900247539113f06/raw/3e666bee279f249e5b59140d8a777192ecb121cd/simpread_user.css
-// @resource     theme_common http://sr.ksria.cn/puread/theme_common.css?version=1.1.2.5005
-// @resource     theme_dark   http://sr.ksria.cn/puread/theme_dark.css?version=1.1.2.5005
-// @resource     theme_github http://sr.ksria.cn/puread/theme_github.css?version=1.1.2.5005
-// @resource     theme_gothic http://sr.ksria.cn/puread/theme_gothic.css?version=1.1.2.5005
-// @resource     theme_night  http://sr.ksria.cn/puread/theme_night.css?version=1.1.2.5005
-// @resource     theme_pixyii http://sr.ksria.cn/puread/theme_pixyii.css?version=1.1.2.5005
-// @resource     theme_engwrite  http://sr.ksria.cn/puread/theme_engwrite.css?version=1.1.2.5005
-// @resource     theme_monospace http://sr.ksria.cn/puread/theme_monospace.css?version=1.1.2.5005
-// @resource     theme_newsprint http://sr.ksria.cn/puread/theme_newsprint.css?version=1.1.2.5005
-// @resource     theme_octopress http://sr.ksria.cn/puread/theme_octopress.css?version=1.1.2.5005
+// @resource     theme_common http://sr.ksria.cn/puread/theme_common.css?version=1.1.2.5016
+// @resource     theme_dark   http://sr.ksria.cn/puread/theme_dark.css?version=1.1.2.5016
+// @resource     theme_github http://sr.ksria.cn/puread/theme_github.css?version=1.1.2.5016
+// @resource     theme_gothic http://sr.ksria.cn/puread/theme_gothic.css?version=1.1.2.5016
+// @resource     theme_night  http://sr.ksria.cn/puread/theme_night.css?version=1.1.2.5016
+// @resource     theme_pixyii http://sr.ksria.cn/puread/theme_pixyii.css?version=1.1.2.5016
+// @resource     theme_engwrite  http://sr.ksria.cn/puread/theme_engwrite.css?version=1.1.2.5016
+// @resource     theme_monospace http://sr.ksria.cn/puread/theme_monospace.css?version=1.1.2.5016
+// @resource     theme_newsprint http://sr.ksria.cn/puread/theme_newsprint.css?version=1.1.2.5016
+// @resource     theme_octopress http://sr.ksria.cn/puread/theme_octopress.css?version=1.1.2.5016
 // @grant        GM_getResourceText
 // @grant        GM_addStyle
 // @grant        GM_getValue

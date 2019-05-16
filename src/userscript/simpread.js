@@ -966,6 +966,10 @@ function wheelmenu() {
         }
         .blooming-menu__item-btn-wrapper {
             background-color: #03a9f4!important;
+            transition: all 1000ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+        }
+        .blooming-menu__item-btn-wrapper:active {
+            background-color: #0D47A1!important;
         }
         .blooming-menu__main.is-active {
             transform: rotate(0);

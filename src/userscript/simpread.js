@@ -558,11 +558,15 @@ function controlbar() {
  * @param {string} include: focus, read
  */
 function entryMode( type ) {
-    type = type == "focus" ? "focus" : "read";
-    if ( [ "none" ].includes( pr.state ) ) {
-        if ( simpread[type].highlight == true ) tempMode( type );
-        else new Notify().Render( `当前未启用 <a href='http://ksria.com/simpread/docs/#/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>，并当前站点也未适配，如需要适配请提交到 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
-    } else type == "focus" ? focusMode() : readMode();
+    try {
+        type = type == "focus" ? "focus" : "read";
+        if ( [ "none" ].includes( pr.state ) ) {
+            if ( simpread[type].highlight == true ) tempMode( type );
+            else new Notify().Render( `当前未启用 <a href='http://ksria.com/simpread/docs/#/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>，并当前站点也未适配，如需要适配请提交到 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
+        } else type == "focus" ? focusMode() : readMode();
+    } catch ( err ) {
+        new Notify().Render( 2, "当前页面无法使用阅读模式。" );
+    }
 }
 
 /**

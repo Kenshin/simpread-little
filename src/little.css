@@ -236,3 +236,31 @@ dialog-content .about a {
 .blooming-menu__item:nth-of-type(6) button {
     transform: rotate(180deg);
 }
+
+/**
+ * Mobile media
+ */
+@media (pointer:coarse) {
+    fab {
+        opacity: 1!important;
+    }
+
+   /**
+    * iPhone XS Max and below
+    */
+    @media only screen and (max-device-width: 414px) {
+
+        sr-rd-crlbar.controlbar {
+            z-index: 2147483646!important;
+        }
+
+        dialog-gp {
+            transform: scale(.7);
+            z-index: 2147483647!important;
+        }
+
+        dialog-content .about {
+            width: 100%!important;
+        }
+    }
+}

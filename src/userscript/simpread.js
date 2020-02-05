@@ -19,7 +19,7 @@
 // @resource     main_style   http://sr.ksria.cn/puread/simpread.css?version=1.1.2.20200205
 // @resource     mntips_style http://sr.ksria.cn/puread/mintooltip.css?version=1.1.2.202002051244
 // @resource     option_style http://sr.ksria.cn/puread/setting.css?version=1.1.2.20200205
-// @resource     user_style   http://sr.ksria.cn/puread/little.css?version=1.1.2.202002051305
+// @resource     user_style   http://sr.ksria.cn/puread/little.css?version=1.1.2.202002051436
 // @resource     theme_common http://sr.ksria.cn/puread/theme_common.css?version=1.1.2.20200205
 // @resource     theme_dark   http://sr.ksria.cn/puread/theme_dark.css?version=1.1.2.20200205
 // @resource     theme_github http://sr.ksria.cn/puread/theme_github.css?version=1.1.2.20200205
@@ -30,6 +30,7 @@
 // @resource     theme_monospace http://sr.ksria.cn/puread/theme_monospace.css?version=1.1.2.20200205
 // @resource     theme_newsprint http://sr.ksria.cn/puread/theme_newsprint.css?version=1.1.2.20200205
 // @resource     theme_octopress http://sr.ksria.cn/puread/theme_octopress.css?version=1.1.2.20200205
+// @resource     theme_mobile    http://sr.ksria.cn/puread/theme_mobile.css?version=1.1.2.20200205
 // @grant        GM_getResourceText
 // @grant        GM_addStyle
 // @grant        GM_getValue
@@ -58,6 +59,7 @@ const pr         = new PureRead(),
     theme_monospace = GM_getResourceText( "theme_monospace" ),
     theme_newsprint = GM_getResourceText( "theme_newsprint" ),
     theme_octopress = GM_getResourceText( "theme_octopress" ),
+    theme_mobile    = GM_getResourceText( "theme_mobile" ),
     theme        = { theme_github, theme_newsprint, theme_gothic, theme_engwrite, theme_octopress, theme_pixyii, theme_monospace, theme_night, theme_dark },
     focus        = {
         version   : "2016-12-29",
@@ -223,9 +225,6 @@ const pr         = new PureRead(),
 // initialize
 version();
 
-// common mobile
-commonMobile();
-
 // blacklist
 if ( !blacklist() ) {
     // add simpread style
@@ -235,6 +234,7 @@ if ( !blacklist() ) {
     GM_addStyle( option_style );
     GM_addStyle( user_style   );
     GM_addStyle( theme_common );
+    GM_addStyle( theme_mobile );
 
     // add websites and current can'b read mode
     if (GM_getValue( "simpread_db" )) {
@@ -254,73 +254,6 @@ if ( !blacklist() ) {
     autoOpen();
 
     console.log( "[SimpRead Lite] current pureread is ", pr, simpread );
-}
-
-/****************************
- * Style
- ****************************/
-
- /**
-  * Common Mobile style
-  */
-function commonMobile() {
-    const css = `
-
-    sr-rd-content {
-        text-align: justify;
-    }
-    
-    sr-rd-content p {
-        -webkit-hyphens: auto;
-        -moz-hyphens: auto;
-        -ms-hyphens: auto;
-        hyphens: auto;
-    }
-
-    /**
-     * iPad pro 12 and below
-     */
-     @media only screen and (max-device-width: 1024px) {
-
-        sr-rd-content img {
-            margin: 0!important;
-            width: 100%!important;
-            background-color: transparent!important;
-            border: 0!important;
-            box-shadow: none!important;
-        }
-
-        fab {
-            opacity: 1!important;
-        }
-    }
-
-    /**
-    * iPhone XS Max and below
-    */
-    @media only screen and (max-device-width: 414px) {
-
-        sr-rd-crlbar.controlbar {
-            z-index: 2147483646!important;
-        }
-
-        dialog-gp {
-            transform: scale(.7);
-            z-index: 2147483647!important;
-        }
-
-        dialog-content .about {
-            width: 100%!important;
-        }
-    }
-    
-    /**
-    * iPhone SE and below
-    */
-    @media only screen and (max-device-width: 320px) {
-    }
-    `
-    $("head").append( `<style id="sr-common-mobile">${css}</style>` )
 }
 
 /**

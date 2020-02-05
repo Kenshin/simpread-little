@@ -8,6 +8,7 @@
 // @include      https://*/*
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js
+// @require      https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js
 // @require      https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js?version=697886
 // @require      https://greasyfork.org/scripts/40236-notify/code/Notify.js?version=770172
 // @require      https://greasyfork.org/scripts/40172-mousetrap/code/Mousetrap.js?version=262594
@@ -19,7 +20,7 @@
 // @resource     main_style   http://sr.ksria.cn/puread/simpread.css?version=1.1.2.20200205
 // @resource     mntips_style http://sr.ksria.cn/puread/mintooltip.css?version=1.1.2.202002051244
 // @resource     option_style http://sr.ksria.cn/puread/setting.css?version=1.1.2.20200205
-// @resource     user_style   http://sr.ksria.cn/puread/little.css?version=1.1.2.202002051436
+// @resource     user_style   http://sr.ksria.cn/puread/little.css?version=1.1.2.202002051542
 // @resource     theme_common http://sr.ksria.cn/puread/theme_common.css?version=1.1.2.20200205
 // @resource     theme_dark   http://sr.ksria.cn/puread/theme_dark.css?version=1.1.2.20200205
 // @resource     theme_github http://sr.ksria.cn/puread/theme_github.css?version=1.1.2.20200205
@@ -252,6 +253,7 @@ if ( !blacklist() ) {
     bindShortcuts();
     controlbar();
     autoOpen();
+    dragging();
 
     console.log( "[SimpRead Lite] current pureread is ", pr, simpread );
 }
@@ -452,7 +454,7 @@ function autoOpen() {
  * Control bar
  */
 function controlbar() {
-    $( "body" ).append( '<sr-rd-crlbar class="controlbar"><fab class="about"></fab><fab class="setting"></fab><fab style="font-size:12px!important;">简 悦</fab></sr-rd-crlbar>' );
+    $( "body" ).append( '<sr-rd-crlbar class="controlbar draggable"><fab class="about"></fab><fab class="setting"></fab><fab style="font-size:12px!important;">简 悦</fab></sr-rd-crlbar>' );
     $( "sr-rd-crlbar" ).css( "opacity", 1 );
     if ( pr.state == "none" ) $( "sr-rd-crlbar fab:not(.setting,.about)" ).addClass( "not-adapter" );
     setTimeout( () => {
@@ -460,6 +462,7 @@ function controlbar() {
         if ( pr.state == "none" && simpread.option.trigger_hiden == true ) $( "sr-rd-crlbar" ).css({ display: "none" });
     }, 1000 * 2 );
     $( "sr-rd-crlbar fab:not(.setting,.about)" ).click( event => {
+        if ( $( 'sr-rd-crlbar[draggable="true"]' ).length > 0 ) return;
         if ( $(event.target).hasClass( "crlbar-close" ) ) {
             $( ".simpread-focus-root" ).trigger( "click", "okay" );
             $( event.target ).removeClass( "crlbar-close" ).text( "简 悦" );
@@ -1147,6 +1150,50 @@ function toc() {
         event.preventDefault();
     })
     simpread.read.toc_hide && $('head').append( `<style>toc-bg{width:50px!important;height:200px!important}.toc-bg-hidden{transition:opacity .2s ease}.toc-bg-hidden:hover toc{width:180px}toc{width:0;transition:width .5s!important}</style>` );
+}
+
+/**
+ * Drag
+ */
+function dragging() {
+    interact( '.draggable' ).draggable({
+        // enable inertial throwing
+        inertia: true,
+        // keep the element within the area of it's parent
+        modifiers: [
+            interact.modifiers.restrictRect({
+            restriction: 'parent',
+            endOnly: true
+            })
+        ],
+        // enable autoScroll
+        autoScroll: true,
+
+        // call this function on every dragmove event
+        onmove: dragMoveListener,
+        // call this function on every dragend event
+        onend: function (event) {
+            setTimeout( () => $( event.currentTarget ).attr( "draggable", false ), 500 );
+        }
+    });
+
+    function dragMoveListener (event) {
+        $( event.currentTarget ).attr( "draggable", true );
+        var target = event.target
+        // keep the dragged position in the data-x/data-y attributes
+        var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
+        var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
+    
+        // translate the element
+        target.style.webkitTransform =
+        target.style.transform =
+            'translate(' + x + 'px, ' + y + 'px)'
+    
+        // update the posiion attributes
+        target.setAttribute('data-x', x)
+        target.setAttribute('data-y', y)
+    }
+
 }
 
 /**

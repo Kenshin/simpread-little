@@ -16,10 +16,10 @@
 // @require      https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js?version=770175
 // @resource     global_sites http://sr.ksria.cn/website_list_v4.json?data=1.1.2.20200205
 // @resource     notify_style http://sr.ksria.cn/puread/notify.css?version=1.1.2.20200205
-// @resource     main_style   http://sr.ksria.cn/puread/simpread.css?version=1.1.2.5016
+// @resource     main_style   http://sr.ksria.cn/puread/simpread.css?version=1.1.2.20200205
 // @resource     mntips_style http://sr.ksria.cn/puread/mintooltip.css?version=1.1.2.5016
-// @resource     option_style http://sr.ksria.cn/puread/option.css?version=1.1.2.5016
-// @resource     user_style   https://gist.github.com/Kenshin/365a91c61bad550b5900247539113f06/raw/3e666bee279f249e5b59140d8a777192ecb121cd/simpread_user.css
+// @resource     option_style http://sr.ksria.cn/puread/setting.css?version=1.1.2.20200205
+// @resource     user_style   http://sr.ksria.cn/puread/little.css?version=1.1.2.20200205
 // @resource     theme_common http://sr.ksria.cn/puread/theme_common.css?version=1.1.2.20200205
 // @resource     theme_dark   http://sr.ksria.cn/puread/theme_dark.css?version=1.1.2.20200205
 // @resource     theme_github http://sr.ksria.cn/puread/theme_github.css?version=1.1.2.20200205

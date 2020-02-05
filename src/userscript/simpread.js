@@ -19,7 +19,7 @@
 // @resource     main_style   http://sr.ksria.cn/puread/simpread.css?version=1.1.2.20200205
 // @resource     mntips_style http://sr.ksria.cn/puread/mintooltip.css?version=1.1.2.202002051244
 // @resource     option_style http://sr.ksria.cn/puread/setting.css?version=1.1.2.20200205
-// @resource     user_style   http://sr.ksria.cn/puread/little.css?version=1.1.2.20200205
+// @resource     user_style   http://sr.ksria.cn/puread/little.css?version=1.1.2.202002051305
 // @resource     theme_common http://sr.ksria.cn/puread/theme_common.css?version=1.1.2.20200205
 // @resource     theme_dark   http://sr.ksria.cn/puread/theme_dark.css?version=1.1.2.20200205
 // @resource     theme_github http://sr.ksria.cn/puread/theme_github.css?version=1.1.2.20200205
@@ -960,38 +960,6 @@ function wheelmenu() {
             }
         })
     });
-    const css = `
-        .sr-rd-trigger {
-            position: fixed;
-            right: 50%;
-            bottom: 35px;
-        }
-        .blooming-menu__container {
-            transition: all 1s cubic-bezier(.23,1,.32,1) .1s!important;
-        }
-        .blooming-menu__main {
-            background-color: rgba(244, 67, 54, 1);
-        }
-        .blooming-menu__item-btn-wrapper {
-            background-color: #03a9f4!important;
-            transition: all 1000ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-        }
-        .blooming-menu__item-btn-wrapper:active {
-            background-color: #0D47A1!important;
-        }
-        .blooming-menu__main.is-active {
-            transform: rotate(0);
-            -webkit-transform: rotate(0);
-        }
-        .blooming-menu__item:nth-of-type(3) button,
-        .blooming-menu__item:nth-of-type(4) button {
-            transform: rotate(90deg);
-        }
-        .blooming-menu__item:nth-of-type(6) button {
-            transform: rotate(180deg);
-        }
-    `;
-    $( "head" ).append( `<style id="blooming-menu__root">${ css }</style>` );
     setTimeout( ()=> {
         $(".simpread-read-root").append( `<div class="sr-rd-trigger"></div>` );
         $(".sr-rd-trigger").append( $(".blooming-menu__container") );

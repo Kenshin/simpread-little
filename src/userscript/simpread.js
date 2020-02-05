@@ -787,7 +787,7 @@ function readMode() {
         .addClass( "simpread-read-root-show" );
 
     $( "sr-rd-title"        ).html(   pr.html.title   );
-    if ( pr.html.desc != "" ) $( "sr-rd-desc" ).html( pr.html.desc );
+    if ( pr.html.desc != "" && pr.html.desc != undefined ) $( "sr-rd-desc" ).html( pr.html.desc );
     else $( "sr-rd-desc"    ).remove();
     if   ( pr.html.avatar   ) multiple( pr.html.include, pr.html.avatar );
     else $( "sr-rd-content" ).html( pr.html.include );

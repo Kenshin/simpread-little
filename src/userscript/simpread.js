@@ -12,9 +12,9 @@
 // @require      https://greasyfork.org/scripts/40236-notify/code/Notify.js?version=770172
 // @require      https://greasyfork.org/scripts/40172-mousetrap/code/Mousetrap.js?version=262594
 // @require      https://greasyfork.org/scripts/383025-bloomingmenu/code/BloomingMenu.js?version=698175
-// @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=697882
-// @require      https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js?version=697883
-// @resource     global_sites http://sr.ksria.cn/website_list_v4.json?data=1.1.2.5016
+// @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=770173
+// @require      https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js?version=770175
+// @resource     global_sites http://sr.ksria.cn/website_list_v4.json?data=1.1.2.20200205
 // @resource     notify_style http://sr.ksria.cn/puread/notify.css?version=1.1.2.20200205
 // @resource     main_style   http://sr.ksria.cn/puread/simpread.css?version=1.1.2.5016
 // @resource     mntips_style http://sr.ksria.cn/puread/mintooltip.css?version=1.1.2.5016

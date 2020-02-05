@@ -736,7 +736,7 @@ function readMode() {
     style.FontSize(   simpread.read.fontsize   );
     style.Layout(     simpread.read.layout     );
 
-    pr.pure && codehighlight();
+    pr.pure && codeHighlight();
     simpread.read.toc && toc();
 
     // add mobile adpater
@@ -822,12 +822,188 @@ function highlight() {
 /**
  * Code highlight
  */
-function codehighlight() {
-    $("head").append('<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">')
-    $("head").append( '<style>.hljs{background:transparent!important;}</style>' )
-    $("sr-rd-content").find( 'pre' ).map( function(idx,item){
+function codeHighlight() {
+    $("head").append( '<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">' );
+    // source from https://simpread.ksria.cn/plugins/details/klGUASLasg version 0.0.5
+    const $content = $( 'sr-rd-content' );
+    if ( location.host == "blog.csdn.net" ) {
+        // remove svg
+        $content.find( "svg" ).map( function( idx, item ) {
+            if ( $(item).attr("title") == "CSDN认证原创" ) {
+                $(item).remove();
+            } else if ( $(item).html().trim().startsWith( '<path stroke-linecap="round" d="M5,0 0,2.5 5,5z"' ) ) {
+                $(item).remove();
+            }
+        });
+        // remove copywrite
+        $content.children().map( function( idx, item ) {
+            if ( /版权声明/ig.test( item.outerHTML ) ) {
+                $(item).remove();
+            }
+        });
+    }
+
+    if ( location.host.endsWith( "iteye.com" )) {
+        if ( $(".dp-highlighter").length > 0 ) {
+            $content.find( "pre" ).map(function(idx,item){
+                $(item).prev().remove();
+            })
+        }
+    }
+
+    // format pre
+    if ( $("body").find( "div[data-prism-highlighted]" ).length > 0 ) {
+        // e.g. https://zh.javascript.info/hello-world
+        $content.find( "pre" ).map( ( idx, item ) => {
+            $(item).text( $($("body").find( "pre" )[idx]).find( "code.language-markup" )[0].outerText )
+        });
+    } else if ( $("body").find( ".crayon-syntax" ).length > 0 ) {
+        // crayon-syntax
+        $content.find( "table" ).map( ( idx, item ) => {
+            if ( $(item).find( "td" ).attr( "data-settings" ) ) {
+                const html = $($(item).find("tbody td")[1])[0].innerText;
+                $(item).replaceWith( `<pre>${html}</pre>` );
+            }
+        });
+    } else if ( $content.find( "table code" ).length > 0 ) {
+        // syntaxhighlighter
+        $content.find( "table" ).map( ( idx, item ) => {
+            if ( $(item).find( "code" ).length > 0 ) {
+                const html = $($(item).find("tbody td")[1])[0].innerText;
+                $(item).replaceWith( `<pre>${html}</pre>` );
+            }
+        });
+    } else if ( $content.find( "pre code" ).length == 0 && $content.find( "pre" ).length > 0 ) {
+        //NOT-TODO
+    } else if ( $("body").find( 'pre code li' ).length > 0 ) {
+        // pre code → li
+        $("body").find( 'pre' ).map( function( idx, pre ) {
+            let html = "";
+            $(pre).find( 'li' ).map( function( idx, item ) {
+                idx  = idx;
+                html += item.innerText + "\n"
+            })
+            $($content.find( "pre" )[idx]).html( html.replace(/</ig,"&lt;").replace(/>/ig,"&gt;") );
+        })
+    } else if ( $content.find( "table pre" ).length > 0 ) {
+        // pre → table
+        $("table").map(function( idx, item ) {
+            let html = "";
+            $(item).find("pre").map( function(indx, pre) {
+                html += pre.innerText + "\n";
+            });
+            html != "" && $(item).replaceWith( "<pre>" + html.replace(/</ig,"&lt;").replace(/>/ig,"&gt;").trim() + "</pre>" );
+        });
+    } else if ( $("body").find( "pre code" ).length > 0 ) {
+        // pre → code
+        let arr = {};
+        $("body").find( "pre" ).map(function( idx, item ) {
+            let html = "";
+            if ( $(item).find( "code" ).length > 0 ) {
+                if ( $(item).find( "code" ).length > 1 ) {
+                    html = item.innerText;
+                } else {
+                    html = $(item).find( "code" ).text();
+                }
+                arr[idx] = html;
+            }
+        });
+        $content.find( "pre" ).map(function( idx, item ) {
+            $(item).html( arr[idx].replace(/</ig,"&lt;").replace(/>/ig,"&gt;").trim() );
+        });
+    }
+
+    // remove lines
+    $content.find( "pre" ).map( function( idx, item ) {
+        const $target = $(item);
+        const lines = item.innerHTML.split('\n');
+        let html = "";
+        for( let i = 0; i < lines.length; i++ ) {
+            const line = lines[i];
+            if ( !/^\d+$/.test( line.trim() ) ) {
+                html += line + "\n";
+            }
+        }
+        $target.html( html.trim() )
+    });
+
+    // mark
+    Mousetrap.bind( 'h h h', function() {
+        new Notify().Render( "移动鼠标框选需要重新整理并高亮代码的区域。" );
+        mark().done( dom => {
+            let $target = $(dom),
+                $parent = $target.parent();
+            if ( $target.is( "td" ) || $parent.is("td") ) {
+                $target = $parent.parent().parent();
+            }
+            $target.html( `<pre class="hljs">${dom.innerText}</pre>` );
+            hljs.highlightBlock($target.find("pre")[0]);
+        });
+    });
+
+    function mark() {
+        const highlight_class = "simpread-highlight-selector";
+        let $prev;
+        const dtd            = $.Deferred(),
+                mousemoveEvent = event => {
+                if ( !$prev ) {
+                    $( event.target ).addClass( highlight_class );
+                } else {
+                    $prev.removeClass( highlight_class );
+                    $( event.target ).addClass( highlight_class );
+                }
+                $prev = $( event.target );
+        };
+        $content.one( "click", event => {
+            if ( !$prev ) return;
+            $( event.target ).removeClass( highlight_class );
+            $content.off( "mousemove", mousemoveEvent );
+            $prev = undefined;
+            dtd.resolve( event.target );
+        });
+        $("html").one( "keydown", event => {
+            if ( event.keyCode == 27 && $prev ) {
+                $content.find( `.${highlight_class}` ).removeClass( highlight_class );
+                $content.off( "mousemove", mousemoveEvent );
+                $prev = undefined;
+                event.preventDefault();
+                return false;
+            }
+        });
+        $content.on( "mousemove", mousemoveEvent );
+        return dtd;
+    }
+
+    $content.find( 'pre' ).map( function(idx,item){
         hljs.highlightBlock(item);
     });
+
+    // change pre background by theme
+    switch ( simpread.read.theme ) {
+        case 'github':
+        case 'pixyii':
+        case 'gothic':
+            $("head").append( '<style>.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:bold}.hljs-number,.hljs-literal,.hljs-variable,.hljs-template-variable,.hljs-tag .hljs-attr{color:#008080}.hljs-string,.hljs-doctag{color:#d14}.hljs-title,.hljs-section,.hljs-selector-id{color:#900;font-weight:bold}.hljs-subst{font-weight:normal}.hljs-type,.hljs-class .hljs-title{color:#458;font-weight:bold}.hljs-tag,.hljs-name,.hljs-attribute{color:#000080;font-weight:normal}.hljs-regexp,.hljs-link{color:#009926}.hljs-symbol,.hljs-bullet{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:bold}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:bold}</style>' )
+            break;
+        case 'monospace':
+            $("head").append( '<style>.hljs{display:block;overflow-x:auto;padding:.5em;background:#002b36;color:#839496}.hljs-comment,.hljs-quote{color:#586e75}.hljs-keyword,.hljs-selector-tag,.hljs-addition{color:#859900}.hljs-number,.hljs-string,.hljs-meta .hljs-meta-string,.hljs-literal,.hljs-doctag,.hljs-regexp{color:#2aa198}.hljs-title,.hljs-section,.hljs-name,.hljs-selector-id,.hljs-selector-class{color:#268bd2}.hljs-attribute,.hljs-attr,.hljs-variable,.hljs-template-variable,.hljs-class .hljs-title,.hljs-type{color:#b58900}.hljs-symbol,.hljs-bullet,.hljs-subst,.hljs-meta,.hljs-meta .hljs-keyword,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-link{color:#cb4b16}.hljs-built_in,.hljs-deletion{color:#dc322f}.hljs-formula{background:#073642}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:bold}</style>' )
+            break;
+        case 'engwrite':
+            $("head").append( '<style>.hljs{display:block;overflow-x:auto;padding:.5em;background:#fdf6e3;color:#657b83}.hljs-comment,.hljs-quote{color:#93a1a1}.hljs-keyword,.hljs-selector-tag,.hljs-addition{color:#859900}.hljs-number,.hljs-string,.hljs-meta .hljs-meta-string,.hljs-literal,.hljs-doctag,.hljs-regexp{color:#2aa198}.hljs-title,.hljs-section,.hljs-name,.hljs-selector-id,.hljs-selector-class{color:#268bd2}.hljs-attribute,.hljs-attr,.hljs-variable,.hljs-template-variable,.hljs-class .hljs-title,.hljs-type{color:#b58900}.hljs-symbol,.hljs-bullet,.hljs-subst,.hljs-meta,.hljs-meta .hljs-keyword,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-link{color:#cb4b16}.hljs-built_in,.hljs-deletion{color:#dc322f}.hljs-formula{background:#eee8d5}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:bold}</style>' )
+            break;
+        case 'newsprint':
+            $("head").append( '<style>.hljs{background: #dadada;}</style>' )
+            break;
+        case 'octopress':
+            $("head").append( '<style>.hljs{display:block;overflow-x:auto;padding:.5em;background:#fdf6e3;color:#657b83}.hljs-comment,.hljs-quote{color:#93a1a1}.hljs-keyword,.hljs-selector-tag,.hljs-addition{color:#859900}.hljs-number,.hljs-string,.hljs-meta .hljs-meta-string,.hljs-literal,.hljs-doctag,.hljs-regexp{color:#2aa198}.hljs-title,.hljs-section,.hljs-name,.hljs-selector-id,.hljs-selector-class{color:#268bd2}.hljs-attribute,.hljs-attr,.hljs-variable,.hljs-template-variable,.hljs-class .hljs-title,.hljs-type{color:#b58900}.hljs-symbol,.hljs-bullet,.hljs-subst,.hljs-meta,.hljs-meta .hljs-keyword,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-link{color:#cb4b16}.hljs-built_in,.hljs-deletion{color:#dc322f}.hljs-formula{background:#eee8d5}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:bold}</style>' )
+            break;
+        case 'dark':
+            $("head").append( '<style>.hljs{display:block;overflow-x:auto;padding:.5em;color:#abb2bf;background:#282c34}.hljs-comment,.hljs-quote{color:#5c6370;font-style:italic}.hljs-doctag,.hljs-keyword,.hljs-formula{color:#c678dd}.hljs-section,.hljs-name,.hljs-selector-tag,.hljs-deletion,.hljs-subst{color:#e06c75}.hljs-literal{color:#56b6c2}.hljs-string,.hljs-regexp,.hljs-addition,.hljs-attribute,.hljs-meta-string{color:#98c379}.hljs-built_in,.hljs-class .hljs-title{color:#e6c07b}.hljs-attr,.hljs-variable,.hljs-template-variable,.hljs-type,.hljs-selector-class,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-number{color:#d19a66}.hljs-symbol,.hljs-bullet,.hljs-link,.hljs-meta,.hljs-selector-id,.hljs-title{color:#61aeee}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:bold}.hljs-link{text-decoration:underline}</style>' )
+            break;
+        case 'night':
+            $("head").append( '<style>.hljs{display:block;overflow-x:auto;padding:.5em;background:#333;color:white}.hljs-name,.hljs-strong{font-weight:bold}.hljs-code,.hljs-emphasis{font-style:italic}.hljs-tag{color:#62c8f3}.hljs-variable,.hljs-template-variable,.hljs-selector-id,.hljs-selector-class{color:#ade5fc}.hljs-string,.hljs-bullet{color:#a2fca2}.hljs-type,.hljs-title,.hljs-section,.hljs-attribute,.hljs-quote,.hljs-built_in,.hljs-builtin-name{color:#ffa}.hljs-number,.hljs-symbol,.hljs-bullet{color:#d36363}.hljs-keyword,.hljs-selector-tag,.hljs-literal{color:#fcc28c}.hljs-comment,.hljs-deletion,.hljs-code{color:#888}.hljs-regexp,.hljs-link{color:#c6b4f0}.hljs-meta{color:#fc9b9b}.hljs-deletion{background-color:#fc9b9b;color:#333}.hljs-addition{background-color:#a2fca2;color:#333}.hljs a{color:inherit}.hljs a:focus,.hljs a:hover{color:inherit;text-decoration:underline}</style>' )
+            break;
+    }
 }
 
 /**

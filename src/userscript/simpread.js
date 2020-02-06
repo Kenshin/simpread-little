@@ -20,7 +20,7 @@
 // @resource     main_style   http://sr.ksria.cn/puread/simpread.css?version=1.1.2.20200205
 // @resource     mntips_style http://sr.ksria.cn/puread/mintooltip.css?version=1.1.2.202002051244
 // @resource     option_style http://sr.ksria.cn/puread/setting.css?version=1.1.2.20200205
-// @resource     user_style   http://sr.ksria.cn/puread/little.css?version=1.1.2.202002051542
+// @resource     user_style   http://sr.ksria.cn/puread/little.css?version=1.1.2.202002061307
 // @resource     theme_common http://sr.ksria.cn/puread/theme_common.css?version=1.1.2.20200205
 // @resource     theme_dark   http://sr.ksria.cn/puread/theme_dark.css?version=1.1.2.20200205
 // @resource     theme_github http://sr.ksria.cn/puread/theme_github.css?version=1.1.2.20200205
@@ -380,12 +380,24 @@ function autoOpen() {
  * Control bar
  */
 function controlbar() {
-    $( "body" ).append( '<sr-rd-crlbar class="controlbar draggable"><fab class="about"></fab><fab class="setting"></fab><fab style="font-size:12px!important;">简 悦</fab></sr-rd-crlbar>' );
+    $( "body" ).append( '<sr-rd-crlbar class="controlbar hidden draggable"><fab class="about"></fab><fab class="setting"></fab><fab style="font-size:12px!important;">简 悦</fab></sr-rd-crlbar>' );
     $( "sr-rd-crlbar" ).css( "opacity", 1 );
     if ( pr.state == "none" ) $( "sr-rd-crlbar fab:not(.setting,.about)" ).addClass( "not-adapter" );
     setTimeout( () => {
         $( "sr-rd-crlbar" ).removeAttr( "style" );
         if ( pr.state == "none" && simpread.option.trigger_hiden == true ) $( "sr-rd-crlbar" ).css({ display: "none" });
+        const position = GM_getValue( "simpread_trigger_pos" );
+        if ( position && position['sr-rd-crlbar'] ) {
+            const { x, y } = position['sr-rd-crlbar'];
+            $( 'sr-rd-crlbar' )
+                .attr( 'data-x', x )
+                .attr( 'data-y', y )
+                .css({
+                    'transform': `translate(${x}px, ${y}px)`,
+                    '-webkit-transform': `translate(${x}px, ${y}px)`,
+                });
+        }
+        $( "sr-rd-crlbar" ).removeClass( "hidden" );
     }, 1000 * 2 );
     $( "sr-rd-crlbar fab:not(.setting,.about)" ).click( event => {
         if ( $( 'sr-rd-crlbar[draggable="true"]' ).length > 0 ) return;
@@ -949,6 +961,7 @@ function wheelmenu() {
     menu.open()
     menu.props.elements.items.forEach(function (item, index) {
         item.addEventListener('click', function () {
+            if ( $( '.sr-rd-trigger[draggable="true"]' ).length > 0 ) return;
             switch ( index ) {
                 case 0:
                 case 1:
@@ -996,7 +1009,7 @@ function wheelmenu() {
         })
     });
     setTimeout( ()=> {
-        $(".simpread-read-root").append( `<div class="sr-rd-trigger"></div>` );
+        $(".simpread-read-root").append( `<div class="sr-rd-trigger draggable"></div>` );
         $(".sr-rd-trigger").append( $(".blooming-menu__container") );
         $(".simpread-read-root .blooming-menu__main-content").html( `<svg t="1557891708974" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5907" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"><defs><style type="text/css"></style></defs><path d="M152.365633 555.145394a154.587346 154.587346 0 0 0 39.497121 66.761107C221.21131 651.245914 260.251289 667.428762 301.759838 667.428762c41.508549 0 80.548528-16.164563 109.897084-45.531404A154.660489 154.660489 0 0 0 450.40433 557.714536H978.330904c25.206844 0 45.714261-20.470846 45.714262-45.714262 0-25.197701-20.470846-45.714261-45.714262-45.714261H450.395187a154.669631 154.669631 0 0 0-38.729122-64.182823A154.413632 154.413632 0 0 0 301.759838 356.571786c-41.508549 0-80.548528 16.164563-109.897084 45.531404a154.587346 154.587346 0 0 0-39.497121 66.761107A45.48569 45.48569 0 0 0 137.234212 466.286013H45.714261a45.723404 45.723404 0 0 0 0 91.428523h91.519951c5.302854 0 10.395423-0.905142 15.131421-2.569142z m719.359614 270.280998a154.596489 154.596489 0 0 0-39.497121-66.761107A154.413632 154.413632 0 0 0 722.331042 713.143024c-41.508549 0-80.548528 16.164563-109.897084 45.531404A154.660489 154.660489 0 0 0 573.68655 822.857251H45.759976c-25.206844 0-45.714261 20.470846-45.714262 45.714261 0 25.197701 20.470846 45.714261 45.714262 45.714261h527.935717a154.660489 154.660489 0 0 0 38.729122 64.182823C641.782513 1007.84458 680.822492 1024 722.331042 1024c41.508549 0 80.548528-16.164563 109.897084-45.531404a154.587346 154.587346 0 0 0 39.497121-66.761107 45.48569 45.48569 0 0 0 15.131421 2.578284h91.519951a45.723404 45.723404 0 0 0 0-91.428522h-91.519951c-5.302854 0-10.395423 0.905142-15.131421 2.569141z m0-713.142475a154.596489 154.596489 0 0 0-39.497121-66.761107A154.413632 154.413632 0 0 0 722.331042 0.000549c-41.508549 0-80.548528 16.164563-109.897084 45.531404A154.660489 154.660489 0 0 0 573.68655 109.714776H45.759976c-25.206844 0-45.714261 20.470846-45.714262 45.714261 0 25.197701 20.470846 45.714261 45.714262 45.714261h527.935717a154.660489 154.660489 0 0 0 38.729122 64.182823C641.782513 294.702105 680.822492 310.857525 722.331042 310.857525c41.508549 0 80.548528-16.164563 109.897084-45.531404a154.587346 154.587346 0 0 0 39.497121-66.761107 45.48569 45.48569 0 0 0 15.131421 2.578284h91.519951a45.723404 45.723404 0 0 0 0-91.428522h-91.519951c-5.302854 0-10.395423 0.905142-15.131421 2.569141zM347.016957 557.257393A63.579395 63.579395 0 0 1 301.759838 576.00024a63.579395 63.579395 0 0 1-45.257118-18.742847A63.579395 63.579395 0 0 1 237.759873 512.000274c0-17.097134 6.655996-33.170268 18.742847-45.257118A63.579395 63.579395 0 0 1 301.759838 448.000309c17.097134 0 33.170268 6.655996 45.257119 18.742847A63.579395 63.579395 0 0 1 365.759804 512.000274c0 17.097134-6.655996 33.170268-18.742847 45.257119z m420.571203 356.571237A63.579395 63.579395 0 0 1 722.331042 932.571478a63.579395 63.579395 0 0 1-45.257119-18.742848A63.579395 63.579395 0 0 1 658.331076 868.571512c0-17.097134 6.655996-33.170268 18.742847-45.257119A63.579395 63.579395 0 0 1 722.331042 804.571546c17.097134 0 33.170268 6.655996 45.257118 18.742847A63.579395 63.579395 0 0 1 786.331007 868.571512c0 17.097134-6.655996 33.170268-18.742847 45.257118z m0-713.142475A63.579395 63.579395 0 0 1 722.331042 219.429002a63.579395 63.579395 0 0 1-45.257119-18.742847A63.579395 63.579395 0 0 1 658.331076 155.429037c0-17.097134 6.655996-33.170268 18.742847-45.257119A63.579395 63.579395 0 0 1 722.331042 91.429071c17.097134 0 33.170268 6.655996 45.257118 18.742847A63.579395 63.579395 0 0 1 786.331007 155.429037c0 17.097134-6.655996 33.170268-18.742847 45.257118z" fill="#ffffff" p-id="5908"></path></svg>` );
         $($(".simpread-read-root .blooming-menu__item-btn")[0]).html( `<svg t="1580876729007" viewBox="0 0 1027 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2702" width="15" height="15"><path d="M639.93728 846.704l-272-704-0.096 0.032A47.904 47.904 0 0 0 323.16928 112a47.92 47.92 0 0 0-44.672 30.736l-0.112-0.032-272 704 0.112 0.048C4.41728 852.112 3.16928 857.904 3.16928 864a47.92 47.92 0 1 0 92.672 17.264l0.112 0.032L158.25728 720h329.808l62.32 161.296 0.112-0.032A47.92 47.92 0 0 0 643.16928 864c0-6.112-1.248-11.888-3.328-17.264l0.096-0.032zM195.36128 624L323.16928 293.184 450.97728 624H195.36128zM979.16928 464h-96v-96a48 48 0 1 0-96 0v96h-96a48 48 0 1 0 0 96h96v96a48 48 0 1 0 96 0v-96h96a48 48 0 1 0 0-96z" fill="#ffffff"></path></svg>` );
@@ -1014,6 +1027,17 @@ function wheelmenu() {
         $($(".simpread-read-root .blooming-menu__item-btn-wrapper")[5]).attr( "data-balloon-pos", "up" ).attr( "aria-label", "后一个主题" );
         $($(".simpread-read-root .blooming-menu__item-btn-wrapper")[6]).attr( "data-balloon-pos", "right" ).attr( "aria-label", "退出" );
         $( "body" ).find( ".blooming-menu__container" ).remove();
+        const position = GM_getValue( "simpread_trigger_pos" );
+        if ( position && position['div'] ) {
+            const { x, y } = position['div'];
+            $( '.sr-rd-trigger' )
+                .attr( 'data-x', x )
+                .attr( 'data-y', y )
+                .css({
+                    'transform': `translate(${x}px, ${y}px)`,
+                    '-webkit-transform': `translate(${x}px, ${y}px)`,
+                });
+        }
     }, 100 );
 
     let preScroll = 0;
@@ -1079,44 +1103,28 @@ function toc() {
  * Drag
  */
 function dragging() {
+    const position = GM_getValue( "simpread_trigger_pos" ) || {};
     interact( '.draggable' ).draggable({
-        // enable inertial throwing
-        inertia: true,
-        // keep the element within the area of it's parent
-        modifiers: [
-            interact.modifiers.restrictRect({
-            restriction: 'parent',
-            endOnly: true
-            })
-        ],
-        // enable autoScroll
-        autoScroll: true,
-
-        // call this function on every dragmove event
-        onmove: dragMoveListener,
-        // call this function on every dragend event
-        onend: function (event) {
+        onmove: event => {
+            const target = event.currentTarget,
+                  id     = target.tagName.toLowerCase(),
+                  x      = ( parseFloat(target.getAttribute('data-x')) || 0 ) + event.dx,
+                  y      = ( parseFloat(target.getAttribute('data-y')) || 0 ) + event.dy;
+            $( target )
+                .attr( "draggable", true )
+                .attr( 'data-x', x )
+                .attr( 'data-y', y )
+                .css({
+                    'transform': `translate(${x}px, ${y}px)`,
+                    '-webkit-transform': `translate(${x}px, ${y}px)`
+                });
+            position[id] = { x,y };
+            GM_setValue( "simpread_trigger_pos", position );
+        },
+        onend: event => {
             setTimeout( () => $( event.currentTarget ).attr( "draggable", false ), 500 );
         }
     });
-
-    function dragMoveListener (event) {
-        $( event.currentTarget ).attr( "draggable", true );
-        var target = event.target
-        // keep the dragged position in the data-x/data-y attributes
-        var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
-        var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
-    
-        // translate the element
-        target.style.webkitTransform =
-        target.style.transform =
-            'translate(' + x + 'px, ' + y + 'px)'
-    
-        // update the posiion attributes
-        target.setAttribute('data-x', x)
-        target.setAttribute('data-y', y)
-    }
-
 }
 
 /**

@@ -948,7 +948,11 @@ function codeHighlight() {
  * Wheel menu buttons
  */
 function wheelmenu() {
-    if ( $(".sr-rd-trigger").length > 0 ) return;
+    if ( $(".sr-rd-trigger").length > 0 ) {
+        $(".sr-rd-trigger").remove();
+        $("head #blooming-menu__root").remove();
+        return;
+    };
     const menu = new BloomingMenu({
         startAngle: -180,
         endAngle: 0,

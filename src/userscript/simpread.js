@@ -20,7 +20,7 @@
 // @resource     main_style   http://sr.ksria.cn/puread/simpread.css?version=1.1.2.20200205
 // @resource     mntips_style http://sr.ksria.cn/puread/mintooltip.css?version=1.1.2.202002051244
 // @resource     option_style http://sr.ksria.cn/puread/setting.css?version=1.1.2.20200205
-// @resource     user_style   http://sr.ksria.cn/puread/little.css?version=1.1.2.202002061307
+// @resource     user_style   http://sr.ksria.cn/puread/little.css?version=1.1.2.202002061430
 // @resource     theme_common http://sr.ksria.cn/puread/theme_common.css?version=1.1.2.20200205
 // @resource     theme_dark   http://sr.ksria.cn/puread/theme_dark.css?version=1.1.2.20200205
 // @resource     theme_github http://sr.ksria.cn/puread/theme_github.css?version=1.1.2.20200205
@@ -1043,10 +1043,9 @@ function wheelmenu() {
     let preScroll = 0;
     $(document).scroll( () => {
         if ( $(document).scrollTop() > preScroll ) {
-            $(".blooming-menu__container").css({transform: 'translate(-50%, 20%)', opacity: 0.5 });
             menu.close();
         } else {
-             $(".blooming-menu__container").css({transform: 'translate(-50%, -50%)', opacity: 1 });
+            //TO-DO
         }
         preScroll = $(document).scrollTop();
     });

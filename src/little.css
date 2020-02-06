@@ -4,6 +4,11 @@ sr-rd-crlbar.controlbar {
 
     opacity: 1;
     z-index: 2147483647;
+    transition: opacity 450ms 0ms;
+}
+
+sr-rd-crlbar.controlbar.hidden {
+    opacity: 0;
 }
 
 sr-rd-crlbar fab {
@@ -208,7 +213,12 @@ dialog-content .about a {
 }
 
 .blooming-menu__container {
+    opacity: 0.5;
     transition: all 1s cubic-bezier(.23,1,.32,1) .1s!important;
+}
+
+.blooming-menu__container:hover {
+    opacity: 1;
 }
 
 .blooming-menu__main {

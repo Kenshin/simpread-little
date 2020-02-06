@@ -13,8 +13,8 @@
 // @require      https://greasyfork.org/scripts/40236-notify/code/Notify.js?version=770172
 // @require      https://greasyfork.org/scripts/40172-mousetrap/code/Mousetrap.js?version=262594
 // @require      https://greasyfork.org/scripts/383025-bloomingmenu/code/BloomingMenu.js?version=698175
-// @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=770173
-// @require      https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js?version=770175
+// @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=770443
+// @require      https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js?version=770445
 // @resource     global_sites http://sr.ksria.cn/website_list_v4.json?data=1.1.2.20200205
 // @resource     notify_style http://sr.ksria.cn/puread/notify.css?version=1.1.2.20200205
 // @resource     main_style   http://sr.ksria.cn/puread/simpread.css?version=1.1.2.20200205
@@ -439,6 +439,7 @@ function entryMode( type ) {
             else new Notify().Render( `当前未启用 <a href='http://ksria.com/simpread/docs/#/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>，并当前站点也未适配，如需要适配请提交到 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
         } else type == "focus" ? focusMode() : readMode();
     } catch ( err ) {
+        console.error( err )
         new Notify().Render( 2, "当前页面无法使用阅读模式。" );
     }
 }

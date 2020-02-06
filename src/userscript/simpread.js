@@ -1185,6 +1185,7 @@ function optionMode() {
             }
             $.getJSON( "http://sr.ksria.cn/website_list_v4.json" + "?_=" + Math.round(+new Date()), result => {
                 const count = pr.Addsites( result );
+                count > 0 && GM_setValue( "simpread_db", pr.sites );
                 count == 0 ? new Notify().Render( "适配列表已同步至最新版本。" ) : new Notify().Render( 0, `适配列表已同步成功，本次新增 ${ count } 个站点。` );
             });
           },

@@ -1100,7 +1100,9 @@ function toc() {
         });
         event.preventDefault();
     })
-    simpread.read.toc_hide && $('head').append( `<style>toc-bg{width:50px!important;height:200px!important}.toc-bg-hidden{transition:opacity .2s ease}.toc-bg-hidden:hover toc{width:180px}toc{width:0;transition:width .5s!important}</style>` );
+    simpread.read.toc_hide ? 
+        $('head').append( `<style>toc-bg{width:50px!important;height:200px!important}.toc-bg-hidden{transition:opacity .2s ease}.toc-bg-hidden:hover toc{width:180px}toc{width:0;transition:width .5s!important}</style>` )
+        : $( "toc" ).css({ "width" : "initial" });
 }
 
 /**

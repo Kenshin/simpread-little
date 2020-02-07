@@ -1,35 +1,37 @@
 // ==UserScript==
 // @name         简悦( SimpRead ) · 轻阅版
 // @namespace    http://ksria.com/simpread/
-// @version      1.1.2.5016
+// @version      1.1.2.200206
 // @description  简悦 - 让你瞬间进入沉浸式阅读的 User Script 扩展
 // @author       Kenshin <kenshin@ksria.com>
 // @include      http://*/*
 // @include      https://*/*
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js
+// @require      https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js
 // @require      https://greasyfork.org/scripts/40244-mduikit/code/MDUIKit.js?version=697886
-// @require      https://greasyfork.org/scripts/40236-notify/code/Notify.js?version=697887
+// @require      https://greasyfork.org/scripts/40236-notify/code/Notify.js?version=770172
 // @require      https://greasyfork.org/scripts/40172-mousetrap/code/Mousetrap.js?version=262594
 // @require      https://greasyfork.org/scripts/383025-bloomingmenu/code/BloomingMenu.js?version=698175
-// @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=697882
-// @require      https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js?version=697883
-// @resource     global_sites http://sr.ksria.cn/website_list_v4.json?data=1.1.2.5016
-// @resource     notify_style http://sr.ksria.cn/puread/notify.css?version=1.1.2.5016
-// @resource     main_style   http://sr.ksria.cn/puread/simpread.css?version=1.1.2.5016
-// @resource     mntips_style http://sr.ksria.cn/puread/mintooltip.css?version=1.1.2.5016
-// @resource     option_style http://sr.ksria.cn/puread/option.css?version=1.1.2.5016
-// @resource     user_style   https://gist.github.com/Kenshin/365a91c61bad550b5900247539113f06/raw/3e666bee279f249e5b59140d8a777192ecb121cd/simpread_user.css
-// @resource     theme_common http://sr.ksria.cn/puread/theme_common.css?version=1.1.2.5016
-// @resource     theme_dark   http://sr.ksria.cn/puread/theme_dark.css?version=1.1.2.5016
-// @resource     theme_github http://sr.ksria.cn/puread/theme_github.css?version=1.1.2.5016
-// @resource     theme_gothic http://sr.ksria.cn/puread/theme_gothic.css?version=1.1.2.5016
-// @resource     theme_night  http://sr.ksria.cn/puread/theme_night.css?version=1.1.2.5016
-// @resource     theme_pixyii http://sr.ksria.cn/puread/theme_pixyii.css?version=1.1.2.5016
-// @resource     theme_engwrite  http://sr.ksria.cn/puread/theme_engwrite.css?version=1.1.2.5016
-// @resource     theme_monospace http://sr.ksria.cn/puread/theme_monospace.css?version=1.1.2.5016
-// @resource     theme_newsprint http://sr.ksria.cn/puread/theme_newsprint.css?version=1.1.2.5016
-// @resource     theme_octopress http://sr.ksria.cn/puread/theme_octopress.css?version=1.1.2.5016
+// @require      https://greasyfork.org/scripts/39995-pureread/code/PureRead.js?version=770507
+// @require      https://greasyfork.org/scripts/39997-puplugin/code/PuPlugin.js?version=770506
+// @resource     global_sites http://sr.ksria.cn/website_list_v4.json?data=1.1.2.20200205
+// @resource     notify_style http://sr.ksria.cn/puread/notify.css?version=1.1.2.20200205
+// @resource     main_style   http://sr.ksria.cn/puread/simpread.css?version=1.1.2.20200205
+// @resource     mntips_style http://sr.ksria.cn/puread/mintooltip.css?version=1.1.2.202002051244
+// @resource     option_style http://sr.ksria.cn/puread/setting.css?version=1.1.2.20200205
+// @resource     user_style   http://sr.ksria.cn/puread/little.css?version=1.1.2.202002061430
+// @resource     theme_common http://sr.ksria.cn/puread/theme_common.css?version=1.1.2.20200205
+// @resource     theme_dark   http://sr.ksria.cn/puread/theme_dark.css?version=1.1.2.20200205
+// @resource     theme_github http://sr.ksria.cn/puread/theme_github.css?version=1.1.2.20200205
+// @resource     theme_gothic http://sr.ksria.cn/puread/theme_gothic.css?version=1.1.2.20200205
+// @resource     theme_night  http://sr.ksria.cn/puread/theme_night.css?version=1.1.2.20200205
+// @resource     theme_pixyii http://sr.ksria.cn/puread/theme_pixyii.css?version=1.1.2.20200205
+// @resource     theme_engwrite  http://sr.ksria.cn/puread/theme_engwrite.css?version=1.1.2.20200205
+// @resource     theme_monospace http://sr.ksria.cn/puread/theme_monospace.css?version=1.1.2.20200205
+// @resource     theme_newsprint http://sr.ksria.cn/puread/theme_newsprint.css?version=1.1.2.20200205
+// @resource     theme_octopress http://sr.ksria.cn/puread/theme_octopress.css?version=1.1.2.20200205
+// @resource     theme_mobile    http://sr.ksria.cn/puread/theme_mobile.css?version=1.1.2.20200205
 // @grant        GM_getResourceText
 // @grant        GM_addStyle
 // @grant        GM_getValue
@@ -58,6 +60,7 @@ const pr         = new PureRead(),
     theme_monospace = GM_getResourceText( "theme_monospace" ),
     theme_newsprint = GM_getResourceText( "theme_newsprint" ),
     theme_octopress = GM_getResourceText( "theme_octopress" ),
+    theme_mobile    = GM_getResourceText( "theme_mobile" ),
     theme        = { theme_github, theme_newsprint, theme_gothic, theme_engwrite, theme_octopress, theme_pixyii, theme_monospace, theme_night, theme_dark },
     focus        = {
         version   : "2016-12-29",
@@ -223,9 +226,6 @@ const pr         = new PureRead(),
 // initialize
 version();
 
-// common mobile
-commonMobile();
-
 // blacklist
 if ( !blacklist() ) {
     // add simpread style
@@ -235,6 +235,7 @@ if ( !blacklist() ) {
     GM_addStyle( option_style );
     GM_addStyle( user_style   );
     GM_addStyle( theme_common );
+    GM_addStyle( theme_mobile );
 
     // add websites and current can'b read mode
     if (GM_getValue( "simpread_db" )) {
@@ -252,149 +253,9 @@ if ( !blacklist() ) {
     bindShortcuts();
     controlbar();
     autoOpen();
+    dragging();
 
     console.log( "[SimpRead Lite] current pureread is ", pr, simpread );
-}
-
-/****************************
- * Style
- ****************************/
-
- /**
-  * Common Mobile style
-  */
-function commonMobile() {
-    const css = `
-
-    sr-rd-content {
-        text-align: justify;
-    }
-    
-    sr-rd-content p {
-        -webkit-hyphens: auto;
-        -moz-hyphens: auto;
-        -ms-hyphens: auto;
-        hyphens: auto;
-    }
-
-    /**
-     * iPad pro 12 and below
-     */
-     @media only screen and (max-device-width: 1024px) {
-
-        sr-rd-content img {
-            margin: 0!important;
-            width: 100%!important;
-            background-color: transparent!important;
-            border: 0!important;
-            box-shadow: none!important;
-        }
-
-        fab {
-            opacity: 1!important;
-        }
-    }
-
-    /**
-    * iPhone XS Max and below
-    */
-    @media only screen and (max-device-width: 414px) {
-
-        sr-rd-crlbar.controlbar {
-            z-index: 2147483646!important;
-        }
-
-        dialog-gp {
-            transform: scale(.7);
-            z-index: 2147483647!important;
-        }
-
-        dialog-content .about {
-            width: 100%!important;
-        }
-    }
-    
-    /**
-    * iPhone SE and below
-    */
-    @media only screen and (max-device-width: 320px) {
-    }
-    `
-    $("head").append( `<style id="sr-common-mobile">${css}</style>` )
-}
-
-/**
- * read Mode Mobile style
- */
-function readModeMobile() {
-    const css = `
-
-    /**
-    * iPhone XS Max and below
-    */
-    @media only screen and (max-device-width: 414px) {
-        sr-read {
-            margin: 10px 10%;
-            width: 100%;
-            min-width: initial!important;
-            min-height: initial!important;
-        }
-
-        sr-rd-desc {
-            padding: 15px !important;
-            line-height: 2;
-            border: none;
-        }
-
-        sr-rd-content a, sr-rd-content a:link {
-            font-size: inherit;
-        }
-
-        sr-rd-content li code, sr-rd-content p code {
-            font-size: inherit;
-        }
-
-        sr-rd-footer {
-            margin-top: 20px;
-        }
-
-        sr-blockquote, sr-blockquote * {
-            margin: 5px !important;
-            padding: 5px !important;
-        }
-
-        sr-rd-title, sr-rd-content h1, sr-rd-content h2, sr-rd-content h3, sr-rd-content h4, sr-rd-content h5, sr-rd-content h6 {
-            font-family: PingFang SC, Verdana, Helvetica Neue, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
-            color: #000;
-            font-weight: 100;
-            line-height: 1.35;
-        }
-
-        sr-rd-content h1, sr-rd-content h2, sr-rd-content h3, sr-rd-content h4, sr-rd-content h5, sr-rd-content h6,
-        sr-rd-content h1 *, sr-rd-content h2 *, sr-rd-content h3 *, sr-rd-content h4 *, sr-rd-content h5 *, sr-rd-content h6 * {
-            margin-top: 1.2em;
-            margin-bottom: 0.6em;
-            font-weight: 100;
-            line-height: 1.35;
-        }
-
-        sr-rd-content ul, sr-rd-content-ul {
-            margin-left: 1.3em!important;
-            list-style: disc;
-        }
-
-        sr-rd-content ol, sr-rd-content-ol {
-            list-style: decimal;
-            margin-left: 1.9em!important;
-        }
-
-        sr-rd-content li ul, sr-rd-content li ol, sr-rd-content-ul ul, sr-rd-content-ul ol, sr-rd-content-ol ul, sr-rd-content-ol ol {
-            margin-bottom: 0.8em;
-            margin-left: 2em!important;;
-        }
-    }
-    `
-    setTimeout(()=>$("head").append( `<style id="sr-rd-mobile">${css}</style>` ), 1000 );
 }
 
 /****************************
@@ -519,14 +380,27 @@ function autoOpen() {
  * Control bar
  */
 function controlbar() {
-    $( "body" ).append( '<sr-rd-crlbar class="controlbar"><fab class="about"></fab><fab class="setting"></fab><fab style="font-size:12px!important;">简 悦</fab></sr-rd-crlbar>' );
+    $( "body" ).append( '<sr-rd-crlbar class="controlbar hidden draggable"><fab class="about"></fab><fab class="setting"></fab><fab style="font-size:12px!important;">简 悦</fab></sr-rd-crlbar>' );
     $( "sr-rd-crlbar" ).css( "opacity", 1 );
     if ( pr.state == "none" ) $( "sr-rd-crlbar fab:not(.setting,.about)" ).addClass( "not-adapter" );
     setTimeout( () => {
         $( "sr-rd-crlbar" ).removeAttr( "style" );
         if ( pr.state == "none" && simpread.option.trigger_hiden == true ) $( "sr-rd-crlbar" ).css({ display: "none" });
+        const position = GM_getValue( "simpread_trigger_pos" );
+        if ( position && position['sr-rd-crlbar'] ) {
+            const { x, y } = position['sr-rd-crlbar'];
+            $( 'sr-rd-crlbar' )
+                .attr( 'data-x', x )
+                .attr( 'data-y', y )
+                .css({
+                    'transform': `translate(${x}px, ${y}px)`,
+                    '-webkit-transform': `translate(${x}px, ${y}px)`,
+                });
+        }
+        $( "sr-rd-crlbar" ).removeClass( "hidden" );
     }, 1000 * 2 );
     $( "sr-rd-crlbar fab:not(.setting,.about)" ).click( event => {
+        if ( $( 'sr-rd-crlbar[draggable="true"]' ).length > 0 ) return;
         if ( $(event.target).hasClass( "crlbar-close" ) ) {
             $( ".simpread-focus-root" ).trigger( "click", "okay" );
             $( event.target ).removeClass( "crlbar-close" ).text( "简 悦" );
@@ -565,6 +439,7 @@ function entryMode( type ) {
             else new Notify().Render( `当前未启用 <a href='http://ksria.com/simpread/docs/#/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>，并当前站点也未适配，如需要适配请提交到 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
         } else type == "focus" ? focusMode() : readMode();
     } catch ( err ) {
+        console.error( err )
         new Notify().Render( 2, "当前页面无法使用阅读模式。" );
     }
 }
@@ -685,10 +560,10 @@ function readMode() {
                                     <div>本文由 <a href="http://ksria.com/simpread" target="_blank">简悦 SimpRead</a> 优化，用以提升阅读体验</div>
                                     <div class="second">使用了 <abbr>全新的简悦词法分析引擎<sup>beta</sup></abbr>，<a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎">点击查看</a>详细说明</div>
                                     <div class="third">
-                                        <a class="sr-icon good sr-top" data-sr-mini-tooltip="觉得不错？请帮忙投票 😄" data-position="up" target="_blank" href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll/reviews">
+                                        <a class="sr-icon good sr-top" aria-label="觉得不错？请帮忙投票 😄" data-balloon-pos="up" target="_blank" href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll/reviews">
                                             <svg t="1556354786433" viewBox="0 0 1024 1024" version="1.1" width="33" height="33"><defs><style type="text/css"></style></defs><path d="M859.8 191.2c-80.8-84.2-212-84.2-292.8 0L512 248.2l-55-57.2c-81-84.2-212-84.2-292.8 0-91 94.6-91 248.2 0 342.8L512 896l347.8-362C950.8 439.4 950.8 285.8 859.8 191.2z" p-id="6225" fill="#8C8C8C"></path></svg>
                                         </a>
-                                        <a class="sr-icon bad sr-top" data-sr-mini-tooltip="有待改进，请帮忙吐槽 😄" data-position="up" target="_blank" href="https://wj.qq.com/s2/3611463/7260/">
+                                        <a class="sr-icon bad sr-top" aria-label="有待改进，请帮忙吐槽 😄" data-balloon-pos="up" target="_blank" href="https://wj.qq.com/s2/3611463/7260/">
                                             <svg t="1556354650943" viewBox="0 0 1024 1024" version="1.1" p-id="5899" width="33" height="33"><defs><style type="text/css"></style></defs><path d="M458 576c2-36 0-76 16-110 4-10 2-20 2-30-8-42-28-80-30-120 0-2.78 2.008-9.542 2.01-12.314-6.432 4.468-15.214 8.048-22.01 10.314-40 12-35.02 5.146-69.02 27.146l-23.866 14.456c32.686-35.878 77.056-49.562 113.05-77.428 0.388-30.876 1.716-61.354 6.274-91.68C371.22 106.992 243.57 108.536 164.246 191.14c-90.994 94.688-90.994 248.202 0 342.89l305.698 318.192c-0.17-21.312-0.886-42.352-3.944-62.222C454 718 458 648 458 576z" p-id="5900" fill="#8C8C8C"></path><path d="M644 602c-22-52-66-88-126-100-1.7 0-3.758-1.086-5.872-2.638-0.046 0.214-0.082 0.426-0.128 0.638-22 96-46 188-42 284 0 24.454 7.966 50.234 7.666 76.262L512 896l208-216.5C690.306 658.542 660.856 637.242 644 602z" p-id="5901" fill="#8C8C8C"></path><path d="M859.748 191.14c-80.852-84.188-211.978-84.188-292.816 0L528 230.806c0.15 26.35 0.426 52.404-6 77.194-4 20-38 38-32 62 6.006 26.426 16.332 51.41 21.464 77.118C542.028 464.168 569.542 485.792 594 512c45.602 53.532 75.494 114.918 130.566 162.742l135.182-140.71C950.75 439.342 950.75 285.828 859.748 191.14z" p-id="5902" fill="#8C8C8C"></path></svg>
                                         </a>
                                     </div>
@@ -787,7 +662,7 @@ function readMode() {
         .addClass( "simpread-read-root-show" );
 
     $( "sr-rd-title"        ).html(   pr.html.title   );
-    if ( pr.html.desc != "" ) $( "sr-rd-desc" ).html( pr.html.desc );
+    if ( pr.html.desc != "" && pr.html.desc != undefined ) $( "sr-rd-desc" ).html( pr.html.desc );
     else $( "sr-rd-desc"    ).remove();
     if   ( pr.html.avatar   ) multiple( pr.html.include, pr.html.avatar );
     else $( "sr-rd-content" ).html( pr.html.include );
@@ -803,11 +678,8 @@ function readMode() {
     style.FontSize(   simpread.read.fontsize   );
     style.Layout(     simpread.read.layout     );
 
-    pr.pure && codehighlight();
+    pr.pure && codeHighlight();
     simpread.read.toc && toc();
-
-    // add mobile adpater
-    readModeMobile();
 
     // exit
     $( ".simpread-read-root sr-rd-crlbar fab:not(.setting)" ).one( "click", event => {
@@ -889,19 +761,199 @@ function highlight() {
 /**
  * Code highlight
  */
-function codehighlight() {
-    $("head").append('<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">')
-    $("head").append( '<style>.hljs{background:transparent!important;}</style>' )
-    $("sr-rd-content").find( 'pre' ).map( function(idx,item){
+function codeHighlight() {
+    $("head").append( '<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">' );
+    // source from https://simpread.ksria.cn/plugins/details/klGUASLasg version 0.0.5
+    const $content = $( 'sr-rd-content' );
+    if ( location.host == "blog.csdn.net" ) {
+        // remove svg
+        $content.find( "svg" ).map( function( idx, item ) {
+            if ( $(item).attr("title") == "CSDN认证原创" ) {
+                $(item).remove();
+            } else if ( $(item).html().trim().startsWith( '<path stroke-linecap="round" d="M5,0 0,2.5 5,5z"' ) ) {
+                $(item).remove();
+            }
+        });
+        // remove copywrite
+        $content.children().map( function( idx, item ) {
+            if ( /版权声明/ig.test( item.outerHTML ) ) {
+                $(item).remove();
+            }
+        });
+    }
+
+    if ( location.host.endsWith( "iteye.com" )) {
+        if ( $(".dp-highlighter").length > 0 ) {
+            $content.find( "pre" ).map(function(idx,item){
+                $(item).prev().remove();
+            })
+        }
+    }
+
+    // format pre
+    if ( $("body").find( "div[data-prism-highlighted]" ).length > 0 ) {
+        // e.g. https://zh.javascript.info/hello-world
+        $content.find( "pre" ).map( ( idx, item ) => {
+            $(item).text( $($("body").find( "pre" )[idx]).find( "code.language-markup" )[0].outerText )
+        });
+    } else if ( $("body").find( ".crayon-syntax" ).length > 0 ) {
+        // crayon-syntax
+        $content.find( "table" ).map( ( idx, item ) => {
+            if ( $(item).find( "td" ).attr( "data-settings" ) ) {
+                const html = $($(item).find("tbody td")[1])[0].innerText;
+                $(item).replaceWith( `<pre>${html}</pre>` );
+            }
+        });
+    } else if ( $content.find( "table code" ).length > 0 ) {
+        // syntaxhighlighter
+        $content.find( "table" ).map( ( idx, item ) => {
+            if ( $(item).find( "code" ).length > 0 ) {
+                const html = $($(item).find("tbody td")[1])[0].innerText;
+                $(item).replaceWith( `<pre>${html}</pre>` );
+            }
+        });
+    } else if ( $content.find( "pre code" ).length == 0 && $content.find( "pre" ).length > 0 ) {
+        //NOT-TODO
+    } else if ( $("body").find( 'pre code li' ).length > 0 ) {
+        // pre code → li
+        $("body").find( 'pre' ).map( function( idx, pre ) {
+            let html = "";
+            $(pre).find( 'li' ).map( function( idx, item ) {
+                idx  = idx;
+                html += item.innerText + "\n"
+            })
+            $($content.find( "pre" )[idx]).html( html.replace(/</ig,"&lt;").replace(/>/ig,"&gt;") );
+        })
+    } else if ( $content.find( "table pre" ).length > 0 ) {
+        // pre → table
+        $("table").map(function( idx, item ) {
+            let html = "";
+            $(item).find("pre").map( function(indx, pre) {
+                html += pre.innerText + "\n";
+            });
+            html != "" && $(item).replaceWith( "<pre>" + html.replace(/</ig,"&lt;").replace(/>/ig,"&gt;").trim() + "</pre>" );
+        });
+    } else if ( $("body").find( "pre code" ).length > 0 ) {
+        // pre → code
+        let arr = {};
+        $("body").find( "pre" ).map(function( idx, item ) {
+            let html = "";
+            if ( $(item).find( "code" ).length > 0 ) {
+                if ( $(item).find( "code" ).length > 1 ) {
+                    html = item.innerText;
+                } else {
+                    html = $(item).find( "code" ).text();
+                }
+                arr[idx] = html;
+            }
+        });
+        $content.find( "pre" ).map(function( idx, item ) {
+            $(item).html( arr[idx].replace(/</ig,"&lt;").replace(/>/ig,"&gt;").trim() );
+        });
+    }
+
+    // remove lines
+    $content.find( "pre" ).map( function( idx, item ) {
+        const $target = $(item);
+        const lines = item.innerHTML.split('\n');
+        let html = "";
+        for( let i = 0; i < lines.length; i++ ) {
+            const line = lines[i];
+            if ( !/^\d+$/.test( line.trim() ) ) {
+                html += line + "\n";
+            }
+        }
+        $target.html( html.trim() )
+    });
+
+    // mark
+    Mousetrap.bind( 'h h h', function() {
+        new Notify().Render( "移动鼠标框选需要重新整理并高亮代码的区域。" );
+        mark().done( dom => {
+            let $target = $(dom),
+                $parent = $target.parent();
+            if ( $target.is( "td" ) || $parent.is("td") ) {
+                $target = $parent.parent().parent();
+            }
+            $target.html( `<pre class="hljs">${dom.innerText}</pre>` );
+            hljs.highlightBlock($target.find("pre")[0]);
+        });
+    });
+
+    function mark() {
+        const highlight_class = "simpread-highlight-selector";
+        let $prev;
+        const dtd            = $.Deferred(),
+                mousemoveEvent = event => {
+                if ( !$prev ) {
+                    $( event.target ).addClass( highlight_class );
+                } else {
+                    $prev.removeClass( highlight_class );
+                    $( event.target ).addClass( highlight_class );
+                }
+                $prev = $( event.target );
+        };
+        $content.one( "click", event => {
+            if ( !$prev ) return;
+            $( event.target ).removeClass( highlight_class );
+            $content.off( "mousemove", mousemoveEvent );
+            $prev = undefined;
+            dtd.resolve( event.target );
+        });
+        $("html").one( "keydown", event => {
+            if ( event.keyCode == 27 && $prev ) {
+                $content.find( `.${highlight_class}` ).removeClass( highlight_class );
+                $content.off( "mousemove", mousemoveEvent );
+                $prev = undefined;
+                event.preventDefault();
+                return false;
+            }
+        });
+        $content.on( "mousemove", mousemoveEvent );
+        return dtd;
+    }
+
+    $content.find( 'pre' ).map( function(idx,item){
         hljs.highlightBlock(item);
     });
+
+    // change pre background by theme
+    switch ( simpread.read.theme ) {
+        case 'github':
+        case 'pixyii':
+        case 'gothic':
+            $("head").append( '<style>.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:bold}.hljs-number,.hljs-literal,.hljs-variable,.hljs-template-variable,.hljs-tag .hljs-attr{color:#008080}.hljs-string,.hljs-doctag{color:#d14}.hljs-title,.hljs-section,.hljs-selector-id{color:#900;font-weight:bold}.hljs-subst{font-weight:normal}.hljs-type,.hljs-class .hljs-title{color:#458;font-weight:bold}.hljs-tag,.hljs-name,.hljs-attribute{color:#000080;font-weight:normal}.hljs-regexp,.hljs-link{color:#009926}.hljs-symbol,.hljs-bullet{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:bold}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:bold}</style>' )
+            break;
+        case 'monospace':
+            $("head").append( '<style>.hljs{display:block;overflow-x:auto;padding:.5em;background:#002b36;color:#839496}.hljs-comment,.hljs-quote{color:#586e75}.hljs-keyword,.hljs-selector-tag,.hljs-addition{color:#859900}.hljs-number,.hljs-string,.hljs-meta .hljs-meta-string,.hljs-literal,.hljs-doctag,.hljs-regexp{color:#2aa198}.hljs-title,.hljs-section,.hljs-name,.hljs-selector-id,.hljs-selector-class{color:#268bd2}.hljs-attribute,.hljs-attr,.hljs-variable,.hljs-template-variable,.hljs-class .hljs-title,.hljs-type{color:#b58900}.hljs-symbol,.hljs-bullet,.hljs-subst,.hljs-meta,.hljs-meta .hljs-keyword,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-link{color:#cb4b16}.hljs-built_in,.hljs-deletion{color:#dc322f}.hljs-formula{background:#073642}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:bold}</style>' )
+            break;
+        case 'engwrite':
+            $("head").append( '<style>.hljs{display:block;overflow-x:auto;padding:.5em;background:#fdf6e3;color:#657b83}.hljs-comment,.hljs-quote{color:#93a1a1}.hljs-keyword,.hljs-selector-tag,.hljs-addition{color:#859900}.hljs-number,.hljs-string,.hljs-meta .hljs-meta-string,.hljs-literal,.hljs-doctag,.hljs-regexp{color:#2aa198}.hljs-title,.hljs-section,.hljs-name,.hljs-selector-id,.hljs-selector-class{color:#268bd2}.hljs-attribute,.hljs-attr,.hljs-variable,.hljs-template-variable,.hljs-class .hljs-title,.hljs-type{color:#b58900}.hljs-symbol,.hljs-bullet,.hljs-subst,.hljs-meta,.hljs-meta .hljs-keyword,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-link{color:#cb4b16}.hljs-built_in,.hljs-deletion{color:#dc322f}.hljs-formula{background:#eee8d5}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:bold}</style>' )
+            break;
+        case 'newsprint':
+            $("head").append( '<style>.hljs{background: #dadada;}</style>' )
+            break;
+        case 'octopress':
+            $("head").append( '<style>.hljs{display:block;overflow-x:auto;padding:.5em;background:#fdf6e3;color:#657b83}.hljs-comment,.hljs-quote{color:#93a1a1}.hljs-keyword,.hljs-selector-tag,.hljs-addition{color:#859900}.hljs-number,.hljs-string,.hljs-meta .hljs-meta-string,.hljs-literal,.hljs-doctag,.hljs-regexp{color:#2aa198}.hljs-title,.hljs-section,.hljs-name,.hljs-selector-id,.hljs-selector-class{color:#268bd2}.hljs-attribute,.hljs-attr,.hljs-variable,.hljs-template-variable,.hljs-class .hljs-title,.hljs-type{color:#b58900}.hljs-symbol,.hljs-bullet,.hljs-subst,.hljs-meta,.hljs-meta .hljs-keyword,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-link{color:#cb4b16}.hljs-built_in,.hljs-deletion{color:#dc322f}.hljs-formula{background:#eee8d5}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:bold}</style>' )
+            break;
+        case 'dark':
+            $("head").append( '<style>.hljs{display:block;overflow-x:auto;padding:.5em;color:#abb2bf;background:#282c34}.hljs-comment,.hljs-quote{color:#5c6370;font-style:italic}.hljs-doctag,.hljs-keyword,.hljs-formula{color:#c678dd}.hljs-section,.hljs-name,.hljs-selector-tag,.hljs-deletion,.hljs-subst{color:#e06c75}.hljs-literal{color:#56b6c2}.hljs-string,.hljs-regexp,.hljs-addition,.hljs-attribute,.hljs-meta-string{color:#98c379}.hljs-built_in,.hljs-class .hljs-title{color:#e6c07b}.hljs-attr,.hljs-variable,.hljs-template-variable,.hljs-type,.hljs-selector-class,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-number{color:#d19a66}.hljs-symbol,.hljs-bullet,.hljs-link,.hljs-meta,.hljs-selector-id,.hljs-title{color:#61aeee}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:bold}.hljs-link{text-decoration:underline}</style>' )
+            break;
+        case 'night':
+            $("head").append( '<style>.hljs{display:block;overflow-x:auto;padding:.5em;background:#333;color:white}.hljs-name,.hljs-strong{font-weight:bold}.hljs-code,.hljs-emphasis{font-style:italic}.hljs-tag{color:#62c8f3}.hljs-variable,.hljs-template-variable,.hljs-selector-id,.hljs-selector-class{color:#ade5fc}.hljs-string,.hljs-bullet{color:#a2fca2}.hljs-type,.hljs-title,.hljs-section,.hljs-attribute,.hljs-quote,.hljs-built_in,.hljs-builtin-name{color:#ffa}.hljs-number,.hljs-symbol,.hljs-bullet{color:#d36363}.hljs-keyword,.hljs-selector-tag,.hljs-literal{color:#fcc28c}.hljs-comment,.hljs-deletion,.hljs-code{color:#888}.hljs-regexp,.hljs-link{color:#c6b4f0}.hljs-meta{color:#fc9b9b}.hljs-deletion{background-color:#fc9b9b;color:#333}.hljs-addition{background-color:#a2fca2;color:#333}.hljs a{color:inherit}.hljs a:focus,.hljs a:hover{color:inherit;text-decoration:underline}</style>' )
+            break;
+    }
 }
 
 /**
  * Wheel menu buttons
  */
 function wheelmenu() {
-    if ( $(".sr-rd-trigger").length > 0 ) return;
+    if ( $(".sr-rd-trigger").length > 0 ) {
+        $(".sr-rd-trigger").remove();
+        $("head #blooming-menu__root").remove();
+        return;
+    };
     const menu = new BloomingMenu({
         startAngle: -180,
         endAngle: 0,
@@ -914,6 +966,7 @@ function wheelmenu() {
     menu.open()
     menu.props.elements.items.forEach(function (item, index) {
         item.addEventListener('click', function () {
+            if ( $( '.sr-rd-trigger[draggable="true"]' ).length > 0 ) return;
             switch ( index ) {
                 case 0:
                 case 1:
@@ -960,59 +1013,44 @@ function wheelmenu() {
             }
         })
     });
-    const css = `
-        .sr-rd-trigger {
-            position: fixed;
-            right: 50%;
-            bottom: 35px;
-        }
-        .blooming-menu__container {
-            transition: all 1s cubic-bezier(.23,1,.32,1) .1s!important;
-        }
-        .blooming-menu__main {
-            background-color: rgba(244, 67, 54, 1);
-        }
-        .blooming-menu__item-btn-wrapper {
-            background-color: #03a9f4!important;
-            transition: all 1000ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-        }
-        .blooming-menu__item-btn-wrapper:active {
-            background-color: #0D47A1!important;
-        }
-        .blooming-menu__main.is-active {
-            transform: rotate(0);
-            -webkit-transform: rotate(0);
-        }
-        .blooming-menu__item:nth-of-type(3) button,
-        .blooming-menu__item:nth-of-type(4) button {
-            transform: rotate(90deg);
-        }
-        .blooming-menu__item:nth-of-type(6) button {
-            transform: rotate(180deg);
-        }
-    `;
-    $( "head" ).append( `<style id="blooming-menu__root">${ css }</style>` );
     setTimeout( ()=> {
-        $(".simpread-read-root").append( `<div class="sr-rd-trigger"></div>` );
+        $(".simpread-read-root").append( `<div class="sr-rd-trigger draggable"></div>` );
         $(".sr-rd-trigger").append( $(".blooming-menu__container") );
         $(".simpread-read-root .blooming-menu__main-content").html( `<svg t="1557891708974" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5907" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"><defs><style type="text/css"></style></defs><path d="M152.365633 555.145394a154.587346 154.587346 0 0 0 39.497121 66.761107C221.21131 651.245914 260.251289 667.428762 301.759838 667.428762c41.508549 0 80.548528-16.164563 109.897084-45.531404A154.660489 154.660489 0 0 0 450.40433 557.714536H978.330904c25.206844 0 45.714261-20.470846 45.714262-45.714262 0-25.197701-20.470846-45.714261-45.714262-45.714261H450.395187a154.669631 154.669631 0 0 0-38.729122-64.182823A154.413632 154.413632 0 0 0 301.759838 356.571786c-41.508549 0-80.548528 16.164563-109.897084 45.531404a154.587346 154.587346 0 0 0-39.497121 66.761107A45.48569 45.48569 0 0 0 137.234212 466.286013H45.714261a45.723404 45.723404 0 0 0 0 91.428523h91.519951c5.302854 0 10.395423-0.905142 15.131421-2.569142z m719.359614 270.280998a154.596489 154.596489 0 0 0-39.497121-66.761107A154.413632 154.413632 0 0 0 722.331042 713.143024c-41.508549 0-80.548528 16.164563-109.897084 45.531404A154.660489 154.660489 0 0 0 573.68655 822.857251H45.759976c-25.206844 0-45.714261 20.470846-45.714262 45.714261 0 25.197701 20.470846 45.714261 45.714262 45.714261h527.935717a154.660489 154.660489 0 0 0 38.729122 64.182823C641.782513 1007.84458 680.822492 1024 722.331042 1024c41.508549 0 80.548528-16.164563 109.897084-45.531404a154.587346 154.587346 0 0 0 39.497121-66.761107 45.48569 45.48569 0 0 0 15.131421 2.578284h91.519951a45.723404 45.723404 0 0 0 0-91.428522h-91.519951c-5.302854 0-10.395423 0.905142-15.131421 2.569141z m0-713.142475a154.596489 154.596489 0 0 0-39.497121-66.761107A154.413632 154.413632 0 0 0 722.331042 0.000549c-41.508549 0-80.548528 16.164563-109.897084 45.531404A154.660489 154.660489 0 0 0 573.68655 109.714776H45.759976c-25.206844 0-45.714261 20.470846-45.714262 45.714261 0 25.197701 20.470846 45.714261 45.714262 45.714261h527.935717a154.660489 154.660489 0 0 0 38.729122 64.182823C641.782513 294.702105 680.822492 310.857525 722.331042 310.857525c41.508549 0 80.548528-16.164563 109.897084-45.531404a154.587346 154.587346 0 0 0 39.497121-66.761107 45.48569 45.48569 0 0 0 15.131421 2.578284h91.519951a45.723404 45.723404 0 0 0 0-91.428522h-91.519951c-5.302854 0-10.395423 0.905142-15.131421 2.569141zM347.016957 557.257393A63.579395 63.579395 0 0 1 301.759838 576.00024a63.579395 63.579395 0 0 1-45.257118-18.742847A63.579395 63.579395 0 0 1 237.759873 512.000274c0-17.097134 6.655996-33.170268 18.742847-45.257118A63.579395 63.579395 0 0 1 301.759838 448.000309c17.097134 0 33.170268 6.655996 45.257119 18.742847A63.579395 63.579395 0 0 1 365.759804 512.000274c0 17.097134-6.655996 33.170268-18.742847 45.257119z m420.571203 356.571237A63.579395 63.579395 0 0 1 722.331042 932.571478a63.579395 63.579395 0 0 1-45.257119-18.742848A63.579395 63.579395 0 0 1 658.331076 868.571512c0-17.097134 6.655996-33.170268 18.742847-45.257119A63.579395 63.579395 0 0 1 722.331042 804.571546c17.097134 0 33.170268 6.655996 45.257118 18.742847A63.579395 63.579395 0 0 1 786.331007 868.571512c0 17.097134-6.655996 33.170268-18.742847 45.257118z m0-713.142475A63.579395 63.579395 0 0 1 722.331042 219.429002a63.579395 63.579395 0 0 1-45.257119-18.742847A63.579395 63.579395 0 0 1 658.331076 155.429037c0-17.097134 6.655996-33.170268 18.742847-45.257119A63.579395 63.579395 0 0 1 722.331042 91.429071c17.097134 0 33.170268 6.655996 45.257118 18.742847A63.579395 63.579395 0 0 1 786.331007 155.429037c0 17.097134-6.655996 33.170268-18.742847 45.257118z" fill="#ffffff" p-id="5908"></path></svg>` );
-        $($(".simpread-read-root .blooming-menu__item-btn")[0]).html( `<svg t="1557891878314" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7413" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"><defs><style type="text/css"></style></defs><path d="M661.333333 938.666667a21.333333 21.333333 0 0 1-19.886666-13.606667L547.186667 682.666667H178.146667l-94.266667 242.4a21.333333 21.333333 0 1 1-39.76-15.466667l298.666667-768a21.333333 21.333333 0 0 1 39.76 0l298.666666 768A21.333333 21.333333 0 0 1 661.333333 938.666667zM194.74 640h335.853333L362.666667 208.193333zM832 384a21.333333 21.333333 0 0 1-21.333333-21.333333V256h-106.666667a21.333333 21.333333 0 0 1 0-42.666667h106.666667V106.666667a21.333333 21.333333 0 0 1 42.666666 0v106.666666h106.666667a21.333333 21.333333 0 0 1 0 42.666667h-106.666667v106.666667a21.333333 21.333333 0 0 1-21.333333 21.333333z" fill="#ffffff" p-id="7414"></path></svg>` );
-        $($(".simpread-read-root .blooming-menu__item-btn")[1]).html( `<svg t="1557891916958" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7691" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"><defs><style type="text/css"></style></defs><path d="M661.333333 938.666667a21.333333 21.333333 0 0 1-19.886666-13.606667L547.186667 682.666667H178.146667l-94.266667 242.4a21.333333 21.333333 0 1 1-39.76-15.466667l298.666667-768a21.333333 21.333333 0 0 1 39.76 0l298.666666 768A21.333333 21.333333 0 0 1 661.333333 938.666667zM194.74 640h335.853333L362.666667 208.193333zM960 256h-256a21.333333 21.333333 0 0 1 0-42.666667h256a21.333333 21.333333 0 0 1 0 42.666667z" fill="#ffffff" p-id="7692"></path></svg>` );
+        $($(".simpread-read-root .blooming-menu__item-btn")[0]).html( `<svg t="1580876729007" viewBox="0 0 1027 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2702" width="15" height="15"><path d="M639.93728 846.704l-272-704-0.096 0.032A47.904 47.904 0 0 0 323.16928 112a47.92 47.92 0 0 0-44.672 30.736l-0.112-0.032-272 704 0.112 0.048C4.41728 852.112 3.16928 857.904 3.16928 864a47.92 47.92 0 1 0 92.672 17.264l0.112 0.032L158.25728 720h329.808l62.32 161.296 0.112-0.032A47.92 47.92 0 0 0 643.16928 864c0-6.112-1.248-11.888-3.328-17.264l0.096-0.032zM195.36128 624L323.16928 293.184 450.97728 624H195.36128zM979.16928 464h-96v-96a48 48 0 1 0-96 0v96h-96a48 48 0 1 0 0 96h96v96a48 48 0 1 0 96 0v-96h96a48 48 0 1 0 0-96z" fill="#ffffff"></path></svg>` );
+        $($(".simpread-read-root .blooming-menu__item-btn")[1]).html( `<svg t="1580876825388" viewBox="0 0 1027 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3012" width="15" height="15"><path d="M639.93728 846.704l-272-704-0.112 0.032A47.888 47.888 0 0 0 323.16928 112a47.92 47.92 0 0 0-44.672 30.736l-0.096-0.032-272 704 0.112 0.048A47.216 47.216 0 0 0 3.16928 864a47.92 47.92 0 1 0 92.672 17.264l0.112 0.032L158.27328 720h329.808l62.32 161.296 0.096-0.032A47.92 47.92 0 0 0 643.16928 864c0-6.112-1.248-11.888-3.328-17.264l0.096-0.032zM195.36128 624L323.16928 293.184 450.97728 624H195.36128zM979.16928 464H691.16928a48 48 0 1 0 0 96h288a48 48 0 1 0 0-96z" fill="#ffffff"></path></svg>` );
         $($(".simpread-read-root .blooming-menu__item-btn")[2]).html( `<svg t="1557892103159" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="825" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"><defs><style type="text/css"></style></defs><path d="M128 128h768v85.333333H128V128z m213.333333 341.333333v426.666667H256V469.333333H128l170.666667-170.666666 170.666666 170.666666H341.333333z m426.666667 0v426.666667h-85.333333V469.333333h-128l170.666666-170.666666 170.666667 170.666666h-128z" p-id="826" fill="#ffffff"></path></svg>` );
         $($(".simpread-read-root .blooming-menu__item-btn")[3]).html( `<svg t="1557892186358" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10987" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"><defs><style type="text/css"></style></defs><path d="M128 810.666667h768v85.333333H128v-85.333333z m213.333333-256h128l-170.666666 170.666666-170.666667-170.666666h128V128h85.333333v426.666667z m426.666667 0h128l-170.666667 170.666666-170.666666-170.666666h128V128h85.333333v426.666667z" p-id="10988" fill="#ffffff"></path></svg>` );
         $($(".simpread-read-root .blooming-menu__item-btn")[4]).html( `<svg t="1557893778057" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="12269" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"><defs><style type="text/css"></style></defs><path d="M249.984 841.984l0-269.994667 148.010667 356.010667-61.994667 0q-34.005333 0-59.989333-25.984t-25.984-59.989333zM336 374.016q18.005333 0 29.994667-13.013333t11.989333-31.018667-11.989333-29.994667-29.994667-11.989333-29.994667 11.989333-11.989333 29.994667 11.989333 31.018667 29.994667 13.013333zM939.989333 680.021333q13.994667 32 0 64.981333t-45.994667 47.018667l-313.984 130.005333q-16 6.016-34.005333 6.016-56.021333 0-77.994667-52.010667l-212.010667-512q-6.016-18.005333-6.016-34.005333 0-54.016 52.010667-75.989333l315.989333-130.005333q18.005333-6.016 34.005333-6.016 54.016 0 75.989333 52.010667zM107.989333 838.016q-32-13.994667-45.994667-45.994667t0-64l104.021333-249.984 0 384z" p-id="12270" fill="#ffffff"></path></svg>` );
         $($(".simpread-read-root .blooming-menu__item-btn")[5]).html( `<svg t="1557893778057" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="12269" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"><defs><style type="text/css"></style></defs><path d="M249.984 841.984l0-269.994667 148.010667 356.010667-61.994667 0q-34.005333 0-59.989333-25.984t-25.984-59.989333zM336 374.016q18.005333 0 29.994667-13.013333t11.989333-31.018667-11.989333-29.994667-29.994667-11.989333-29.994667 11.989333-11.989333 29.994667 11.989333 31.018667 29.994667 13.013333zM939.989333 680.021333q13.994667 32 0 64.981333t-45.994667 47.018667l-313.984 130.005333q-16 6.016-34.005333 6.016-56.021333 0-77.994667-52.010667l-212.010667-512q-6.016-18.005333-6.016-34.005333 0-54.016 52.010667-75.989333l315.989333-130.005333q18.005333-6.016 34.005333-6.016 54.016 0 75.989333 52.010667zM107.989333 838.016q-32-13.994667-45.994667-45.994667t0-64l104.021333-249.984 0 384z" p-id="12270" fill="#ffffff"></path></svg>` );
         $($(".simpread-read-root .blooming-menu__item-btn")[6]).html( `<svg t="1557893821906" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13152" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"><defs><style type="text/css"></style></defs><path d="M851.428571 755.428571q0 22.857143-16 38.857143l-77.714285 77.714286q-16 16-38.857143 16t-38.857143-16l-168-168-168 168q-16 16-38.857143 16t-38.857143-16l-77.714285-77.714286q-16-16-16-38.857143t16-38.857142l168-168-168-168q-16-16-16-38.857143t16-38.857143l77.714285-77.714286q16-16 38.857143-16t38.857143 16l168 168 168-168q16-16 38.857143-16t38.857143 16l77.714285 77.714286q16 16 16 38.857143t-16 38.857143l-168 168 168 168q16 16 16 38.857142z" p-id="13153" fill="#ffffff"></path></svg>` );
+        $($(".simpread-read-root .blooming-menu__item-btn-wrapper")[0]).attr( "data-balloon-pos", "left" ).attr( "aria-label", "增加字体" );
+        $($(".simpread-read-root .blooming-menu__item-btn-wrapper")[1]).attr( "data-balloon-pos", "up" ).attr( "aria-label", "减小字体" );
+        $($(".simpread-read-root .blooming-menu__item-btn-wrapper")[2]).attr( "data-balloon-pos", "up" ).attr( "aria-label", "减小留白" );
+        $($(".simpread-read-root .blooming-menu__item-btn-wrapper")[3]).attr( "data-balloon-pos", "up" ).attr( "aria-label", "增加留白" );
+        $($(".simpread-read-root .blooming-menu__item-btn-wrapper")[4]).attr( "data-balloon-pos", "up" ).attr( "aria-label", "前一个主题" );
+        $($(".simpread-read-root .blooming-menu__item-btn-wrapper")[5]).attr( "data-balloon-pos", "up" ).attr( "aria-label", "后一个主题" );
+        $($(".simpread-read-root .blooming-menu__item-btn-wrapper")[6]).attr( "data-balloon-pos", "right" ).attr( "aria-label", "退出" );
         $( "body" ).find( ".blooming-menu__container" ).remove();
-    }, 1000);
+        const position = GM_getValue( "simpread_trigger_pos" );
+        if ( position && position['div'] ) {
+            const { x, y } = position['div'];
+            $( '.sr-rd-trigger' )
+                .attr( 'data-x', x )
+                .attr( 'data-y', y )
+                .css({
+                    'transform': `translate(${x}px, ${y}px)`,
+                    '-webkit-transform': `translate(${x}px, ${y}px)`,
+                });
+        }
+    }, 100 );
 
     let preScroll = 0;
     $(document).scroll( () => {
         if ( $(document).scrollTop() > preScroll ) {
-            $(".blooming-menu__container").css({transform: 'translate(-50%, 20%)', opacity: 0.5 });
             menu.close();
         } else {
-             $(".blooming-menu__container").css({transform: 'translate(-50%, -50%)', opacity: 1 });
+            //TO-DO
         }
         preScroll = $(document).scrollTop();
     });
@@ -1062,7 +1100,37 @@ function toc() {
         });
         event.preventDefault();
     })
-    simpread.read.toc_hide && $('head').append( `<style>toc-bg{width:50px!important;height:200px!important}.toc-bg-hidden{transition:opacity .2s ease}.toc-bg-hidden:hover toc{width:180px}toc{width:0;transition:width .5s!important}</style>` );
+    simpread.read.toc_hide ? 
+        $('head').append( `<style>toc-bg{width:50px!important;height:200px!important}.toc-bg-hidden{transition:opacity .2s ease}.toc-bg-hidden:hover toc{width:180px}toc{width:0;transition:width .5s!important}</style>` )
+        : $( "toc" ).css({ "width" : "initial" });
+}
+
+/**
+ * Drag
+ */
+function dragging() {
+    const position = GM_getValue( "simpread_trigger_pos" ) || {};
+    interact( '.draggable' ).draggable({
+        onmove: event => {
+            const target = event.currentTarget,
+                  id     = target.tagName.toLowerCase(),
+                  x      = ( parseFloat(target.getAttribute('data-x')) || 0 ) + event.dx,
+                  y      = ( parseFloat(target.getAttribute('data-y')) || 0 ) + event.dy;
+            $( target )
+                .attr( "draggable", true )
+                .attr( 'data-x', x )
+                .attr( 'data-y', y )
+                .css({
+                    'transform': `translate(${x}px, ${y}px)`,
+                    '-webkit-transform': `translate(${x}px, ${y}px)`
+                });
+            position[id] = { x,y };
+            GM_setValue( "simpread_trigger_pos", position );
+        },
+        onend: event => {
+            setTimeout( () => $( event.currentTarget ).attr( "draggable", false ), 500 );
+        }
+    });
 }
 
 /**
@@ -1131,6 +1199,7 @@ function optionMode() {
             }
             $.getJSON( "http://sr.ksria.cn/website_list_v4.json" + "?_=" + Math.round(+new Date()), result => {
                 const count = pr.Addsites( result );
+                count > 0 && GM_setValue( "simpread_db", pr.sites );
                 count == 0 ? new Notify().Render( "适配列表已同步至最新版本。" ) : new Notify().Render( 0, `适配列表已同步成功，本次新增 ${ count } 个站点。` );
             });
           },

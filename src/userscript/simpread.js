@@ -481,7 +481,7 @@ function focusMode( element = undefined ) {
         };
 
     if ( current_state == "focus" ) {
-        new Notify().Render( "请误重复进入。" );
+        new Notify().Render( "请勿重复进入。" );
         return;
     } else if ( current_state != "" ) {
         new Notify().Render( "请先退出当前模式。" );
@@ -643,7 +643,7 @@ function readMode() {
     if ( special() ) return;
 
     if ( current_state == "read" ) {
-        new Notify().Render( "请误重复进入。" );
+        new Notify().Render( "请勿重复进入。" );
         return;
     } else if ( current_state != "" ) {
         new Notify().Render( "请先退出当前模式。" );
@@ -1295,7 +1295,7 @@ function optionMode() {
                         </dialog-gp>
                     </div>`;
     if ( current_state == "option" ) {
-        new Notify().Render( "请误重复进入。" );
+        new Notify().Render( "请勿重复进入。" );
         return;
     } else if ( current_state != "" ) {
         new Notify().Render( "请先退出当前模式。" );
@@ -1355,7 +1355,7 @@ function aboutMode() {
                         </dialog-gp>
                     </div>`;
     if ( current_state == "option" ) {
-        new Notify().Render( "请误重复进入。" );
+        new Notify().Render( "请勿重复进入。" );
         return;
     } else if ( current_state != "" ) {
         new Notify().Render( "请先退出当前模式。" );
